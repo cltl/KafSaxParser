@@ -1,0 +1,167 @@
+K 25
+svn:wc:ra_dav:version-url
+V 100
+/svn/kyoto/!svn/ver/1258/trunk/lib/kafsaxparser/KyotoKafSaxParser/src/main/java/eu/kyotoproject/util
+END
+DateUtil.java
+K 25
+svn:wc:ra_dav:version-url
+V 114
+/svn/kyoto/!svn/ver/1092/trunk/lib/kafsaxparser/KyotoKafSaxParser/src/main/java/eu/kyotoproject/util/DateUtil.java
+END
+ReduceKafToSelectedSentences.java
+K 25
+svn:wc:ra_dav:version-url
+V 134
+/svn/kyoto/!svn/ver/1092/trunk/lib/kafsaxparser/KyotoKafSaxParser/src/main/java/eu/kyotoproject/util/ReduceKafToSelectedSentences.java
+END
+AddTokensAsCommentsToSpans.java
+K 25
+svn:wc:ra_dav:version-url
+V 132
+/svn/kyoto/!svn/ver/1368/trunk/lib/kafsaxparser/KyotoKafSaxParser/src/main/java/eu/kyotoproject/util/AddTokensAsCommentsToSpans.java
+END
+AlignKafFiles.java
+K 25
+svn:wc:ra_dav:version-url
+V 119
+/svn/kyoto/!svn/ver/1092/trunk/lib/kafsaxparser/KyotoKafSaxParser/src/main/java/eu/kyotoproject/util/AlignKafFiles.java
+END
+DependenciesToTermAttribute.java
+K 25
+svn:wc:ra_dav:version-url
+V 133
+/svn/kyoto/!svn/ver/1453/trunk/lib/kafsaxparser/KyotoKafSaxParser/src/main/java/eu/kyotoproject/util/DependenciesToTermAttribute.java
+END
+xml_util.java
+K 25
+svn:wc:ra_dav:version-url
+V 114
+/svn/kyoto/!svn/ver/1092/trunk/lib/kafsaxparser/KyotoKafSaxParser/src/main/java/eu/kyotoproject/util/xml_util.java
+END
+RenameSynthemaPages.java
+K 25
+svn:wc:ra_dav:version-url
+V 125
+/svn/kyoto/!svn/ver/1092/trunk/lib/kafsaxparser/KyotoKafSaxParser/src/main/java/eu/kyotoproject/util/RenameSynthemaPages.java
+END
+TakeOutput.java
+K 25
+svn:wc:ra_dav:version-url
+V 116
+/svn/kyoto/!svn/ver/1092/trunk/lib/kafsaxparser/KyotoKafSaxParser/src/main/java/eu/kyotoproject/util/TakeOutput.java
+END
+XmlCharacterConversion.java
+K 25
+svn:wc:ra_dav:version-url
+V 128
+/svn/kyoto/!svn/ver/1092/trunk/lib/kafsaxparser/KyotoKafSaxParser/src/main/java/eu/kyotoproject/util/XmlCharacterConversion.java
+END
+QueryUrl.java
+K 25
+svn:wc:ra_dav:version-url
+V 114
+/svn/kyoto/!svn/ver/1092/trunk/lib/kafsaxparser/KyotoKafSaxParser/src/main/java/eu/kyotoproject/util/QueryUrl.java
+END
+GetTermListFromKaf.java
+K 25
+svn:wc:ra_dav:version-url
+V 124
+/svn/kyoto/!svn/ver/1092/trunk/lib/kafsaxparser/KyotoKafSaxParser/src/main/java/eu/kyotoproject/util/GetTermListFromKaf.java
+END
+DummyKafModifier.java
+K 25
+svn:wc:ra_dav:version-url
+V 122
+/svn/kyoto/!svn/ver/1191/trunk/lib/kafsaxparser/KyotoKafSaxParser/src/main/java/eu/kyotoproject/util/DummyKafModifier.java
+END
+KafMatchPosition.java
+K 25
+svn:wc:ra_dav:version-url
+V 122
+/svn/kyoto/!svn/ver/1092/trunk/lib/kafsaxparser/KyotoKafSaxParser/src/main/java/eu/kyotoproject/util/KafMatchPosition.java
+END
+MakeKafValidXml.java
+K 25
+svn:wc:ra_dav:version-url
+V 121
+/svn/kyoto/!svn/ver/1092/trunk/lib/kafsaxparser/KyotoKafSaxParser/src/main/java/eu/kyotoproject/util/MakeKafValidXml.java
+END
+StringOperations.java
+K 25
+svn:wc:ra_dav:version-url
+V 122
+/svn/kyoto/!svn/ver/1092/trunk/lib/kafsaxparser/KyotoKafSaxParser/src/main/java/eu/kyotoproject/util/StringOperations.java
+END
+CopyPdfDocuments.java
+K 25
+svn:wc:ra_dav:version-url
+V 122
+/svn/kyoto/!svn/ver/1092/trunk/lib/kafsaxparser/KyotoKafSaxParser/src/main/java/eu/kyotoproject/util/CopyPdfDocuments.java
+END
+NamedEntitiesToTermAttribute.java
+K 25
+svn:wc:ra_dav:version-url
+V 134
+/svn/kyoto/!svn/ver/1272/trunk/lib/kafsaxparser/KyotoKafSaxParser/src/main/java/eu/kyotoproject/util/NamedEntitiesToTermAttribute.java
+END
+UtfWriter.java
+K 25
+svn:wc:ra_dav:version-url
+V 115
+/svn/kyoto/!svn/ver/1092/trunk/lib/kafsaxparser/KyotoKafSaxParser/src/main/java/eu/kyotoproject/util/UtfWriter.java
+END
+CountLemmas.java
+K 25
+svn:wc:ra_dav:version-url
+V 117
+/svn/kyoto/!svn/ver/1258/trunk/lib/kafsaxparser/KyotoKafSaxParser/src/main/java/eu/kyotoproject/util/CountLemmas.java
+END
+SQLuser.java
+K 25
+svn:wc:ra_dav:version-url
+V 113
+/svn/kyoto/!svn/ver/1092/trunk/lib/kafsaxparser/KyotoKafSaxParser/src/main/java/eu/kyotoproject/util/SQLuser.java
+END
+DetectEncoding.java
+K 25
+svn:wc:ra_dav:version-url
+V 120
+/svn/kyoto/!svn/ver/1092/trunk/lib/kafsaxparser/KyotoKafSaxParser/src/main/java/eu/kyotoproject/util/DetectEncoding.java
+END
+FileProcessor.java
+K 25
+svn:wc:ra_dav:version-url
+V 119
+/svn/kyoto/!svn/ver/1092/trunk/lib/kafsaxparser/KyotoKafSaxParser/src/main/java/eu/kyotoproject/util/FileProcessor.java
+END
+TextSearch.java
+K 25
+svn:wc:ra_dav:version-url
+V 116
+/svn/kyoto/!svn/ver/1092/trunk/lib/kafsaxparser/KyotoKafSaxParser/src/main/java/eu/kyotoproject/util/TextSearch.java
+END
+WsdJob.java
+K 25
+svn:wc:ra_dav:version-url
+V 112
+/svn/kyoto/!svn/ver/1092/trunk/lib/kafsaxparser/KyotoKafSaxParser/src/main/java/eu/kyotoproject/util/WsdJob.java
+END
+CheckOntologyForTerms.java
+K 25
+svn:wc:ra_dav:version-url
+V 127
+/svn/kyoto/!svn/ver/1092/trunk/lib/kafsaxparser/KyotoKafSaxParser/src/main/java/eu/kyotoproject/util/CheckOntologyForTerms.java
+END
+KafFixPage.java
+K 25
+svn:wc:ra_dav:version-url
+V 116
+/svn/kyoto/!svn/ver/1092/trunk/lib/kafsaxparser/KyotoKafSaxParser/src/main/java/eu/kyotoproject/util/KafFixPage.java
+END
+Copier.java
+K 25
+svn:wc:ra_dav:version-url
+V 112
+/svn/kyoto/!svn/ver/1092/trunk/lib/kafsaxparser/KyotoKafSaxParser/src/main/java/eu/kyotoproject/util/Copier.java
+END

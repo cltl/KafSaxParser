@@ -1,0 +1,191 @@
+K 25
+svn:wc:ra_dav:version-url
+V 99
+/svn/kyoto/!svn/ver/1265/trunk/lib/kafsaxparser/KyotoKafSaxParser/src/main/java/eu/kyotoproject/kaf
+END
+KafWordformSaxParser.java
+K 25
+svn:wc:ra_dav:version-url
+V 125
+/svn/kyoto/!svn/ver/1092/trunk/lib/kafsaxparser/KyotoKafSaxParser/src/main/java/eu/kyotoproject/kaf/KafWordformSaxParser.java
+END
+GeoInfoPlace.java
+K 25
+svn:wc:ra_dav:version-url
+V 117
+/svn/kyoto/!svn/ver/1430/trunk/lib/kafsaxparser/KyotoKafSaxParser/src/main/java/eu/kyotoproject/kaf/GeoInfoPlace.java
+END
+KafProperty.java
+K 25
+svn:wc:ra_dav:version-url
+V 116
+/svn/kyoto/!svn/ver/1369/trunk/lib/kafsaxparser/KyotoKafSaxParser/src/main/java/eu/kyotoproject/kaf/KafProperty.java
+END
+GeoCountryObject.java
+K 25
+svn:wc:ra_dav:version-url
+V 121
+/svn/kyoto/!svn/ver/1430/trunk/lib/kafsaxparser/KyotoKafSaxParser/src/main/java/eu/kyotoproject/kaf/GeoCountryObject.java
+END
+KafValidator.java
+K 25
+svn:wc:ra_dav:version-url
+V 117
+/svn/kyoto/!svn/ver/1092/trunk/lib/kafsaxparser/KyotoKafSaxParser/src/main/java/eu/kyotoproject/kaf/KafValidator.java
+END
+KafTextUnit.java
+K 25
+svn:wc:ra_dav:version-url
+V 116
+/svn/kyoto/!svn/ver/1092/trunk/lib/kafsaxparser/KyotoKafSaxParser/src/main/java/eu/kyotoproject/kaf/KafTextUnit.java
+END
+KafMetaData.java
+K 25
+svn:wc:ra_dav:version-url
+V 116
+/svn/kyoto/!svn/ver/1453/trunk/lib/kafsaxparser/KyotoKafSaxParser/src/main/java/eu/kyotoproject/kaf/KafMetaData.java
+END
+KafMatchPosition.java
+K 25
+svn:wc:ra_dav:version-url
+V 121
+/svn/kyoto/!svn/ver/1092/trunk/lib/kafsaxparser/KyotoKafSaxParser/src/main/java/eu/kyotoproject/kaf/KafMatchPosition.java
+END
+KafTermPageSaxParser.java
+K 25
+svn:wc:ra_dav:version-url
+V 125
+/svn/kyoto/!svn/ver/1092/trunk/lib/kafsaxparser/KyotoKafSaxParser/src/main/java/eu/kyotoproject/kaf/KafTermPageSaxParser.java
+END
+KafWordForm.java
+K 25
+svn:wc:ra_dav:version-url
+V 116
+/svn/kyoto/!svn/ver/1453/trunk/lib/kafsaxparser/KyotoKafSaxParser/src/main/java/eu/kyotoproject/kaf/KafWordForm.java
+END
+KafChunk.java
+K 25
+svn:wc:ra_dav:version-url
+V 113
+/svn/kyoto/!svn/ver/1092/trunk/lib/kafsaxparser/KyotoKafSaxParser/src/main/java/eu/kyotoproject/kaf/KafChunk.java
+END
+KafTerm.java
+K 25
+svn:wc:ra_dav:version-url
+V 112
+/svn/kyoto/!svn/ver/1429/trunk/lib/kafsaxparser/KyotoKafSaxParser/src/main/java/eu/kyotoproject/kaf/KafTerm.java
+END
+KafSaxParser.java
+K 25
+svn:wc:ra_dav:version-url
+V 117
+/svn/kyoto/!svn/ver/1453/trunk/lib/kafsaxparser/KyotoKafSaxParser/src/main/java/eu/kyotoproject/kaf/KafSaxParser.java
+END
+CorefTarget.java
+K 25
+svn:wc:ra_dav:version-url
+V 116
+/svn/kyoto/!svn/ver/1368/trunk/lib/kafsaxparser/KyotoKafSaxParser/src/main/java/eu/kyotoproject/kaf/CorefTarget.java
+END
+GeoInfoCountry.java
+K 25
+svn:wc:ra_dav:version-url
+V 119
+/svn/kyoto/!svn/ver/1430/trunk/lib/kafsaxparser/KyotoKafSaxParser/src/main/java/eu/kyotoproject/kaf/GeoInfoCountry.java
+END
+KafEventISI.java
+K 25
+svn:wc:ra_dav:version-url
+V 116
+/svn/kyoto/!svn/ver/1273/trunk/lib/kafsaxparser/KyotoKafSaxParser/src/main/java/eu/kyotoproject/kaf/KafEventISI.java
+END
+KafTermSentiment.java
+K 25
+svn:wc:ra_dav:version-url
+V 121
+/svn/kyoto/!svn/ver/1377/trunk/lib/kafsaxparser/KyotoKafSaxParser/src/main/java/eu/kyotoproject/kaf/KafTermSentiment.java
+END
+KafCoreferenceSet.java
+K 25
+svn:wc:ra_dav:version-url
+V 122
+/svn/kyoto/!svn/ver/1364/trunk/lib/kafsaxparser/KyotoKafSaxParser/src/main/java/eu/kyotoproject/kaf/KafCoreferenceSet.java
+END
+KafOpinion.java
+K 25
+svn:wc:ra_dav:version-url
+V 115
+/svn/kyoto/!svn/ver/1429/trunk/lib/kafsaxparser/KyotoKafSaxParser/src/main/java/eu/kyotoproject/kaf/KafOpinion.java
+END
+TermComponent.java
+K 25
+svn:wc:ra_dav:version-url
+V 118
+/svn/kyoto/!svn/ver/1355/trunk/lib/kafsaxparser/KyotoKafSaxParser/src/main/java/eu/kyotoproject/kaf/TermComponent.java
+END
+KafTermSaxParser.java
+K 25
+svn:wc:ra_dav:version-url
+V 121
+/svn/kyoto/!svn/ver/1092/trunk/lib/kafsaxparser/KyotoKafSaxParser/src/main/java/eu/kyotoproject/kaf/KafTermSaxParser.java
+END
+KafEntityFeature.java
+K 25
+svn:wc:ra_dav:version-url
+V 121
+/svn/kyoto/!svn/ver/1364/trunk/lib/kafsaxparser/KyotoKafSaxParser/src/main/java/eu/kyotoproject/kaf/KafEntityFeature.java
+END
+KafDep.java
+K 25
+svn:wc:ra_dav:version-url
+V 111
+/svn/kyoto/!svn/ver/1092/trunk/lib/kafsaxparser/KyotoKafSaxParser/src/main/java/eu/kyotoproject/kaf/KafDep.java
+END
+KafSense.java
+K 25
+svn:wc:ra_dav:version-url
+V 113
+/svn/kyoto/!svn/ver/1353/trunk/lib/kafsaxparser/KyotoKafSaxParser/src/main/java/eu/kyotoproject/kaf/KafSense.java
+END
+DateInfo.java
+K 25
+svn:wc:ra_dav:version-url
+V 113
+/svn/kyoto/!svn/ver/1191/trunk/lib/kafsaxparser/KyotoKafSaxParser/src/main/java/eu/kyotoproject/kaf/DateInfo.java
+END
+KafReference.java
+K 25
+svn:wc:ra_dav:version-url
+V 117
+/svn/kyoto/!svn/ver/1430/trunk/lib/kafsaxparser/KyotoKafSaxParser/src/main/java/eu/kyotoproject/kaf/KafReference.java
+END
+KafDiscourseUnits.java
+K 25
+svn:wc:ra_dav:version-url
+V 122
+/svn/kyoto/!svn/ver/1092/trunk/lib/kafsaxparser/KyotoKafSaxParser/src/main/java/eu/kyotoproject/kaf/KafDiscourseUnits.java
+END
+GeoPlaceObject.java
+K 25
+svn:wc:ra_dav:version-url
+V 119
+/svn/kyoto/!svn/ver/1430/trunk/lib/kafsaxparser/KyotoKafSaxParser/src/main/java/eu/kyotoproject/kaf/GeoPlaceObject.java
+END
+KafMetaSaxParser.java
+K 25
+svn:wc:ra_dav:version-url
+V 121
+/svn/kyoto/!svn/ver/1092/trunk/lib/kafsaxparser/KyotoKafSaxParser/src/main/java/eu/kyotoproject/kaf/KafMetaSaxParser.java
+END
+ISODate.java
+K 25
+svn:wc:ra_dav:version-url
+V 112
+/svn/kyoto/!svn/ver/1430/trunk/lib/kafsaxparser/KyotoKafSaxParser/src/main/java/eu/kyotoproject/kaf/ISODate.java
+END
+KafEntity.java
+K 25
+svn:wc:ra_dav:version-url
+V 114
+/svn/kyoto/!svn/ver/1369/trunk/lib/kafsaxparser/KyotoKafSaxParser/src/main/java/eu/kyotoproject/kaf/KafEntity.java
+END

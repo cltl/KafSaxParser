@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<triples>
+<triple id="o1" relation="positive#1#####" kaflayer="opinion">
+	<elementFirstIds comment="nice hotel in Amsterdam">
+		<elementFirst id="w_5"/>
+		<elementFirst id="w_6"/>
+		<elementFirst id="w_7"/>
+		<elementFirst id="w_8"/>
+	</elementFirstIds>
+	<elementSecondIds/>
+</triple>
+</triples>

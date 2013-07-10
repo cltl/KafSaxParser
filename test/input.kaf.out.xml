@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<KAF xml:lang="en">
+  <kafHeader>
+    <linguisticProcessors layer="text">
+      <lp name="Open-nlp sentence splitter" timestamp="2013-04-11T09:21:29CEST" version="1.0"/>
+      <lp name="Open-nlp tokenizer" timestamp="2013-04-11T09:21:29CEST" version="1.0"/>
+      <lp name="Crfsuite machine learning opinion miner" timestamp="*" version="1.0"/>
+      <lp name="Basic_polarity_tagger_with_pos" timestamp="2013-04-11T09:23:08CEST" version="1.0"/>
+      <lp name="TreeTagger_from_kaf" timestamp="2013-04-11T09:23:07CEST" version="1.0"/>
+    </linguisticProcessors>
+  </kafHeader>
+  <text>
+    <wf sent="s_1" wid="w_1">This</wf>
+    <wf sent="s_1" wid="w_2">is</wf>
+    <wf sent="s_1" wid="w_3">a</wf>
+    <wf sent="s_1" wid="w_4">very</wf>
+    <wf sent="s_1" wid="w_5">nice</wf>
+    <wf sent="s_1" wid="w_6">hotel</wf>
+    <wf sent="s_1" wid="w_7">in</wf>
+    <wf sent="s_1" wid="w_8">Amsterdam</wf>
+  </text>
+  <terms>
+    <term lemma="this" morphofeat="DT" pos="D" tid="t_1" type="close">
+      <span>
+        <!--This-->
+        <target id="w_1"/>
+      </span>
+    </term>
+    <term lemma="be" morphofeat="VBZ" pos="V" tid="t_2" type="open">
+      <span>
+        <!--is-->
+        <target id="w_2"/>
+      </span>
+    </term>
+    <term lemma="a" morphofeat="DT" pos="D" tid="t_3" type="close">
+      <span>
+        <!--a-->
+        <target id="w_3"/>
+      </span>
+    </term>
+    <term lemma="very" morphofeat="RB" pos="A" tid="t_4" type="open">
+      <sentiment resource="VUA_olery_lexicon_en_lmf" sentiment_modifier="intensifier"/>
+      <span>
+        <!--very-->
+        <target id="w_4"/>
+      </span>
+    </term>
+    <term lemma="nice" morphofeat="JJ" pos="G" tid="t_5" type="open">
+      <sentiment polarity="positive" resource="VUA_olery_lexicon_en_lmf"/>
+      <span>
+        <!--nice-->
+        <target id="w_5"/>
+      </span>
+    </term>
+    <term lemma="hotel" morphofeat="NN" pos="N" tid="t_6" type="open">
+      <span>
+        <!--hotel-->
+        <target id="w_6"/>
+      </span>
+    </term>
+    <term lemma="in" morphofeat="IN" pos="P" tid="t_7" type="close">
+      <span>
+        <!--in-->
+        <target id="w_7"/>
+      </span>
+    </term>
+    <term lemma="Amsterdam" morphofeat="NP" pos="R" tid="t_8" type="open">
+      <span>
+        <!--Amsterdam-->
+        <target id="w_8"/>
+      </span>
+    </term>
+  </terms>
+  <deps/>
+  <chunks/>
+  <opinions>
+    <opinion oid="o1">
+      <opinion_holder type=""/>
+      <opinion_target/>
+      <opinion_expression polarity="positive" strength="1">
+        <span>
+          <!--nice hotel in Amsterdam-->
+          <target id="t_5"/>
+          <target id="t_6"/>
+          <target id="t_7"/>
+          <target id="t_8"/>
+        </span>
+      </opinion_expression>
+    </opinion>
+  </opinions>
+  <entities>
+    <entity eid="e15" type="location">
+      <references>
+        <span>
+          <!--Amsterdam-->
+          <target id="t_8"/>
+        </span>
+      </references>
+    </entity>
+  </entities>
+  <locations/>
+  <dates/>
+  <tunits/>
+</KAF>

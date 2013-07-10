@@ -1,0 +1,767 @@
+<?xml version='1.0' encoding='utf-8'?>
+<KAF xml:lang="en">
+  <linguisticProcessors layer="text">
+    <lp timestamp="2012-10-29T15:48:46CET" version="1.0" name="SimpleTokenizer"/>
+  </linguisticProcessors>
+  <linguisticProcessors layer="terms">
+    <lp timestamp="2012-10-29T15:48:46CET" version="1.0" name="SimpleTokenizer"/>
+  </linguisticProcessors>
+  <text>
+    <wf wid="w_1" para="1" sent="1">You</wf>
+    <wf wid="w_2" para="1" sent="1">may</wf>
+    <wf wid="w_3" para="1" sent="1">easily</wf>
+    <wf wid="w_4" para="1" sent="1">walk</wf>
+    <wf wid="w_5" para="1" sent="1">to</wf>
+    <wf wid="w_6" para="1" sent="1">many</wf>
+    <wf wid="w_7" para="1" sent="1">of</wf>
+    <wf wid="w_8" para="1" sent="1">the</wf>
+    <wf wid="w_9" para="1" sent="1">popular</wf>
+    <wf wid="w_10" para="1" sent="1">sites</wf>
+    <wf wid="w_11" para="1" sent="1">from</wf>
+    <wf wid="w_12" para="1" sent="1">the</wf>
+    <wf wid="w_13" para="1" sent="1">hotel,</wf>
+    <wf wid="w_14" para="1" sent="1">and</wf>
+    <wf wid="w_15" para="1" sent="1">a</wf>
+    <wf wid="w_16" para="1" sent="1">canal</wf>
+    <wf wid="w_17" para="1" sent="1">cruise</wf>
+    <wf wid="w_18" para="1" sent="1">is</wf>
+    <wf wid="w_19" para="1" sent="1">just</wf>
+    <wf wid="w_20" para="1" sent="1">a</wf>
+    <wf wid="w_21" para="1" sent="1">block</wf>
+    <wf wid="w_22" para="1" sent="1">away.</wf>
+    <wf wid="w_23" para="1" sent="1">If</wf>
+    <wf wid="w_24" para="1" sent="1">you're</wf>
+    <wf wid="w_25" para="1" sent="1">considering</wf>
+    <wf wid="w_26" para="1" sent="1">a</wf>
+    <wf wid="w_27" para="1" sent="1">canal</wf>
+    <wf wid="w_28" para="1" sent="1">cruise,</wf>
+    <wf wid="w_29" para="1" sent="1">I</wf>
+    <wf wid="w_30" para="1" sent="1">wish</wf>
+    <wf wid="w_31" para="1" sent="1">we</wf>
+    <wf wid="w_32" para="1" sent="1">would</wf>
+    <wf wid="w_33" para="1" sent="1">have</wf>
+    <wf wid="w_34" para="1" sent="1">done</wf>
+    <wf wid="w_35" para="1" sent="1">the</wf>
+    <wf wid="w_36" para="1" sent="1">"hop-on-hop-off"</wf>
+    <wf wid="w_37" para="1" sent="1">canal</wf>
+    <wf wid="w_38" para="1" sent="1">cruise</wf>
+    <wf wid="w_39" para="1" sent="1">instead</wf>
+    <wf wid="w_40" para="1" sent="1">of</wf>
+    <wf wid="w_41" para="1" sent="1">just</wf>
+    <wf wid="w_42" para="1" sent="1">the</wf>
+    <wf wid="w_43" para="1" sent="1">1-hour</wf>
+    <wf wid="w_44" para="1" sent="1">cruise,</wf>
+    <wf wid="w_45" para="1" sent="1">so</wf>
+    <wf wid="w_46" para="1" sent="1">I</wf>
+    <wf wid="w_47" para="1" sent="1">recommend</wf>
+    <wf wid="w_48" para="1" sent="1">that</wf>
+    <wf wid="w_49" para="1" sent="1">one</wf>
+    <wf wid="w_50" para="1" sent="1">for</wf>
+    <wf wid="w_51" para="1" sent="1">just</wf>
+    <wf wid="w_52" para="1" sent="1">a</wf>
+    <wf wid="w_53" para="1" sent="1">bit</wf>
+    <wf wid="w_54" para="1" sent="1">more</wf>
+    <wf wid="w_55" para="1" sent="1">euro.</wf>
+    <wf wid="w_56" para="1" sent="1">Bike</wf>
+    <wf wid="w_57" para="1" sent="1">rentals</wf>
+    <wf wid="w_58" para="1" sent="1">are</wf>
+    <wf wid="w_59" para="1" sent="1">close</wf>
+    <wf wid="w_60" para="1" sent="1">by,</wf>
+    <wf wid="w_61" para="1" sent="1">too,</wf>
+    <wf wid="w_62" para="1" sent="1">which</wf>
+    <wf wid="w_63" para="1" sent="1">I</wf>
+    <wf wid="w_64" para="1" sent="1">highly</wf>
+    <wf wid="w_65" para="1" sent="1">recommend,</wf>
+    <wf wid="w_66" para="1" sent="1">but</wf>
+    <wf wid="w_67" para="1" sent="1">be</wf>
+    <wf wid="w_68" para="1" sent="1">careful</wf>
+    <wf wid="w_69" para="1" sent="1">of</wf>
+    <wf wid="w_70" para="1" sent="1">the</wf>
+    <wf wid="w_71" para="1" sent="1">other</wf>
+    <wf wid="w_72" para="1" sent="1">bike</wf>
+    <wf wid="w_73" para="1" sent="1">traffic</wf>
+    <wf wid="w_74" para="1" sent="1">and</wf>
+    <wf wid="w_75" para="1" sent="1">other</wf>
+    <wf wid="w_76" para="1" sent="1">tourists</wf>
+    <wf wid="w_77" para="1" sent="1">who</wf>
+    <wf wid="w_78" para="1" sent="1">are</wf>
+    <wf wid="w_79" para="1" sent="1">unaware</wf>
+    <wf wid="w_80" para="1" sent="1">of</wf>
+    <wf wid="w_81" para="1" sent="1">the</wf>
+    <wf wid="w_82" para="1" sent="1">bikes.</wf>
+    <wf wid="w_83" para="1" sent="1">Over</wf>
+    <wf wid="w_84" para="1" sent="1">all,</wf>
+    <wf wid="w_85" para="1" sent="1">a</wf>
+    <wf wid="w_86" para="1" sent="1">nice</wf>
+    <wf wid="w_87" para="1" sent="1">stay,</wf>
+    <wf wid="w_88" para="1" sent="1">but</wf>
+    <wf wid="w_89" para="1" sent="1">nothing</wf>
+    <wf wid="w_90" para="1" sent="1">exceptional.</wf>
+  </text>
+  <terms>
+    <term tid="t_1" lemma="you" type="open">
+      <span>
+        <target id="w_1"/>
+      </span>
+    </term>
+    <term tid="t_2" lemma="may" type="open">
+      <span>
+        <target id="w_2"/>
+      </span>
+    </term>
+    <term tid="t_3" lemma="easily" type="open">
+    <sentiment resource="VUA_polarityLexicon_word"
+    polarity="positive" strength="average"
+    subjectivity="subjective"
+    sentiment_semantic_type="behaviour/trait"
+    sentiment_product_feature="" />
+      <span>
+        <target id="w_3"/>
+      </span>
+    </term>
+    <term tid="t_4" lemma="walk" type="open">
+      <span>
+        <target id="w_4"/>
+      </span>
+    </term>
+    <term tid="t_5" lemma="to" type="open">
+      <span>
+        <target id="w_5"/>
+      </span>
+    </term>
+    <term tid="t_6" lemma="many" type="open">
+      <span>
+        <target id="w_6"/>
+      </span>
+    </term>
+    <term tid="t_7" lemma="of" type="open">
+      <span>
+        <target id="w_7"/>
+      </span>
+    </term>
+    <term tid="t_8" lemma="the" type="open">
+      <span>
+        <target id="w_8"/>
+      </span>
+    </term>
+    <term tid="t_9" lemma="popular" type="open">
+      <span>
+        <target id="w_9"/>
+      </span>
+    </term>
+    <term tid="t_10" lemma="sites" type="open">
+      <span>
+        <target id="w_10"/>
+      </span>
+    </term>
+    <term tid="t_11" lemma="from" type="open">
+      <span>
+        <target id="w_11"/>
+      </span>
+    </term>
+    <term tid="t_12" lemma="the" type="open">
+      <span>
+        <target id="w_12"/>
+      </span>
+    </term>
+    <term tid="t_13" lemma="hotel" type="open">
+      <span>
+        <target id="w_13"/>
+      </span>
+    </term>
+    <term tid="t_14" lemma="and" type="open">
+      <span>
+        <target id="w_14"/>
+      </span>
+    </term>
+    <term tid="t_15" lemma="a" type="open">
+      <span>
+        <target id="w_15"/>
+      </span>
+    </term>
+    <term tid="t_16" lemma="canal" type="open">
+      <span>
+        <target id="w_16"/>
+      </span>
+    </term>
+    <term tid="t_17" lemma="cruise" type="open">
+      <span>
+        <target id="w_17"/>
+      </span>
+    </term>
+    <term tid="t_18" lemma="is" type="open">
+      <span>
+        <target id="w_18"/>
+      </span>
+    </term>
+    <term tid="t_19" lemma="just" type="open">
+      <span>
+        <target id="w_19"/>
+      </span>
+    </term>
+    <term tid="t_20" lemma="a" type="open">
+      <span>
+        <target id="w_20"/>
+      </span>
+    </term>
+    <term tid="t_21" lemma="block" type="open">
+      <span>
+        <target id="w_21"/>
+      </span>
+    </term>
+    <term tid="t_22" lemma="away" type="open">
+      <span>
+        <target id="w_22"/>
+      </span>
+    </term>
+    <term tid="t_23" lemma="if" type="open">
+      <span>
+        <target id="w_23"/>
+      </span>
+    </term>
+    <term tid="t_24" lemma="you're" type="open">
+      <span>
+        <target id="w_24"/>
+      </span>
+    </term>
+    <term tid="t_25" lemma="considering" type="open">
+      <span>
+        <target id="w_25"/>
+      </span>
+    </term>
+    <term tid="t_26" lemma="a" type="open">
+      <span>
+        <target id="w_26"/>
+      </span>
+    </term>
+    <term tid="t_27" lemma="canal" type="open">
+      <span>
+        <target id="w_27"/>
+      </span>
+    </term>
+    <term tid="t_28" lemma="cruise" type="open">
+      <span>
+        <target id="w_28"/>
+      </span>
+    </term>
+    <term tid="t_29" lemma="i" type="open">
+      <span>
+        <target id="w_29"/>
+      </span>
+    </term>
+    <term tid="t_30" lemma="wish" type="open">
+      <span>
+        <target id="w_30"/>
+      </span>
+    </term>
+    <term tid="t_31" lemma="we" type="open">
+      <span>
+        <target id="w_31"/>
+      </span>
+    </term>
+    <term tid="t_32" lemma="would" type="open">
+      <span>
+        <target id="w_32"/>
+      </span>
+    </term>
+    <term tid="t_33" lemma="have" type="open">
+      <span>
+        <target id="w_33"/>
+      </span>
+    </term>
+    <term tid="t_34" lemma="done" type="open">
+      <span>
+        <target id="w_34"/>
+      </span>
+    </term>
+    <term tid="t_35" lemma="the" type="open">
+      <span>
+        <target id="w_35"/>
+      </span>
+    </term>
+    <term tid="t_36" lemma="&quot;hop-on-hop-off&quot;" type="open">
+      <span>
+        <target id="w_36"/>
+      </span>
+    </term>
+    <term tid="t_37" lemma="canal" type="open">
+      <span>
+        <target id="w_37"/>
+      </span>
+    </term>
+    <term tid="t_38" lemma="cruise" type="open">
+      <span>
+        <target id="w_38"/>
+      </span>
+    </term>
+    <term tid="t_39" lemma="instead" type="open">
+      <span>
+        <target id="w_39"/>
+      </span>
+    </term>
+    <term tid="t_40" lemma="of" type="open">
+      <span>
+        <target id="w_40"/>
+      </span>
+    </term>
+    <term tid="t_41" lemma="just" type="open">
+      <span>
+        <target id="w_41"/>
+      </span>
+    </term>
+    <term tid="t_42" lemma="the" type="open">
+      <span>
+        <target id="w_42"/>
+      </span>
+    </term>
+    <term tid="t_43" lemma="1-hour" type="open">
+      <span>
+        <target id="w_43"/>
+      </span>
+    </term>
+    <term tid="t_44" lemma="cruise" type="open">
+      <span>
+        <target id="w_44"/>
+      </span>
+    </term>
+    <term tid="t_45" lemma="so" type="open">
+      <span>
+        <target id="w_45"/>
+      </span>
+    </term>
+    <term tid="t_46" lemma="i" type="open">
+      <span>
+        <target id="w_46"/>
+      </span>
+    </term>
+    <term tid="t_47" lemma="recommend" type="open">
+    
+      <span>
+        <target id="w_47"/>
+      </span>
+    </term>
+    <term tid="t_48" lemma="that" type="open">
+      <span>
+        <target id="w_48"/>
+      </span>
+    </term>
+    <term tid="t_49" lemma="one" type="open">
+      <span>
+        <target id="w_49"/>
+      </span>
+    </term>
+    <term tid="t_50" lemma="for" type="open">
+      <span>
+        <target id="w_50"/>
+      </span>
+    </term>
+    <term tid="t_51" lemma="just" type="open">
+      <span>
+        <target id="w_51"/>
+      </span>
+    </term>
+    <term tid="t_52" lemma="a" type="open">
+      <span>
+        <target id="w_52"/>
+      </span>
+    </term>
+    <term tid="t_53" lemma="bit" type="open">
+      <span>
+        <target id="w_53"/>
+      </span>
+    </term>
+    <term tid="t_54" lemma="more" type="open">
+      <span>
+        <target id="w_54"/>
+      </span>
+    </term>
+    <term tid="t_55" lemma="euro" type="open">
+      <span>
+        <target id="w_55"/>
+      </span>
+    </term>
+    <term tid="t_56" lemma="bike" type="open">
+      <span>
+        <target id="w_56"/>
+      </span>
+    </term>
+    <term tid="t_57" lemma="rentals" type="open">
+      <span>
+        <target id="w_57"/>
+      </span>
+    </term>
+    <term tid="t_58" lemma="are" type="open">
+      <span>
+        <target id="w_58"/>
+      </span>
+    </term>
+    <term tid="t_59" lemma="close" type="open">
+      <span>
+        <target id="w_59"/>
+      </span>
+    </term>
+    <term tid="t_60" lemma="by" type="open">
+      <span>
+        <target id="w_60"/>
+      </span>
+    </term>
+    <term tid="t_61" lemma="too" type="open">
+      <span>
+        <target id="w_61"/>
+      </span>
+    </term>
+    <term tid="t_62" lemma="which" type="open">
+      <span>
+        <target id="w_62"/>
+      </span>
+    </term>
+    <term tid="t_63" lemma="i" type="open">
+      <span>
+        <target id="w_63"/>
+      </span>
+    </term>
+    <term tid="t_64" lemma="highly" type="open">
+    <sentiment resource="VUA_polarityLexicon_word"
+    polarity="" strength="strong"
+    subjectivity="subjective"
+    sentiment_semantic_type=""
+    sentiment_product_feature="" />
+      <span>
+        <target id="w_64"/>
+      </span>
+    </term>
+    <term tid="t_65" lemma="recommend" type="open">
+    <sentiment resource="VUA_polarityLexicon_word"
+    polarity="positive" strength="average"
+    subjectivity="subjective"
+    factual = "true"
+    sentiment_semantic_type=""
+    sentiment_product_feature="" />
+      <span>
+        <target id="w_65"/>
+      </span>
+    </term>
+    <term tid="t_66" lemma="but" type="open">
+      <span>
+        <target id="w_66"/>
+      </span>
+    </term>
+    <term tid="t_67" lemma="be" type="open">
+      <span>
+        <target id="w_67"/>
+      </span>
+    </term>
+    <term tid="t_68" lemma="careful" type="open">
+    <sentiment resource="VUA_polarityLexicon_word"
+    polarity="negative" strength="average"
+    subjectivity="subjective"
+    factual = "true"
+    sentiment_semantic_type="behaviour/trait"
+    sentiment_product_feature="" />
+      <span>
+        <target id="w_68"/>
+      </span>
+    </term>
+    <term tid="t_69" lemma="of" type="open">
+      <span>
+        <target id="w_69"/>
+      </span>
+    </term>
+    <term tid="t_70" lemma="the" type="open">
+      <span>
+        <target id="w_70"/>
+      </span>
+    </term>
+    <term tid="t_71" lemma="other" type="open">
+      <span>
+        <target id="w_71"/>
+      </span>
+    </term>
+    <term tid="t_72" lemma="bike" type="open">
+      <span>
+        <target id="w_72"/>
+      </span>
+    </term>
+    <term tid="t_73" lemma="traffic" type="open">
+      <span>
+        <target id="w_73"/>
+      </span>
+      <externalReferences>
+			<externalRef confidence="0.556412" reference="eng-30-06571301-n" resource="wn30g">
+
+				<sentiment resource="VUA_polarityLexicon_word"
+					  
+    polarity="positive" strength="average"
+					  
+    subjectivity="subjective"
+					  
+    sentiment_semantic_type="behaviour/trait"
+					  
+    sentiment_product_feature="" />
+                <externalRef confidence="1.0" reference="eng-30-06568978-n"  reftype="baseConcept" resource="wn30g"/>
+                <externalRef confidence="1.0" reference="Kyoto#instrument" reftype="sc_playRole" resource="ontology"/>
+                <externalRef confidence="1.0" reference="Kyoto#program__programme__computer_program__computer_programme-eng-3.0-06568978-n" reftype="sc_subClassOf" resource="ontology">
+                        <externalRef reftype="SubClassOf" reference="Kyoto#program__programme__computer_program__computer_programme-eng-3.0-06568978-n" status="implied"/>
+                        <externalRef reftype="SubClassOf" reference="InformationObjects.owl#information-realization"/>
+                        <externalRef reftype="SubClassOf" reference="ExtendedDnS.owl#physical-realization" status="implied"/>
+                        <externalRef reftype="ExtendedDnS.owl#realizes" reference="ExtendedDnS.owl#information-object" status="implied"/>
+                        <externalRef reftype="SubClassOf" reference="DOLCE-Lite.owl#spatio-temporal-particular" status="implied"/>
+                        <externalRef reftype="SubClassOf" reference="DOLCE-Lite.owl#particular" status="implied"/>
+                </externalRef>
+                <externalRef confidence="1.0" reference="Kyoto#search__seek__look_for-eng-3.0-01315613-v" reftype="sc_participantOf" resource="ontology">
+                        <externalRef reftype="SubClassOf" reference="Kyoto#search__seek__look_for-eng-3.0-01315613-v" status="implied"/>
+                        <externalRef reftype="SubClassOf" reference="Kyoto#verb_contact"/>
+                        <externalRef reftype="SubClassOf" reference="ExtendedDnS.owl#action"/>
+                        <externalRef reftype="DOLCE-Lite.owl#participant" reference="ExtendedDnS.owl#agent" status="implied"/>
+                        <externalRef reftype="DOLCE-Lite.owl#generically-dependent-on" reference="ExtendedDnS.owl#cognitive-state" status="implied"/>
+                        <externalRef reftype="SubClassOf" reference="DOLCE-Lite.owl#perdurant" status="implied"/>
+                        <externalRef reftype="SubClassOf" reference="DOLCE-Lite.owl#accomplishment" status="implied"/>
+                        <externalRef reftype="DOLCE-Lite.owl#part" reference="DOLCE-Lite.owl#perdurant" status="implied"/>
+                        <externalRef reftype="DOLCE-Lite.owl#has-quality" reference="DOLCE-Lite.owl#temporal-quality" status="implied"/>
+                        <externalRef reftype="DOLCE-Lite.owl#specific-constant-constituent" reference="DOLCE-Lite.owl#perdurant" status="implied"/>
+                        <externalRef reftype="SubClassOf" reference="DOLCE-Lite.owl#event" status="implied"/>
+                        <externalRef reftype="DOLCE-Lite.owl#has-quality" reference="DOLCE-Lite.owl#temporal-location_q" status="implied"/>
+                        <externalRef reftype="SubClassOf" reference="DOLCE-Lite.owl#spatio-temporal-particular" status="implied"/>
+                        <externalRef reftype="SubClassOf" reference="DOLCE-Lite.owl#particular" status="implied"/>
+                </externalRef>
+            </externalRef>
+			<externalRef confidence="0.443588" reference="eng-30-09877587-n" resource="wn30g">
+                <externalRef confidence="1.0" reference="eng-30-00007846-n"  reftype="baseConcept" resource="wn30g"/>
+                <externalRef confidence="1.0" reference="Kyoto#done-by" reftype="sc_playRole" resource="ontology">
+                        <externalRef reftype="InverseObjectProperties" reference="Kyoto#active-participant-in" status="implied"/>
+                        <externalRef reftype="SubObjectPropertyOf" reference="Kyoto#done-by" status="implied"/>
+                        <externalRef reftype="SubObjectPropertyOf" reference="FunctionalParticipation.owl#functional-participant" status="implied"/>
+                        <externalRef reftype="SubObjectPropertyOf" reference="DOLCE-Lite.owl#participant" status="implied"/>
+                        <externalRef reftype="SubObjectPropertyOf" reference="DOLCE-Lite.owl#immediate-relation" status="implied"/>
+                        <externalRef reftype="ObjectPropertyDomain" reference="DOLCE-Lite.owl#perdurant" status="implied"/>
+                        <externalRef reftype="ObjectPropertyRange" reference="DOLCE-Lite.owl#endurant" status="implied"/>
+                </externalRef>
+                <externalRef confidence="1.0" reference="Kyoto#search__seek__look_for-eng-3.0-01315613-v" reftype="sc_participantOf" resource="ontology">
+                        <externalRef reftype="SubClassOf" reference="Kyoto#search__seek__look_for-eng-3.0-01315613-v" status="implied"/>
+                        <externalRef reftype="SubClassOf" reference="Kyoto#verb_contact"/>
+                        <externalRef reftype="SubClassOf" reference="ExtendedDnS.owl#action"/>
+                        <externalRef reftype="DOLCE-Lite.owl#participant" reference="ExtendedDnS.owl#agent" status="implied"/>
+                        <externalRef reftype="DOLCE-Lite.owl#generically-dependent-on" reference="ExtendedDnS.owl#cognitive-state" status="implied"/>
+                        <externalRef reftype="SubClassOf" reference="DOLCE-Lite.owl#perdurant" status="implied"/>
+                        <externalRef reftype="SubClassOf" reference="DOLCE-Lite.owl#accomplishment" status="implied"/>
+                        <externalRef reftype="DOLCE-Lite.owl#part" reference="DOLCE-Lite.owl#perdurant" status="implied"/>
+                        <externalRef reftype="DOLCE-Lite.owl#has-quality" reference="DOLCE-Lite.owl#temporal-quality" status="implied"/>
+                        <externalRef reftype="DOLCE-Lite.owl#specific-constant-constituent" reference="DOLCE-Lite.owl#perdurant" status="implied"/>
+                        <externalRef reftype="SubClassOf" reference="DOLCE-Lite.owl#event" status="implied"/>
+                        <externalRef reftype="DOLCE-Lite.owl#has-quality" reference="DOLCE-Lite.owl#temporal-location_q" status="implied"/>
+                        <externalRef reftype="SubClassOf" reference="DOLCE-Lite.owl#spatio-temporal-particular" status="implied"/>
+                        <externalRef reftype="SubClassOf" reference="DOLCE-Lite.owl#particular" status="implied"/>
+                </externalRef>
+            </externalRef>
+		</externalReferences>
+    </term>
+    <term tid="t_74" lemma="and" type="open">
+      <span>
+        <target id="w_74"/>
+      </span>
+    </term>
+    <term tid="t_75" lemma="other" type="open">
+      <span>
+        <target id="w_75"/>
+      </span>
+    </term>
+    <term tid="t_76" lemma="tourists" type="open">
+      <span>
+        <target id="w_76"/>
+      </span>
+    </term>
+    <term tid="t_77" lemma="who" type="open">
+      <span>
+        <target id="w_77"/>
+      </span>
+    </term>
+    <term tid="t_78" lemma="are" type="open">
+      <span>
+        <target id="w_78"/>
+      </span>
+    </term>
+    <term tid="t_79" lemma="unaware" type="open">
+      <span>
+        <target id="w_79"/>
+      </span>
+    </term>
+    <term tid="t_80" lemma="of" type="open">
+      <span>
+        <target id="w_80"/>
+      </span>
+    </term>
+    <term tid="t_81" lemma="the" type="open">
+      <span>
+        <target id="w_81"/>
+      </span>
+    </term>
+    <term tid="t_82" lemma="bikes" type="open">
+      <span>
+        <target id="w_82"/>
+      </span>
+    </term>
+    <term tid="t_83" lemma="over" type="open">
+      <span>
+        <target id="w_83"/>
+      </span>
+    </term>
+    <term tid="t_84" lemma="all" type="open">
+      <span>
+        <target id="w_84"/>
+      </span>
+    </term>
+    <term tid="t_85" lemma="a" type="open">
+      <span>
+        <target id="w_85"/>
+      </span>
+    </term>
+    <term tid="t_86" lemma="nice" type="open">
+      <span>
+        <target id="w_86"/>
+      </span>
+    </term>
+    <term tid="t_87" lemma="stay" type="open">
+      <span>
+        <target id="w_87"/>
+      </span>
+    </term>
+    <term tid="t_88" lemma="but" type="open">
+      <span>
+        <target id="w_88"/>
+      </span>
+    </term>
+    <term tid="t_89" lemma="nothing" type="open">
+      <span>
+        <target id="w_89"/>
+      </span>
+    </term>
+    <term tid="t_90" lemma="exceptional" type="open">
+      <span>
+        <target id="w_90"/>
+      </span>
+    </term>
+  </terms>
+  <entities>
+  	  <entity type="person" eid="e1">
+    	<references>
+    	  <span>
+    	    <target id="t_1"/>
+     	   <target id="t_2"/>
+     	 </span>
+   	 	</references>
+   		 <externalReferences>
+    	  <externalReference confidence="0.7" reference="13982343" resource="JRCNames"/>
+    	  <externalReference confidence="0.3" reference="834354" resource="JRCNames"/>
+    	</externalReferences>
+      </entity>
+      <entity type="date" eid="e2" dateISO="2012-11-10">
+    	<references>
+    	  <span>
+    	    <target id="t_11"/>
+     	   <target id="t_12"/>
+     	 </span>
+     	 <span>
+    	    <target id="t_31"/>
+     	   <target id="t_32"/>
+     	 </span>
+   	 	</references>
+      </entity>
+  </entities>
+  <properties>
+     <property pid="p1" type="customer services">
+      <references>
+        <span>
+          <target id="t_58" />
+          <target id="t_59" />
+        </span>
+      </references>
+    </property>
+    <property pid="p2" type="rate">
+      <references>
+        <span>
+          <target id="t_63" />
+        </span>
+        <span>
+          <target id="t_72" />
+          <target id="t_73" />
+        </span>
+      </references>
+    </property>
+  </properties>
+  <coreferences>
+  <coref coid="co1">
+    <!-- London -->
+    <span >
+      <target id="t_12" head="yes"/>
+    </span>
+    <!-- the capital city of England -->
+    <span>
+      <target id="t_1"/>
+      <target id="t_2"/>
+      <target id="t_3" head ="yes"/> <!-- city is the head -->
+      <target id="t_4"/>
+      <target id="t_5"/>
+    </span>
+    <!-- it -->
+    <span>
+      <target id="t_20" head="yes"/>
+    </span>
+  </coref>
+    <coref coid="co2">
+    <!-- London -->
+    <span >
+      <target id="t_13" head="yes"/>
+    </span>
+    <!-- the capital city of England -->
+    <span>
+      <target id="t_21"/>
+      <target id="t_22"/>
+      <target id="t_23" head ="yes"/> <!-- city is the head -->
+      <target id="t_24"/>
+      <target id="t_25"/>
+    </span>
+    <!-- it -->
+    <span>
+      <target id="t30" head="yes"/>
+    </span>
+  </coref>
+</coreferences>
+  <opinions>
+      <opinion oid="1">
+        <opinion_holder type="SW" >
+            <span> <target id="t_8"/></span>
+        </opinion_holder>
+        <opinion_target>
+            <span> <target id="t_9"/></span>
+        </opinion_target>
+        <opinion_expression
+            polarity="negative"
+            strength="strong"
+            resource="VUSENTIMENTLEX"
+            subjectivity="subjectivity"
+            factual = "yes"
+            sentiment_semantic_type="evaluation"
+            sentiment_product_feature="prices">
+            <span> <target id="t_10"/><target id="t_11"/></span>
+         </opinion_expression>
+     </opinion>
+     <opinion oid="2">
+        <opinion_holder type="AC" >
+            <span> <target id="t_1"/></span>
+        </opinion_holder>
+        <opinion_target>
+            <span> <target id="t_3"/></span>
+        </opinion_target>
+        <opinion_expression
+            polarity="negative"
+            strength="strong"
+            resource="VUSENTIMENTLEX"
+            factual = "no"
+            subjectivity="subjectivity"
+            semantic_type="evaluation"
+            sentiment_product_feature="cleaniness">
+            <span> <target id="t_4"/><target id="t_5"/></span>
+         </opinion_expression>
+     </opinion>
+    </opinions>
+</KAF>
