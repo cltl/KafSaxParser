@@ -1,7 +1,9 @@
 package eu.kyotoproject.stats;
 
 import eu.kyotoproject.kaf.*;
+import eu.kyotoproject.util.FileProcessor;
 
+import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.HashMap;
@@ -175,7 +177,12 @@ public class ExternalRefStats {
 
         str += "Nr. of Terms\t"+nTerms+"\n";
         str += "Sense tokens:\t"+nSenseTokens+"\n";
-        str += "Average polysemy:\t"+(nSenseTokens/nTerms)+"\n";
+        if (nTerms==0) {
+            str += "Average polysemy:\t"+0+"\n";
+        }
+        else {
+            str += "Average polysemy:\t"+(nSenseTokens/nTerms)+"\n";
+        }
         str += "Sense types:\t"+senseMap.size()+"\n";
         str += "Base concept tokens:\t"+nBaseConceptTokens+"\n";
         str += "Base concept types:\t"+baseConceptMap.size()+"\n";
@@ -257,18 +264,41 @@ public class ExternalRefStats {
     static public void main (String [] args) {
         try {
             String kafFilePath = args[0];
-            String kafStatFilePath = kafFilePath+"."+"xls";
             String pos = "";
             if (args.length==2) {
                 pos = args[1];
-                kafStatFilePath = kafFilePath+"."+pos+".xls";
             }
-            FileOutputStream fos = new FileOutputStream(kafStatFilePath);
-            KafSaxParser parser = new KafSaxParser();
-            parser.parseFile(kafFilePath);
-            String str = getOntologyStatistics(parser, pos);
-            fos.write(str.getBytes());
-            fos.close();
+            File file = new File(kafFilePath);
+            if (file.isDirectory()) {
+                String [] files= FileProcessor.makeFlatFileList(kafFilePath);
+                for (int i = 0; i < files.length; i++) {
+                    String filePath = files[i];
+                    String kafStatFilePath = filePath+".xls";
+                    if (!pos.isEmpty()) {
+                        kafStatFilePath = filePath+"."+pos+".xls";
+                    }
+                    KafSaxParser parser = new KafSaxParser();
+                    parser.parseFile(filePath);
+                    FileOutputStream fos = new FileOutputStream(kafStatFilePath);
+                    String str = getOntologyStatistics(parser, pos);
+
+                    fos.write(str.getBytes());
+                    fos.close();
+
+                }
+            }
+            else {
+                String kafStatFilePath = kafFilePath+"."+"xls";
+                if (!pos.isEmpty()) {
+                    kafStatFilePath = kafFilePath+"."+pos+".xls";
+                }
+                FileOutputStream fos = new FileOutputStream(kafStatFilePath);
+                KafSaxParser parser = new KafSaxParser();
+                parser.parseFile(kafFilePath);
+                String str = getOntologyStatistics(parser, pos);
+                fos.write(str.getBytes());
+                fos.close();
+            }
         } catch (IOException e) {
             e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
         }

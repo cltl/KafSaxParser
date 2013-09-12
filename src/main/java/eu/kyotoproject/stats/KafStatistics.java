@@ -4,7 +4,9 @@ import eu.kyotoproject.kaf.KafChunk;
 import eu.kyotoproject.kaf.KafSaxParser;
 import eu.kyotoproject.kaf.KafTerm;
 import eu.kyotoproject.kaf.KafWordForm;
+import eu.kyotoproject.util.FileProcessor;
 
+import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.HashMap;
@@ -223,10 +225,24 @@ public class KafStatistics {
     static public void main (String [] args) {
         try {
             String kafFilePath = args[0];
-            String kafStatFilePath = kafFilePath+".xls";
-            FileOutputStream fos = new FileOutputStream(kafStatFilePath);
-            fos.write(getBasicKafStatistics(kafFilePath).getBytes());
-            fos.close();
+            File file = new File(kafFilePath);
+            if (file.isDirectory()) {
+                String [] files= FileProcessor.makeFlatFileList(kafFilePath);
+                for (int i = 0; i < files.length; i++) {
+                    String filePath = files[i];
+                    String kafStatFilePath = filePath+".xls";
+                    FileOutputStream fos = new FileOutputStream(kafStatFilePath);
+                    fos.write(getBasicKafStatistics(filePath).getBytes());
+                    fos.close();
+
+                }
+            }
+            else {
+                String kafStatFilePath = kafFilePath+".xls";
+                FileOutputStream fos = new FileOutputStream(kafStatFilePath);
+                fos.write(getBasicKafStatistics(kafFilePath).getBytes());
+                fos.close();
+            }
         } catch (IOException e) {
             e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
         }

@@ -2,9 +2,7 @@ package eu.kyotoproject.kaf;
 
 
 import eu.kyotoproject.util.AddTokensAsCommentsToSpans;
-import org.w3c.dom.DOMImplementation;
-import org.w3c.dom.Document;
-import org.w3c.dom.Element;
+import org.w3c.dom.*;
 import org.xml.sax.Attributes;
 import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
@@ -48,6 +46,7 @@ public class KafSaxParser extends DefaultHandler {
     private String value = "";
     private String previousvalue = "";
     private KafMetaData kafMetaData;
+    public ArrayList<KafEvent> kafEventArrayList;
     public ArrayList<KafEntity> kafEntityArrayList;
     public ArrayList<KafProperty> kafPropertyArrayList;
     public ArrayList<KafOpinion> kafOpinionArrayList;
@@ -189,6 +188,7 @@ public class KafSaxParser extends DefaultHandler {
     private KafDep kafDep;
     private KafOpinion kafOpinion;
     private KafTermSentiment kafTermSentiment;
+    private KafEvent kafEvent;
     private KafEventISI kafEventISI;
     private KafTextUnit kaftextUnit;
     private ArrayList<KafSense> senseTags;
@@ -314,6 +314,7 @@ public class KafSaxParser extends DefaultHandler {
     public void init() {
      //    lastTermId = "";
      //    lastTermLemma = "";
+         kafEventArrayList = new ArrayList<KafEvent>();
          kafEventISIList = new ArrayList<KafEventISI>();
          kafMetaData = new KafMetaData();
          kafDiscourseList = new ArrayList<KafTextUnit>();
@@ -354,6 +355,7 @@ public class KafSaxParser extends DefaultHandler {
          sense = new KafSense();
          kafWordForm = new KafWordForm();
          termComponent = new TermComponent();
+         kafEvent = new KafEvent();
          kafEventISI = new KafEventISI();
          kaftextUnit = new KafTextUnit();
          WordFormToTerm = new HashMap<String,String>();
@@ -673,6 +675,64 @@ public class KafSaxParser extends DefaultHandler {
                    kafEventISI.setStart(attributes.getValue(i).trim());
                }
            }
+       }
+       else if (qName.equalsIgnoreCase("event")) {
+           kafEvent = new KafEvent();
+           kafEvent.setComponentType(qName);
+
+           spans = new ArrayList<String>();
+
+           for (int i = 0; i < attributes.getLength(); i++) {
+               String name = attributes.getQName(i);
+               if (name.equalsIgnoreCase("id")) {
+                   kafEvent.setId(attributes.getValue(i).trim());
+               }
+               else if (name.equalsIgnoreCase("referenceType")) {
+                   kafEvent.setReferenceType(attributes.getValue(i).trim());
+               }
+               else if (name.equalsIgnoreCase("synsetId")) {
+                   kafEvent.setSynsetId(attributes.getValue(i).trim());
+               }
+               else if (name.equalsIgnoreCase("synsetConfidence")) {
+                   try {
+                       kafEvent.setSynsetConfidence(Double.parseDouble(attributes.getValue(i).trim()));
+                   } catch (NumberFormatException e) {
+                       e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+                   }
+               }
+
+           }
+       }
+       else if (qName.equalsIgnoreCase("participant")) {
+           KafParticipant kafParticipant = new KafParticipant();
+           kafParticipant.setComponentType(qName);
+
+           spans = new ArrayList<String>();
+
+           for (int i = 0; i < attributes.getLength(); i++) {
+               String name = attributes.getQName(i);
+               if (name.equalsIgnoreCase("id")) {
+                   kafParticipant.setId(attributes.getValue(i).trim());
+               }
+               else if (name.equalsIgnoreCase("referenceType")) {
+                   kafParticipant.setReferenceType(attributes.getValue(i).trim());
+               }
+               else if (name.equalsIgnoreCase("role")) {
+                   kafParticipant.setRole(attributes.getValue(i).trim());
+               }
+               else if (name.equalsIgnoreCase("synsetId")) {
+                   kafParticipant.setSynsetId(attributes.getValue(i).trim());
+               }
+               else if (name.equalsIgnoreCase("synsetConfidence")) {
+                   try {
+                       kafParticipant.setSynsetConfidence(Double.parseDouble(attributes.getValue(i).trim()));
+                   } catch (NumberFormatException e) {
+                       e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+                   }
+               }
+
+           }
+           kafEvent.addParticipant(kafParticipant);
        }
        else if (qName.equalsIgnoreCase("sentiment")) {
                kafTermSentiment = new KafTermSentiment();
@@ -1467,6 +1527,11 @@ version 1:
                 spans = new ArrayList<String>();
                 kafEventISIList.add(kafEventISI);
             }
+            else if (qName.equalsIgnoreCase("event")) {
+                kafEvent.setSpans(spans);
+                spans = new ArrayList<String>();
+                kafEventArrayList.add(kafEvent);
+            }
             else if (qName.equalsIgnoreCase("term")) {
                 kafTerm.setSpans(spans);
                 if (senseTags.size()>0) {
@@ -1765,6 +1830,10 @@ version 1:
         return kafEventISIList;
     }
 
+    public ArrayList<KafEvent> getKafEventArrayList() {
+        return kafEventArrayList;
+    }
+
     public ArrayList<GeoPlaceObject> getKafPlaceArrayList() {
         return kafPlaceArrayList;
     }
@@ -2041,6 +2110,7 @@ version 1:
             str += kaf.toString();
         }
         str += "</deps>\n";
+
         if (kafEventISIList.size()>0) {
             str += "<isi-events>\n";
             for (int i = 0; i < kafEventISIList.size(); i++) {
@@ -2048,6 +2118,15 @@ version 1:
                 str += eventISI.toString();
             }
             str += "</isi-events>\n";
+        }
+
+        if (kafEventArrayList.size()>0) {
+            str += "<events>\n";
+            for (int i = 0; i < kafEventArrayList.size(); i++) {
+                KafEvent event = kafEventArrayList.get(i);
+                str += event.toString();
+            }
+            str += "</events>\n";
         }
 
         str += "<opinions>\n";
@@ -2681,6 +2760,26 @@ version 1:
                 root.appendChild(isiEvents);
             }
 
+            if (kafEventArrayList.size()>0) {
+                Element events  = xmldoc.createElement("events");
+                for (int i = 0; i < kafEventArrayList.size(); i++) {
+                    KafEvent event = kafEventArrayList.get(i);
+                    scope = true;
+                    for (int j = 0; j < event.getSpans().size(); j++)
+                    {
+                        String span = (String) event.getSpans().get(j);
+                        if (!termIdScope.contains(span))
+                        {
+                            scope = false;
+                            break;
+                        }
+                    }
+                    if (scope)
+                        events.appendChild(event.toXML(xmldoc));
+                }
+                root.appendChild(events);
+            }
+
 			Element tunits = xmldoc.createElement("tunits");
 			for (int i = 0; i < this.kafDiscourseList.size(); i++) 
 			{
@@ -2869,6 +2968,16 @@ version 1:
                     root.appendChild(isiEvents);
                 }
 
+
+                if (kafEventArrayList.size()>0) {
+                    Element events  = xmldoc.createElement("srls");
+                    for (int i = 0; i < kafEventArrayList.size(); i++) {
+                        KafEvent event = kafEventArrayList.get(i);
+                        events.appendChild(event.toSrlKafXML(xmldoc));
+                    }
+                    root.appendChild(events);
+                }
+
 				Element tunits = xmldoc.createElement("tunits");
 				for (int i = 0; i < this.kafDiscourseList.size(); i++) {
 					KafTextUnit kaf  = (KafTextUnit) kafDiscourseList.get(i);
@@ -2892,6 +3001,174 @@ version 1:
 
             StreamResult streamResult = new StreamResult(new OutputStreamWriter(stream,"UTF-8"));
 			serializer.transform(domSource, streamResult); 
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+    }
+
+    public void writeNafToStream(OutputStream stream)
+    {
+    	try
+		{
+			DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+			DocumentBuilder builder = factory.newDocumentBuilder();
+			DOMImplementation impl = builder.getDOMImplementation();
+/*            //&lt; &gt; &amp; &quot; &apos;
+            String docTypeString = "&lt!DOCTYPE rdf:RDF [\n" +
+                    "&lt;!ENTITY rdf &quot;http://www.w3.org/1999/02/22-rdf-syntax-ns#&quot;&gt;\n" +
+                    "&lt;!ENTITY rdfs &quot;http://www.w3.org/TR/WD-rdf-schema#&quot;&gt;\n" +
+                    "&lt;!ENTITY naf &quot;http://www.newsreader-project.eu/ns/2013/08/NAF/&quot;&gt;\n" +
+                    "&lt;!ENTITY wn30g &quot;http://example.org/wordnet3.0/&quot;&gt;\n"+
+                    "&lt;!ENTITY fn &quot;http://example.org/framenet/&quot;&gt;\n"+
+                    "&lt;!ENTITY vn &quot;http://example.org/verbnet/&quot;&gt;\n"+
+                    "&lt;!ENTITY pb &quot;http://example.org/propbank/&quot;&gt;\n"+
+                    "&lt;!ENTITY wn &quot;http://example.org/wordnet3.0/&quot;&gt;";
+
+            docTypeString += "&lt;!ENTITY wn30g &quot;"+kafMetaData.getFilename()+"&quot;&gt;";
+            docTypeString += "]&gt;\n";*/
+
+            String docTypeString = "<!DOCTYPE rdf:RDF [" +
+                    "<!ENTITY rdf 'http://www.w3.org/1999/02/22-rdf-syntax-ns#'>" +
+                    "<!ENTITY rdfs 'http://www.w3.org/TR/WD-rdf-schema#'>" +
+                    "<!ENTITY naf 'http://www.newsreader-project.eu/ns/2013/08/NAF/'>" +
+                    "<!ENTITY wn30g 'http://example.org/wordnet3.0/'>\n"+
+                    "<!ENTITY fn 'http://example.org/framenet/'>"+
+                    "<!ENTITY vn 'http://example.org/verbnet/'>"+
+                    "<!ENTITY pb 'http://example.org/propbank/'>"+
+                    "<!ENTITY wn 'http://example.org/wordnet3.0/'>";
+
+            docTypeString += "<!ENTITY wn30g '"+kafMetaData.getFilename()+"'>";
+            docTypeString += "]>";
+
+            /*
+
+            <!DOCTYPE rdf:RDF [
+    <!ENTITY rdf 'http://www.w3.org/1999/02/22-rdf-syntax-ns#'>
+    <!ENTITY rdfs 'http://www.w3.org/TR/WD-rdf-schema#'>
+    <!ENTITY docId 'http://casa400.com/docs/test.pdf/3_3012/2013-06-27_14:15:18_16:34:59_user@machine#'>
+    <!ENTITY naf 'http://www.newsreader-project.eu/ns/2013/08/NAF/'>
+    <!ENTITY wn30g 'http://example.org/wordnet3.0/'>
+]>
+            <rdf:RDF xmlns="&naf;" xmlns:rdf="&rdf;" xmlns:naf="&naf;" xmlns:rdfs="&rdfs;">
+  <NAF naf:version="v1">
+             */
+
+            DocumentType docType = builder.parse(docTypeString).getDoctype();
+
+            Document xmldoc = impl.createDocument("rdf", "RDF", docType);
+
+
+            xmldoc.setXmlStandalone(true);
+			Element root = xmldoc.getDocumentElement();
+			root.setAttribute("xmlns", "&naf;");
+			root.setAttribute("xmlns:rdf", "&rdf;");
+			root.setAttribute("xmlns:naf", "&naf;");
+			root.setAttribute("xmlns:rdfs", "&rdfs;");
+			root.appendChild(kafMetaData.toHeaderXML(xmldoc));
+
+            Element naf = xmldoc.createElement("NAF");
+            naf.setAttribute("naf:version", "v1");
+
+            Element text = xmldoc.createElement("text");
+            text.setAttribute("xml:lang", kafMetaData.getLanguage());
+
+            for (int i = 0; i < this.kafWordFormList.size(); i++) {
+                KafWordForm kaf  = (KafWordForm) kafWordFormList.get(i);
+                text.appendChild(kaf.toXML(xmldoc));
+            }
+            naf.appendChild(text);
+
+            Element terms = xmldoc.createElement("terms");
+            for (int i = 0; i < this.kafTermList.size(); i++) {
+                KafTerm kaf  = (KafTerm) kafTermList.get(i);
+                terms.appendChild(kaf.toXML(xmldoc));
+            }
+            naf.appendChild(terms);
+
+            Element deps = xmldoc.createElement("deps");
+            for (int i = 0; i < this.kafDepList.size(); i++) {
+                KafDep kaf  = (KafDep) kafDepList.get(i);
+                deps.appendChild(kaf.toXML(xmldoc));
+            }
+            naf.appendChild(deps);
+
+            Element chunks = xmldoc.createElement("chunks");
+            for (int i = 0; i < this.kafChunkList.size(); i++) {
+                KafChunk kaf  = (KafChunk) kafChunkList.get(i);
+                chunks.appendChild(kaf.toXML(xmldoc));
+            }
+            naf.appendChild(chunks);
+
+            if (kafOpinionArrayList.size()>0) {
+                Element opinions = xmldoc.createElement("opinions");
+                for (int i = 0; i < this.kafOpinionArrayList.size(); i++){
+                    KafOpinion kaf  =  kafOpinionArrayList.get(i);
+                    opinions.appendChild(kaf.toXML(xmldoc));
+                }
+                naf.appendChild(opinions);
+            }
+
+            if (kafEntityArrayList.size()>0) {
+                Element entities = xmldoc.createElement("entities");
+                for (int i = 0; i < this.kafEntityArrayList.size(); i++) {
+                    KafEntity kaf  = kafEntityArrayList.get(i);
+                    entities.appendChild(kaf.toXML(xmldoc));
+                }
+                naf.appendChild(entities);
+            }
+
+            if (kafPropertyArrayList.size()>0) {
+                Element properties = xmldoc.createElement("properties");
+                for (int i = 0; i < this.kafPropertyArrayList.size(); i++) {
+                    KafProperty kaf  = kafPropertyArrayList.get(i);
+                    properties.appendChild(kaf.toXML(xmldoc));
+                }
+                naf.appendChild(properties);
+            }
+
+            if (kafCorefenceArrayList.size()>0) {
+                Element coreferences = xmldoc.createElement("coreferences");
+                for (int i = 0; i < this.kafCorefenceArrayList.size(); i++) {
+                    KafCoreferenceSet kaf  = kafCorefenceArrayList.get(i);
+                    coreferences.appendChild(kaf.toXML(xmldoc));
+                }
+                naf.appendChild(coreferences);
+            }
+
+
+            if (kafEventArrayList.size()>0) {
+                Element events  = xmldoc.createElement("srls");
+                for (int i = 0; i < kafEventArrayList.size(); i++) {
+                    KafEvent event = kafEventArrayList.get(i);
+                    event.setTokenString(AddTokensAsCommentsToSpans.getTokenString(this, event.getSpans()));
+                    for (int j = 0; j < event.getParticipants().size(); j++) {
+                        KafParticipant kafParticipant = event.getParticipants().get(j);
+                        kafParticipant.setTokenString(AddTokensAsCommentsToSpans.getTokenStringFromTermIds(this, kafParticipant.getSpans()));
+                    }
+                    events.appendChild(event.toSrlNafXML(xmldoc));
+                }
+                naf.appendChild(events);
+            }
+
+            root.appendChild(naf);
+
+
+			// Serialisation through Tranform.
+			DOMSource domSource = new DOMSource(xmldoc);
+			TransformerFactory tf = TransformerFactory.newInstance();
+			//tf.setAttribute("indent-number", 4);
+			Transformer serializer = tf.newTransformer();
+			serializer.setOutputProperty(OutputKeys.INDENT,"yes");
+			serializer.setOutputProperty(OutputKeys.ENCODING,"UTF-8");
+			serializer.setOutputProperty(OutputKeys.STANDALONE, "yes");
+            //serializer.setParameter("format-pretty-print", Boolean.TRUE);
+            serializer.setOutputProperty(OutputKeys.INDENT, "yes");
+            serializer.setOutputProperty("{http://xml.apache.org/xslt}indent-amount", "2");
+
+            StreamResult streamResult = new StreamResult(new OutputStreamWriter(stream,"UTF-8"));
+			serializer.transform(domSource, streamResult);
 		}
 		catch(Exception e)
 		{
@@ -3010,6 +3287,21 @@ version 1:
                 root.appendChild(isiEvents);
             }
 
+
+            if (kafEventArrayList.size()>0) {
+                Element events  = xmldoc.createElement("srls");
+                for (int i = 0; i < kafEventArrayList.size(); i++) {
+                    KafEvent event = kafEventArrayList.get(i);
+                    event.setTokenString(AddTokensAsCommentsToSpans.getTokenString(this, event.getSpans()));
+                    for (int j = 0; j < event.getParticipants().size(); j++) {
+                        KafParticipant kafParticipant = event.getParticipants().get(j);
+                        kafParticipant.setTokenString(AddTokensAsCommentsToSpans.getTokenStringFromTermIds(this, kafParticipant.getSpans()));
+                    }
+                    events.appendChild(event.toSrlKafXML(xmldoc));
+                }
+                root.appendChild(events);
+            }
+
             Element tunits = xmldoc.createElement("tunits");
             for (int i = 0; i < this.kafDiscourseList.size(); i++) {
                 KafTextUnit kaf  = (KafTextUnit) kafDiscourseList.get(i);
@@ -3031,6 +3323,7 @@ version 1:
 
             StreamResult streamResult = new StreamResult(new OutputStreamWriter(stream,"UTF-8"));
 			serializer.transform(domSource, streamResult);
+
 		}
 		catch(Exception e)
 		{
@@ -3038,6 +3331,14 @@ version 1:
 		}
     }
 
+    public String getFullText () {
+        String text = "";
+        for (int i = 0; i < this.kafWordFormList.size(); i++) {
+            KafWordForm wordForm = this.kafWordFormList.get(i);
+            text += " "+wordForm.getWf();
+        }
+        return text.trim();
+    }
     public KafTerm getTerm (String tid) {
         for (int i = 0; i < this.kafTermList.size(); i++) {
             KafTerm kt  = (KafTerm) this.kafTermList.get(i);
@@ -3048,10 +3349,33 @@ version 1:
         return null;
     }
     
+    public KafTerm getTermForWordId (String wid) {
+        for (int i = 0; i < this.kafTermList.size(); i++) {
+            KafTerm kt  = (KafTerm) this.kafTermList.get(i);
+            for (int j = 0; j < kt.getSpans().size(); j++) {
+                String s = kt.getSpans().get(j);
+                if (s.equalsIgnoreCase(wid)) {
+                    return kt;
+                }
+            }
+        }
+        return null;
+    }
+
     public KafEventISI getEventISI (String eventid) {
         for (int i = 0; i < this.kafEventISIList.size(); i++) {
             KafEventISI kt  = (KafEventISI) this.kafEventISIList.get(i);
             if (kt.getEventid().equalsIgnoreCase(eventid)) {
+                return kt;
+            }
+        }
+        return null;
+    }
+
+    public KafEvent getEvents (String eventid) {
+        for (int i = 0; i < this.kafEventArrayList.size(); i++) {
+            KafEvent kt  = (KafEvent) this.kafEventArrayList.get(i);
+            if (kt.getId().equalsIgnoreCase(eventid)) {
                 return kt;
             }
         }
@@ -3067,6 +3391,16 @@ version 1:
             }
         }
         return entities;
+    }
+
+    public KafOpinion getOpinion (String oid) {
+        for (int i = 0; i < kafOpinionArrayList.size(); i++) {
+            KafOpinion opinion = kafOpinionArrayList.get(i);
+            if (opinion.getOpinionId().equals(oid)) {
+                return opinion;
+            }
+        }
+        return null;
     }
 
     public KafWordForm getWordForm (String wid) {

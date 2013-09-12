@@ -42,6 +42,7 @@ public class AddTokensAsCommentsToSpans {
         ArrayList<String> tokenSpan = new ArrayList<String>();
         for (int i = 0; i < span.size(); i++) {
             String s = span.get(i);
+            //System.out.println("s = " + s);
             if (kafSaxParser.TermToWord.containsKey(s)) {
                 ArrayList<String> tokens = kafSaxParser.TermToWord.get(s);
                 for (int j = 0; j < tokens.size(); j++) {
@@ -50,6 +51,17 @@ public class AddTokensAsCommentsToSpans {
                 }
             }
             else {
+                int idx = s.lastIndexOf(";");
+                if (idx>-1) {
+                    s = s.substring(idx);
+                    if (kafSaxParser.TermToWord.containsKey(s)) {
+                        ArrayList<String> tokens = kafSaxParser.TermToWord.get(s);
+                        for (int j = 0; j < tokens.size(); j++) {
+                            String t = tokens.get(j);
+                            tokenSpan.add(t);
+                        }
+                    }
+                }
                 System.out.println("s = " + s);
             }
 
