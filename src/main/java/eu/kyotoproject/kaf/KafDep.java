@@ -54,6 +54,15 @@ public class KafDep {
   	  return root;
     }
     
+    public Element toNafXML(Document xmldoc)
+    {
+  	  Element root = xmldoc.createElement("dep");
+ 	  root.setAttribute("from", from);
+  	  root.setAttribute("to", to);
+  	  root.setAttribute("rfunc", rfunc);
+  	  return root;
+    }
+
     public String getFrom() {
         return from;
     }

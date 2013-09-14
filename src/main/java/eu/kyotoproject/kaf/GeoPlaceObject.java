@@ -62,6 +62,15 @@ public class GeoPlaceObject {
         this.externalReferences = externalReferences;
     }
 
+    public ArrayList<String> getSpans() {
+        ArrayList<String> spans = new ArrayList<String>();
+        for (int i = 0; i < kafReferences.size(); i++) {
+            KafReference kafReference = kafReferences.get(i);
+            spans.add(kafReference.getTerm());
+        }
+        return spans;
+    }
+
     public GeoInfoPlace getPlaceInfo() {
         return placeInfo;
     }
@@ -112,6 +121,20 @@ public class GeoPlaceObject {
     {
   	  Element root = xmldoc.createElement("place");
  	  root.setAttribute("lid", pId);
+  	  Element kafRefs = xmldoc.createElement("kafReferences");
+      for (KafReference ref : kafReferences) {
+          Element kafReference = ref.toXML(xmldoc);
+          kafRefs.appendChild(kafReference);
+      }
+      root.appendChild(kafRefs);
+      Element placeXml = this.placeInfo.toXML(xmldoc);
+      root.appendChild(placeXml);
+  	  return root;
+    }
+    public Element toNafXML(Document xmldoc)
+    {
+  	  Element root = xmldoc.createElement("place");
+ 	  root.setAttribute("id", pId);
   	  Element kafRefs = xmldoc.createElement("kafReferences");
       for (KafReference ref : kafReferences) {
           Element kafReference = ref.toXML(xmldoc);

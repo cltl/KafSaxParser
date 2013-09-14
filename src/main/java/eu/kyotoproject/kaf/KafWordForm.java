@@ -123,6 +123,26 @@ public class KafWordForm {
   	  return root;
     }
     
+    public Element toNafXML(Document xmldoc)
+    {
+  	  Element root = xmldoc.createElement("wf");
+ 	  root.setAttribute("id", wid);
+  	  root.setAttribute("sent", sent);
+  	  if (para.length() > 0)
+  		  root.setAttribute("para", para);
+  	  if (page.length() > 0)
+  		  root.setAttribute("page", page);
+  	  if (charOffset.length() > 0)
+  		  root.setAttribute("offset", charOffset);
+
+  	  if (charLength.length() > 0)
+  		  root.setAttribute("length", charLength);
+
+  	  Node text = xmldoc.createTextNode(wf);
+  	  root.appendChild(text);
+  	  return root;
+    }
+
     public String getPage() {
         return page;
     }

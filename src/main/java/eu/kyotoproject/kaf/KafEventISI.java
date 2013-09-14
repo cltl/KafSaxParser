@@ -189,4 +189,40 @@ public class KafEventISI {
         root.appendChild(span);
         return root;
     }
+   public Element toNafXML(Document xmldoc)
+    {
+        Element root = xmldoc.createElement("isi-event");
+        root.setAttribute("id", eventid);
+        if (epistemic_status.length()>0) {
+            root.setAttribute("epistemic_status", epistemic_status);
+        }
+        if (memberOf.length()>0) {
+            root.setAttribute("memberOf", memberOf);
+        }
+        if (inReporting.length()>0) {
+            root.setAttribute("inReporting", inReporting);
+        }
+        if (coreference.length()>0) {
+            root.setAttribute("coreference", coreference);
+        }
+        if (event_type.length()>0) {
+            root.setAttribute("event_type", event_type);
+        }
+        if (subevent_of.length()>0) {
+            root.setAttribute("subevent_of", subevent_of);
+        }
+        if (start.length()>0) {
+            root.setAttribute("start", start);
+        }
+
+        Element span = xmldoc.createElement("span");
+        for (int i = 0; i < this.spans.size(); i++)
+        {
+            Element target = xmldoc.createElement("target");
+            target.setAttribute("id", spans.get(i));
+            span.appendChild(target);
+        }
+        root.appendChild(span);
+        return root;
+    }
 }

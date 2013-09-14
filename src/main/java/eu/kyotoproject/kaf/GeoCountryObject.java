@@ -59,6 +59,15 @@ public class GeoCountryObject {
         return kafReferences;
     }
 
+    public ArrayList<String> getSpans() {
+        ArrayList<String> spans = new ArrayList<String>();
+        for (int i = 0; i < kafReferences.size(); i++) {
+            KafReference kafReference = kafReferences.get(i);
+            spans.add(kafReference.getTerm());
+        }
+        return spans;
+    }
+
     public void setKafReferences(ArrayList<KafReference> kafReferences) {
         this.kafReferences = kafReferences;
     }
@@ -112,6 +121,27 @@ public class GeoCountryObject {
     {
   	  Element root = xmldoc.createElement("country");
  	  root.setAttribute("lid", cId);
+  	  Element kafRefs = xmldoc.createElement("kafReferences");
+      for (KafReference ref : kafReferences) {
+          Element kafReference = ref.toXML(xmldoc);
+          kafRefs.appendChild(kafReference);
+      }
+      root.appendChild(kafRefs);
+      Element exRefs = xmldoc.createElement("externalReferences");
+      for (KafSense sense : externalReferences) {
+          Element exRefXml = sense.toXML(xmldoc);
+          exRefs.appendChild(exRefXml);
+      }
+        root.appendChild(exRefs);
+      Element placeXml = this.countryInfo.toXML(xmldoc);
+      root.appendChild(placeXml);
+  	  return root;
+    }
+
+    public Element toNafXML(Document xmldoc)
+    {
+  	  Element root = xmldoc.createElement("country");
+ 	  root.setAttribute("id", cId);
   	  Element kafRefs = xmldoc.createElement("kafReferences");
       for (KafReference ref : kafReferences) {
           Element kafReference = ref.toXML(xmldoc);

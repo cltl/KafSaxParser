@@ -99,7 +99,58 @@ public class KafParticipant extends KafEventComponent{
         return root;
     }
 
+
+    /*
+         <role rid="docId:_pr1r1" semRole="A1">
+   <!-- of -->
+   <span><target id="docId:_t2"/></span>
+     </role>
+
+    */
     public Element toSrlNafXML(Document xmldoc)
+    {
+        Element root = xmldoc.createElement("role");
+
+        if (this.getId() != null)
+            root.setAttribute("id", this.getId());
+
+        if (this.getRole() != null)
+            root.setAttribute("semRole", this.getRole());
+
+        if (!this.getSynsetId().isEmpty()) {
+            root.setAttribute("uri", this.getSynsetId());
+            root.setAttribute("confidence", new Double(this.getSynsetConfidence()).toString());
+        }
+
+        if (this.getTokenString().length()>0) {
+            Comment comment = xmldoc.createComment(this.getTokenString());
+            root.appendChild(comment);
+        }
+
+
+        if (!this.getReferenceType().isEmpty()) {
+            Element conceptUri = xmldoc.createElement("type");
+            conceptUri.setAttribute("uri", this.getReferenceType());
+            root.appendChild(conceptUri);
+        }
+
+        if (!this.getElementName().isEmpty()) {
+            Element conceptUri = xmldoc.createElement("type");
+            conceptUri.setAttribute("uri", this.getElementName());
+            root.appendChild(conceptUri);
+        }
+
+        for (int i = 0; i < this.getSpans().size(); i++)
+        {
+            Element target = xmldoc.createElement("target");
+            target.setAttribute("id", this.getSpans().get(i));
+            root.appendChild(target);
+        }
+
+        return root;
+    }
+
+    public Element toSrlNafRdfXML(Document xmldoc)
     {
         Element root = xmldoc.createElement("role");
 
@@ -109,6 +160,12 @@ public class KafParticipant extends KafEventComponent{
 
         if (this.getRole() != null)
             role.setAttribute("naf:semRole", this.getRole());
+
+        if (this.getTokenString().length()>0) {
+            Comment comment = xmldoc.createComment(this.getTokenString());
+            role.appendChild(comment);
+        }
+
 
         if (!this.getSynsetId().isEmpty()) {
             Element synsetUri = xmldoc.createElement("naf:uri");
@@ -123,17 +180,19 @@ public class KafParticipant extends KafEventComponent{
             role.appendChild(conceptUri);
         }
 
+        if (!this.getElementName().isEmpty()) {
+            Element conceptUri = xmldoc.createElement("naf:uri");
+            conceptUri.setAttribute("rdf:resource", this.getElementName());
+            role.appendChild(conceptUri);
+        }
 
         for (int i = 0; i < this.getSpans().size(); i++)
         {
             Element target = xmldoc.createElement("target");
             target.setAttribute("rdf:resource", this.getSpans().get(i));
-            if (this.getTokenString().length()>0) {
-                Comment comment = xmldoc.createComment(this.getTokenString());
-                target.appendChild(comment);
-            }
             role.appendChild(target);
         }
+
         root.appendChild(role);
 
         return root;

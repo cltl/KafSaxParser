@@ -124,13 +124,81 @@ public class KafEvent extends KafEventComponent{
         return root;
     }
 
-    public Element toSrlNafXML(Document xmldoc)
+
+    /*
+      <srl>
+    <!-- 1 follower.01 : A1[2 of] -->
+    <predicate prid="docId:_pr1" uri="URI_OF_follower.01">
+      <span><target id="docId:_t1"/></span>
+      <role rid="docId:_pr1r1" semRole="A1">
+	<!-- of -->
+	<span><target id="docId:_t2"/></span>
+      </role>
+    </predicate>
+    <!-- 5 clash.01 : A0[1 followers] A1[6 with] AM-LOC[9 in] -->
+
+     */
+
+    public Element toNafXML(Document xmldoc)
+    {
+        Element root = xmldoc.createElement("srl");
+
+        Element predicate = xmldoc.createElement("Predicate");
+        if (this.getId() != null)
+            predicate.setAttribute("id", this.getId());
+        if (!this.getSynsetId().isEmpty()) {
+            predicate.setAttribute("uri", this.getSynsetId());
+            predicate.setAttribute("confidence", new Double(this.getSynsetConfidence()).toString());
+        }
+
+        if (this.getTokenString().length()>0) {
+            Comment comment = xmldoc.createComment(this.getTokenString());
+            predicate.appendChild(comment);
+        }
+
+        if (!this.getReferenceType().isEmpty()) {
+            Element conceptUri = xmldoc.createElement("type");
+            conceptUri.setAttribute("uri", this.getReferenceType());
+            predicate.appendChild(conceptUri);
+        }
+
+        if (!this.getElementName().isEmpty()) {
+            Element conceptUri = xmldoc.createElement("type");
+            conceptUri.setAttribute("uri", this.getElementName());
+            predicate.appendChild(conceptUri);
+        }
+
+
+        for (int i = 0; i < this.getSpans().size(); i++)
+        {
+            Element target = xmldoc.createElement("target");
+            target.setAttribute("id", this.getSpans().get(i));
+            predicate.appendChild(target);
+        }
+
+        if (participants.size()>0) {
+            for (int i = 0; i < participants.size(); i++) {
+                KafParticipant kafParticipant = participants.get(i);
+                Element participantElement = kafParticipant.toSrlNafXML(xmldoc);
+                predicate.appendChild(participantElement);
+            }
+        }
+        root.appendChild(predicate);
+        return root;
+    }
+
+    public Element toNafRdfXML(Document xmldoc)
     {
         Element root = xmldoc.createElement("srl");
 
         Element predicate = xmldoc.createElement("Predicate");
         if (this.getId() != null)
             predicate.setAttribute("rdf:about", this.getId());
+
+        if (this.getTokenString().length()>0) {
+            Comment comment = xmldoc.createComment(this.getTokenString());
+            predicate.appendChild(comment);
+        }
 
         if (!this.getSynsetId().isEmpty()) {
             Element synsetUri = xmldoc.createElement("naf:uri");
@@ -145,15 +213,17 @@ public class KafEvent extends KafEventComponent{
             predicate.appendChild(conceptUri);
         }
 
+        if (!this.getElementName().isEmpty()) {
+            Element conceptUri = xmldoc.createElement("naf:uri");
+            conceptUri.setAttribute("rdf:resource", this.getElementName());
+            predicate.appendChild(conceptUri);
+        }
+
 
         for (int i = 0; i < this.getSpans().size(); i++)
         {
             Element target = xmldoc.createElement("target");
             target.setAttribute("rdf:resource", this.getSpans().get(i));
-            if (this.getTokenString().length()>0) {
-                Comment comment = xmldoc.createComment(this.getTokenString());
-                target.appendChild(comment);
-            }
             predicate.appendChild(target);
         }
 

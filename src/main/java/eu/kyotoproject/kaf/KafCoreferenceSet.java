@@ -91,4 +91,22 @@ public class KafCoreferenceSet {
         }
         return root;
     }
+    public Element toNafXML(Document xmldoc)
+    {
+        Element root = xmldoc.createElement("coref");
+        if (coid != null)
+            root.setAttribute("id", coid);
+        if (setsOfSpans.size()>0) {
+            for (int i = 0; i < setsOfSpans.size(); i++) {
+                ArrayList<CorefTarget> corefTargets = setsOfSpans.get(i);
+                Element setOfTargets = xmldoc.createElement(("span"));
+                for (int j = 0; j < corefTargets.size(); j++) {
+                    CorefTarget corefTarget = corefTargets.get(j);
+                    setOfTargets.appendChild(corefTarget.toXML(xmldoc));
+                }
+                root.appendChild(setOfTargets);
+            }
+        }
+        return root;
+    }
 }

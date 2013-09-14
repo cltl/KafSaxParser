@@ -286,4 +286,57 @@ public class KafEntity {
         }
         return root;
     }
+
+    public Element toNafXML(Document xmldoc)
+    {
+        Element root = xmldoc.createElement("entity");
+        if (type != null)
+            root.setAttribute("type", type);
+        if (id != null)
+            root.setAttribute("id", id);
+        if ((subtype != null) && (!subtype.isEmpty()))
+            root.setAttribute("subtype", subtype);
+        if ((moneyISO != null)  && (!moneyISO.isEmpty()))
+            root.setAttribute("moneyISO", moneyISO);
+        if ((dateISO != null)  && (!dateISO.isEmpty()))
+            root.setAttribute("dateISO", dateISO);
+/*        if (spans.size()>0) {
+            Element referencesElement = xmldoc.createElement("references");
+            Element spanElement = xmldoc.createElement("span");
+            for (int i = 0; i < this.spans.size(); i++)
+            {
+                Element target = xmldoc.createElement("target");
+                target.setAttribute("id", spans.get(i));
+                spanElement.appendChild(target);
+            }
+            referencesElement.appendChild(spanElement);
+            root.appendChild(referencesElement);
+        }*/
+        if (setsOfSpans.size()>0) {
+            Element referencesElement = xmldoc.createElement("references");
+            for (int i = 0; i < setsOfSpans.size(); i++) {
+                ArrayList<CorefTarget> corefTargets = setsOfSpans.get(i);
+                Element setOfTargets = xmldoc.createElement(("span"));
+                for (int j = 0; j < corefTargets.size(); j++) {
+                    CorefTarget corefTarget = corefTargets.get(j);
+                    if (tokenStringArray.size()>j) {
+                        Comment comment = xmldoc.createComment(tokenStringArray.get(j));
+                        setOfTargets.appendChild(comment);
+                    }
+                    setOfTargets.appendChild(corefTarget.toXML(xmldoc));
+                }
+                referencesElement.appendChild(setOfTargets);
+            }
+            root.appendChild(referencesElement);
+        }
+        if (externalReferences.size()>0) {
+            Element externalRefs = xmldoc.createElement("externalReferences");
+            for (int i = 0; i < externalReferences.size(); i++) {
+                KafSense kafSense = externalReferences.get(i);
+                externalRefs.appendChild(kafSense.toXML(xmldoc));
+            }
+            root.appendChild(externalRefs);
+        }
+        return root;
+    }
 }

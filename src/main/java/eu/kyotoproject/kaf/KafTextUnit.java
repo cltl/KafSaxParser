@@ -172,4 +172,27 @@ public class KafTextUnit {
 	  	root.appendChild(span);
   	  	return root;
     }
+
+    public Element toNafXML(Document xmldoc)
+    {
+    	Comment comment1 = xmldoc.createComment("<!--"+leftContext+" <html_page> "+rightContext+"-->\n");
+    	Comment comment2 = xmldoc.createComment("<!-- first word ="+getFirstWord()+" & "+" last word ="+lastWord+" -->\n");
+
+  	  	Element root = xmldoc.createElement("tunit");
+  	  	root.setAttribute("type", type);
+  	  	root.setAttribute("id", Integer.toString(getUnitid()));
+  	  	root.appendChild(comment1);
+  	  	root.appendChild(comment2);
+
+  	  	Element span = xmldoc.createElement("span");
+  	  	Element target1 = xmldoc.createElement("target");
+  	  	target1.setAttribute("id", spans.get(0));
+  	  	span.appendChild(target1);
+  	  	Element target2 = xmldoc.createElement("target");
+	  	target2.setAttribute("id", spans.get(spans.size()-1));
+	  	span.appendChild(target2);
+
+	  	root.appendChild(span);
+  	  	return root;
+    }
 }

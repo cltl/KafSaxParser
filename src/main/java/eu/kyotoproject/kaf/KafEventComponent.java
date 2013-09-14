@@ -16,12 +16,14 @@ public class KafEventComponent {
     private String synsetId;
     private double synsetConfidence;
     private String referenceType;
+    private String elementName;
     private String lemma;
     private String pos;
     private ArrayList<String> spans;
     private String tokenString;
 
     public KafEventComponent() {
+        this.elementName = "";
         this.tokenString = "";
         this.lemma = "";
         this.pos = "";
@@ -33,6 +35,13 @@ public class KafEventComponent {
         this.spans = new ArrayList<String>();
     }
 
+    public String getElementName() {
+        return elementName;
+    }
+
+    public void setElementName(String elementName) {
+        this.elementName = elementName;
+    }
 
     public String getTokenString() {
         return tokenString;

@@ -85,6 +85,24 @@ public class KafChunk {
   	  return root;
     }
     
+    public Element toNafXML(Document xmldoc)
+    {
+  	  Element root = xmldoc.createElement("chunk");
+ 	  root.setAttribute("id", cid);
+  	  root.setAttribute("head", head);
+  	  root.setAttribute("phrase", phrase);
+
+  	  Element span = xmldoc.createElement("span");
+  	  for (int i = 0; i < this.spans.size(); i++)
+  	  {
+  		  Element target = xmldoc.createElement("target");
+  		  target.setAttribute("id", spans.get(i));
+  		  span.appendChild(target);
+  	  }
+  	  root.appendChild(span);
+  	  return root;
+    }
+
     public String getCid() {
         return cid;
     }

@@ -64,6 +64,15 @@ public class ISODate {
         return kafReferences;
     }
 
+    public ArrayList<String> getSpans() {
+        ArrayList<String> spans = new ArrayList<String>();
+        for (int i = 0; i < kafReferences.size(); i++) {
+            KafReference kafReference = kafReferences.get(i);
+            spans.add(kafReference.getTerm());
+        }
+        return spans;
+    }
+
     public void setKafReferences(ArrayList<KafReference> kafReferences) {
         this.kafReferences = kafReferences;
     }
@@ -112,6 +121,21 @@ public class ISODate {
     }
 
     public Element toXML(Document xmldoc)
+    {
+  	  Element root = xmldoc.createElement("date");
+ 	  root.setAttribute("did", did);
+  	  Element kafRefs = xmldoc.createElement("kafReferences");
+      for (KafReference ref : kafReferences) {
+          Element kafReference = ref.toXML(xmldoc);
+          kafRefs.appendChild(kafReference);
+      }
+      root.appendChild(kafRefs);
+      Element dateInfoXml = this.dateInfo.toXML(xmldoc);
+      root.appendChild(dateInfoXml);
+  	  return root;
+    }
+
+    public Element toNafXML(Document xmldoc)
     {
   	  Element root = xmldoc.createElement("date");
  	  root.setAttribute("did", did);

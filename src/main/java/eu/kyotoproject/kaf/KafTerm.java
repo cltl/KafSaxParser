@@ -278,6 +278,64 @@ sentiment_semanrtic_type="behaviour/trait" sentiment_product_feature="" />
     	return root;
     }
 
+    public Element toNafXML(Document xmldoc)
+    {
+    	Element root = xmldoc.createElement("term");
+    	root.setAttribute("id", tid);
+    	root.setAttribute("lemma", XmlCharacterConversion.replaceXmlChar(lemma));
+    	root.setAttribute("pos", pos);
+    	root.setAttribute("type", type);
+
+        if (head.length()>0) {
+            root.setAttribute("head", head);
+        }
+        if (morphofeat.length()>0) {
+            root.setAttribute("morphofeat", morphofeat);
+        }
+    	if (netype.length()>0)
+    		root.setAttribute("netype", netype);
+    	if (parent.length()>0)
+    		root.setAttribute("parent", parent);
+    	if (modifier.length()>0)
+    		root.setAttribute("modifier", modifier);
+        if (this.polarity.length()>0)
+            root.setAttribute("polarity", polarity);
+        if (this.dep.length()>0)
+            root.setAttribute("dep", dep);
+
+        if (kafTermSentiment.hasValue()) {
+            Element sentiment = kafTermSentiment.toXML(xmldoc);
+            root.appendChild(sentiment);
+        }
+
+        Element span = xmldoc.createElement("span");
+        if (tokenString.length()>0) {
+            Comment comment = xmldoc.createComment(tokenString);
+            span.appendChild(comment);
+        }
+    	for (int i = 0; i < this.spans.size(); i++)
+    	{
+    		Element target = xmldoc.createElement("target");
+    		target.setAttribute("id", spans.get(i));
+    		span.appendChild(target);
+    	}
+    	root.appendChild(span);
+
+    	if (senseTags.size()>0)
+    	{
+    		Element refs = xmldoc.createElement("externalReferences");
+            for (KafSense sense : senseTags)
+            	refs.appendChild(sense.toXML(xmldoc));
+            root.appendChild(refs);
+    	}
+        if (components.size()>0) {
+             for (TermComponent comp : components)
+                 root.appendChild(comp.toXML(xmldoc));
+        }
+
+    	return root;
+    }
+
     public String getTokenString() {
         return tokenString;
     }

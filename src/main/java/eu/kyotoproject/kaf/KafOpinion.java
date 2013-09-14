@@ -376,6 +376,87 @@ public class KafOpinion {
         return root;
     }
 
+    public Element toNafXML(Document xmldoc)
+    {   Element span = null;
+        Element root = xmldoc.createElement("opinion" +
+                "");
+        root.setAttribute("id", opinionId);
+        if (overlap_ents.length()>0) {
+            root.setAttribute("overlap_ents", overlap_ents);
+        }
+        if (overlap_props.length()>0) {
+            root.setAttribute("overlap_props", overlap_props);
+        }
+
+        Element opinion_holder = xmldoc.createElement("opinion_holder");
+        opinion_holder.setAttribute("type", opinionHolderType);
+        if (spansOpinionHolder.size()>0) {
+            span = xmldoc.createElement("span");
+            if (tokenStringOpinionHolder.length()>0) {
+                Comment comment = xmldoc.createComment(tokenStringOpinionHolder);
+                span.appendChild(comment);
+            }
+            for (int i = 0; i < this.spansOpinionHolder.size(); i++)
+            {
+                Element target = xmldoc.createElement("target");
+                target.setAttribute("id", spansOpinionHolder.get(i));
+                span.appendChild(target);
+            }
+            opinion_holder.appendChild(span);
+        }
+        root.appendChild(opinion_holder);
+
+        Element opinion_target = xmldoc.createElement("opinion_target");
+        if (spansOpinionTarget.size()>0) {
+            span = xmldoc.createElement("span");
+            if (tokenStringOpinionTarget.length()>0) {
+                Comment comment = xmldoc.createComment(tokenStringOpinionTarget);
+                span.appendChild(comment);
+            }
+            for (int i = 0; i < this.spansOpinionTarget.size(); i++)
+            {
+                Element target = xmldoc.createElement("target");
+                target.setAttribute("id", spansOpinionTarget.get(i));
+                span.appendChild(target);
+            }
+            opinion_target.appendChild(span);
+        }
+        root.appendChild(opinion_target);
+
+        Element opinion_expression = xmldoc.createElement("opinion_expression");
+        if (!this.opinionSentiment.getPolarity().isEmpty())
+            opinion_expression.setAttribute("polarity", this.opinionSentiment.getPolarity());
+        if (!this.opinionSentiment.getResource().isEmpty())
+            opinion_expression.setAttribute("resource", this.opinionSentiment.getResource());
+        if (!this.opinionSentiment.getFactual().isEmpty())
+            opinion_expression.setAttribute("factual", this.opinionSentiment.getFactual());
+        if (!this.opinionSentiment.getStrength().isEmpty())
+            opinion_expression.setAttribute("strength", this.opinionSentiment.getStrength());
+        if (!this.opinionSentiment.getSubjectivity().isEmpty())
+            opinion_expression.setAttribute("subjectivity", this.opinionSentiment.getSubjectivity());
+        if (!this.opinionSentiment.getSentiment_semantic_type().isEmpty())
+            opinion_expression.setAttribute("semantic_type", this.opinionSentiment.getSentiment_semantic_type());
+        if (!this.opinionSentiment.getSentiment_product_feature().isEmpty())
+            opinion_expression.setAttribute("sentiment_product_feature", this.opinionSentiment.getSentiment_product_feature());
+        if (spansOpinionExpression.size()>0) {
+            span = xmldoc.createElement("span");
+            if (tokenStringOpinionExpression.length()>0) {
+                Comment comment = xmldoc.createComment(tokenStringOpinionExpression);
+                span.appendChild(comment);
+            }
+            for (int i = 0; i < this.spansOpinionExpression.size(); i++)
+            {
+                Element target = xmldoc.createElement("target");
+                target.setAttribute("id", spansOpinionExpression.get(i));
+                span.appendChild(target);
+            }
+            opinion_expression.appendChild(span);
+        }
+        root.appendChild(opinion_expression);
+
+        return root;
+    }
+
     static public void main (String [] args) {
         KafOpinion kafOpinion = new KafOpinion();
         kafOpinion.setOpinionId("21");
