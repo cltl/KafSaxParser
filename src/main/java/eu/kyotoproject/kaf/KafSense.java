@@ -77,11 +77,11 @@ public class KafSense {
     public Element toXML(Document xmldoc)
     {
   	  Element root = xmldoc.createElement("externalRef");
- 	  root.setAttribute("resource", resource);
-  	  root.setAttribute("reference", sensecode);
-  	  root.setAttribute("refType", refType);
-  	  root.setAttribute("status", status);
-  	  root.setAttribute("confidence", Double.toString(confidence));
+      if (!resource.isEmpty()) root.setAttribute("resource", resource);
+      if (!sensecode.isEmpty()) root.setAttribute("reference", sensecode);
+      if (!refType.isEmpty()) root.setAttribute("reftype", refType);
+      if (!status.isEmpty()) root.setAttribute("status", status);
+      if (confidence>0) root.setAttribute("confidence", Double.toString(confidence));
       if (kafTermSentiment.hasValue()) {
           root.appendChild(kafTermSentiment.toXML(xmldoc));
       }

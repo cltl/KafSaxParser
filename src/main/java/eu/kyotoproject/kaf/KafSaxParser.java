@@ -177,6 +177,7 @@ public class KafSaxParser extends DefaultHandler {
     private String layer;
     private ArrayList<String> spans;
     private ArrayList<CorefTarget> corefSpans;
+    private ArrayList<KafParticipant> participantArrayList;
     private KafTerm kafTerm;
     private KafChunk kafChunk;
     private KafEntity kafEntity;
@@ -189,6 +190,7 @@ public class KafSaxParser extends DefaultHandler {
     private KafOpinion kafOpinion;
     private KafTermSentiment kafTermSentiment;
     private KafEvent kafEvent;
+    private KafParticipant kafParticipant;
     private KafEventISI kafEventISI;
     private KafTextUnit kaftextUnit;
     private ArrayList<KafSense> senseTags;
@@ -332,10 +334,13 @@ public class KafSaxParser extends DefaultHandler {
          kafEntityArrayList = new ArrayList<KafEntity>();
          kafPropertyArrayList = new ArrayList<KafProperty>();
          kafCorefenceArrayList = new ArrayList<KafCoreferenceSet>();
+         participantArrayList = new ArrayList<KafParticipant>();
+
          kafreference = false;
          coreference = false;
          entity = false;
          property = false;
+         kafParticipant = new KafParticipant();
          kafReference = new KafReference();
          date = new ISODate();
          country = new GeoCountryObject();
@@ -569,24 +574,6 @@ public class KafSaxParser extends DefaultHandler {
            }
        }
        else if (qName.equalsIgnoreCase("opinion")) {
-           /*
-          <OPINION oid="1">
-              <opinion_holder type="SW/AC" >
-                  <span target id="t1.1"></span>
-              </opinion_holder>
-              <opinion_target
-                  <span> <id>t1.6</id><id>t1.7</id><id>t1.8</id></span>
-              </opinion_target>
-              <opinion_expression
-                  polarity="negative"
-                  strength="strong"
-                  subjectivity="subjectivity"
-                  sentiment_semantic_type="evaluation"
-                  sentiment_product_feature=ÓÓ>
-                  <span> <id>t1.3</id><id>t1.4</id></span>
-               </opinion_expression>
-           </OPINION>
-           */
            kafOpinion = new KafOpinion();
            for (int i = 0; i < attributes.getLength(); i++) {
                String name = attributes.getQName(i);
@@ -645,13 +632,6 @@ public class KafSaxParser extends DefaultHandler {
            }
        }
        else if (qName.equalsIgnoreCase("isi-event")) {
-           /*
-                  <isi-event eventid="33" epistemic_status="" memberOf="" inReporting="" coreference="" event_type="" subevent_of="" start="1984">
-                  <span>
-                      <target id="t1120"/>
-                  </span>
-              </isi-event>
-           */
            kafEventISI = new KafEventISI();
            spans = new ArrayList<String>();
            for (int i = 0; i < attributes.getLength(); i++) {
@@ -685,21 +665,22 @@ public class KafSaxParser extends DefaultHandler {
                }
            }
        }
-       else if (qName.equalsIgnoreCase("event")) {
+       else if (qName.equalsIgnoreCase("predicate")) {
            kafEvent = new KafEvent();
-           kafEvent.setComponentType(qName);
+           kafEvent.setComponentType("event");
 
            spans = new ArrayList<String>();
+           senseTags = new ArrayList<KafSense>();
 
            for (int i = 0; i < attributes.getLength(); i++) {
                String name = attributes.getQName(i);
-               if (name.equalsIgnoreCase("id")) {
+               if (name.equalsIgnoreCase("prid")) {
                    kafEvent.setId(attributes.getValue(i).trim());
                }
-               else if (name.equalsIgnoreCase("referenceType")) {
-                   kafEvent.setReferenceType(attributes.getValue(i).trim());
-               }
                else if (name.equalsIgnoreCase("synsetId")) {
+                   kafEvent.setSynsetId(attributes.getValue(i).trim());
+               }
+               else if (name.equalsIgnoreCase("sentence")) {
                    kafEvent.setSynsetId(attributes.getValue(i).trim());
                }
                else if (name.equalsIgnoreCase("synsetConfidence")) {
@@ -709,25 +690,25 @@ public class KafSaxParser extends DefaultHandler {
                        e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
                    }
                }
-
            }
        }
-       else if (qName.equalsIgnoreCase("participant")) {
+       else if (qName.equalsIgnoreCase("role")) {
            KafParticipant kafParticipant = new KafParticipant();
-           kafParticipant.setComponentType(qName);
+           kafParticipant.setComponentType("participant");
 
            spans = new ArrayList<String>();
+           senseTags = new ArrayList<KafSense>();
 
            for (int i = 0; i < attributes.getLength(); i++) {
                String name = attributes.getQName(i);
-               if (name.equalsIgnoreCase("id")) {
+               if (name.equalsIgnoreCase("rid")) {
                    kafParticipant.setId(attributes.getValue(i).trim());
-               }
-               else if (name.equalsIgnoreCase("referenceType")) {
-                   kafParticipant.setReferenceType(attributes.getValue(i).trim());
                }
                else if (name.equalsIgnoreCase("role")) {
                    kafParticipant.setRole(attributes.getValue(i).trim());
+               }
+               else if (name.equalsIgnoreCase("sentence")) {
+                   kafParticipant.setSentenceId(attributes.getValue(i).trim());
                }
                else if (name.equalsIgnoreCase("synsetId")) {
                    kafParticipant.setSynsetId(attributes.getValue(i).trim());
@@ -739,9 +720,7 @@ public class KafSaxParser extends DefaultHandler {
                        e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
                    }
                }
-
            }
-           kafEvent.addParticipant(kafParticipant);
        }
        else if (qName.equalsIgnoreCase("sentiment")) {
                kafTermSentiment = new KafTermSentiment();
@@ -1142,52 +1121,6 @@ public class KafSaxParser extends DefaultHandler {
                }
            }
        }
-        /*
-        <place lid="l3">
-<kafReferences>
-<kafReference pageId="0">
-<span id="t17.10"></span>
-</kafReference>
-</kafReferences>
-<externalReferences>
-<externalRef confidence="0.35" reference="2744769" resource="GeoNames"></externalRef>
-<externalRef reference="eng-30-08675967-n" resource="wn30g"></externalRef>
-</externalReferences>
-<geoInfo>
-<place countryCode="NL" countryName="Nederland" fname="populated place" latitude="52.85" longitude="6.608333" name="Westerbork" timezone="Europe/Amsterdam"></place>
-</geoInfo>
-</place>
-
-
-version 1:
-<location lid="l2">
-    <kafReferences><kafReference pageId="0"><span id="t9.48"></span></kafReference>
-    </kafReferences>
-    <externalReferences>
-    <externalRef confidence="1.0" reference="GB" resource="GeoNames"></externalRef>
-    <externalRef reference="eng-30-08544813-n" resource="wn30g"></externalRef>
-    </externalReferences>
-    <geoInfo>
-    <country capital="London" continent="EU" countryCode="GB" countryName="Groot-Brittanni‘" east="1.75900018215179" fname="country" north="60.8458099365234" population="60943000" south="49.9061889648438" west="-8.62355613708496"></country>
-    </geoInfo>
-</location>
-<location lid="l0">
-    <kafReferences>
-    <kafReference pageId="0"><span id="t2.7"></span></kafReference>
-    <kafReference pageId="0"><span id="t17.32"></span></kafReference>
-    <kafReference pageId="0"><span id="t3.30"></span></kafReference>
-    <kafReference pageId="0"><span id="t20.2"></span></kafReference>
-    </kafReferences>
-    <externalReferences>
-    <externalRef confidence="0.35" reference="3190159" resource="GeoNames"></externalRef>
-    <externalRef reference="eng-30-08675967-n" resource="wn30g"></externalRef>
-    </externalReferences>
-    <geoInfo>
-    <place countryCode="BA" countryName="Bosni‘ en Herzegovina" fname="populated place" latitude="44.1063889" longitude="19.2969444" name="Srebrenica" population="2862" timezone="Europe/Sarajevo"></place>
-    </geoInfo>
-</location>
-
-         */
         else if (qName.equalsIgnoreCase("location")) {
            for (int i = 0; i < attributes.getLength(); i++) {
                String name = attributes.getQName(i);
@@ -1276,30 +1209,6 @@ version 1:
            }
 
         }
-
-        /*version 2:
-
-        <locations>
-        <country lid="l4">
-        <kafReferences>
-        <kafReference docId="" pageId=""><span id="t111"/></kafReference>
-        <kafReference docId="" pageId=""><span id="t939"/></kafReference>
-        <kafReference docId="" pageId=""><span id="t915"/></kafReference>
-        <kafReference docId="" pageId=""><span id="t616"/></kafReference>
-        </kafReferences>
-        <externalReferences>
-        <externalRef confidence="1.0" refType="" reference="SO" resource="GeoNames" status=""/>
-        <externalRef confidence="0.0" refType="" reference="eng-30-08544813-n" resource="wn30g" status=""/>
-        </externalReferences>
-        <geoInfo capital="Mogadishu" continent="AF" countryCode="SO" countryName="Somalia" east="" fname="country" north="11.9791669845581" population="9379000" south="-1.67486822605133" west="40.9865875244141"/>
-        </country>
-        <place lid="l9">
-        <kafReferences>
-        <kafReference docId="" pageId=""><span id="t435"/></kafReference>
-        </kafReferences>
-        <geoInfo countryCode="SO" countryName="Somalia" fname="mountain" latitude="9.9188889" longitude="45.3813889" name="" population="" timezone=""/>
-        </place>
-                */
         else if ((qName.equalsIgnoreCase("geoInfo")) && attributes.getLength()>0) {
            if (placeObject) {
                placeInfo = new GeoInfoPlace();
@@ -1424,7 +1333,13 @@ version 1:
        }
     }//--startElement
 
-
+    /**
+     * @TODO fix predicate and role processing
+     * @param uri
+     * @param localName
+     * @param qName
+     * @throws SAXException
+     */
     public void endElement(String uri, String localName, String qName)
             throws SAXException {
             if (qName.equalsIgnoreCase("chunk")) {
@@ -1446,39 +1361,11 @@ version 1:
                 kafChunkList.add(kafChunk);
             }
             else if (qName.equalsIgnoreCase("opinion")) {
-                /*
-               <OPINION oid="1">
-                   <opinion_holder type="SW/AC" >
-                       <span target id="t1.1"></span>
-                   </opinion_holder>
-                   <opinion_target
-                       <span> <id>t1.6</id><id>t1.7</id><id>t1.8</id></span>
-                   </opinion_target>
-                   <opinion_expression
-                       polarity="negative"
-                       strength="strong"
-                       subjectivity="subjectivity"
-                       sentiment_semantic_type="evaluation"
-                       sentiment_product_feature=ÓÓ>
-                       <span> <id>t1.3</id><id>t1.4</id></span>
-                    </opinion_expression>
-                </OPINION>
-                */
                 this.kafOpinionArrayList.add(kafOpinion);
                 kafOpinion = new KafOpinion();
 
             }
             else if (qName.equalsIgnoreCase("opinion_expression")) {
-                /*
-                   <opinion_expression
-                       polarity="negative"
-                       strength="strong"
-                       subjectivity="subjectivity"
-                       sentiment_semantic_type="evaluation"
-                       sentiment_product_feature=ÓÓ>
-                       <span> <id>t1.3</id><id>t1.4</id></span>
-                    </opinion_expression>
-                */
                 kafOpinion.setSpansOpinionExpression(spans);
                 for (int i = 0; i < kafOpinion.getSpansOpinionExpression().size(); i++) {
                     String span = (String) kafOpinion.getSpansOpinionExpression().get(i);
@@ -1775,6 +1662,25 @@ version 1:
                     }
                     corefSpans = new ArrayList<CorefTarget>();
                 }
+            }
+            else if (qName.equalsIgnoreCase("predicate")) {
+                kafEvent.setSpans(spans);
+                kafEvent.setExternalReferences(senseTags);
+                kafEvent.setParticipants(participantArrayList);
+                kafEventArrayList.add(kafEvent);
+                kafEvent = new KafEvent();
+                participantArrayList = new ArrayList<KafParticipant>();
+                spans = new ArrayList<String>();
+                senseTags = new ArrayList<KafSense>();
+            }
+            else if (qName.equalsIgnoreCase("role")) {
+                kafParticipant.setSpans(spans);
+                kafParticipant.setExternalReferences(senseTags);
+                participantArrayList.add(kafParticipant);
+                kafParticipant = new KafParticipant();
+                spans = new ArrayList<String>();
+                senseTags = new ArrayList<KafSense>();
+               /////
             }
     }
 
@@ -3063,11 +2969,11 @@ version 1:
 			DocumentBuilder builder = factory.newDocumentBuilder();
 			DOMImplementation impl = builder.getDOMImplementation();
 
-			Document xmldoc = impl.createDocument(null, "KAF", null);
+			Document xmldoc = impl.createDocument(null, "NAF", null);
 			xmldoc.setXmlStandalone(true);
 			Element root = xmldoc.getDocumentElement();
 			root.setAttribute("xml:lang", kafMetaData.getLanguage());
-			root.appendChild(kafMetaData.toHeaderXML(xmldoc));
+			root.appendChild(kafMetaData.toNafHeaderXML(xmldoc));
 
 
             Element text = xmldoc.createElement("text");
@@ -3146,7 +3052,7 @@ version 1:
 
 
             if (kafEventArrayList.size()>0) {
-                Element events  = xmldoc.createElement("srls");
+                Element events  = xmldoc.createElement("srl");
 
                 for (int i = 0; i < kafEventArrayList.size(); i++) {
                     KafEvent event = kafEventArrayList.get(i);

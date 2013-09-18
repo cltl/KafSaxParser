@@ -15,11 +15,12 @@ public class KafEventComponent {
     private String id;
     private String synsetId;
     private double synsetConfidence;
-    private String referenceType;
+    private String sentenceId;
     private String elementName;
     private String lemma;
     private String pos;
     private ArrayList<String> spans;
+    private ArrayList<KafSense> externalReferences;
     private String tokenString;
 
     public KafEventComponent() {
@@ -31,8 +32,9 @@ public class KafEventComponent {
         this.id = "";
         this.synsetConfidence = 0;
         this.synsetId = "";
-        this.referenceType = "";
+        this.sentenceId = "";
         this.spans = new ArrayList<String>();
+        this.externalReferences = new ArrayList<KafSense>();
     }
 
     public String getElementName() {
@@ -99,12 +101,12 @@ public class KafEventComponent {
         this.synsetId = synsetId;
     }
 
-    public String getReferenceType() {
-        return referenceType;
+    public String getSentenceId() {
+        return sentenceId;
     }
 
-    public void setReferenceType(String type) {
-        this.referenceType = type;
+    public void setSentenceId(String sid) {
+        this.sentenceId = sid;
     }
 
     public ArrayList<String> getSpans() {
@@ -119,4 +121,15 @@ public class KafEventComponent {
             this.spans.add(span);
     }
 
+    public ArrayList<KafSense> getExternalReferences() {
+        return externalReferences;
+    }
+
+    public void setExternalReferences(ArrayList<KafSense> externalReferences) {
+        this.externalReferences = externalReferences;
+    }
+
+    public void addExternalReferences(KafSense externalReference) {
+        this.externalReferences.add(externalReference);
+    }
 }

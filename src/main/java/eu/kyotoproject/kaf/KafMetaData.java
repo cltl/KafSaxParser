@@ -333,6 +333,60 @@ public class KafMetaData {
 */
 
 
+
+    public Element toNafHeaderXML(Document xmldoc)
+    {
+        Element root = xmldoc.createElement("nafHeader");
+        Element fileDesc = xmldoc.createElement("fileDesc");
+        if ((title != null) && (title.length() > 0))
+            fileDesc.setAttribute("title", title);
+        if ((author != null) && (author.length() > 0))
+            fileDesc.setAttribute("author", author);
+        if ((filename != null) && (filename.length() > 0))
+            fileDesc.setAttribute("filename", filename);
+        if (filesize > 0)
+            fileDesc.setAttribute("filesize", Long.toString(filesize));
+        if ((filetype != null) && (filetype.length() > 0))
+            fileDesc.setAttribute("filetype", filetype);
+        if (nPages > 0)
+            fileDesc.setAttribute("pages", Integer.toString(nPages));
+        if ((metakey != null) && (metakey.length() > 0))
+            fileDesc.setAttribute("metakey", metakey);
+        if (fileDesc.hasAttributes())		//only add the element if it had any attributes
+            root.appendChild(fileDesc);
+
+        Element p = xmldoc.createElement("public");
+        if ((project != null) && (project.length() > 0))
+            p.setAttribute("project", project);
+        if ((collectionId != null) && (collectionId.length() > 0))
+            p.setAttribute("collectionid", collectionId);
+        //  if ((docId != null) && (docId.length() > 0))
+        //	  p.setAttribute("docid", docId);
+        if ((publicId != null) && (publicId.length() > 0))
+            p.setAttribute("dmsid", publicId);
+        if ((url != null) && (url.length() > 0))
+            p.setAttribute("uri", url);
+        //  p.setAttribute("uri", url.replaceAll("&", "&amp;"));
+        if (p.hasAttributes())		//only add the element if it had any attributes
+            root.appendChild(p);
+
+        Element capture = xmldoc.createElement("captureDesc");
+        if ((dateString != null) && (dateString.length() > 0))
+            capture.setAttribute("dateString", dateString);
+        if (capture.hasAttributes())		//only add the element if it had any attributes
+            root.appendChild(capture);
+
+        for (String layer : linguisticProcessors.keySet())
+        {
+            Element lingEl = xmldoc.createElement("linguisticProcessors");
+            lingEl.setAttribute("layer", layer);
+            for (LP lp : linguisticProcessors.get(layer))
+                lingEl.appendChild(lp.toXML(xmldoc));
+            root.appendChild(lingEl);
+        }
+        return root;
+    }
+
     public String toString () {
           String str = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?>\n";
           if (this.getLanguage().length()>0) {

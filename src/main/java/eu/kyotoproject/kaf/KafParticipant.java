@@ -33,16 +33,23 @@ public class KafParticipant extends KafEventComponent{
     {
         Element root = xmldoc.createElement(this.getComponentType());
         if (this.getId() != null)
-            root.setAttribute("id", this.getId());
+            root.setAttribute("rid", this.getId());
 
         if (!this.getSynsetId().isEmpty()) {
             root.setAttribute("synsetId", this.getSynsetId());
             root.setAttribute("synsetConfidence", new Double(this.getSynsetConfidence()).toString());
         }
 
-        if (!this.getReferenceType().isEmpty()) {
-            root.setAttribute("referenceType", this.getReferenceType());
+        if (this.getExternalReferences().size()>0) {
+            Element externalRefs = xmldoc.createElement("externalRefs");
+            for (int i = 0; i < this.getExternalReferences().size(); i++) {
+                KafSense kafSense = this.getExternalReferences().get(i);
+                Element kafElement = kafSense.toXML(xmldoc);
+                externalRefs.appendChild(kafElement);
+            }
+            root.appendChild(externalRefs);
         }
+
 
         if (!role.isEmpty()) {
             root.setAttribute("role", this.role);
@@ -61,7 +68,7 @@ public class KafParticipant extends KafEventComponent{
 
     public Element toSrlKafXML(Document xmldoc)
     {
-        Element root = xmldoc.createElement("role");
+        Element root = xmldoc.createElement("roles");
 
         Element role = xmldoc.createElement("Role");
         if (this.getId() != null)
@@ -77,12 +84,16 @@ public class KafParticipant extends KafEventComponent{
             role.appendChild(synsetUri);
         }
 
-        if (!this.getReferenceType().isEmpty()) {
-            Element conceptUri = xmldoc.createElement("uri");
-            conceptUri.setAttribute("resource", this.getReferenceType());
-            role.appendChild(conceptUri);
-        }
 
+        if (this.getExternalReferences().size()>0) {
+            Element externalRefs = xmldoc.createElement("externalRefs");
+            for (int i = 0; i < this.getExternalReferences().size(); i++) {
+                KafSense kafSense = this.getExternalReferences().get(i);
+                Element kafElement = kafSense.toXML(xmldoc);
+                externalRefs.appendChild(kafElement);
+            }
+            role.appendChild(externalRefs);
+        }
 
         for (int i = 0; i < this.getSpans().size(); i++)
         {
@@ -107,50 +118,56 @@ public class KafParticipant extends KafEventComponent{
      </role>
 
     */
-    public Element toSrlNafXML(Document xmldoc)
+    public Element toNafXML(Document xmldoc)
     {
         Element root = xmldoc.createElement("role");
 
         if (this.getId() != null)
-            root.setAttribute("id", this.getId());
+            root.setAttribute("rid", this.getId());
+
+
+/*
+        if (!this.getSentenceId().isEmpty()) {
+            root.setAttribute("sentence", this.getSentenceId());
+        }
+*/
 
         if (this.getRole() != null)
             root.setAttribute("semRole", this.getRole());
 
-        if (!this.getSynsetId().isEmpty()) {
+        /*if (!this.getSynsetId().isEmpty()) {
             root.setAttribute("uri", this.getSynsetId());
             root.setAttribute("confidence", new Double(this.getSynsetConfidence()).toString());
-        }
+        }*/
 
         if (this.getTokenString().length()>0) {
             Comment comment = xmldoc.createComment(this.getTokenString());
             root.appendChild(comment);
         }
 
-
-        if (!this.getReferenceType().isEmpty()) {
-            Element conceptUri = xmldoc.createElement("type");
-            conceptUri.setAttribute("uri", this.getReferenceType());
-            root.appendChild(conceptUri);
+        if (this.getExternalReferences().size()>0) {
+            Element externalRefs = xmldoc.createElement("externalRefs");
+            for (int i = 0; i < this.getExternalReferences().size(); i++) {
+                KafSense kafSense = this.getExternalReferences().get(i);
+                Element kafElement = kafSense.toXML(xmldoc);
+                externalRefs.appendChild(kafElement);
+            }
+            root.appendChild(externalRefs);
         }
 
-        if (!this.getElementName().isEmpty()) {
-            Element conceptUri = xmldoc.createElement("type");
-            conceptUri.setAttribute("uri", this.getElementName());
-            root.appendChild(conceptUri);
-        }
-
+        Element spanElement = xmldoc.createElement("span");
         for (int i = 0; i < this.getSpans().size(); i++)
         {
             Element target = xmldoc.createElement("target");
             target.setAttribute("id", this.getSpans().get(i));
-            root.appendChild(target);
+            spanElement.appendChild(target);
         }
+        root.appendChild(spanElement);
 
         return root;
     }
 
-    public Element toSrlNafRdfXML(Document xmldoc)
+    public Element toNafRdfXML(Document xmldoc)
     {
         Element root = xmldoc.createElement("role");
 
@@ -174,10 +191,13 @@ public class KafParticipant extends KafEventComponent{
             role.appendChild(synsetUri);
         }
 
-        if (!this.getReferenceType().isEmpty()) {
-            Element conceptUri = xmldoc.createElement("naf:uri");
-            conceptUri.setAttribute("rdf:resource", this.getReferenceType());
-            role.appendChild(conceptUri);
+        if (this.getExternalReferences().size()>0) {
+            for (int i = 0; i < this.getExternalReferences().size(); i++) {
+                Element conceptUri = xmldoc.createElement("naf:uri");
+                KafSense kafSense = this.getExternalReferences().get(i);
+                conceptUri.setAttribute("rdf:resource", kafSense.getResource()+"#"+kafSense.getSensecode());
+                role.appendChild(conceptUri);
+            }
         }
 
         if (!this.getElementName().isEmpty()) {
