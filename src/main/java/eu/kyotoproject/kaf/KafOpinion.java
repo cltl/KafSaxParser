@@ -190,7 +190,7 @@ public class KafOpinion {
            strength="strong"
            subjectivity="subjectivity"
            sentiment_semantic_type="evaluation"
-           sentiment_product_feature=сс>
+           sentiment_product_feature=>
            <span> <id>t1.3</id><id>t1.4</id></span>
         </opinion_expression>
     </OPINION>

@@ -45,54 +45,6 @@ public class KafEntity {
   </entity>
 </entities>
 
-
-<entities>
-  <entity type=ÕpersonÕ eid=Óe9Ó>
-    <references>
-      <reference>
-          <target id=Ót1Ó/> // ex. First Name
-          <target id=Ót2Ó/> // ex. Last Name
-      </reference>
-      <reference>
-        <target id=Ót34Ó/>
-        <target id=Ót35Ó/>
-      </reference>
-    </references>
-    <externalReferences>
-      <externalReference confidence=Ó0.7Ó reference=Ó13982343Ó resource=ÓJRCNamesÓ/>
-      <externalReference confidence=Ó0.3Ó reference=Ó834354Ó resource=ÓJRCNamesÓ/>
-    </externalReferences>
-  </entity>
-  <entity type=ÓpersonÓ eid=Óe11Ó>
-    <references>
-      <reference>
-        <target id=Ót2Ó/> // ex. Name
-      </reference>
-    </references>
-    <externalReferences>
-      <externalReference confidence=Ó0.9Ó reference=Ó13982343Ó resource=ÓJRCNamesÓ/>
-      <externalReference confidence=Ó0.1Ó reference=Ó834354Ó resource=ÓJRCNamesÓ/>
-    </externalReferences>
-  </entity>
-</entities>
-
-<entities>
-
-  <entity type=ÓpersonÓ eid=Óe1Ó>
-    <references>
-      <span>
-        <target id=Ót1Ó/>
-        <target id=Ót2Ó/>
-      </span>
-      <span>
-        ... TARGET(S) ...
-      </span>
-    </references>
-    <externalReferences>
-      <externalReference confidence=Ó0.7Ó reference=Ó13982343Ó resource=ÓJRCNamesÓ/>
-      <externalReference confidence=Ó0.3Ó reference=Ó834354Ó resource=ÓJRCNamesÓ/>
-    </externalReferences>
-  </entity>
      */
 
     private String id;

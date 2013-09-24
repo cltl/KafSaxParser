@@ -13,28 +13,6 @@ import java.util.ArrayList;
  * To change this template use File | Settings | File Templates.
  */
 public class KafCoreferenceSet {
-    /*
-    <coreferences>
-  <coref coid="co1">
-    <!-- London -->
-    <span >
-      <target id="t12" head=ÓyesÓ/>
-    </span>
-    <!-- the capital city of England -->
-    <span>
-      <target id="t1"/>
-      <target id="t2"/>
-      <target id="t3" head ="yes"/> <!-- city is the head -->
-      <target id="t4"/>
-      <target id="t5"/>
-    </span>
-    <!-- it -->
-    <span>
-      <target id="t20" head=ÓyesÓ/>
-    </span>
-  </coref>
-</coreferences>
-     */
 
     private String coid;
     private ArrayList<ArrayList<CorefTarget>> setsOfSpans;

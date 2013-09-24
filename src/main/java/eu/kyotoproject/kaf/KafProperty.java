@@ -16,15 +16,6 @@ import java.util.ArrayList;
  */
 public class KafProperty {
 
-    /*
-    <properties>
-<property type=ÒroomÓ pid=Óp1Ó>
-	<references>
-	<span> <target id=Ót49Ó /> </span>
-	</references>
-</property>
-</properties>
-     */
 
     private String type;
     private String id;

@@ -176,6 +176,8 @@ public class KafSaxParser extends DefaultHandler {
 //    private String lastTermLemma;
     private String layer;
     private ArrayList<String> spans;
+    private ArrayList<String> predicateSpans;
+    private ArrayList<String> roleSpans;
     private ArrayList<CorefTarget> corefSpans;
     private ArrayList<KafParticipant> participantArrayList;
     private KafTerm kafTerm;
@@ -194,9 +196,13 @@ public class KafSaxParser extends DefaultHandler {
     private KafEventISI kafEventISI;
     private KafTextUnit kaftextUnit;
     private ArrayList<KafSense> senseTags;
+    private ArrayList<KafSense> predicateSenseTags;
+    private ArrayList<KafSense> roleSenseTags;
     private ArrayList<KafSense> senseTagsComponents;
     private boolean COMPONENT = false;
-    
+    private boolean PREDICATE = false;
+    private boolean ROLE = false;
+
     /*
      * This KafSaxParser can be used to check some internal KAF consistencies.
      * At this moment we check:
@@ -325,6 +331,8 @@ public class KafSaxParser extends DefaultHandler {
          kafChunkList = new ArrayList<KafChunk>();
          kafDepList = new ArrayList<KafDep>();
          senseTags = new ArrayList<KafSense>();
+         predicateSenseTags = new ArrayList<KafSense>();
+         roleSenseTags = new ArrayList<KafSense>();
          senseTagsComponents = new ArrayList<KafSense>();
          kafCountryArrayList = new ArrayList<GeoCountryObject>();
          kafPlaceArrayList = new ArrayList<GeoPlaceObject>();
@@ -354,6 +362,8 @@ public class KafSaxParser extends DefaultHandler {
          externalreference = false;
          externalRefLevel = 0;
          spans = new ArrayList<String>();
+         predicateSpans = new ArrayList<String>();
+         roleSpans = new ArrayList<String>();
          kafChunk = new KafChunk();
          kafDep = new KafDep();
          kafTerm = new KafTerm();
@@ -377,6 +387,8 @@ public class KafSaxParser extends DefaultHandler {
          termMap = new HashMap<String,KafTerm>();
          chunkMap = new HashMap<String,KafChunk>();
          COMPONENT = false;
+         PREDICATE = false;
+         ROLE = false;
     }
 
     public void buildSentenceTermIndex (){
@@ -406,7 +418,7 @@ public class KafSaxParser extends DefaultHandler {
         //System.out.println("qName = " + qName);
        previousvalue = value;
        value = "";
-       if (qName.equalsIgnoreCase("KAF")) {
+       if ((qName.equalsIgnoreCase("KAF")) || (qName.equalsIgnoreCase("NAF"))) {
            //<KAF xml:lang="en" doc="1000">
            kafMetaData = new KafMetaData ();
            for (int i = 0; i < attributes.getLength(); i++) {
@@ -668,15 +680,16 @@ public class KafSaxParser extends DefaultHandler {
        else if (qName.equalsIgnoreCase("predicate")) {
            kafEvent = new KafEvent();
            kafEvent.setComponentType("event");
-
-           spans = new ArrayList<String>();
-           senseTags = new ArrayList<KafSense>();
+           PREDICATE = true;
+           ROLE = false;
+           predicateSpans = new ArrayList<String>();
+           predicateSenseTags = new ArrayList<KafSense>();
 
            for (int i = 0; i < attributes.getLength(); i++) {
                String name = attributes.getQName(i);
                if (name.equalsIgnoreCase("prid")) {
                    kafEvent.setId(attributes.getValue(i).trim());
-               }
+               }/* @depricated
                else if (name.equalsIgnoreCase("synsetId")) {
                    kafEvent.setSynsetId(attributes.getValue(i).trim());
                }
@@ -689,24 +702,24 @@ public class KafSaxParser extends DefaultHandler {
                    } catch (NumberFormatException e) {
                        e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
                    }
-               }
+               }*/
            }
        }
        else if (qName.equalsIgnoreCase("role")) {
-           KafParticipant kafParticipant = new KafParticipant();
+           kafParticipant = new KafParticipant();
            kafParticipant.setComponentType("participant");
-
-           spans = new ArrayList<String>();
-           senseTags = new ArrayList<KafSense>();
+           ROLE = true;
+           roleSpans = new ArrayList<String>();
+           roleSenseTags = new ArrayList<KafSense>();
 
            for (int i = 0; i < attributes.getLength(); i++) {
                String name = attributes.getQName(i);
                if (name.equalsIgnoreCase("rid")) {
                    kafParticipant.setId(attributes.getValue(i).trim());
                }
-               else if (name.equalsIgnoreCase("role")) {
+               else if (name.equalsIgnoreCase("semrole")) {
                    kafParticipant.setRole(attributes.getValue(i).trim());
-               }
+               }/* @depricated
                else if (name.equalsIgnoreCase("sentence")) {
                    kafParticipant.setSentenceId(attributes.getValue(i).trim());
                }
@@ -719,8 +732,9 @@ public class KafSaxParser extends DefaultHandler {
                    } catch (NumberFormatException e) {
                        e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
                    }
-               }
+               }*/
            }
+
        }
        else if (qName.equalsIgnoreCase("sentiment")) {
                kafTermSentiment = new KafTermSentiment();
@@ -929,7 +943,17 @@ public class KafSaxParser extends DefaultHandler {
            }
        }
        else if (qName.equalsIgnoreCase("target")) {
-           if ((!coreference) && (!entity) && (!property)) {
+           if (ROLE) {
+               for (int i = 0; i < attributes.getLength(); i++) {
+                   roleSpans.add(attributes.getValue(i).trim());
+               }
+           }
+           else if (PREDICATE) {
+               for (int i = 0; i < attributes.getLength(); i++) {
+                   predicateSpans.add(attributes.getValue(i).trim());
+               }
+           }
+           else if ((!coreference) && (!entity) && (!property)) {
                for (int i = 0; i < attributes.getLength(); i++) {
                    spans.add(attributes.getValue(i).trim());
                }
@@ -951,6 +975,12 @@ public class KafSaxParser extends DefaultHandler {
        else if (qName.equalsIgnoreCase("externalReferences")) {
            if (COMPONENT) {
                senseTagsComponents = new ArrayList<KafSense>();
+           }
+           else if (ROLE) {
+               roleSenseTags = new ArrayList<KafSense>();
+           }
+           else if (PREDICATE) {
+               predicateSenseTags = new ArrayList<KafSense>();
            }
            else {
                senseTags = new ArrayList<KafSense>();
@@ -1008,6 +1038,33 @@ public class KafSaxParser extends DefaultHandler {
                }
                else {
                    senseTagsComponents.add(sense);
+               }
+           }
+           else if (PREDICATE && !ROLE) {
+               if (predicateSenseTags.size()>0) {
+                   if (externalRefLevel>0) {
+                        KafSense k = predicateSenseTags.get(predicateSenseTags.size()-1);
+                        k.getChildren().add(sense);
+                   }
+                   else {
+                       predicateSenseTags.add(sense);
+                   }
+               }
+               else {
+                   predicateSenseTags.add(sense);
+               }
+           } if (ROLE) {
+               if (roleSenseTags.size()>0) {
+                   if (externalRefLevel>0) {
+                        KafSense k = roleSenseTags.get(roleSenseTags.size()-1);
+                        k.getChildren().add(sense);
+                   }
+                   else {
+                       roleSenseTags.add(sense);
+                   }
+               }
+               else {
+                   roleSenseTags.add(sense);
                }
            }
            else {
@@ -1455,11 +1512,6 @@ public class KafSaxParser extends DefaultHandler {
                 spans = new ArrayList<String>();
                 kafEventISIList.add(kafEventISI);
             }
-            else if (qName.equalsIgnoreCase("event")) {
-                kafEvent.setSpans(spans);
-                spans = new ArrayList<String>();
-                kafEventArrayList.add(kafEvent);
-            }
             else if (qName.equalsIgnoreCase("term")) {
                 kafTerm.setSpans(spans);
                 if (senseTags.size()>0) {
@@ -1664,26 +1716,28 @@ public class KafSaxParser extends DefaultHandler {
                 }
             }
             else if (qName.equalsIgnoreCase("predicate")) {
-                kafEvent.setSpans(spans);
-                kafEvent.setExternalReferences(senseTags);
+                kafEvent.setSpans(predicateSpans);
+                kafEvent.setExternalReferences(predicateSenseTags);
                 kafEvent.setParticipants(participantArrayList);
                 kafEventArrayList.add(kafEvent);
 
                 //init
                 kafEvent = new KafEvent();
                 participantArrayList = new ArrayList<KafParticipant>();
-                spans = new ArrayList<String>();
-                senseTags = new ArrayList<KafSense>();
+                predicateSpans = new ArrayList<String>();
+                predicateSenseTags = new ArrayList<KafSense>();
+                PREDICATE = false;
             }
             else if (qName.equalsIgnoreCase("role")) {
-                kafParticipant.setSpans(spans);
-                kafParticipant.setExternalReferences(senseTags);
+                kafParticipant.setSpans(roleSpans);
+                kafParticipant.setExternalReferences(roleSenseTags);
                 participantArrayList.add(kafParticipant);
 
                 //init
                 kafParticipant = new KafParticipant();
-                spans = new ArrayList<String>();
-                senseTags = new ArrayList<KafSense>();
+                roleSpans = new ArrayList<String>();
+                roleSenseTags = new ArrayList<KafSense>();
+                ROLE = false;
                /////
             }
     }
@@ -2862,8 +2916,10 @@ public class KafSaxParser extends DefaultHandler {
 				Element deps = xmldoc.createElement("deps");
 				for (int i = 0; i < this.kafDepList.size(); i++) {
 					KafDep kaf  = (KafDep) kafDepList.get(i);
-					deps.appendChild(kaf.toXML(xmldoc));
-				}
+                    if ((this.getTerm(kaf.from)!=null) && (this.getTerm(kaf.to)!=null)) {
+                        deps.appendChild(kaf.toXML(xmldoc));
+                    }
+                }
 				root.appendChild(deps);
 
 				Element chunks = xmldoc.createElement("chunks");
@@ -2997,7 +3053,9 @@ public class KafSaxParser extends DefaultHandler {
             Element deps = xmldoc.createElement("deps");
             for (int i = 0; i < this.kafDepList.size(); i++) {
                 KafDep kaf  = (KafDep) kafDepList.get(i);
-                deps.appendChild(kaf.toNafXML(xmldoc));
+                if ((this.getTerm(kaf.from)!=null) && (this.getTerm(kaf.to)!=null)) {
+                    deps.appendChild(kaf.toXML(xmldoc));
+                }
             }
             root.appendChild(deps);
 
@@ -3180,7 +3238,9 @@ public class KafSaxParser extends DefaultHandler {
             Element deps = xmldoc.createElement("deps");
             for (int i = 0; i < this.kafDepList.size(); i++) {
                 KafDep kaf  = (KafDep) kafDepList.get(i);
-                deps.appendChild(kaf.toXML(xmldoc));
+                if ((this.getTerm(kaf.from)!=null) && (this.getTerm(kaf.to)!=null)) {
+                    deps.appendChild(kaf.toXML(xmldoc));
+                }
             }
             naf.appendChild(deps);
 
@@ -3298,7 +3358,9 @@ public class KafSaxParser extends DefaultHandler {
             Element deps = xmldoc.createElement("deps");
             for (int i = 0; i < this.kafDepList.size(); i++) {
                 KafDep kaf  = (KafDep) kafDepList.get(i);
-                deps.appendChild(kaf.toXML(xmldoc));
+                if ((this.getTerm(kaf.from)!=null) && (this.getTerm(kaf.to)!=null)) {
+                    deps.appendChild(kaf.toXML(xmldoc));
+                }
             }
             root.appendChild(deps);
 
@@ -3524,13 +3586,14 @@ public class KafSaxParser extends DefaultHandler {
     }
 
     static public void main (String[] args) {
-        String file = "test/input.kaf";
+        String file = "test/car.naf";
         KafSaxParser parser = new KafSaxParser();
         parser.parseFile(file);
         String outfile = file+".out.xml";
         try {
             FileOutputStream fos = new FileOutputStream(outfile);
-            parser.writeKafToFile(fos);
+            //parser.writeKafToFile(fos);
+            parser.writeNafToStream(fos);
             fos.close();
         } catch (IOException e) {
             e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.

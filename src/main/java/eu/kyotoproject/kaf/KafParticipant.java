@@ -146,7 +146,7 @@ public class KafParticipant extends KafEventComponent{
         }
 
         if (this.getExternalReferences().size()>0) {
-            Element externalRefs = xmldoc.createElement("externalRefs");
+            Element externalRefs = xmldoc.createElement("externalReferences");
             for (int i = 0; i < this.getExternalReferences().size(); i++) {
                 KafSense kafSense = this.getExternalReferences().get(i);
                 Element kafElement = kafSense.toXML(xmldoc);
