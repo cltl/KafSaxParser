@@ -1668,6 +1668,8 @@ public class KafSaxParser extends DefaultHandler {
                 kafEvent.setExternalReferences(senseTags);
                 kafEvent.setParticipants(participantArrayList);
                 kafEventArrayList.add(kafEvent);
+
+                //init
                 kafEvent = new KafEvent();
                 participantArrayList = new ArrayList<KafParticipant>();
                 spans = new ArrayList<String>();
@@ -1677,6 +1679,8 @@ public class KafSaxParser extends DefaultHandler {
                 kafParticipant.setSpans(spans);
                 kafParticipant.setExternalReferences(senseTags);
                 participantArrayList.add(kafParticipant);
+
+                //init
                 kafParticipant = new KafParticipant();
                 spans = new ArrayList<String>();
                 senseTags = new ArrayList<KafSense>();
