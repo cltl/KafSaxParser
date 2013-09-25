@@ -40,6 +40,7 @@ import java.util.*;
     along with KafSaxParser.  If not, see <http://www.gnu.org/licenses/>.
  */
 public class KafSaxParser extends DefaultHandler {
+    static final String NAFVERSION = "v1";
     final byte[] utf8_bom = { (byte) 0xEF, (byte) 0xBB,
         (byte) 0xBF }; /// For Chinese KAF
     final String utf8_bomString = new String(utf8_bom);
@@ -527,10 +528,7 @@ public class KafSaxParser extends DefaultHandler {
            kafChunk = new KafChunk();
            for (int i = 0; i < attributes.getLength(); i++) {
                String name = attributes.getQName(i);
-               if (name.equalsIgnoreCase("cid")) {
-                   kafChunk.setCid(attributes.getValue(i).trim());
-               }
-               else if (name.equalsIgnoreCase("id")) {
+               if ((name.equalsIgnoreCase("cid")) || (name.equalsIgnoreCase("id"))) {
                    kafChunk.setCid(attributes.getValue(i).trim());
                }
                else if (name.equalsIgnoreCase("head")) {
@@ -687,9 +685,9 @@ public class KafSaxParser extends DefaultHandler {
 
            for (int i = 0; i < attributes.getLength(); i++) {
                String name = attributes.getQName(i);
-               if (name.equalsIgnoreCase("prid")) {
+               if (name.equalsIgnoreCase("id")) {
                    kafEvent.setId(attributes.getValue(i).trim());
-               }/* @depricated
+               }/* @Deprecated
                else if (name.equalsIgnoreCase("synsetId")) {
                    kafEvent.setSynsetId(attributes.getValue(i).trim());
                }
@@ -714,12 +712,12 @@ public class KafSaxParser extends DefaultHandler {
 
            for (int i = 0; i < attributes.getLength(); i++) {
                String name = attributes.getQName(i);
-               if (name.equalsIgnoreCase("rid")) {
+               if (name.equalsIgnoreCase("id")) {
                    kafParticipant.setId(attributes.getValue(i).trim());
                }
                else if (name.equalsIgnoreCase("semrole")) {
                    kafParticipant.setRole(attributes.getValue(i).trim());
-               }/* @depricated
+               }/* @Deprecated
                else if (name.equalsIgnoreCase("sentence")) {
                    kafParticipant.setSentenceId(attributes.getValue(i).trim());
                }
@@ -1571,7 +1569,7 @@ public class KafSaxParser extends DefaultHandler {
             else if (qName.equalsIgnoreCase("wf")) {
                 kafWordForm.setWf(value.trim());
                 kafWordFormList.add(kafWordForm);
-                wordFormMap.put(kafWordForm.wid, kafWordForm);
+                wordFormMap.put(kafWordForm.getWid(), kafWordForm);
 //               IdToWord.put(kafWordForm.wid, kafWordForm.wf);
             }
             else if (qName.equalsIgnoreCase("tunit")) {
@@ -2916,6 +2914,7 @@ public class KafSaxParser extends DefaultHandler {
 				Element deps = xmldoc.createElement("deps");
 				for (int i = 0; i < this.kafDepList.size(); i++) {
 					KafDep kaf  = (KafDep) kafDepList.get(i);
+                    /// the next checks are needed because some parser create reference to nonexisting elements
                     if ((this.getTerm(kaf.from)!=null) && (this.getTerm(kaf.to)!=null)) {
                         deps.appendChild(kaf.toXML(xmldoc));
                     }
@@ -2925,8 +2924,19 @@ public class KafSaxParser extends DefaultHandler {
 				Element chunks = xmldoc.createElement("chunks");
 				for (int i = 0; i < this.kafChunkList.size(); i++) {
 					KafChunk kaf  = (KafChunk) kafChunkList.get(i);
-					chunks.appendChild(kaf.toXML(xmldoc));
-				}
+                    /// the next checks are needed because some parser create reference to nonexisting elements
+                    boolean nullSpan = false;
+                    for (int j = 0; j < kaf.getSpans().size(); j++) {
+                        String span = kaf.getSpans().get(j);
+                        if (this.getTerm(span)==null) {
+                            nullSpan = true;
+                            break;
+                        }
+                    }
+                    if (this.getTerm(kaf.getHead())!=null) {
+                        if (!nullSpan) chunks.appendChild(kaf.toXML(xmldoc));
+                    }
+                }
 				root.appendChild(chunks);
 
                 if (kafOpinionArrayList.size()>0) {
@@ -3032,37 +3042,50 @@ public class KafSaxParser extends DefaultHandler {
 			Document xmldoc = impl.createDocument(null, "NAF", null);
 			xmldoc.setXmlStandalone(true);
 			Element root = xmldoc.getDocumentElement();
+            root.setAttribute("version", NAFVERSION);
 			root.setAttribute("xml:lang", kafMetaData.getLanguage());
 			root.appendChild(kafMetaData.toNafHeaderXML(xmldoc));
 
 
             Element text = xmldoc.createElement("text");
             for (int i = 0; i < this.kafWordFormList.size(); i++) {
-                KafWordForm kaf  = (KafWordForm) kafWordFormList.get(i);
+                KafWordForm kaf  = kafWordFormList.get(i);
                 text.appendChild(kaf.toNafXML(xmldoc));
             }
             root.appendChild(text);
 
             Element terms = xmldoc.createElement("terms");
             for (int i = 0; i < this.kafTermList.size(); i++) {
-                KafTerm kaf  = (KafTerm) kafTermList.get(i);
+                KafTerm kaf  = kafTermList.get(i);
                 terms.appendChild(kaf.toNafXML(xmldoc));
             }
             root.appendChild(terms);
 
             Element deps = xmldoc.createElement("deps");
             for (int i = 0; i < this.kafDepList.size(); i++) {
-                KafDep kaf  = (KafDep) kafDepList.get(i);
+                KafDep kaf  = kafDepList.get(i);
+                /// the next checks are needed because some parser create reference to nonexisting elements
                 if ((this.getTerm(kaf.from)!=null) && (this.getTerm(kaf.to)!=null)) {
-                    deps.appendChild(kaf.toXML(xmldoc));
+                    deps.appendChild(kaf.toNafXML(xmldoc));
                 }
             }
             root.appendChild(deps);
 
             Element chunks = xmldoc.createElement("chunks");
             for (int i = 0; i < this.kafChunkList.size(); i++) {
-                KafChunk kaf  = (KafChunk) kafChunkList.get(i);
-                chunks.appendChild(kaf.toNafXML(xmldoc));
+                KafChunk kaf  = kafChunkList.get(i);
+                /// the next checks are needed because some parser create reference to nonexisting elements
+                boolean nullSpan = false;
+                for (int j = 0; j < kaf.getSpans().size(); j++) {
+                    String span = kaf.getSpans().get(j);
+                    if (this.getTerm(span)==null) {
+                        nullSpan = true;
+                        break;
+                    }
+                }
+                if (this.getTerm(kaf.getHead())!=null) {
+                    if (!nullSpan) chunks.appendChild(kaf.toNafXML(xmldoc));
+                }
             }
             root.appendChild(chunks);
 
@@ -3103,6 +3126,7 @@ public class KafSaxParser extends DefaultHandler {
             }
 
 
+/*         @deprecated
             if (kafEventISIList.size()>0) {
                 Element isiEvents  = xmldoc.createElement("isi-events");
                 for (int i = 0; i < kafEventISIList.size(); i++) {
@@ -3111,6 +3135,7 @@ public class KafSaxParser extends DefaultHandler {
                 }
                 root.appendChild(isiEvents);
             }
+*/
 
 
             if (kafEventArrayList.size()>0) {
@@ -3128,13 +3153,15 @@ public class KafSaxParser extends DefaultHandler {
                 root.appendChild(events);
             }
 
+/*       @deprecated
             Element tunits = xmldoc.createElement("tunits");
             for (int i = 0; i < this.kafDiscourseList.size(); i++) {
-                KafTextUnit kaf  = (KafTextUnit) kafDiscourseList.get(i);
+                KafTextUnit kaf  =  kafDiscourseList.get(i);
                 tunits.appendChild(kaf.toNafXML(xmldoc));
             }
             root.appendChild(tunits);
 
+*/
 			// Serialisation through Tranform.
 			DOMSource domSource = new DOMSource(xmldoc);
 			TransformerFactory tf = TransformerFactory.newInstance();
@@ -3156,6 +3183,10 @@ public class KafSaxParser extends DefaultHandler {
 		}
     }
 
+    /**
+     * @TODO NEEDS TO BE FIXED AT ALL LAYERS
+     * @param stream
+     */
     public void writeNafRdfToStream(OutputStream stream)
     {
     	try
@@ -3223,21 +3254,22 @@ public class KafSaxParser extends DefaultHandler {
             text.setAttribute("xml:lang", kafMetaData.getLanguage());
 
             for (int i = 0; i < this.kafWordFormList.size(); i++) {
-                KafWordForm kaf  = (KafWordForm) kafWordFormList.get(i);
+                KafWordForm kaf  =  kafWordFormList.get(i);
                 text.appendChild(kaf.toXML(xmldoc));
             }
             naf.appendChild(text);
 
             Element terms = xmldoc.createElement("terms");
             for (int i = 0; i < this.kafTermList.size(); i++) {
-                KafTerm kaf  = (KafTerm) kafTermList.get(i);
+                KafTerm kaf  =  kafTermList.get(i);
                 terms.appendChild(kaf.toXML(xmldoc));
             }
             naf.appendChild(terms);
 
             Element deps = xmldoc.createElement("deps");
             for (int i = 0; i < this.kafDepList.size(); i++) {
-                KafDep kaf  = (KafDep) kafDepList.get(i);
+                KafDep kaf  = kafDepList.get(i);
+                /// the next checks are needed because some parser create reference to nonexisting elements
                 if ((this.getTerm(kaf.from)!=null) && (this.getTerm(kaf.to)!=null)) {
                     deps.appendChild(kaf.toXML(xmldoc));
                 }
@@ -3246,8 +3278,19 @@ public class KafSaxParser extends DefaultHandler {
 
             Element chunks = xmldoc.createElement("chunks");
             for (int i = 0; i < this.kafChunkList.size(); i++) {
-                KafChunk kaf  = (KafChunk) kafChunkList.get(i);
-                chunks.appendChild(kaf.toXML(xmldoc));
+                KafChunk kaf  =  kafChunkList.get(i);
+                /// the next checks are needed because some parser create reference to nonexisting elements
+                boolean nullSpan = false;
+                for (int j = 0; j < kaf.getSpans().size(); j++) {
+                    String span = kaf.getSpans().get(j);
+                    if (this.getTerm(span)==null) {
+                        nullSpan = true;
+                        break;
+                    }
+                }
+                if (this.getTerm(kaf.getHead())!=null) {
+                    if (!nullSpan) chunks.appendChild(kaf.toXML(xmldoc));
+                }
             }
             naf.appendChild(chunks);
 
@@ -3342,14 +3385,14 @@ public class KafSaxParser extends DefaultHandler {
 
             Element text = xmldoc.createElement("text");
             for (int i = 0; i < this.kafWordFormList.size(); i++) {
-                KafWordForm kaf  = (KafWordForm) kafWordFormList.get(i);
+                KafWordForm kaf  = kafWordFormList.get(i);
                 text.appendChild(kaf.toXML(xmldoc));
             }
             root.appendChild(text);
 
             Element terms = xmldoc.createElement("terms");
             for (int i = 0; i < this.kafTermList.size(); i++) {
-                KafTerm kaf  = (KafTerm) kafTermList.get(i);
+                KafTerm kaf  = kafTermList.get(i);
                 kaf.setTokenString(AddTokensAsCommentsToSpans.getTokenString(this, kaf.getSpans()));
                 terms.appendChild(kaf.toXML(xmldoc));
             }
@@ -3357,7 +3400,8 @@ public class KafSaxParser extends DefaultHandler {
 
             Element deps = xmldoc.createElement("deps");
             for (int i = 0; i < this.kafDepList.size(); i++) {
-                KafDep kaf  = (KafDep) kafDepList.get(i);
+                KafDep kaf  = kafDepList.get(i);
+                /// the next checks are needed because some parser create reference to nonexisting elements
                 if ((this.getTerm(kaf.from)!=null) && (this.getTerm(kaf.to)!=null)) {
                     deps.appendChild(kaf.toXML(xmldoc));
                 }
@@ -3366,8 +3410,19 @@ public class KafSaxParser extends DefaultHandler {
 
             Element chunks = xmldoc.createElement("chunks");
             for (int i = 0; i < this.kafChunkList.size(); i++) {
-                KafChunk kaf  = (KafChunk) kafChunkList.get(i);
-                chunks.appendChild(kaf.toXML(xmldoc));
+                KafChunk kaf  = kafChunkList.get(i);
+                /// the next checks are needed because some parser create reference to nonexisting elements
+                boolean nullSpan = false;
+                for (int j = 0; j < kaf.getSpans().size(); j++) {
+                    String span = kaf.getSpans().get(j);
+                    if (this.getTerm(span)==null) {
+                        nullSpan = true;
+                        break;
+                    }
+                }
+                if (this.getTerm(kaf.getHead())!=null) {
+                    if (!nullSpan) chunks.appendChild(kaf.toXML(xmldoc));
+                }
             }
             root.appendChild(chunks);
 

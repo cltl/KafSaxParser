@@ -106,7 +106,7 @@ public class KafEvent extends KafEventComponent{
 
         Element predicate = xmldoc.createElement("predicate");
         if (this.getId() != null)
-            predicate.setAttribute("prid", this.getId());
+            predicate.setAttribute("id", this.getId());
 /*
         if (!this.getSynsetId().isEmpty()) {
             predicate.setAttribute("uri", this.getSynsetId());

@@ -55,13 +55,14 @@ public class KafWordForm {
 </text>
 
      */
-    String wid;
-    String wf;
-    String para;
-    String sent;
-    String page;
-    String charOffset;
-    String charLength;
+    private String wid;
+    private String wf;
+    private String para;
+    private String sent;
+    private String page;
+    private String charOffset;
+    private String charLength;
+    private String xpath;
 
     public String toString() {
         String str = "<wf wid=\""+wid+"\" sent=\""+sent+"\" para=\""+para+"\"";
@@ -101,6 +102,7 @@ public class KafWordForm {
         this.page="";
         this.charOffset = "";
         this.charLength = "";
+        this.xpath = "";
     }
 
     public Element toXML(Document xmldoc)
@@ -117,6 +119,9 @@ public class KafWordForm {
 
   	  if (charLength.length() > 0)
   		  root.setAttribute("length", charLength);
+
+  	  if (xpath.length() > 0)
+  		  root.setAttribute("xpath", xpath);
 
   	  Node text = xmldoc.createTextNode(wf);
   	  root.appendChild(text);
@@ -138,7 +143,10 @@ public class KafWordForm {
   	  if (charLength.length() > 0)
   		  root.setAttribute("length", charLength);
 
-  	  Node text = xmldoc.createTextNode(wf);
+      if (xpath.length() > 0)
+            root.setAttribute("xpath", xpath);
+
+      Node text = xmldoc.createTextNode(wf);
   	  root.appendChild(text);
   	  return root;
     }
@@ -197,5 +205,13 @@ public class KafWordForm {
 
     public void setCharLength(String charLength) {
         this.charLength = charLength;
+    }
+
+    public String getXpath() {
+        return xpath;
+    }
+
+    public void setXpath(String xpath) {
+        this.xpath = xpath;
     }
 }

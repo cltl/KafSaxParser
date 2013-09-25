@@ -123,7 +123,7 @@ public class KafParticipant extends KafEventComponent{
         Element root = xmldoc.createElement("role");
 
         if (this.getId() != null)
-            root.setAttribute("rid", this.getId());
+            root.setAttribute("id", this.getId());
 
 
 /*

@@ -77,7 +77,7 @@ public class KafSense {
     public Element toXML(Document xmldoc)
     {
   	  Element root = xmldoc.createElement("externalRef");
-      if (!resource.isEmpty()) root.setAttribute("resource", resource);
+      root.setAttribute("resource", resource);
       if (!sensecode.isEmpty()) root.setAttribute("reference", sensecode);
       if (!refType.isEmpty()) root.setAttribute("reftype", refType);
       if (!status.isEmpty()) root.setAttribute("status", status);
