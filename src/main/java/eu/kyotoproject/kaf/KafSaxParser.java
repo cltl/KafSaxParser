@@ -56,6 +56,7 @@ public class KafSaxParser extends DefaultHandler {
     public ArrayList<GeoPlaceObject> kafPlaceArrayList;
     public ArrayList<ISODate> kafDateArrayList;
     private ArrayList<KafReference> kafReferenceArrayList;
+    public ArrayList<KafConstituencyTree> kafConstituencyTrees;
     private KafReference kafReference;
     private boolean kafreference;
     private boolean coreference;
@@ -186,7 +187,8 @@ public class KafSaxParser extends DefaultHandler {
     private KafEntity kafEntity;
     private KafProperty kafProperty;
     private KafCoreferenceSet kafCoreferenceSet;
-
+    private KafConstituencyTree kafConstituencyTree;
+    private KafConstituencyTerminal kafConstituencyTerminal;
     private KafWordForm kafWordForm;
     private TermComponent termComponent;
     private KafDep kafDep;
@@ -344,7 +346,9 @@ public class KafSaxParser extends DefaultHandler {
          kafPropertyArrayList = new ArrayList<KafProperty>();
          kafCorefenceArrayList = new ArrayList<KafCoreferenceSet>();
          participantArrayList = new ArrayList<KafParticipant>();
-
+         kafConstituencyTrees = new ArrayList<KafConstituencyTree>();
+         kafConstituencyTree = new KafConstituencyTree();
+         kafConstituencyTerminal = new KafConstituencyTerminal();
          kafreference = false;
          coreference = false;
          entity = false;
@@ -583,6 +587,56 @@ public class KafSaxParser extends DefaultHandler {
             	   System.out.println("352 ********* FOUND UNKNOWN Attribute " + name + " *****************");
            }
        }
+
+
+       else if (qName.equalsIgnoreCase("tree")) {
+           kafConstituencyTree = new KafConstituencyTree();
+
+       }
+       else if (qName.equalsIgnoreCase("nt")) {
+           KafConstituencyNonTerminal kafConstituencyNonTerminal = new KafConstituencyNonTerminal();
+           for (int i = 0; i < attributes.getLength(); i++) {
+               String name = attributes.getQName(i);
+               if (name.equalsIgnoreCase("id")) {
+                   kafConstituencyNonTerminal.setId(attributes.getValue(i).trim());
+               }
+               else if (name.equalsIgnoreCase("label")) {
+                   kafConstituencyNonTerminal.setLabel(attributes.getValue(i).trim());
+               }
+               else
+                   System.out.println("352 ********* FOUND UNKNOWN Attribute " + name + " *****************");
+           }
+           kafConstituencyTree.addNonterminals(kafConstituencyNonTerminal);
+       }
+       else if (qName.equalsIgnoreCase("t")) {
+           kafConstituencyTerminal = new KafConstituencyTerminal();
+           for (int i = 0; i < attributes.getLength(); i++) {
+               String name = attributes.getQName(i);
+               if (name.equalsIgnoreCase("id")) {
+                   kafConstituencyTerminal.setId(attributes.getValue(i).trim());
+               }
+               else
+                   System.out.println("352 ********* FOUND UNKNOWN Attribute " + name + " *****************");
+           }
+       }
+       else if (qName.equalsIgnoreCase("edge")) {
+           KafConstituencyEdge kafConstituencyEdge = new KafConstituencyEdge();
+           for (int i = 0; i < attributes.getLength(); i++) {
+               String name = attributes.getQName(i);
+               if (name.equalsIgnoreCase("from")) {
+                   kafConstituencyEdge.setFrom(attributes.getValue(i).trim());
+               }
+               else if (name.equalsIgnoreCase("to")) {
+                   kafConstituencyEdge.setTo(attributes.getValue(i).trim());
+               }
+               else
+                   System.out.println("352 ********* FOUND UNKNOWN Attribute " + name + " *****************");
+           }
+           kafConstituencyTree.addEdges(kafConstituencyEdge);
+       }
+
+
+
        else if (qName.equalsIgnoreCase("opinion")) {
            kafOpinion = new KafOpinion();
            for (int i = 0; i < attributes.getLength(); i++) {
@@ -1509,6 +1563,15 @@ public class KafSaxParser extends DefaultHandler {
                 kafEventISI.setSpans(spans);
                 spans = new ArrayList<String>();
                 kafEventISIList.add(kafEventISI);
+            }
+            else if (qName.equalsIgnoreCase("t")) {
+                kafConstituencyTerminal.setSpans(spans);
+                spans = new ArrayList<String>();
+                kafConstituencyTree.addTerminals(kafConstituencyTerminal);
+            }
+            else if (qName.equalsIgnoreCase("tree")) {
+                kafConstituencyTrees.add(kafConstituencyTree);
+                kafConstituencyTree = new KafConstituencyTree();
             }
             else if (qName.equalsIgnoreCase("term")) {
                 kafTerm.setSpans(spans);
@@ -2976,6 +3039,15 @@ public class KafSaxParser extends DefaultHandler {
                 }
 
 
+                if (kafConstituencyTrees.size()>0) {
+                    Element constituency = xmldoc.createElement("kafConstituencyTree");
+                    for (int i = 0; i < kafConstituencyTrees.size(); i++) {
+                        KafConstituencyTree constituencyTree = kafConstituencyTrees.get(i);
+                        constituency.appendChild(constituencyTree.toNafXML(xmldoc));
+                    }
+                    root.appendChild(constituency);
+                }
+
                 if (kafEventISIList.size()>0) {
                     Element isiEvents  = xmldoc.createElement("isi-events");
                     for (int i = 0; i < kafEventISIList.size(); i++) {
@@ -3125,6 +3197,14 @@ public class KafSaxParser extends DefaultHandler {
                 root.appendChild(coreferences);
             }
 
+            if (kafConstituencyTrees.size()>0) {
+                Element constituency = xmldoc.createElement("kafConstituencyTree");
+                for (int i = 0; i < kafConstituencyTrees.size(); i++) {
+                    KafConstituencyTree constituencyTree = kafConstituencyTrees.get(i);
+                    constituency.appendChild(constituencyTree.toNafXML(xmldoc));
+                }
+                root.appendChild(constituency);
+            }
 
 /*         @deprecated
             if (kafEventISIList.size()>0) {
@@ -3641,7 +3721,8 @@ public class KafSaxParser extends DefaultHandler {
     }
 
     static public void main (String[] args) {
-        String file = "test/car.naf";
+        String file = "/Tools/kafkybot.v.0.1/naf-example/world_us_canada_new.naf";
+       // String file = "test/car.naf";
         KafSaxParser parser = new KafSaxParser();
         parser.parseFile(file);
         String outfile = file+".out.xml";

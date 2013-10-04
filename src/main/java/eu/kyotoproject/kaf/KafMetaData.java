@@ -205,7 +205,8 @@ public class KafMetaData {
       this.filesize = filesize;
   }
 
-  public String toTableString () {
+
+    public String toTableString () {
       String str = "";
       str += "meta:title\t"+title+"\n";
       str += "meta:author\t"+author+"\n";
