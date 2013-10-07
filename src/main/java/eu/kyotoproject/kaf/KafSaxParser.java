@@ -3144,48 +3144,55 @@ public class KafSaxParser extends DefaultHandler {
 			root.setAttribute("xml:lang", kafMetaData.getLanguage());
 			root.appendChild(kafMetaData.toNafHeaderXML(xmldoc));
 
-
-            Element text = xmldoc.createElement("text");
-            for (int i = 0; i < this.kafWordFormList.size(); i++) {
-                KafWordForm kaf  = kafWordFormList.get(i);
-                text.appendChild(kaf.toNafXML(xmldoc));
-            }
-            root.appendChild(text);
-
-            Element terms = xmldoc.createElement("terms");
-            for (int i = 0; i < this.kafTermList.size(); i++) {
-                KafTerm kaf  = kafTermList.get(i);
-                terms.appendChild(kaf.toNafXML(xmldoc));
-            }
-            root.appendChild(terms);
-
-            Element deps = xmldoc.createElement("deps");
-            for (int i = 0; i < this.kafDepList.size(); i++) {
-                KafDep kaf  = kafDepList.get(i);
-                /// the next checks are needed because some parser create reference to nonexisting elements
-                if ((this.getTerm(kaf.from)!=null) && (this.getTerm(kaf.to)!=null)) {
-                    deps.appendChild(kaf.toNafXML(xmldoc));
+            if (this.kafWordFormList.size()>0) {
+                Element text = xmldoc.createElement("text");
+                for (int i = 0; i < this.kafWordFormList.size(); i++) {
+                    KafWordForm kaf  = kafWordFormList.get(i);
+                    text.appendChild(kaf.toNafXML(xmldoc));
                 }
+                root.appendChild(text);
             }
-            root.appendChild(deps);
 
-            Element chunks = xmldoc.createElement("chunks");
-            for (int i = 0; i < this.kafChunkList.size(); i++) {
-                KafChunk kaf  = kafChunkList.get(i);
-                /// the next checks are needed because some parser create reference to nonexisting elements
-                boolean nullSpan = false;
-                for (int j = 0; j < kaf.getSpans().size(); j++) {
-                    String span = kaf.getSpans().get(j);
-                    if (this.getTerm(span)==null) {
-                        nullSpan = true;
-                        break;
+            if (this.kafTermList.size()>0) {
+                Element terms = xmldoc.createElement("terms");
+                for (int i = 0; i < this.kafTermList.size(); i++) {
+                    KafTerm kaf  = kafTermList.get(i);
+                    terms.appendChild(kaf.toNafXML(xmldoc));
+                }
+                root.appendChild(terms);
+            }
+
+            if (this.kafDepList.size()>0) {
+                Element deps = xmldoc.createElement("deps");
+                for (int i = 0; i < this.kafDepList.size(); i++) {
+                    KafDep kaf  = kafDepList.get(i);
+                    /// the next checks are needed because some parser create reference to nonexisting elements
+                    if ((this.getTerm(kaf.from)!=null) && (this.getTerm(kaf.to)!=null)) {
+                        deps.appendChild(kaf.toNafXML(xmldoc));
                     }
                 }
-                if (this.getTerm(kaf.getHead())!=null) {
-                    if (!nullSpan) chunks.appendChild(kaf.toNafXML(xmldoc));
-                }
+                root.appendChild(deps);
             }
-            root.appendChild(chunks);
+
+            if (this.kafChunkList.size()>0) {
+                Element chunks = xmldoc.createElement("chunks");
+                for (int i = 0; i < this.kafChunkList.size(); i++) {
+                    KafChunk kaf  = kafChunkList.get(i);
+                    /// the next checks are needed because some parser create reference to nonexisting elements
+                    boolean nullSpan = false;
+                    for (int j = 0; j < kaf.getSpans().size(); j++) {
+                        String span = kaf.getSpans().get(j);
+                        if (this.getTerm(span)==null) {
+                            nullSpan = true;
+                            break;
+                        }
+                    }
+                    if (this.getTerm(kaf.getHead())!=null) {
+                        if (!nullSpan) chunks.appendChild(kaf.toNafXML(xmldoc));
+                    }
+                }
+                root.appendChild(chunks);
+            }
 
             if (kafOpinionArrayList.size()>0) {
                 Element opinions = xmldoc.createElement("opinions");
@@ -3224,7 +3231,7 @@ public class KafSaxParser extends DefaultHandler {
             }
 
             if (kafConstituencyTrees.size()>0) {
-                Element constituency = xmldoc.createElement("kafConstituencyTree");
+                Element constituency = xmldoc.createElement("constituency");
                 for (int i = 0; i < kafConstituencyTrees.size(); i++) {
                     KafConstituencyTree constituencyTree = kafConstituencyTrees.get(i);
                     constituency.appendChild(constituencyTree.toNafXML(xmldoc));
@@ -3489,48 +3496,56 @@ public class KafSaxParser extends DefaultHandler {
 			root.setAttribute("xml:lang", kafMetaData.getLanguage());
 			root.appendChild(kafMetaData.toHeaderXML(xmldoc));
 
-            Element text = xmldoc.createElement("text");
-            for (int i = 0; i < this.kafWordFormList.size(); i++) {
-                KafWordForm kaf  = kafWordFormList.get(i);
-                text.appendChild(kaf.toXML(xmldoc));
-            }
-            root.appendChild(text);
-
-            Element terms = xmldoc.createElement("terms");
-            for (int i = 0; i < this.kafTermList.size(); i++) {
-                KafTerm kaf  = kafTermList.get(i);
-                kaf.setTokenString(AddTokensAsCommentsToSpans.getTokenString(this, kaf.getSpans()));
-                terms.appendChild(kaf.toXML(xmldoc));
-            }
-            root.appendChild(terms);
-
-            Element deps = xmldoc.createElement("deps");
-            for (int i = 0; i < this.kafDepList.size(); i++) {
-                KafDep kaf  = kafDepList.get(i);
-                /// the next checks are needed because some parser create reference to nonexisting elements
-                if ((this.getTerm(kaf.from)!=null) && (this.getTerm(kaf.to)!=null)) {
-                    deps.appendChild(kaf.toXML(xmldoc));
+            if (this.kafWordFormList.size()>0) {
+                Element text = xmldoc.createElement("text");
+                for (int i = 0; i < this.kafWordFormList.size(); i++) {
+                    KafWordForm kaf  = kafWordFormList.get(i);
+                    text.appendChild(kaf.toXML(xmldoc));
                 }
+                root.appendChild(text);
             }
-            root.appendChild(deps);
 
-            Element chunks = xmldoc.createElement("chunks");
-            for (int i = 0; i < this.kafChunkList.size(); i++) {
-                KafChunk kaf  = kafChunkList.get(i);
-                /// the next checks are needed because some parser create reference to nonexisting elements
-                boolean nullSpan = false;
-                for (int j = 0; j < kaf.getSpans().size(); j++) {
-                    String span = kaf.getSpans().get(j);
-                    if (this.getTerm(span)==null) {
-                        nullSpan = true;
-                        break;
+            if (this.kafTermList.size()>0) {
+                Element terms = xmldoc.createElement("terms");
+                for (int i = 0; i < this.kafTermList.size(); i++) {
+                    KafTerm kaf  = kafTermList.get(i);
+                    kaf.setTokenString(AddTokensAsCommentsToSpans.getTokenString(this, kaf.getSpans()));
+                    terms.appendChild(kaf.toXML(xmldoc));
+                }
+                root.appendChild(terms);
+            }
+
+            if ( this.kafDepList.size()>0) {
+                Element deps = xmldoc.createElement("deps");
+                for (int i = 0; i < this.kafDepList.size(); i++) {
+                    KafDep kaf  = kafDepList.get(i);
+                    /// the next checks are needed because some parser create reference to nonexisting elements
+                    if ((this.getTerm(kaf.from)!=null) && (this.getTerm(kaf.to)!=null)) {
+                        deps.appendChild(kaf.toXML(xmldoc));
                     }
                 }
-                if (this.getTerm(kaf.getHead())!=null) {
-                    if (!nullSpan) chunks.appendChild(kaf.toXML(xmldoc));
-                }
+                root.appendChild(deps);
             }
-            root.appendChild(chunks);
+
+            if (this.kafChunkList.size()>0) {
+                Element chunks = xmldoc.createElement("chunks");
+                for (int i = 0; i < this.kafChunkList.size(); i++) {
+                    KafChunk kaf  = kafChunkList.get(i);
+                    /// the next checks are needed because some parser create reference to nonexisting elements
+                    boolean nullSpan = false;
+                    for (int j = 0; j < kaf.getSpans().size(); j++) {
+                        String span = kaf.getSpans().get(j);
+                        if (this.getTerm(span)==null) {
+                            nullSpan = true;
+                            break;
+                        }
+                    }
+                    if (this.getTerm(kaf.getHead())!=null) {
+                        if (!nullSpan) chunks.appendChild(kaf.toXML(xmldoc));
+                    }
+                }
+                root.appendChild(chunks);
+            }
 
 
             if (kafOpinionArrayList.size()>0) {

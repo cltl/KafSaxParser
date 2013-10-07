@@ -48,9 +48,9 @@ public class KafConstituencyNonTerminal {
 
         Element element = xmldoc.createElement("nt");
         if (this.id != null)
-            element.setAttribute("from", this.getId());
+            element.setAttribute("id", this.getId());
         if (this.label != null)
-            element.setAttribute("to", this.getLabel());
+            element.setAttribute("label", this.getLabel());
 
         return element;
     }
