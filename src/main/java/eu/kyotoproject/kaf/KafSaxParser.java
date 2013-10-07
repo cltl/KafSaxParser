@@ -437,8 +437,9 @@ public class KafSaxParser extends DefaultHandler {
                else if (name.equalsIgnoreCase("doc")) {
             	   kafMetaData.setDocId(attributes.getValue(i).trim());
                }
-               else
-            	   System.out.println("216 ********* FOUND UNKNOWN Attribute " + name + " *****************");
+               else {
+            	//   System.out.println("216 ********* FOUND UNKNOWN Attribute " + name + " *****************");
+               }
            }
        }
        else if (qName.equalsIgnoreCase("fileDesc")) {
@@ -473,8 +474,9 @@ public class KafSaxParser extends DefaultHandler {
                         e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
                     }
                 }
-                else
-             	   System.out.println("251 ********* FOUND UNKNOWN Attribute " + name + " *****************");
+                else {
+             	//   System.out.println("251 ********* FOUND UNKNOWN Attribute " + name + " *****************");
+                }
             }
         }
         else if (qName.equalsIgnoreCase("captureDesc")) {
@@ -486,8 +488,9 @@ public class KafSaxParser extends DefaultHandler {
                 else if (name.equalsIgnoreCase("dateString")) {
                     kafMetaData.setDateString(attributes.getValue(i).trim());
                 }
-                else
-             	   System.out.println("262 ********* FOUND UNKNOWN Attribute " + name + " *****************");
+                else {
+             	//   System.out.println("262 ********* FOUND UNKNOWN Attribute " + name + " *****************");
+                }
             }
         }
         else   if (qName.equalsIgnoreCase("public")) {
@@ -508,8 +511,9 @@ public class KafSaxParser extends DefaultHandler {
                 else if (name.equalsIgnoreCase("uri")) {
                     kafMetaData.setUrl(attributes.getValue(i).trim());
                 }
-                else
-             	   System.out.println("282 ********* FOUND UNKNOWN Attribute " + name + " *****************");
+                else {
+             	  // System.out.println("282 ********* FOUND UNKNOWN Attribute " + name + " *****************");
+                }
             }
         }
         else if (qName.equalsIgnoreCase("linguisticProcessors"))
@@ -541,8 +545,9 @@ public class KafSaxParser extends DefaultHandler {
                else if (name.equalsIgnoreCase("phrase")) {
                    kafChunk.setPhrase(attributes.getValue(i).trim());
                }
-               else
-            	   System.out.println("314 ********* FOUND UNKNOWN Attribute " + name + " *****************");
+               else {
+            	//   System.out.println("314 ********* FOUND UNKNOWN Attribute " + name + " *****************");
+               }
            }
        }
        else if (qName.equalsIgnoreCase("dep")) {
@@ -558,8 +563,9 @@ public class KafSaxParser extends DefaultHandler {
                else if (name.equalsIgnoreCase("rfunc")) {
                    kafDep.setRfunc(attributes.getValue(i).trim());
                }
-               else
-            	   System.out.println("329 ********* FOUND UNKNOWN Attribute " + name + " *****************");
+               else {
+            	//   System.out.println("329 ********* FOUND UNKNOWN Attribute " + name + " *****************");
+               }
            }
            /// dep only has attributes so we can store it now....
            kafDepList.add(kafDep);
@@ -583,8 +589,9 @@ public class KafSaxParser extends DefaultHandler {
                else if (name.equalsIgnoreCase("unitid")) {
                    kaftextUnit.setUnitid(Integer.parseInt(attributes.getValue(i).trim()));
                }
-               else
-            	   System.out.println("352 ********* FOUND UNKNOWN Attribute " + name + " *****************");
+               else {
+            	//   System.out.println("352 ********* FOUND UNKNOWN Attribute " + name + " *****************");
+               }
            }
        }
 
@@ -603,8 +610,9 @@ public class KafSaxParser extends DefaultHandler {
                else if (name.equalsIgnoreCase("label")) {
                    kafConstituencyNonTerminal.setLabel(attributes.getValue(i).trim());
                }
-               else
-                   System.out.println("352 ********* FOUND UNKNOWN Attribute " + name + " *****************");
+               else {
+                //   System.out.println("352 ********* FOUND UNKNOWN Attribute " + name + " *****************");
+               }
            }
            kafConstituencyTree.addNonterminals(kafConstituencyNonTerminal);
        }
@@ -615,8 +623,9 @@ public class KafSaxParser extends DefaultHandler {
                if (name.equalsIgnoreCase("id")) {
                    kafConstituencyTerminal.setId(attributes.getValue(i).trim());
                }
-               else
-                   System.out.println("352 ********* FOUND UNKNOWN Attribute " + name + " *****************");
+               else {
+                //   System.out.println("352 ********* FOUND UNKNOWN Attribute " + name + " *****************");
+               }
            }
        }
        else if (qName.equalsIgnoreCase("edge")) {
@@ -629,8 +638,9 @@ public class KafSaxParser extends DefaultHandler {
                else if (name.equalsIgnoreCase("to")) {
                    kafConstituencyEdge.setTo(attributes.getValue(i).trim());
                }
-               else
-                   System.out.println("352 ********* FOUND UNKNOWN Attribute " + name + " *****************");
+               else {
+                //   System.out.println("352 ********* FOUND UNKNOWN Attribute " + name + " *****************");
+               }
            }
            kafConstituencyTree.addEdges(kafConstituencyEdge);
        }
@@ -653,8 +663,9 @@ public class KafSaxParser extends DefaultHandler {
                else if (name.equalsIgnoreCase("overlap_props")) {
                    kafOpinion.setOverlap_props(attributes.getValue(i).trim());
                }
-               else
-                   System.out.println("352 ********* FOUND UNKNOWN Attribute " + name + " *****************");
+               else  {
+                //   System.out.println("352 ********* FOUND UNKNOWN Attribute " + name + " *****************");
+               }
            }
        }
        else if (qName.equalsIgnoreCase("opinion_holder")) {
@@ -936,8 +947,9 @@ public class KafSaxParser extends DefaultHandler {
                else if (name.equalsIgnoreCase("polarity")) {
                    kafTerm.setPolarity(attributes.getValue(i).trim());
                }
-               else
-            	   System.out.println("395 ********* FOUND UNKNOWN Attribute " + name + " *****************");
+               else {
+            	//   System.out.println("395 ********* FOUND UNKNOWN Attribute " + name + " *****************");
+               }
            }
        }
        else if (qName.equalsIgnoreCase("wf")) {
@@ -977,8 +989,9 @@ public class KafSaxParser extends DefaultHandler {
                else if (name.equalsIgnoreCase("length")) {
                    kafWordForm.setCharLength(attributes.getValue(i).trim());
                }
-               else
-            	   System.out.println("414 ********* FOUND UNKNOWN Attribute " + name + " *****************");
+               else  {
+            	 //  System.out.println("414 ********* FOUND UNKNOWN Attribute " + name + " *****************");
+               }
                if ((wid.length()>0) && (sentenceId.length()>0)) {
                    if (SentenceToWord.containsKey(sentenceId)) {
                        ArrayList<String> tokenIds = SentenceToWord.get(sentenceId);
@@ -1075,7 +1088,7 @@ public class KafSaxParser extends DefaultHandler {
                     sense.setStatus(attributes.getValue(i).trim());
                }
                else {
-            	   System.out.println("449 ********* FOUND UNKNOWN Attribute " + name + " *****************");
+            	 //  System.out.println("449 ********* FOUND UNKNOWN Attribute " + name + " *****************");
                }
            }
            if (COMPONENT) {
@@ -1170,8 +1183,9 @@ public class KafSaxParser extends DefaultHandler {
                else if (name.equalsIgnoreCase("pos")) {
             	   termComponent.setPos(attributes.getValue(i).trim());
                }
-               else
-            	   System.out.println("521 ********* FOUND UNKNOWN Attribute " + name + " *****************");
+               else {
+            	//   System.out.println("521 ********* FOUND UNKNOWN Attribute " + name + " *****************");
+               }
            }
        }
        ///// handle kaf references for dates, locations and countries (NEs)
@@ -1859,6 +1873,18 @@ public class KafSaxParser extends DefaultHandler {
     public String getSentenceId(KafTerm term)
     {
 		String wid = term.getFirstSpan();
+		if ((wid.length() > 0) && wordFormMap.containsKey(wid))
+		{
+			KafWordForm word = wordFormMap.get(wid);
+			return word.getSent();
+		}
+		return "-1";
+    }
+
+    public String getSentenceId(String termId)
+    {
+        KafTerm kafTerm = this.getTerm(termId);
+		String wid = kafTerm.getFirstSpan();
 		if ((wid.length() > 0) && wordFormMap.containsKey(wid))
 		{
 			KafWordForm word = wordFormMap.get(wid);
