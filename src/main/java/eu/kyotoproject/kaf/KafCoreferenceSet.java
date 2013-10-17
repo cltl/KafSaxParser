@@ -14,13 +14,46 @@ import java.util.ArrayList;
  */
 public class KafCoreferenceSet {
 
+    /*
+    <coreferences>
+<coref id="co1">
+<!-- London -->
+<span >
+<target id="t12" head="yes"/>
+</span>
+<!-- the capital city of England -->
+<span>
+<target id="t1"/>
+<target id="t2"/>
+<target id="t3" head ="yes"/> <!-- city is the head -->
+<target id="t4"/>
+<target id="t5"/>
+</span>
+<!-- it -->
+<span>
+<target id="t20" head="yes"/>
+</span>
+</coref>
+</coreferences>
+     */
+
     private String coid;
+    private String type;
     private ArrayList<ArrayList<CorefTarget>> setsOfSpans;
 
 
     public KafCoreferenceSet() {
         this.coid = "";
+        this.type = "";
         this.setsOfSpans = new ArrayList<ArrayList<CorefTarget>>();
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
     }
 
     public String getCoid() {
@@ -47,6 +80,7 @@ public class KafCoreferenceSet {
     public String toString() {
         return "KafCoreferenceSet{" +
                 "coid='" + coid + '\'' +
+                "type='" + type + '\'' +
                 ", setsOfSpans=" + setsOfSpans +
                 '}';
     }
@@ -56,6 +90,8 @@ public class KafCoreferenceSet {
         Element root = xmldoc.createElement("coref");
         if (coid != null)
             root.setAttribute("coid", coid);
+        if (type != null)
+            root.setAttribute("type", type);
         if (setsOfSpans.size()>0) {
             for (int i = 0; i < setsOfSpans.size(); i++) {
                 ArrayList<CorefTarget> corefTargets = setsOfSpans.get(i);
@@ -74,6 +110,8 @@ public class KafCoreferenceSet {
         Element root = xmldoc.createElement("coref");
         if (coid != null)
             root.setAttribute("id", coid);
+        if (type != null)
+            root.setAttribute("type", type);
         if (setsOfSpans.size()>0) {
             for (int i = 0; i < setsOfSpans.size(); i++) {
                 ArrayList<CorefTarget> corefTargets = setsOfSpans.get(i);
