@@ -65,14 +65,25 @@ public class KafEvent extends KafEventComponent{
             root.setAttribute("pos", this.getPos());
         }
 
-        Element span = xmldoc.createElement("span");
+        if (this.getSpans().size()>0) {
+            Element span = xmldoc.createElement("span");
+            for (int i = 0; i < this.getSpans().size(); i++)
+            {
+                CorefTarget corefTarget = this.getSpans().get(i);
+                span.appendChild(corefTarget.toXML(xmldoc));
+            }
+            root.appendChild(span);
+        }
+
+/*        Element span = xmldoc.createElement("span");
         for (int i = 0; i < this.getSpans().size(); i++)
         {
             Element target = xmldoc.createElement("target");
             target.setAttribute("id", this.getSpans().get(i));
             span.appendChild(target);
         }
-        root.appendChild(span);
+        root.appendChild(span);*/
+
         if (participants.size()>0) {
             for (int i = 0; i < participants.size(); i++) {
                 KafParticipant kafParticipant = participants.get(i);
@@ -135,6 +146,17 @@ public class KafEvent extends KafEventComponent{
         }
 
 
+        if (this.getSpans().size()>0) {
+            Element span = xmldoc.createElement("span");
+            for (int i = 0; i < this.getSpans().size(); i++)
+            {
+                CorefTarget corefTarget = this.getSpans().get(i);
+                span.appendChild(corefTarget.toXML(xmldoc));
+            }
+            predicate.appendChild(span);
+        }
+
+/*
         Element spanElement = xmldoc.createElement("span");
         for (int i = 0; i < this.getSpans().size(); i++)
         {
@@ -143,6 +165,7 @@ public class KafEvent extends KafEventComponent{
             spanElement.appendChild(target);
         }
         predicate.appendChild(spanElement);
+*/
 
         if (participants.size()>0) {
             for (int i = 0; i < participants.size(); i++) {
@@ -183,12 +206,22 @@ public class KafEvent extends KafEventComponent{
             }
         }
 
+        if (this.getSpans().size()>0) {
+            Element span = xmldoc.createElement("span");
+            for (int i = 0; i < this.getSpans().size(); i++)
+            {
+                CorefTarget corefTarget = this.getSpans().get(i);
+                span.appendChild(corefTarget.toXML(xmldoc));
+            }
+            root.appendChild(span);
+        }
+/*
         for (int i = 0; i < this.getSpans().size(); i++)
         {
             Element target = xmldoc.createElement("target");
             target.setAttribute("rdf:resource", this.getSpans().get(i));
             predicate.appendChild(target);
-        }
+        }*/
 
         if (participants.size()>0) {
             for (int i = 0; i < participants.size(); i++) {

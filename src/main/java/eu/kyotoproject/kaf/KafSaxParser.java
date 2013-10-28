@@ -178,8 +178,8 @@ public class KafSaxParser extends DefaultHandler {
 //    private String lastTermLemma;
     private String layer;
     private ArrayList<String> spans;
-    private ArrayList<String> predicateSpans;
-    private ArrayList<String> roleSpans;
+    private ArrayList<CorefTarget> predicateSpans;
+    private ArrayList<CorefTarget> roleSpans;
     private ArrayList<CorefTarget> corefSpans;
     private ArrayList<KafParticipant> participantArrayList;
     private KafTerm kafTerm;
@@ -367,8 +367,8 @@ public class KafSaxParser extends DefaultHandler {
          externalreference = false;
          externalRefLevel = 0;
          spans = new ArrayList<String>();
-         predicateSpans = new ArrayList<String>();
-         roleSpans = new ArrayList<String>();
+         predicateSpans = new ArrayList<CorefTarget>();
+         roleSpans = new ArrayList<CorefTarget>();
          kafChunk = new KafChunk();
          kafDep = new KafDep();
          kafTerm = new KafTerm();
@@ -745,7 +745,7 @@ public class KafSaxParser extends DefaultHandler {
            kafEvent.setComponentType("event");
            PREDICATE = true;
            ROLE = false;
-           predicateSpans = new ArrayList<String>();
+           predicateSpans = new ArrayList<CorefTarget>();
            predicateSenseTags = new ArrayList<KafSense>();
 
            for (int i = 0; i < attributes.getLength(); i++) {
@@ -772,7 +772,7 @@ public class KafSaxParser extends DefaultHandler {
            kafParticipant = new KafParticipant();
            kafParticipant.setComponentType("participant");
            ROLE = true;
-           roleSpans = new ArrayList<String>();
+           roleSpans = new ArrayList<CorefTarget>();
            roleSenseTags = new ArrayList<KafSense>();
 
            for (int i = 0; i < attributes.getLength(); i++) {
@@ -1009,21 +1009,32 @@ public class KafSaxParser extends DefaultHandler {
        }
        else if (qName.equalsIgnoreCase("target")) {
            if (ROLE) {
+               CorefTarget corefTarget = new CorefTarget();
                for (int i = 0; i < attributes.getLength(); i++) {
-                   roleSpans.add(attributes.getValue(i).trim());
+                   String name = attributes.getQName(i);
+                   if (name.equalsIgnoreCase("id")) {
+                       corefTarget.setId(attributes.getValue(i).trim());
+                   }
+                   else if (name.equalsIgnoreCase("head")) {
+                       corefTarget.setHead(attributes.getValue(i).trim());
+                   }
                }
+               roleSpans.add(corefTarget);
            }
            else if (PREDICATE) {
+               CorefTarget corefTarget = new CorefTarget();
                for (int i = 0; i < attributes.getLength(); i++) {
-                   predicateSpans.add(attributes.getValue(i).trim());
+                   String name = attributes.getQName(i);
+                   if (name.equalsIgnoreCase("id")) {
+                       corefTarget.setId(attributes.getValue(i).trim());
+                   }
+                   else if (name.equalsIgnoreCase("head")) {
+                       corefTarget.setHead(attributes.getValue(i).trim());
+                   }
                }
+               predicateSpans.add(corefTarget);
            }
-           else if ((!coreference) && (!entity) && (!property)) {
-               for (int i = 0; i < attributes.getLength(); i++) {
-                   spans.add(attributes.getValue(i).trim());
-               }
-           }
-           else {
+           else if ((coreference) || (entity) || (property)) {
                CorefTarget corefTarget = new CorefTarget();
                for (int i = 0; i < attributes.getLength(); i++) {
                    String name = attributes.getQName(i);
@@ -1035,6 +1046,11 @@ public class KafSaxParser extends DefaultHandler {
                    }
                }
                corefSpans.add(corefTarget);
+           }
+           else {//// simple span
+                for (int i = 0; i < attributes.getLength(); i++) {
+                       spans.add(attributes.getValue(i).trim());
+               }
            }
        }
        else if (qName.equalsIgnoreCase("externalReferences")) {
@@ -1446,6 +1462,9 @@ public class KafSaxParser extends DefaultHandler {
                if (name.equalsIgnoreCase("coid")) {
                    kafCoreferenceSet.setCoid(attributes.getValue(i).trim());
                }
+               else if (name.equalsIgnoreCase("type")) {
+                   kafCoreferenceSet.setType(attributes.getValue(i).trim());
+               }
                else if (name.equalsIgnoreCase("id")) {
                    kafCoreferenceSet.setCoid(attributes.getValue(i).trim());
                }
@@ -1799,7 +1818,7 @@ public class KafSaxParser extends DefaultHandler {
                 //init
                 kafEvent = new KafEvent();
                 participantArrayList = new ArrayList<KafParticipant>();
-                predicateSpans = new ArrayList<String>();
+                predicateSpans = new ArrayList<CorefTarget>();
                 predicateSenseTags = new ArrayList<KafSense>();
                 PREDICATE = false;
             }
@@ -1810,7 +1829,7 @@ public class KafSaxParser extends DefaultHandler {
 
                 //init
                 kafParticipant = new KafParticipant();
-                roleSpans = new ArrayList<String>();
+                roleSpans = new ArrayList<CorefTarget>();
                 roleSenseTags = new ArrayList<KafSense>();
                 ROLE = false;
                /////
@@ -2859,8 +2878,8 @@ public class KafSaxParser extends DefaultHandler {
                     scope = true;
                     for (int j = 0; j < event.getSpans().size(); j++)
                     {
-                        String span = (String) event.getSpans().get(j);
-                        if (!termIdScope.contains(span))
+                        CorefTarget span = event.getSpans().get(j);
+                        if (!termIdScope.contains(span.getId()))
                         {
                             scope = false;
                             break;
@@ -3089,10 +3108,10 @@ public class KafSaxParser extends DefaultHandler {
 
                     for (int i = 0; i < kafEventArrayList.size(); i++) {
                         KafEvent event = kafEventArrayList.get(i);
-                        event.setTokenString(AddTokensAsCommentsToSpans.getTokenStringFromTermIds(this, event.getSpans()));
+                        event.setTokenString(AddTokensAsCommentsToSpans.getTokenStringFromTermIds(this, event.getSpanIds()));
                         for (int j = 0; j < event.getParticipants().size(); j++) {
                             KafParticipant kafParticipant = event.getParticipants().get(j);
-                            kafParticipant.setTokenString(AddTokensAsCommentsToSpans.getTokenStringFromTermIds(this, kafParticipant.getSpans()));
+                            kafParticipant.setTokenString(AddTokensAsCommentsToSpans.getTokenStringFromTermIds(this, kafParticipant.getSpanIds()));
                         }
                         events.appendChild(event.toXML(xmldoc));
                     }
@@ -3256,10 +3275,10 @@ public class KafSaxParser extends DefaultHandler {
 
                 for (int i = 0; i < kafEventArrayList.size(); i++) {
                     KafEvent event = kafEventArrayList.get(i);
-                    event.setTokenString(AddTokensAsCommentsToSpans.getTokenStringFromTermIds(this, event.getSpans()));
+                    event.setTokenString(AddTokensAsCommentsToSpans.getTokenStringFromTermIds(this, event.getSpanIds()));
                     for (int j = 0; j < event.getParticipants().size(); j++) {
                         KafParticipant kafParticipant = event.getParticipants().get(j);
-                        kafParticipant.setTokenString(AddTokensAsCommentsToSpans.getTokenStringFromTermIds(this, kafParticipant.getSpans()));
+                        kafParticipant.setTokenString(AddTokensAsCommentsToSpans.getTokenStringFromTermIds(this, kafParticipant.getSpanIds()));
                     }
                     events.appendChild(event.toNafXML(xmldoc));
                 }
@@ -3448,10 +3467,10 @@ public class KafSaxParser extends DefaultHandler {
                 Element events  = xmldoc.createElement("srls");
                 for (int i = 0; i < kafEventArrayList.size(); i++) {
                     KafEvent event = kafEventArrayList.get(i);
-                    event.setTokenString(AddTokensAsCommentsToSpans.getTokenStringFromTermIds(this, event.getSpans()));
+                    event.setTokenString(AddTokensAsCommentsToSpans.getTokenStringFromTermIds(this, event.getSpanIds()));
                     for (int j = 0; j < event.getParticipants().size(); j++) {
                         KafParticipant kafParticipant = event.getParticipants().get(j);
-                        kafParticipant.setTokenString(AddTokensAsCommentsToSpans.getTokenStringFromTermIds(this, kafParticipant.getSpans()));
+                        kafParticipant.setTokenString(AddTokensAsCommentsToSpans.getTokenStringFromTermIds(this, kafParticipant.getSpanIds()));
                     }
                     events.appendChild(event.toNafRdfXML(xmldoc));
                 }
@@ -3620,10 +3639,10 @@ public class KafSaxParser extends DefaultHandler {
                 Element events  = xmldoc.createElement("srls");
                 for (int i = 0; i < kafEventArrayList.size(); i++) {
                     KafEvent event = kafEventArrayList.get(i);
-                    event.setTokenString(AddTokensAsCommentsToSpans.getTokenStringFromTermIds(this, event.getSpans()));
+                    event.setTokenString(AddTokensAsCommentsToSpans.getTokenStringFromTermIds(this, event.getSpanIds()));
                     for (int j = 0; j < event.getParticipants().size(); j++) {
                         KafParticipant kafParticipant = event.getParticipants().get(j);
-                        kafParticipant.setTokenString(AddTokensAsCommentsToSpans.getTokenStringFromTermIds(this, kafParticipant.getSpans()));
+                        kafParticipant.setTokenString(AddTokensAsCommentsToSpans.getTokenStringFromTermIds(this, kafParticipant.getSpanIds()));
                     }
                     events.appendChild(event.toXML(xmldoc));
                 }

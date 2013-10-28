@@ -55,14 +55,17 @@ public class KafParticipant extends KafEventComponent{
             root.setAttribute("role", this.role);
         }
 
-        Element span = xmldoc.createElement("span");
-        for (int i = 0; i < this.getSpans().size(); i++)
-        {
-            Element target = xmldoc.createElement("target");
-            target.setAttribute("id", this.getSpans().get(i));
-            span.appendChild(target);
+        if (this.getSpans().size()>0) {
+            Element span = xmldoc.createElement("span");
+            for (int i = 0; i < this.getSpans().size(); i++)
+            {
+                CorefTarget corefTarget = this.getSpans().get(i);
+                span.appendChild(corefTarget.toXML(xmldoc));
+            }
+            root.appendChild(span);
         }
-        root.appendChild(span);
+
+
         return root;
     }
 
@@ -95,6 +98,16 @@ public class KafParticipant extends KafEventComponent{
             role.appendChild(externalRefs);
         }
 
+        if (this.getSpans().size()>0) {
+            Element span = xmldoc.createElement("span");
+            for (int i = 0; i < this.getSpans().size(); i++)
+            {
+                CorefTarget corefTarget = this.getSpans().get(i);
+                span.appendChild(corefTarget.toXML(xmldoc));
+            }
+            root.appendChild(span);
+        }
+        /*
         for (int i = 0; i < this.getSpans().size(); i++)
         {
             Element target = xmldoc.createElement("target");
@@ -104,7 +117,8 @@ public class KafParticipant extends KafEventComponent{
                 target.appendChild(comment);
             }
             role.appendChild(target);
-        }
+        }*/
+
         root.appendChild(role);
 
         return root;
@@ -155,14 +169,24 @@ public class KafParticipant extends KafEventComponent{
             root.appendChild(externalRefs);
         }
 
-        Element spanElement = xmldoc.createElement("span");
+        if (this.getSpans().size()>0) {
+            Element span = xmldoc.createElement("span");
+            for (int i = 0; i < this.getSpans().size(); i++)
+            {
+                CorefTarget corefTarget = this.getSpans().get(i);
+                span.appendChild(corefTarget.toXML(xmldoc));
+            }
+            root.appendChild(span);
+        }
+
+/*        Element spanElement = xmldoc.createElement("span");
         for (int i = 0; i < this.getSpans().size(); i++)
         {
             Element target = xmldoc.createElement("target");
             target.setAttribute("id", this.getSpans().get(i));
             spanElement.appendChild(target);
         }
-        root.appendChild(spanElement);
+        root.appendChild(spanElement);*/
 
         return root;
     }
@@ -206,12 +230,22 @@ public class KafParticipant extends KafEventComponent{
             role.appendChild(conceptUri);
         }
 
-        for (int i = 0; i < this.getSpans().size(); i++)
+        if (this.getSpans().size()>0) {
+            Element span = xmldoc.createElement("span");
+            for (int i = 0; i < this.getSpans().size(); i++)
+            {
+                CorefTarget corefTarget = this.getSpans().get(i);
+                span.appendChild(corefTarget.toXML(xmldoc));
+            }
+            root.appendChild(span);
+        }
+
+ /*       for (int i = 0; i < this.getSpans().size(); i++)
         {
             Element target = xmldoc.createElement("target");
             target.setAttribute("rdf:resource", this.getSpans().get(i));
             role.appendChild(target);
-        }
+        }*/
 
         root.appendChild(role);
 

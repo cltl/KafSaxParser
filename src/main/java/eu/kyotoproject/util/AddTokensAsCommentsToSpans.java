@@ -62,7 +62,7 @@ public class AddTokensAsCommentsToSpans {
                         }
                     }
                 }
-                System.out.println("s = " + s);
+               // System.out.println("s = " + s);
             }
 
         }

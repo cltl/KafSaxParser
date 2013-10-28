@@ -19,7 +19,7 @@ public class KafEventComponent {
     private String elementName;
     private String lemma;
     private String pos;
-    private ArrayList<String> spans;
+    private ArrayList<CorefTarget> spans;
     private ArrayList<KafSense> externalReferences;
     private String tokenString;
 
@@ -33,7 +33,7 @@ public class KafEventComponent {
         this.synsetConfidence = 0;
         this.synsetId = "";
         this.sentenceId = "";
-        this.spans = new ArrayList<String>();
+        this.spans = new ArrayList<CorefTarget>();
         this.externalReferences = new ArrayList<KafSense>();
     }
 
@@ -109,15 +109,24 @@ public class KafEventComponent {
         this.sentenceId = sid;
     }
 
-    public ArrayList<String> getSpans() {
+    public ArrayList<CorefTarget> getSpans() {
         return spans;
     }
 
-    public void setSpans(ArrayList<String> spans) {
+    public ArrayList<String> getSpanIds() {
+        ArrayList<String> spanIds = new ArrayList<String>();
+        for (int i = 0; i < spans.size(); i++) {
+            CorefTarget corefTarget = spans.get(i);
+            spanIds.add(corefTarget.getId());
+        }
+        return spanIds;
+    }
+
+    public void setSpans(ArrayList<CorefTarget> spans) {
         this.spans = spans;
     }
 
-    public void addSpan(String span) {
+    public void addSpan(CorefTarget span) {
             this.spans.add(span);
     }
 
