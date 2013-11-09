@@ -3258,16 +3258,23 @@ public class KafSaxParser extends DefaultHandler {
                 root.appendChild(constituency);
             }
 
-/*         @deprecated
-            if (kafEventISIList.size()>0) {
-                Element isiEvents  = xmldoc.createElement("isi-events");
-                for (int i = 0; i < kafEventISIList.size(); i++) {
-                    KafEventISI eventISI = kafEventISIList.get(i);
-                    isiEvents.appendChild(eventISI.toNafXML(xmldoc));
-                }
-                root.appendChild(isiEvents);
+            Element locations = xmldoc.createElement("locations");
+            for (int i = 0; i < kafCountryArrayList.size(); i++) {
+                GeoCountryObject geoCountryObject = kafCountryArrayList.get(i);
+                locations.appendChild(geoCountryObject.toNafXML(xmldoc));
             }
-*/
+            for (int i = 0; i < kafPlaceArrayList.size(); i++) {
+                GeoPlaceObject geoPlaceObject = kafPlaceArrayList.get(i);
+                locations.appendChild(geoPlaceObject.toNafXML(xmldoc));
+            }
+            root.appendChild(locations);
+
+            Element dates = xmldoc.createElement("dates");
+            for (int i = 0; i < kafDateArrayList.size(); i++) {
+                ISODate isoDate = kafDateArrayList.get(i);
+                dates.appendChild(isoDate.toNafXML(xmldoc));
+            }
+            root.appendChild(dates);
 
 
             if (kafEventArrayList.size()>0) {
