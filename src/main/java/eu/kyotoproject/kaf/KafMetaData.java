@@ -43,6 +43,7 @@ public class KafMetaData {
     private String project;
     private String collectionId;
     private String language;
+    private String creationtime;
     private String dateString;
     private long filesize;
     private String pagefolderpath;
@@ -73,6 +74,7 @@ public class KafMetaData {
       this.nPages = 0;
       this.filesize = 0;
       this.metakey = "";
+      creationtime = "";
       dateString = "";
       pagefolderpath = "";
   }
@@ -197,7 +199,15 @@ public class KafMetaData {
       this.dateString = dateString;
   }
 
-  public long getFilesize() {
+    public String getCreationtime() {
+        return creationtime;
+    }
+
+    public void setCreationtime(String creationtime) {
+        this.creationtime = creationtime;
+    }
+
+    public long getFilesize() {
       return filesize;
   }
 
@@ -258,7 +268,9 @@ public class KafMetaData {
   {
 	  Element root = xmldoc.createElement("kafHeader");
 	  Element fileDesc = xmldoc.createElement("fileDesc");
-	  if ((title != null) && (title.length() > 0))
+      if ((creationtime != null) && (creationtime.length() > 0))
+          fileDesc.setAttribute("creationtime", creationtime);
+      if ((title != null) && (title.length() > 0))
 		  fileDesc.setAttribute("title", title);
 	  if ((author != null) && (author.length() > 0))
 		  fileDesc.setAttribute("author", author);
@@ -339,6 +351,8 @@ public class KafMetaData {
     {
         Element root = xmldoc.createElement("nafHeader");
         Element fileDesc = xmldoc.createElement("fileDesc");
+        if ((creationtime != null) && (creationtime.length() > 0))
+            fileDesc.setAttribute("creationtime", creationtime);
         if ((title != null) && (title.length() > 0))
             fileDesc.setAttribute("title", title);
         if ((author != null) && (author.length() > 0))
@@ -364,7 +378,7 @@ public class KafMetaData {
         //  if ((docId != null) && (docId.length() > 0))
         //	  p.setAttribute("docid", docId);
         if ((publicId != null) && (publicId.length() > 0))
-            p.setAttribute("dmsid", publicId);
+            p.setAttribute("publicId", publicId);
         if ((url != null) && (url.length() > 0))
             p.setAttribute("uri", url);
         //  p.setAttribute("uri", url.replaceAll("&", "&amp;"));

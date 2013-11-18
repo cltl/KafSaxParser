@@ -40,7 +40,7 @@ import java.util.*;
     along with KafSaxParser.  If not, see <http://www.gnu.org/licenses/>.
  */
 public class KafSaxParser extends DefaultHandler {
-    static final String NAFVERSION = "v1";
+    static final String NAFVERSION = "v3";
     final byte[] utf8_bom = { (byte) 0xEF, (byte) 0xBB,
         (byte) 0xBF }; /// For Chinese KAF
     final String utf8_bomString = new String(utf8_bom);
@@ -74,7 +74,7 @@ public class KafSaxParser extends DefaultHandler {
     private boolean placeObject;
     private boolean externalreference;
     private int externalRefLevel = 0;
-
+    public String rawText;
     /**
      * ArrayList with KafEventISI: special events represented in the ISI corpus
      */
@@ -325,6 +325,7 @@ public class KafSaxParser extends DefaultHandler {
     public void init() {
      //    lastTermId = "";
      //    lastTermLemma = "";
+         rawText = "";
          kafEventArrayList = new ArrayList<KafEvent>();
          kafEventISIList = new ArrayList<KafEventISI>();
          kafMetaData = new KafMetaData();
@@ -451,6 +452,9 @@ public class KafSaxParser extends DefaultHandler {
                 else if (name.equalsIgnoreCase("author")) {
                     kafMetaData.setAuthor(attributes.getValue(i).trim());
                 }
+                else if (name.equalsIgnoreCase("creationtime")) {
+                    kafMetaData.setCreationtime(attributes.getValue(i).trim());
+                }
                 else if (name.equalsIgnoreCase("filename")) {
                     kafMetaData.setFilename(attributes.getValue(i).trim());
                 }
@@ -506,6 +510,9 @@ public class KafSaxParser extends DefaultHandler {
                     kafMetaData.setDocId(attributes.getValue(i).trim());
                 }
                 else if (name.equalsIgnoreCase("dmsid")) {
+                    kafMetaData.setPublicId(attributes.getValue(i).trim());
+                }
+                else if (name.equalsIgnoreCase("publicid")) {
                     kafMetaData.setPublicId(attributes.getValue(i).trim());
                 }
                 else if (name.equalsIgnoreCase("uri")) {
@@ -752,20 +759,7 @@ public class KafSaxParser extends DefaultHandler {
                String name = attributes.getQName(i);
                if (name.equalsIgnoreCase("id")) {
                    kafEvent.setId(attributes.getValue(i).trim());
-               }/* @Deprecated
-               else if (name.equalsIgnoreCase("synsetId")) {
-                   kafEvent.setSynsetId(attributes.getValue(i).trim());
                }
-               else if (name.equalsIgnoreCase("sentence")) {
-                   kafEvent.setSynsetId(attributes.getValue(i).trim());
-               }
-               else if (name.equalsIgnoreCase("synsetConfidence")) {
-                   try {
-                       kafEvent.setSynsetConfidence(Double.parseDouble(attributes.getValue(i).trim()));
-                   } catch (NumberFormatException e) {
-                       e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
-                   }
-               }*/
            }
        }
        else if (qName.equalsIgnoreCase("role")) {
@@ -782,20 +776,7 @@ public class KafSaxParser extends DefaultHandler {
                }
                else if (name.equalsIgnoreCase("semrole")) {
                    kafParticipant.setRole(attributes.getValue(i).trim());
-               }/* @Deprecated
-               else if (name.equalsIgnoreCase("sentence")) {
-                   kafParticipant.setSentenceId(attributes.getValue(i).trim());
                }
-               else if (name.equalsIgnoreCase("synsetId")) {
-                   kafParticipant.setSynsetId(attributes.getValue(i).trim());
-               }
-               else if (name.equalsIgnoreCase("synsetConfidence")) {
-                   try {
-                       kafParticipant.setSynsetConfidence(Double.parseDouble(attributes.getValue(i).trim()));
-                   } catch (NumberFormatException e) {
-                       e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
-                   }
-               }*/
            }
 
        }
@@ -1501,6 +1482,9 @@ public class KafSaxParser extends DefaultHandler {
                 }
                 spans = new ArrayList<String>();
                 kafChunkList.add(kafChunk);
+            }
+            else if (qName.equalsIgnoreCase("raw")) {
+                rawText = value.trim();
             }
             else if (qName.equalsIgnoreCase("opinion")) {
                 this.kafOpinionArrayList.add(kafOpinion);
@@ -3163,6 +3147,11 @@ public class KafSaxParser extends DefaultHandler {
 			root.setAttribute("xml:lang", kafMetaData.getLanguage());
 			root.appendChild(kafMetaData.toNafHeaderXML(xmldoc));
 
+            if (!rawText.isEmpty())  {
+                Element text = xmldoc.createElement("raw");
+                text.setTextContent(rawText);
+                root.appendChild(text);
+            }
             if (this.kafWordFormList.size()>0) {
                 Element text = xmldoc.createElement("text");
                 for (int i = 0; i < this.kafWordFormList.size(); i++) {
@@ -3176,6 +3165,7 @@ public class KafSaxParser extends DefaultHandler {
                 Element terms = xmldoc.createElement("terms");
                 for (int i = 0; i < this.kafTermList.size(); i++) {
                     KafTerm kaf  = kafTermList.get(i);
+                    kaf.setTokenString(AddTokensAsCommentsToSpans.getTokenString(this, kaf.getSpans()));
                     terms.appendChild(kaf.toNafXML(xmldoc));
                 }
                 root.appendChild(terms);
@@ -3185,6 +3175,9 @@ public class KafSaxParser extends DefaultHandler {
                 Element deps = xmldoc.createElement("deps");
                 for (int i = 0; i < this.kafDepList.size(); i++) {
                     KafDep kaf  = kafDepList.get(i);
+                    String commentString = kaf.getTokensString(this);
+                    Comment comment = xmldoc.createComment(commentString);
+                    deps.appendChild(comment);
                     /// the next checks are needed because some parser create reference to nonexisting elements
                     if ((this.getTerm(kaf.from)!=null) && (this.getTerm(kaf.to)!=null)) {
                         deps.appendChild(kaf.toNafXML(xmldoc));
@@ -3197,6 +3190,7 @@ public class KafSaxParser extends DefaultHandler {
                 Element chunks = xmldoc.createElement("chunks");
                 for (int i = 0; i < this.kafChunkList.size(); i++) {
                     KafChunk kaf  = kafChunkList.get(i);
+                    kaf.setTokenString(this);
                     /// the next checks are needed because some parser create reference to nonexisting elements
                     boolean nullSpan = false;
                     for (int j = 0; j < kaf.getSpans().size(); j++) {
@@ -3217,6 +3211,7 @@ public class KafSaxParser extends DefaultHandler {
                 Element opinions = xmldoc.createElement("opinions");
                 for (int i = 0; i < this.kafOpinionArrayList.size(); i++){
                     KafOpinion kaf  =  kafOpinionArrayList.get(i);
+                    kaf.setTokenStrings(this);
                     opinions.appendChild(kaf.toNafXML(xmldoc));
                 }
                 root.appendChild(opinions);
@@ -3226,6 +3221,7 @@ public class KafSaxParser extends DefaultHandler {
                 Element entities = xmldoc.createElement("entities");
                 for (int i = 0; i < this.kafEntityArrayList.size(); i++) {
                     KafEntity kaf  = kafEntityArrayList.get(i);
+                    kaf.setTokenStrings(this);
                     entities.appendChild(kaf.toNafXML(xmldoc));
                 }
                 root.appendChild(entities);
@@ -3235,6 +3231,7 @@ public class KafSaxParser extends DefaultHandler {
                 Element properties = xmldoc.createElement("properties");
                 for (int i = 0; i < this.kafPropertyArrayList.size(); i++) {
                     KafProperty kaf  = kafPropertyArrayList.get(i);
+                    kaf.setTokenStrings(this);
                     properties.appendChild(kaf.toNafXML(xmldoc));
                 }
                 root.appendChild(properties);
@@ -3788,7 +3785,7 @@ public class KafSaxParser extends DefaultHandler {
     }
 
     static public void main (String[] args) {
-        String file = "/Tools/kafkybot.v.0.1/naf-example/world_us_canada_new.naf";
+        String file = "/Code/vu/newsreader/pos.xml";
        // String file = "test/car.naf";
         KafSaxParser parser = new KafSaxParser();
         parser.parseFile(file);

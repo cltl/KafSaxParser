@@ -1,6 +1,5 @@
 package eu.kyotoproject.kaf;
 
-import org.w3c.dom.Comment;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
@@ -61,10 +60,6 @@ public class CorefTarget {
                 root.setAttribute("id", id);
             if (head != null)
                 if (!head.isEmpty()) root.setAttribute("head", head);
-            if (tokenString.length()>0) {
-                Comment comment = xmldoc.createComment(tokenString);
-                root.appendChild(comment);
-            }
             return root;
         }
 }

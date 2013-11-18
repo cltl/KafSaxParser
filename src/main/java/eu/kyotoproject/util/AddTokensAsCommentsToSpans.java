@@ -38,6 +38,45 @@ public class AddTokensAsCommentsToSpans {
         }
         return str.trim();
     }
+    static public String getTokenString (KafSaxParser kafSaxParser, String termId) {
+        String str = "";
+        ArrayList<String> tokenSpan = convertTermSpanToTokenSpan(kafSaxParser, termId);
+        for (int i = 0; i < tokenSpan.size(); i++) {
+            String id = tokenSpan.get(i);
+            if (kafSaxParser.wordFormMap.containsKey(id)) {
+                KafWordForm kafWordForm = kafSaxParser.wordFormMap.get(id);
+                str += kafWordForm.getWf()+" ";
+            }
+        }
+        return str.trim();
+    }
+
+    static public ArrayList<String> convertTermSpanToTokenSpan (KafSaxParser kafSaxParser, String termId) {
+        ArrayList<String> tokenSpan = new ArrayList<String>();
+        if (kafSaxParser.TermToWord.containsKey(termId)) {
+            ArrayList<String> tokens = kafSaxParser.TermToWord.get(termId);
+            for (int j = 0; j < tokens.size(); j++) {
+                String t = tokens.get(j);
+                tokenSpan.add(t);
+            }
+        }
+        else {
+            int idx = termId.lastIndexOf(";");
+            if (idx>-1) {
+                termId = termId.substring(idx);
+                if (kafSaxParser.TermToWord.containsKey(termId)) {
+                    ArrayList<String> tokens = kafSaxParser.TermToWord.get(termId);
+                    for (int j = 0; j < tokens.size(); j++) {
+                        String t = tokens.get(j);
+                        tokenSpan.add(t);
+                    }
+                }
+            }
+           // System.out.println("s = " + s);
+        }
+        return tokenSpan;
+    }
+
     static public ArrayList<String> convertTermSpanToTokenSpan (KafSaxParser kafSaxParser, ArrayList<String> span) {
         ArrayList<String> tokenSpan = new ArrayList<String>();
         for (int i = 0; i < span.size(); i++) {

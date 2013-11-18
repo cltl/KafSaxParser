@@ -1,5 +1,6 @@
 package eu.kyotoproject.kaf;
 
+import org.w3c.dom.Comment;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
@@ -116,6 +117,18 @@ public class KafCoreferenceSet {
             for (int i = 0; i < setsOfSpans.size(); i++) {
                 ArrayList<CorefTarget> corefTargets = setsOfSpans.get(i);
                 Element setOfTargets = xmldoc.createElement(("span"));
+
+                String tokenString = "";
+                for (int j = 0; j < corefTargets.size(); j++) {
+                    CorefTarget corefTarget = corefTargets.get(j);
+                    tokenString += " "+corefTarget.getTokenString();
+
+                }
+                if (tokenString.trim().length()>0) {
+                    Comment comment = xmldoc.createComment(tokenString.trim());
+                    setOfTargets.appendChild(comment);
+                }
+
                 for (int j = 0; j < corefTargets.size(); j++) {
                     CorefTarget corefTarget = corefTargets.get(j);
                     setOfTargets.appendChild(corefTarget.toXML(xmldoc));

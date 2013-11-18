@@ -1,7 +1,11 @@
 package eu.kyotoproject.kaf;
 
+import eu.kyotoproject.util.AddTokensAsCommentsToSpans;
+import org.w3c.dom.Comment;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
+
+import java.util.ArrayList;
 
 /**
  * Created by IntelliJ IDEA.
@@ -33,6 +37,7 @@ public class KafDep {
     String from;
     String to;
     String rfunc;
+    String tokenString = "";
 
     public String toString() {
         String str = "<dep from=\""+from+"\" to=\""+to+"\" rfunc=\""+rfunc+"\"/>\n";
@@ -43,6 +48,15 @@ public class KafDep {
         from = "";
         to = "";
         rfunc = "";
+        tokenString = "";
+    }
+
+    public String getTokenString() {
+        return tokenString;
+    }
+
+    public void setTokenString(String tokenString) {
+        this.tokenString = tokenString;
     }
 
     public Element toXML(Document xmldoc)
@@ -51,7 +65,9 @@ public class KafDep {
  	  root.setAttribute("from", from);
   	  root.setAttribute("to", to);
   	  root.setAttribute("rfunc", rfunc);
-  	  return root;
+      Comment comment = xmldoc.createComment(tokenString.trim());
+      comment.appendChild(comment);
+      return root;
     }
     
     public Element toNafXML(Document xmldoc)
@@ -85,5 +101,17 @@ public class KafDep {
 
     public void setRfunc(String rfunc) {
         this.rfunc = rfunc;
+    }
+
+    public String getTokensString (KafSaxParser kafSaxParser) {
+        String comment = rfunc+"("+ AddTokensAsCommentsToSpans.getTokenString(kafSaxParser, from)+ ","+AddTokensAsCommentsToSpans.getTokenString(kafSaxParser, to)+")";
+        return comment;
+    }
+
+    public ArrayList<String> getTermIds (){
+        ArrayList<String> ids = new ArrayList<String>();
+        ids.add(from);
+        ids.add(to);
+        return ids;
     }
 }

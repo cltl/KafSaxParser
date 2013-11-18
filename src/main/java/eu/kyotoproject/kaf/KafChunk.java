@@ -1,5 +1,7 @@
 package eu.kyotoproject.kaf;
 
+import eu.kyotoproject.util.AddTokensAsCommentsToSpans;
+import org.w3c.dom.Comment;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
@@ -59,12 +61,14 @@ public class KafChunk {
     String head;
     String phrase;
     ArrayList<String> spans;
+    String tokenString;
 
     public KafChunk() {
         this.cid = "";
         this.head = "";
         this.phrase = "";
         this.spans = new ArrayList<String>();
+        this.tokenString = "";
     }
 
     public Element toXML(Document xmldoc)
@@ -75,7 +79,11 @@ public class KafChunk {
   	  root.setAttribute("phrase", phrase);
   	  
   	  Element span = xmldoc.createElement("span");
-  	  for (int i = 0; i < this.spans.size(); i++) 
+        if (tokenString.trim().length()>0) {
+            Comment comment = xmldoc.createComment(tokenString.trim());
+            span.appendChild(comment);
+        }
+  	  for (int i = 0; i < this.spans.size(); i++)
   	  {
   		  Element target = xmldoc.createElement("target");
   		  target.setAttribute("tid", spans.get(i));
@@ -93,7 +101,11 @@ public class KafChunk {
   	  root.setAttribute("phrase", phrase);
 
   	  Element span = xmldoc.createElement("span");
-  	  for (int i = 0; i < this.spans.size(); i++)
+      if (tokenString.trim().length()>0) {
+            Comment comment = xmldoc.createComment(tokenString.trim());
+            span.appendChild(comment);
+      }
+      for (int i = 0; i < this.spans.size(); i++)
   	  {
   		  Element target = xmldoc.createElement("target");
   		  target.setAttribute("id", spans.get(i));
@@ -101,6 +113,18 @@ public class KafChunk {
   	  }
   	  root.appendChild(span);
   	  return root;
+    }
+
+    public String getTokenString() {
+        return tokenString;
+    }
+
+    public void setTokenString(String tokenString) {
+        this.tokenString = tokenString;
+    }
+
+    public void setTokenString(KafSaxParser kafSaxParser) {
+        this.setTokenString(AddTokensAsCommentsToSpans.getTokenStringFromTermIds(kafSaxParser, this.getSpans()));
     }
 
     public String getCid() {
