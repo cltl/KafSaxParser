@@ -57,6 +57,7 @@ public class KafSaxParser extends DefaultHandler {
     public ArrayList<ISODate> kafDateArrayList;
     private ArrayList<KafReference> kafReferenceArrayList;
     public ArrayList<KafConstituencyTree> kafConstituencyTrees;
+    public ArrayList<KafFactuality> kafFactualityLayer;
     private KafReference kafReference;
     private boolean kafreference;
     private boolean coreference;
@@ -350,6 +351,7 @@ public class KafSaxParser extends DefaultHandler {
          kafConstituencyTrees = new ArrayList<KafConstituencyTree>();
          kafConstituencyTree = new KafConstituencyTree();
          kafConstituencyTerminal = new KafConstituencyTerminal();
+         kafFactualityLayer = new ArrayList<KafFactuality>();
          kafreference = false;
          coreference = false;
          entity = false;
@@ -653,6 +655,35 @@ public class KafSaxParser extends DefaultHandler {
        }
 
 
+       /**
+        * <factualitylayer>
+        *     <factvalue id="w4" prediction="CT+" confidence="0.5904876913248487"/>
+        * <factvalue id="w681" prediction="Uu" confidence="0.5324089742552198"/>
+        */
+
+       else if (qName.equalsIgnoreCase("factvalue")) {
+           KafFactuality kafFactuality = new KafFactuality();
+           for (int i = 0; i < attributes.getLength(); i++) {
+               String name = attributes.getQName(i);
+               if (name.equalsIgnoreCase("id")) {
+                   kafFactuality.setId(attributes.getValue(i).trim());
+               }
+               else if (name.equalsIgnoreCase("prediction")) {
+                   kafFactuality.setPrediction(attributes.getValue(i).trim());
+               }
+               else if (name.equalsIgnoreCase("confidence")) {
+                   try {
+                       kafFactuality.setConfidence(Double.parseDouble(attributes.getValue(i).trim()));
+                   } catch (NumberFormatException e) {
+                       e.printStackTrace();
+                   }
+               }
+               else  {
+                //   System.out.println("352 ********* FOUND UNKNOWN Attribute " + name + " *****************");
+               }
+           }
+           kafFactualityLayer.add(kafFactuality);
+       }
 
        else if (qName.equalsIgnoreCase("opinion")) {
            kafOpinion = new KafOpinion();
@@ -3102,7 +3133,18 @@ public class KafSaxParser extends DefaultHandler {
                     root.appendChild(events);
                 }
 
-				Element tunits = xmldoc.createElement("tunits");
+                if (kafFactualityLayer.size()>0) {
+                    Element factualities = xmldoc.createElement("factualitylayer");
+
+                    for (int i = 0; i < kafFactualityLayer.size(); i++) {
+                        KafFactuality kafFactuality = kafFactualityLayer.get(i);
+                        factualities.appendChild((kafFactuality.toNafXML(xmldoc)));
+                    }
+                    root.appendChild(factualities);
+                }
+
+
+                Element tunits = xmldoc.createElement("tunits");
 				for (int i = 0; i < this.kafDiscourseList.size(); i++) {
 					KafTextUnit kaf  = (KafTextUnit) kafDiscourseList.get(i);
 					tunits.appendChild(kaf.toXML(xmldoc));
@@ -3289,6 +3331,16 @@ public class KafSaxParser extends DefaultHandler {
                 root.appendChild(events);
             }
 
+            if (kafFactualityLayer.size()>0) {
+                Element factualities = xmldoc.createElement("factualitylayer");
+
+                for (int i = 0; i < kafFactualityLayer.size(); i++) {
+                    KafFactuality kafFactuality = kafFactualityLayer.get(i);
+                    factualities.appendChild((kafFactuality.toNafXML(xmldoc)));
+                }
+                root.appendChild(factualities);
+            }
+
 /*       @deprecated
             Element tunits = xmldoc.createElement("tunits");
             for (int i = 0; i < this.kafDiscourseList.size(); i++) {
@@ -3298,192 +3350,6 @@ public class KafSaxParser extends DefaultHandler {
             root.appendChild(tunits);
 
 */
-			// Serialisation through Tranform.
-			DOMSource domSource = new DOMSource(xmldoc);
-			TransformerFactory tf = TransformerFactory.newInstance();
-			//tf.setAttribute("indent-number", 4);
-			Transformer serializer = tf.newTransformer();
-			serializer.setOutputProperty(OutputKeys.INDENT,"yes");
-			serializer.setOutputProperty(OutputKeys.ENCODING,"UTF-8");
-			serializer.setOutputProperty(OutputKeys.STANDALONE, "yes");
-            //serializer.setParameter("format-pretty-print", Boolean.TRUE);
-            serializer.setOutputProperty(OutputKeys.INDENT, "yes");
-            serializer.setOutputProperty("{http://xml.apache.org/xslt}indent-amount", "2");
-
-            StreamResult streamResult = new StreamResult(new OutputStreamWriter(stream,"UTF-8"));
-			serializer.transform(domSource, streamResult);
-		}
-		catch(Exception e)
-		{
-			e.printStackTrace();
-		}
-    }
-
-    /**
-     * @TODO NEEDS TO BE FIXED AT ALL LAYERS
-     * @param stream
-     */
-    public void writeNafRdfToStream(OutputStream stream)
-    {
-    	try
-		{
-			DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
-			DocumentBuilder builder = factory.newDocumentBuilder();
-			DOMImplementation impl = builder.getDOMImplementation();
-/*            //&lt; &gt; &amp; &quot; &apos;
-            String docTypeString = "&lt!DOCTYPE rdf:RDF [\n" +
-                    "&lt;!ENTITY rdf &quot;http://www.w3.org/1999/02/22-rdf-syntax-ns#&quot;&gt;\n" +
-                    "&lt;!ENTITY rdfs &quot;http://www.w3.org/TR/WD-rdf-schema#&quot;&gt;\n" +
-                    "&lt;!ENTITY naf &quot;http://www.newsreader-project.eu/ns/2013/08/NAF/&quot;&gt;\n" +
-                    "&lt;!ENTITY wn30g &quot;http://example.org/wordnet3.0/&quot;&gt;\n"+
-                    "&lt;!ENTITY fn &quot;http://example.org/framenet/&quot;&gt;\n"+
-                    "&lt;!ENTITY vn &quot;http://example.org/verbnet/&quot;&gt;\n"+
-                    "&lt;!ENTITY pb &quot;http://example.org/propbank/&quot;&gt;\n"+
-                    "&lt;!ENTITY wn &quot;http://example.org/wordnet3.0/&quot;&gt;";
-
-            docTypeString += "&lt;!ENTITY wn30g &quot;"+kafMetaData.getFilename()+"&quot;&gt;";
-            docTypeString += "]&gt;\n";*/
-
-            String docTypeString = "<!DOCTYPE rdf:RDF [" +
-                    "<!ENTITY rdf 'http://www.w3.org/1999/02/22-rdf-syntax-ns#'>" +
-                    "<!ENTITY rdfs 'http://www.w3.org/TR/WD-rdf-schema#'>" +
-                    "<!ENTITY naf 'http://www.newsreader-project.eu/ns/2013/08/NAF/'>" +
-                    "<!ENTITY wn30g 'http://example.org/wordnet3.0/'>\n"+
-                    "<!ENTITY fn 'http://example.org/framenet/'>"+
-                    "<!ENTITY vn 'http://example.org/verbnet/'>"+
-                    "<!ENTITY pb 'http://example.org/propbank/'>"+
-                    "<!ENTITY wn 'http://example.org/wordnet3.0/'>";
-
-            docTypeString += "<!ENTITY wn30g '"+kafMetaData.getFilename()+"'>";
-            docTypeString += "]>";
-
-            /*
-
-            <!DOCTYPE rdf:RDF [
-    <!ENTITY rdf 'http://www.w3.org/1999/02/22-rdf-syntax-ns#'>
-    <!ENTITY rdfs 'http://www.w3.org/TR/WD-rdf-schema#'>
-    <!ENTITY docId 'http://casa400.com/docs/test.pdf/3_3012/2013-06-27_14:15:18_16:34:59_user@machine#'>
-    <!ENTITY naf 'http://www.newsreader-project.eu/ns/2013/08/NAF/'>
-    <!ENTITY wn30g 'http://example.org/wordnet3.0/'>
-]>
-            <rdf:RDF xmlns="&naf;" xmlns:rdf="&rdf;" xmlns:naf="&naf;" xmlns:rdfs="&rdfs;">
-  <NAF naf:version="v1">
-             */
-
-            DocumentType docType = builder.parse(docTypeString).getDoctype();
-
-            Document xmldoc = impl.createDocument("rdf", "RDF", docType);
-
-
-            xmldoc.setXmlStandalone(true);
-			Element root = xmldoc.getDocumentElement();
-			root.setAttribute("xmlns", "&naf;");
-			root.setAttribute("xmlns:rdf", "&rdf;");
-			root.setAttribute("xmlns:naf", "&naf;");
-			root.setAttribute("xmlns:rdfs", "&rdfs;");
-			root.appendChild(kafMetaData.toHeaderXML(xmldoc));
-
-            Element naf = xmldoc.createElement("NAF");
-            naf.setAttribute("naf:version", "v1");
-
-            Element text = xmldoc.createElement("text");
-            text.setAttribute("xml:lang", kafMetaData.getLanguage());
-
-            for (int i = 0; i < this.kafWordFormList.size(); i++) {
-                KafWordForm kaf  =  kafWordFormList.get(i);
-                text.appendChild(kaf.toXML(xmldoc));
-            }
-            naf.appendChild(text);
-
-            Element terms = xmldoc.createElement("terms");
-            for (int i = 0; i < this.kafTermList.size(); i++) {
-                KafTerm kaf  =  kafTermList.get(i);
-                terms.appendChild(kaf.toXML(xmldoc));
-            }
-            naf.appendChild(terms);
-
-            Element deps = xmldoc.createElement("deps");
-            for (int i = 0; i < this.kafDepList.size(); i++) {
-                KafDep kaf  = kafDepList.get(i);
-                /// the next checks are needed because some parser create reference to nonexisting elements
-                if ((this.getTerm(kaf.from)!=null) && (this.getTerm(kaf.to)!=null)) {
-                    deps.appendChild(kaf.toXML(xmldoc));
-                }
-            }
-            naf.appendChild(deps);
-
-            Element chunks = xmldoc.createElement("chunks");
-            for (int i = 0; i < this.kafChunkList.size(); i++) {
-                KafChunk kaf  =  kafChunkList.get(i);
-                /// the next checks are needed because some parser create reference to nonexisting elements
-                boolean nullSpan = false;
-                for (int j = 0; j < kaf.getSpans().size(); j++) {
-                    String span = kaf.getSpans().get(j);
-                    if (this.getTerm(span)==null) {
-                        nullSpan = true;
-                        break;
-                    }
-                }
-                if (this.getTerm(kaf.getHead())!=null) {
-                    if (!nullSpan) chunks.appendChild(kaf.toXML(xmldoc));
-                }
-            }
-            naf.appendChild(chunks);
-
-            if (kafOpinionArrayList.size()>0) {
-                Element opinions = xmldoc.createElement("opinions");
-                for (int i = 0; i < this.kafOpinionArrayList.size(); i++){
-                    KafOpinion kaf  =  kafOpinionArrayList.get(i);
-                    opinions.appendChild(kaf.toXML(xmldoc));
-                }
-                naf.appendChild(opinions);
-            }
-
-            if (kafEntityArrayList.size()>0) {
-                Element entities = xmldoc.createElement("entities");
-                for (int i = 0; i < this.kafEntityArrayList.size(); i++) {
-                    KafEntity kaf  = kafEntityArrayList.get(i);
-                    entities.appendChild(kaf.toXML(xmldoc));
-                }
-                naf.appendChild(entities);
-            }
-
-            if (kafPropertyArrayList.size()>0) {
-                Element properties = xmldoc.createElement("properties");
-                for (int i = 0; i < this.kafPropertyArrayList.size(); i++) {
-                    KafProperty kaf  = kafPropertyArrayList.get(i);
-                    properties.appendChild(kaf.toXML(xmldoc));
-                }
-                naf.appendChild(properties);
-            }
-
-            if (kafCorefenceArrayList.size()>0) {
-                Element coreferences = xmldoc.createElement("coreferences");
-                for (int i = 0; i < this.kafCorefenceArrayList.size(); i++) {
-                    KafCoreferenceSet kaf  = kafCorefenceArrayList.get(i);
-                    coreferences.appendChild(kaf.toXML(xmldoc));
-                }
-                naf.appendChild(coreferences);
-            }
-
-
-            if (kafEventArrayList.size()>0) {
-                Element events  = xmldoc.createElement("srls");
-                for (int i = 0; i < kafEventArrayList.size(); i++) {
-                    KafEvent event = kafEventArrayList.get(i);
-                    event.setTokenString(AddTokensAsCommentsToSpans.getTokenStringFromTermIds(this, event.getSpanIds()));
-                    for (int j = 0; j < event.getParticipants().size(); j++) {
-                        KafParticipant kafParticipant = event.getParticipants().get(j);
-                        kafParticipant.setTokenString(AddTokensAsCommentsToSpans.getTokenStringFromTermIds(this, kafParticipant.getSpanIds()));
-                    }
-                    events.appendChild(event.toNafRdfXML(xmldoc));
-                }
-                naf.appendChild(events);
-            }
-
-            root.appendChild(naf);
-
-
 			// Serialisation through Tranform.
 			DOMSource domSource = new DOMSource(xmldoc);
 			TransformerFactory tf = TransformerFactory.newInstance();
@@ -3651,6 +3517,16 @@ public class KafSaxParser extends DefaultHandler {
                     events.appendChild(event.toXML(xmldoc));
                 }
                 root.appendChild(events);
+            }
+
+            if (kafFactualityLayer.size()>0) {
+                Element factualities = xmldoc.createElement("factualitylayer");
+
+                for (int i = 0; i < kafFactualityLayer.size(); i++) {
+                    KafFactuality kafFactuality = kafFactualityLayer.get(i);
+                    factualities.appendChild((kafFactuality.toNafXML(xmldoc)));
+                }
+                root.appendChild(factualities);
             }
 
             Element tunits = xmldoc.createElement("tunits");
