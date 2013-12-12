@@ -58,6 +58,8 @@ public class KafSaxParser extends DefaultHandler {
     private ArrayList<KafReference> kafReferenceArrayList;
     public ArrayList<KafConstituencyTree> kafConstituencyTrees;
     public ArrayList<KafFactuality> kafFactualityLayer;
+    public ArrayList<KafTimex> kafTimexLayer;
+    public boolean AUGMENTID;
     private KafReference kafReference;
     private boolean kafreference;
     private boolean coreference;
@@ -115,6 +117,11 @@ public class KafSaxParser extends DefaultHandler {
      * HashMap with IDs of the KafTerm pointing to the ID of the KafChunk in which they occur as part of the span
      */
     public HashMap<String,ArrayList<String>> TermToChunk;
+
+    /**
+     * HashMap with IDs of the KafToken pointing to the ID of the Timex in which they occur as part of the span
+     */
+    public HashMap<String,ArrayList<String>> TokenToTimex;
 
     /**
      * HashMap with IDs of the KafTerm pointing to the ID of the KafDep in which they occur as part of the span
@@ -199,6 +206,7 @@ public class KafSaxParser extends DefaultHandler {
     private KafParticipant kafParticipant;
     private KafEventISI kafEventISI;
     private KafTextUnit kaftextUnit;
+    private KafTimex kafTimex;
     private ArrayList<KafSense> senseTags;
     private ArrayList<KafSense> predicateSenseTags;
     private ArrayList<KafSense> roleSenseTags;
@@ -352,6 +360,8 @@ public class KafSaxParser extends DefaultHandler {
          kafConstituencyTree = new KafConstituencyTree();
          kafConstituencyTerminal = new KafConstituencyTerminal();
          kafFactualityLayer = new ArrayList<KafFactuality>();
+         kafTimexLayer = new ArrayList<KafTimex>();
+         AUGMENTID = false;
          kafreference = false;
          coreference = false;
          entity = false;
@@ -384,6 +394,7 @@ public class KafSaxParser extends DefaultHandler {
          WordFormToTerm = new HashMap<String,String>();
          SentenceToWord = new HashMap<String,ArrayList<String>>();
          SentenceToTerm = new HashMap<String,ArrayList<String>>();
+         TokenToTimex = new HashMap<String,ArrayList<String>>();
          TermToChunk = new HashMap<String,ArrayList<String>>();
          TermToDeps = new HashMap<String,ArrayList<KafDep>>();
          TermToWord = new HashMap<String,ArrayList<String>>();
@@ -534,6 +545,38 @@ public class KafSaxParser extends DefaultHandler {
            	kafMetaData.addLayer(layer, attributes.getValue("name"), attributes.getValue("version"), attributes.getValue("timestamp"));
         	//kafMetaData.addLP(attributes.getValue("name"), attributes.getValue("version"), attributes.getValue("timestamp"));
         }
+
+       else if (qName.equalsIgnoreCase("timex3")) {
+           /**
+            * <timeExpressions>
+            <timex3 id="tmx1" type="DURATION">
+            <span>
+            <target id="w9"/>
+            <target id="w10"/>
+            </span>
+            </timex3>
+            <timex3 id="tmx2" type="DURATION">
+            <span>
+            <target id="w46"/>
+            <target id="w47"/>
+            </span>
+            </timex3>
+            </timeExpressions>
+            */
+            kafTimex = new KafTimex();
+            for (int i = 0; i < attributes.getLength(); i++) {
+               String name = attributes.getQName(i);
+               if (name.equalsIgnoreCase("id")) {
+                   kafTimex.setId(attributes.getValue(i).trim());
+               }
+               else if (name.equalsIgnoreCase("type")) {
+                   kafTimex.setType(attributes.getValue(i).trim());
+               }
+               else {
+                   //   System.out.println("314 ********* FOUND UNKNOWN Attribute " + name + " *****************");
+               }
+            }
+       }
        else if (qName.equalsIgnoreCase("chunk")) {
 /*
     <chunk cid="cid53895.3" head="tid53895.4" phrase="S"><span>
@@ -1482,6 +1525,21 @@ public class KafSaxParser extends DefaultHandler {
                }
            }
        }
+       else if (qName.equalsIgnoreCase("timex3")) {
+           spans = new ArrayList<String>();
+           for (int i = 0; i < attributes.getLength(); i++) {
+               String name = attributes.getQName(i);
+               if (name.equalsIgnoreCase("coid")) {
+                   kafCoreferenceSet.setCoid(attributes.getValue(i).trim());
+               }
+               else if (name.equalsIgnoreCase("type")) {
+                   kafCoreferenceSet.setType(attributes.getValue(i).trim());
+               }
+               else if (name.equalsIgnoreCase("id")) {
+                   kafCoreferenceSet.setCoid(attributes.getValue(i).trim());
+               }
+           }
+       }
        else {
           ///
        }
@@ -1513,6 +1571,24 @@ public class KafSaxParser extends DefaultHandler {
                 }
                 spans = new ArrayList<String>();
                 kafChunkList.add(kafChunk);
+            }
+            else if (qName.equalsIgnoreCase("timex3")) {
+                kafTimex.setSpans(spans);
+                for (int i = 0; i < spans.size(); i++) {
+                     String span = (String) spans.get(i);
+                     if (TokenToTimex.containsKey(span)) {
+                         ArrayList<String> chunks = TokenToTimex.get(span);
+                         chunks.add(kafTimex.getId());
+                         TokenToTimex.put(span, chunks);
+                     }
+                     else {
+                         ArrayList<String> chunks = new ArrayList<String>();
+                         chunks.add(kafTimex.getId());
+                         TokenToTimex.put(span, chunks);
+                     }
+                }
+                spans = new ArrayList<String>();
+                kafTimexLayer.add(kafTimex);
             }
             else if (qName.equalsIgnoreCase("raw")) {
                 rawText = value.trim();
@@ -3133,6 +3209,18 @@ public class KafSaxParser extends DefaultHandler {
                     root.appendChild(events);
                 }
 
+                if (kafTimexLayer.size()>0) {
+                    Element timexLayer = xmldoc.createElement("timeExpressions");
+
+                    for (int i = 0; i < kafTimexLayer.size(); i++) {
+                        KafTimex timex = kafTimexLayer.get(i);
+                        timex.setTokenString(AddTokensAsCommentsToSpans.getTokenString(this, timex.getSpans()));
+                        timexLayer.appendChild(timex.toNafXML(xmldoc));
+                    }
+
+                    root.appendChild(timexLayer);
+                }
+
                 if (kafFactualityLayer.size()>0) {
                     Element factualities = xmldoc.createElement("factualitylayer");
 
@@ -3331,6 +3419,19 @@ public class KafSaxParser extends DefaultHandler {
                 root.appendChild(events);
             }
 
+
+            if (kafTimexLayer.size()>0) {
+                Element timexLayer = xmldoc.createElement("timeExpressions");
+
+                for (int i = 0; i < kafTimexLayer.size(); i++) {
+                    KafTimex timex = kafTimexLayer.get(i);
+                    timex.setTokenString(AddTokensAsCommentsToSpans.getTokenString(this, timex.getSpans()));
+                    timexLayer.appendChild(timex.toNafXML(xmldoc));
+                }
+
+                root.appendChild(timexLayer);
+            }
+
             if (kafFactualityLayer.size()>0) {
                 Element factualities = xmldoc.createElement("factualitylayer");
 
@@ -3519,6 +3620,19 @@ public class KafSaxParser extends DefaultHandler {
                 root.appendChild(events);
             }
 
+
+            if (kafTimexLayer.size()>0) {
+                Element timexLayer = xmldoc.createElement("timeExpressions");
+
+                for (int i = 0; i < kafTimexLayer.size(); i++) {
+                    KafTimex timex = kafTimexLayer.get(i);
+                    timex.setTokenString(AddTokensAsCommentsToSpans.getTokenString(this, timex.getSpans()));
+                    timexLayer.appendChild(timex.toNafXML(xmldoc));
+                }
+
+                root.appendChild(timexLayer);
+            }
+
             if (kafFactualityLayer.size()>0) {
                 Element factualities = xmldoc.createElement("factualitylayer");
 
@@ -3661,7 +3775,8 @@ public class KafSaxParser extends DefaultHandler {
     }
 
     static public void main (String[] args) {
-        String file = "/Code/vu/newsreader/pos.xml";
+        String file = "/Tools/TextPro/TextPro2.0-forNewsReader/test/gold/Time.NAF.xml";
+       // String file = "/Code/vu/newsreader/pos.xml";
        // String file = "test/car.naf";
         KafSaxParser parser = new KafSaxParser();
         parser.parseFile(file);
