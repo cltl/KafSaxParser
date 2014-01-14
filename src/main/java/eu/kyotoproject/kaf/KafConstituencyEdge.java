@@ -14,15 +14,21 @@ public class KafConstituencyEdge {
 
     private String from;
     private String to;
+    private String id;
+    private String head;
 
     public KafConstituencyEdge() {
         this.from = "";
         this.to = "";
+        this.id = "";
+        this.head = "";
     }
 
     public KafConstituencyEdge(String from, String to) {
         this.from = from;
         this.to = to;
+        this.id = "";
+        this.head = "";
     }
 
     public String getFrom() {
@@ -41,6 +47,22 @@ public class KafConstituencyEdge {
         this.to = to;
     }
 
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public String getHead() {
+        return head;
+    }
+
+    public void setHead(String head) {
+        this.head = head;
+    }
+
     /// toNaf
 
     public Element toNafXML(Document xmldoc)
@@ -51,7 +73,10 @@ public class KafConstituencyEdge {
             element.setAttribute("from", this.getFrom());
         if (this.to != null)
             element.setAttribute("to", this.getTo());
-
+        if (this.id != null)
+            element.setAttribute("id", this.getId());
+        if (!this.head.isEmpty())
+            element.setAttribute("head", this.getHead());
         return element;
     }
 

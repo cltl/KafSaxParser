@@ -1,5 +1,6 @@
 package eu.kyotoproject.kaf;
 
+import eu.kyotoproject.util.AddTokensAsCommentsToSpans;
 import org.w3c.dom.Comment;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -41,12 +42,25 @@ public class KafCoreferenceSet {
     private String coid;
     private String type;
     private ArrayList<ArrayList<CorefTarget>> setsOfSpans;
+    private ArrayList<String> tokenStringArray;
 
 
     public KafCoreferenceSet() {
         this.coid = "";
         this.type = "";
         this.setsOfSpans = new ArrayList<ArrayList<CorefTarget>>();
+        this.tokenStringArray = new ArrayList<String>();
+    }
+    public ArrayList<String> getTokenStringArray() {
+        return tokenStringArray;
+    }
+
+    public void setTokenStringArray(ArrayList<String> tokenStringArray) {
+        this.tokenStringArray = tokenStringArray;
+    }
+
+    public void addTokenStringArray(String tokenString) {
+        this.tokenStringArray.add(tokenString);
     }
 
     public String getType() {
@@ -75,6 +89,15 @@ public class KafCoreferenceSet {
 
     public void addSetsOfSpans(ArrayList<CorefTarget> setOfSpans) {
         this.setsOfSpans.add(setOfSpans);
+    }
+
+    public void setTokenStrings (KafSaxParser parser) {
+        for (int i = 0; i < setsOfSpans.size(); i++) {
+            ArrayList<CorefTarget> corefTargets = setsOfSpans.get(i);
+            ArrayList<String> corefTokens = AddTokensAsCommentsToSpans.convertCorefTargetsToTokenSpan(parser, corefTargets);
+            String tokenString = AddTokensAsCommentsToSpans.getTokenString(parser, corefTokens);
+            tokenStringArray.add(tokenString);
+        }
     }
 
     @Override
@@ -111,24 +134,18 @@ public class KafCoreferenceSet {
         Element root = xmldoc.createElement("coref");
         if (coid != null)
             root.setAttribute("id", coid);
-        if (type != null)
+        if ((type != null) && (!type.isEmpty())) {
             root.setAttribute("type", type);
+        }
+
         if (setsOfSpans.size()>0) {
             for (int i = 0; i < setsOfSpans.size(); i++) {
                 ArrayList<CorefTarget> corefTargets = setsOfSpans.get(i);
                 Element setOfTargets = xmldoc.createElement(("span"));
-
-                String tokenString = "";
-                for (int j = 0; j < corefTargets.size(); j++) {
-                    CorefTarget corefTarget = corefTargets.get(j);
-                    tokenString += " "+corefTarget.getTokenString();
-
-                }
-                if (tokenString.trim().length()>0) {
-                    Comment comment = xmldoc.createComment(tokenString.trim());
+                if (tokenStringArray.size()>0) {
+                    Comment comment = xmldoc.createComment(tokenStringArray.get(i));
                     setOfTargets.appendChild(comment);
                 }
-
                 for (int j = 0; j < corefTargets.size(); j++) {
                     CorefTarget corefTarget = corefTargets.get(j);
                     setOfTargets.appendChild(corefTarget.toXML(xmldoc));

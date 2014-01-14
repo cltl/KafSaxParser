@@ -1,5 +1,7 @@
 package eu.kyotoproject.kaf;
 
+import eu.kyotoproject.util.AddTokensAsCommentsToSpans;
+import org.w3c.dom.Comment;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
@@ -14,12 +16,28 @@ import java.util.ArrayList;
  */
 public class KafConstituencyTerminal {
 
+    private String tokenString;
     private String id;
     private ArrayList<String> spans;
 
     public KafConstituencyTerminal() {
+        this.tokenString = "";
         this.id = "";
         this.spans = new ArrayList<String>();
+    }
+
+    public String getTokenString() {
+        return tokenString;
+    }
+
+    public void setTokenString(String tokenString) {
+        this.tokenString = tokenString;
+    }
+
+    public void setTokenString (KafSaxParser parser) {
+        for (int i = 0; i < spans.size(); i++) {
+            tokenString = AddTokensAsCommentsToSpans.getTokenStringFromTermIds(parser, spans);
+        }
     }
 
     public String getId() {
@@ -50,7 +68,10 @@ public class KafConstituencyTerminal {
         Element element = xmldoc.createElement("t");
         if (this.id != null)
             element.setAttribute("id", this.getId());
-
+        if (!this.tokenString.isEmpty()) {
+            Comment comment = xmldoc.createComment(tokenString);
+            element.appendChild(comment);
+        }
         Element spanElement = xmldoc.createElement("span");
         for (int i = 0; i < this.getSpans().size(); i++)
         {

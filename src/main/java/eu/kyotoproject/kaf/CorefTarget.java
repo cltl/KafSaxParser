@@ -62,4 +62,5 @@ public class CorefTarget {
                 if (!head.isEmpty()) root.setAttribute("head", head);
             return root;
         }
+
 }

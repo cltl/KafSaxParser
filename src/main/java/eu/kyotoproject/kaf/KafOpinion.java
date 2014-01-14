@@ -389,7 +389,9 @@ public class KafOpinion {
         }
 
         Element opinion_holder = xmldoc.createElement("opinion_holder");
-        opinion_holder.setAttribute("type", opinionHolderType);
+        if (!opinionHolderType.isEmpty()) {
+            opinion_holder.setAttribute("type", opinionHolderType);
+        }
         if (spansOpinionHolder.size()>0) {
             span = xmldoc.createElement("span");
             if (tokenStringOpinionHolder.length()>0) {

@@ -270,7 +270,8 @@ public class KafSaxParser extends DefaultHandler {
     {
     	try
     	{
-    		FileReader reader = new FileReader(file);
+            System.out.println("file.getAbsolutePath() = " + file.getAbsolutePath());
+            FileReader reader = new FileReader(file);
     		InputSource inp = new InputSource(reader);
     		boolean result = parseFile(inp, encoding);
     		reader.close();
@@ -689,6 +690,12 @@ public class KafSaxParser extends DefaultHandler {
                }
                else if (name.equalsIgnoreCase("to")) {
                    kafConstituencyEdge.setTo(attributes.getValue(i).trim());
+               }
+               else if (name.equalsIgnoreCase("id")) {
+                   kafConstituencyEdge.setId(attributes.getValue(i).trim());
+               }
+               else if (name.equalsIgnoreCase("head")) {
+                   kafConstituencyEdge.setHead(attributes.getValue(i).trim());
                }
                else {
                 //   System.out.println("352 ********* FOUND UNKNOWN Attribute " + name + " *****************");
@@ -3371,6 +3378,7 @@ public class KafSaxParser extends DefaultHandler {
                 Element coreferences = xmldoc.createElement("coreferences");
                 for (int i = 0; i < this.kafCorefenceArrayList.size(); i++) {
                     KafCoreferenceSet kaf  = kafCorefenceArrayList.get(i);
+                    kaf.setTokenStrings(this);
                     coreferences.appendChild(kaf.toNafXML(xmldoc));
                 }
                 root.appendChild(coreferences);
@@ -3380,6 +3388,7 @@ public class KafSaxParser extends DefaultHandler {
                 Element constituency = xmldoc.createElement("constituency");
                 for (int i = 0; i < kafConstituencyTrees.size(); i++) {
                     KafConstituencyTree constituencyTree = kafConstituencyTrees.get(i);
+                    constituencyTree.addComments(this);
                     constituency.appendChild(constituencyTree.toNafXML(xmldoc));
                 }
                 root.appendChild(constituency);
@@ -3775,7 +3784,8 @@ public class KafSaxParser extends DefaultHandler {
     }
 
     static public void main (String[] args) {
-        String file = "/Tools/TextPro/TextPro2.0-forNewsReader/test/gold/Time.NAF.xml";
+        String file = "/Code/vu/kyotoproject/KafSaxParser/test/eventcoref_in.xml";
+        //String file = "/Tools/TextPro/TextPro2.0-forNewsReader/test/gold/Time.NAF.xml";
        // String file = "/Code/vu/newsreader/pos.xml";
        // String file = "test/car.naf";
         KafSaxParser parser = new KafSaxParser();

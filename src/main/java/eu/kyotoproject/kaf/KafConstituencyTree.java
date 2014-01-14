@@ -61,7 +61,12 @@ public class KafConstituencyTree {
     }
 
     //toNaf
-
+    public void addComments (KafSaxParser kafSaxParser) {
+        for (int i = 0; i < terminals.size(); i++) {
+            KafConstituencyTerminal kafConstituencyTerminal = terminals.get(i);
+            kafConstituencyTerminal.setTokenString(kafSaxParser);
+        }
+    }
 
     public Element toNafXML(Document xmldoc)
     {
