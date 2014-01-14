@@ -132,7 +132,7 @@ public class KafCoreferenceSet {
     public Element toNafXML(Document xmldoc)
     {
         Element root = xmldoc.createElement("coref");
-        if (coid != null)
+        if (!coid.isEmpty())
             root.setAttribute("id", coid);
         if ((type != null) && (!type.isEmpty())) {
             root.setAttribute("type", type);

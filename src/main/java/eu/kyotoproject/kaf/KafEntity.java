@@ -189,9 +189,9 @@ public class KafEntity {
     public Element toXML(Document xmldoc)
     {
         Element root = xmldoc.createElement("entity");
-        if (type != null)
+        if (!type.isEmpty())
             root.setAttribute("type", type);
-        if (id != null)
+        if (!id.isEmpty())
             root.setAttribute("eid", id);
         if ((subtype != null) && (!subtype.isEmpty()))
             root.setAttribute("subtype", subtype);

@@ -281,10 +281,10 @@ sentiment_semanrtic_type="behaviour/trait" sentiment_product_feature="" />
     public Element toNafXML(Document xmldoc)
     {
     	Element root = xmldoc.createElement("term");
-    	root.setAttribute("id", tid);
-    	root.setAttribute("lemma", XmlCharacterConversion.replaceXmlChar(lemma));
-    	root.setAttribute("pos", pos);
-    	root.setAttribute("type", type);
+    	if (!tid.isEmpty()) root.setAttribute("id", tid);
+    	if (!lemma.isEmpty()) root.setAttribute("lemma", XmlCharacterConversion.replaceXmlChar(lemma));
+    	if (!pos.isEmpty()) root.setAttribute("pos", pos);
+    	if (!type.isEmpty()) root.setAttribute("type", type);
 
         if (head.length()>0) {
             root.setAttribute("head", head);

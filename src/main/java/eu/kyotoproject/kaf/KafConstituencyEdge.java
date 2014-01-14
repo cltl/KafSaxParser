@@ -69,11 +69,11 @@ public class KafConstituencyEdge {
     {
 
         Element element = xmldoc.createElement("edge");
-        if (this.from != null)
+        if (!this.from.isEmpty())
             element.setAttribute("from", this.getFrom());
-        if (this.to != null)
+        if (!this.to.isEmpty())
             element.setAttribute("to", this.getTo());
-        if (this.id != null)
+        if (!this.id.isEmpty())
             element.setAttribute("id", this.getId());
         if (!this.head.isEmpty())
             element.setAttribute("head", this.getHead());

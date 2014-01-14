@@ -113,9 +113,9 @@ public class KafReference {
     public Element toXML(Document xmldoc)
     {
   	  Element root = xmldoc.createElement("kafReference");
-  	  if (docId != null)
+  	  if (!docId.isEmpty())
   		  root.setAttribute("docId", docId);
-  	  if (pageId != null)
+  	  if (!pageId.isEmpty())
   		  root.setAttribute("pageId", pageId);
   	  
   	  Element span = xmldoc.createElement("span");

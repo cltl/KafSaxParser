@@ -136,7 +136,7 @@ public class KafParticipant extends KafEventComponent{
     {
         Element root = xmldoc.createElement("role");
 
-        if (this.getId() != null)
+        if (!getId().isEmpty())
             root.setAttribute("id", this.getId());
 
 
@@ -146,7 +146,7 @@ public class KafParticipant extends KafEventComponent{
         }
 */
 
-        if (this.getRole() != null)
+        if (!this.getRole().isEmpty())
             root.setAttribute("semRole", this.getRole());
 
         /*if (!this.getSynsetId().isEmpty()) {
@@ -191,64 +191,5 @@ public class KafParticipant extends KafEventComponent{
         return root;
     }
 
-    public Element toNafRdfXML(Document xmldoc)
-    {
-        Element root = xmldoc.createElement("role");
 
-        Element role = xmldoc.createElement("Role");
-        if (this.getId() != null)
-            role.setAttribute("rdf:about", this.getId());
-
-        if (this.getRole() != null)
-            role.setAttribute("naf:semRole", this.getRole());
-
-        if (this.getTokenString().length()>0) {
-            Comment comment = xmldoc.createComment(this.getTokenString());
-            role.appendChild(comment);
-        }
-
-
-        if (!this.getSynsetId().isEmpty()) {
-            Element synsetUri = xmldoc.createElement("naf:uri");
-            synsetUri.setAttribute("rdf:resource", this.getSynsetId());
-            synsetUri.setAttribute("confidence", new Double(this.getSynsetConfidence()).toString());
-            role.appendChild(synsetUri);
-        }
-
-        if (this.getExternalReferences().size()>0) {
-            for (int i = 0; i < this.getExternalReferences().size(); i++) {
-                Element conceptUri = xmldoc.createElement("naf:uri");
-                KafSense kafSense = this.getExternalReferences().get(i);
-                conceptUri.setAttribute("rdf:resource", kafSense.getResource()+"#"+kafSense.getSensecode());
-                role.appendChild(conceptUri);
-            }
-        }
-
-        if (!this.getElementName().isEmpty()) {
-            Element conceptUri = xmldoc.createElement("naf:uri");
-            conceptUri.setAttribute("rdf:resource", this.getElementName());
-            role.appendChild(conceptUri);
-        }
-
-        if (this.getSpans().size()>0) {
-            Element span = xmldoc.createElement("span");
-            for (int i = 0; i < this.getSpans().size(); i++)
-            {
-                CorefTarget corefTarget = this.getSpans().get(i);
-                span.appendChild(corefTarget.toXML(xmldoc));
-            }
-            root.appendChild(span);
-        }
-
- /*       for (int i = 0; i < this.getSpans().size(); i++)
-        {
-            Element target = xmldoc.createElement("target");
-            target.setAttribute("rdf:resource", this.getSpans().get(i));
-            role.appendChild(target);
-        }*/
-
-        root.appendChild(role);
-
-        return root;
-    }
 }

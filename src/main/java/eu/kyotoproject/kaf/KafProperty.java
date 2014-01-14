@@ -100,9 +100,9 @@ public class KafProperty {
     public Element toXML(Document xmldoc)
     {
         Element root = xmldoc.createElement("property");
-        if (type != null)
+        if (!type.isEmpty())
             root.setAttribute("type", type);
-        if (id != null)
+        if (!id.isEmpty())
             root.setAttribute("pid", id);
 /*
         if (spans.size()>0) {
@@ -142,9 +142,9 @@ public class KafProperty {
     public Element toNafXML(Document xmldoc)
     {
         Element root = xmldoc.createElement("property");
-        if (type != null)
+        if (!type.isEmpty())
             root.setAttribute("type", type);
-        if (id != null)
+        if (!id.isEmpty())
             root.setAttribute("id", id);
 /*
         if (spans.size()>0) {

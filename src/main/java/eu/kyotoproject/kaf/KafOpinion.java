@@ -380,7 +380,7 @@ public class KafOpinion {
     {   Element span = null;
         Element root = xmldoc.createElement("opinion" +
                 "");
-        root.setAttribute("id", opinionId);
+        if (!opinionId.isEmpty()) root.setAttribute("id", opinionId);
         if (overlap_ents.length()>0) {
             root.setAttribute("overlap_ents", overlap_ents);
         }

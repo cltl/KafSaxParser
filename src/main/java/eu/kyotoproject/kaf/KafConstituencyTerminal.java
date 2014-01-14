@@ -66,7 +66,7 @@ public class KafConstituencyTerminal {
     {
 
         Element element = xmldoc.createElement("t");
-        if (this.id != null)
+        if (!this.id.isEmpty())
             element.setAttribute("id", this.getId());
         if (!this.tokenString.isEmpty()) {
             Comment comment = xmldoc.createComment(tokenString);

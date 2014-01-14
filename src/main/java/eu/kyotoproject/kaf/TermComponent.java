@@ -128,9 +128,9 @@ public class TermComponent {
     public Element toXML(Document xmldoc)
     {
   	  Element root = xmldoc.createElement("component");
- 	  root.setAttribute("id", id);
-  	  root.setAttribute("lemma", lemma);
-  	  root.setAttribute("pos", pos);
+ 	  if (!id.isEmpty()) root.setAttribute("id", id);
+  	  if (!lemma.isEmpty()) root.setAttribute("lemma", lemma);
+  	  if (!pos.isEmpty()) root.setAttribute("pos", pos);
       if (kafTermSentiment.hasValue()) {
             root.appendChild(kafTermSentiment.toXML(xmldoc));
       }

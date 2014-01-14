@@ -39,7 +39,7 @@ public class KafEvent extends KafEventComponent{
     public Element toXML(Document xmldoc)
     {
         Element root = xmldoc.createElement(this.getComponentType());
-        if (this.getId() != null)
+        if (!this.getId().isEmpty())
             root.setAttribute("id", this.getId());
 
         if (!this.getSynsetId().isEmpty()) {
@@ -116,7 +116,7 @@ public class KafEvent extends KafEventComponent{
     {
 
         Element predicate = xmldoc.createElement("predicate");
-        if (this.getId() != null)
+        if (!this.getId().isEmpty())
             predicate.setAttribute("id", this.getId());
 /*
         if (!this.getSynsetId().isEmpty()) {
@@ -177,62 +177,6 @@ public class KafEvent extends KafEventComponent{
         return predicate;
     }
 
-    public Element toNafRdfXML(Document xmldoc)
-    {
-        Element root = xmldoc.createElement("srl");
-
-        Element predicate = xmldoc.createElement("Predicate");
-        if (this.getId() != null)
-            predicate.setAttribute("rdf:about", this.getId());
-
-        if (this.getTokenString().length()>0) {
-            Comment comment = xmldoc.createComment(this.getTokenString());
-            predicate.appendChild(comment);
-        }
-
-        if (!this.getSynsetId().isEmpty()) {
-            Element synsetUri = xmldoc.createElement("naf:uri");
-            synsetUri.setAttribute("rdf:resource", this.getSynsetId());
-            synsetUri.setAttribute("naf:confidence", new Double(this.getSynsetConfidence()).toString());
-            predicate.appendChild(synsetUri);
-        }
-
-        if (this.getExternalReferences().size()>0) {
-            for (int i = 0; i < this.getExternalReferences().size(); i++) {
-                Element conceptUri = xmldoc.createElement("naf:uri");
-                KafSense kafSense = this.getExternalReferences().get(i);
-                conceptUri.setAttribute("rdf:resource", kafSense.getResource()+"#"+kafSense.getSensecode());
-                predicate.appendChild(conceptUri);
-            }
-        }
-
-        if (this.getSpans().size()>0) {
-            Element span = xmldoc.createElement("span");
-            for (int i = 0; i < this.getSpans().size(); i++)
-            {
-                CorefTarget corefTarget = this.getSpans().get(i);
-                span.appendChild(corefTarget.toXML(xmldoc));
-            }
-            root.appendChild(span);
-        }
-/*
-        for (int i = 0; i < this.getSpans().size(); i++)
-        {
-            Element target = xmldoc.createElement("target");
-            target.setAttribute("rdf:resource", this.getSpans().get(i));
-            predicate.appendChild(target);
-        }*/
-
-        if (participants.size()>0) {
-            for (int i = 0; i < participants.size(); i++) {
-                KafParticipant kafParticipant = participants.get(i);
-                Element participantElement = kafParticipant.toNafRdfXML(xmldoc);
-                predicate.appendChild(participantElement);
-            }
-        }
-        root.appendChild(predicate);
-        return root;
-    }
 
 
     /// NAF representation

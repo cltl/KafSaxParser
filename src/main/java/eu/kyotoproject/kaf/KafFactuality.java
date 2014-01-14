@@ -51,9 +51,9 @@ public class KafFactuality {
     public Element toNafXML(Document xmldoc)
     {
         Element root = xmldoc.createElement("factvalue");
-        if (id != null)
+        if (!id.isEmpty())
             root.setAttribute("id", id);
-        if (prediction != null)
+        if (!prediction.isEmpty())
             root.setAttribute("prediction", prediction);
         if (confidence>0) {
             root.setAttribute("confidence", confidence.toString());

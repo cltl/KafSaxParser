@@ -97,8 +97,8 @@ public class KafChunk {
     {
   	  Element root = xmldoc.createElement("chunk");
  	  root.setAttribute("id", cid);
-  	  root.setAttribute("head", head);
-  	  root.setAttribute("phrase", phrase);
+  	  if (!head.isEmpty()) root.setAttribute("head", head);
+  	  if (!phrase.isEmpty()) root.setAttribute("phrase", phrase);
 
   	  Element span = xmldoc.createElement("span");
       if (tokenString.trim().length()>0) {
