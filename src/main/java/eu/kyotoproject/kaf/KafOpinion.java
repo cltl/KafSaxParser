@@ -387,43 +387,46 @@ public class KafOpinion {
         if (overlap_props.length()>0) {
             root.setAttribute("overlap_props", overlap_props);
         }
-
-        Element opinion_holder = xmldoc.createElement("opinion_holder");
-        if (!opinionHolderType.isEmpty()) {
-            opinion_holder.setAttribute("type", opinionHolderType);
-        }
         if (spansOpinionHolder.size()>0) {
-            span = xmldoc.createElement("span");
-            if (tokenStringOpinionHolder.length()>0) {
-                Comment comment = xmldoc.createComment(tokenStringOpinionHolder);
-                span.appendChild(comment);
+            Element opinion_holder = xmldoc.createElement("opinion_holder");
+            if (!opinionHolderType.isEmpty()) {
+                opinion_holder.setAttribute("type", opinionHolderType);
             }
-            for (int i = 0; i < this.spansOpinionHolder.size(); i++)
-            {
-                Element target = xmldoc.createElement("target");
-                target.setAttribute("id", spansOpinionHolder.get(i));
-                span.appendChild(target);
+            if (spansOpinionHolder.size()>0) {
+                span = xmldoc.createElement("span");
+                if (tokenStringOpinionHolder.length()>0) {
+                    Comment comment = xmldoc.createComment(tokenStringOpinionHolder);
+                    span.appendChild(comment);
+                }
+                for (int i = 0; i < this.spansOpinionHolder.size(); i++)
+                {
+                    Element target = xmldoc.createElement("target");
+                    target.setAttribute("id", spansOpinionHolder.get(i));
+                    span.appendChild(target);
+                }
+                opinion_holder.appendChild(span);
             }
-            opinion_holder.appendChild(span);
+            root.appendChild(opinion_holder);
         }
-        root.appendChild(opinion_holder);
 
-        Element opinion_target = xmldoc.createElement("opinion_target");
         if (spansOpinionTarget.size()>0) {
-            span = xmldoc.createElement("span");
-            if (tokenStringOpinionTarget.length()>0) {
-                Comment comment = xmldoc.createComment(tokenStringOpinionTarget);
-                span.appendChild(comment);
+            Element opinion_target = xmldoc.createElement("opinion_target");
+            if (spansOpinionTarget.size()>0) {
+                span = xmldoc.createElement("span");
+                if (tokenStringOpinionTarget.length()>0) {
+                    Comment comment = xmldoc.createComment(tokenStringOpinionTarget);
+                    span.appendChild(comment);
+                }
+                for (int i = 0; i < this.spansOpinionTarget.size(); i++)
+                {
+                    Element target = xmldoc.createElement("target");
+                    target.setAttribute("id", spansOpinionTarget.get(i));
+                    span.appendChild(target);
+                }
+                opinion_target.appendChild(span);
             }
-            for (int i = 0; i < this.spansOpinionTarget.size(); i++)
-            {
-                Element target = xmldoc.createElement("target");
-                target.setAttribute("id", spansOpinionTarget.get(i));
-                span.appendChild(target);
-            }
-            opinion_target.appendChild(span);
+            root.appendChild(opinion_target);
         }
-        root.appendChild(opinion_target);
 
         Element opinion_expression = xmldoc.createElement("opinion_expression");
         if (!this.opinionSentiment.getPolarity().isEmpty())
