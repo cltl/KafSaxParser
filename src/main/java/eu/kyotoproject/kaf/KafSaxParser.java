@@ -270,7 +270,7 @@ public class KafSaxParser extends DefaultHandler {
     {
     	try
     	{
-            System.out.println("file.getAbsolutePath() = " + file.getAbsolutePath());
+           // System.out.println("file.getAbsolutePath() = " + file.getAbsolutePath());
             FileReader reader = new FileReader(file);
     		InputSource inp = new InputSource(reader);
     		boolean result = parseFile(inp, encoding);
