@@ -680,6 +680,9 @@ public class FileProcessor {
     }
 
     static boolean acceptFile(String fileName, String filter) {
+        if (filter.isEmpty()) {
+            return true;
+        }
         if (fileName.toLowerCase().endsWith(filter.toLowerCase())) {
             return true;
         } else {

@@ -178,8 +178,10 @@ public class KafTables {
             //String kafFilePath = args[0];
             //String extension = args[1];
             //String kafFilePath = "/Users/piek/Desktop/NWR-DATA/techcrunch/1_3000";
-             String kafFilePath = "/Users/piek/Desktop/Thomese/Thomese_book_opener_nwr_srl";
-             String extension = "kaf.coref.coref";
+             //String kafFilePath = "/Users/piek/Desktop/Thomese/Thomese_book_opener_nwr_srl";
+             //String extension = "kaf.coref.coref";
+             String kafFilePath = "";
+             String extension = "";
             //String extension = ".naf";
             for (int i = 0; i < args.length; i++) {
                 String arg = args[i];
@@ -196,7 +198,6 @@ public class KafTables {
             if (file.isDirectory()) {
                 files= FileProcessor.makeRecursiveFileList(kafFilePath, extension);
             }
-
             else {
                 files= new String[1];
                 files[0] = kafFilePath;
