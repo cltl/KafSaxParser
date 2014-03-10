@@ -181,6 +181,16 @@ public class KafTables {
              String kafFilePath = "/Users/piek/Desktop/Thomese/Thomese_book_opener_nwr_srl";
              String extension = "kaf.coref.coref";
             //String extension = ".naf";
+            for (int i = 0; i < args.length; i++) {
+                String arg = args[i];
+                if (arg.equalsIgnoreCase("--input") && args.length>(i+1)) {
+                    kafFilePath = args[i+1];
+                }
+                else if (arg.equalsIgnoreCase("--extension") && args.length>(i+1)) {
+                    extension = args[i+1];
+                }
+
+            }
             File file = new File(kafFilePath);
             String [] files = null;
             if (file.isDirectory()) {

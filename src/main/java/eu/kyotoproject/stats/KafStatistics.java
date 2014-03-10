@@ -1137,12 +1137,20 @@ public class KafStatistics {
 
     static public void main (String [] args) {
         try {
-            //String kafFilePath = args[0];
-            //String extension = args[1];
             String kafFilePath = "/Users/piek/Desktop/NWR-DATA/techcrunch/1_3000";
            // String kafFilePath = "/Users/piek/Desktop/Thomese/Thomese_book_opener_nwr_srl";
            // String extension = "kaf.coref.coref";
             String extension = ".naf";
+            for (int i = 0; i < args.length; i++) {
+                 String arg = args[i];
+                 if (arg.equalsIgnoreCase("--input") && args.length>(i+1)) {
+                     kafFilePath = args[i+1];
+                 }
+                else if (arg.equalsIgnoreCase("--extension") && args.length>(i+1)) {
+                     extension = args[i+1];
+                 }
+
+            }
             File file = new File(kafFilePath);
             if (file.isDirectory()) {
                 String [] files= FileProcessor.makeRecursiveFileList(kafFilePath, extension);
