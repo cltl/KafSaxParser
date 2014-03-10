@@ -1,9 +1,7 @@
 package eu.kyotoproject.stats;
 
-import eu.kyotoproject.kaf.KafChunk;
-import eu.kyotoproject.kaf.KafSaxParser;
-import eu.kyotoproject.kaf.KafTerm;
-import eu.kyotoproject.kaf.KafWordForm;
+import eu.kyotoproject.kaf.*;
+import eu.kyotoproject.util.AddTokensAsCommentsToSpans;
 import eu.kyotoproject.util.FileProcessor;
 
 import java.io.File;
@@ -24,6 +22,8 @@ public class KafStatistics {
         private int nFile = 0;
         private ArrayList<String> sourceNames;
         private ArrayList<Integer> nLemmasArrayList;
+        private ArrayList<Integer> nEntitiesArrayList;
+        private ArrayList<Integer> nEventsArrayList;
         private ArrayList<Integer> nSentencesArrayList;
         private ArrayList<Integer> nParagraphsArrayList;
         private ArrayList<Integer> nPagesArrayList;
@@ -34,7 +34,8 @@ public class KafStatistics {
         private ArrayList<Integer> nDatesArrayList;
         private ArrayList<Integer> nPlacesArrayList;
         private ArrayList<Integer> nCoreferencesArrayList;
-        private ArrayList<Integer> nEntitiesArrayList;
+        private HashMap<String, ArrayList<Integer>> entityMap;
+        private HashMap<String, ArrayList<Integer>> eventMap;
         private HashMap<String, ArrayList<Integer>> lemmaMap;
         private HashMap<String, ArrayList<Integer>> posMap = new HashMap<String, ArrayList<Integer>>();
         private HashMap<String, ArrayList<Integer>> mainPosMap = new HashMap<String, ArrayList<Integer>>();
@@ -55,6 +56,9 @@ public class KafStatistics {
             this.nPlacesArrayList = initArrayList(nFile);
             this.nCoreferencesArrayList = initArrayList(nFile);
             this.nEntitiesArrayList = initArrayList(nFile);
+            this.nEventsArrayList = initArrayList(nFile);
+            this.entityMap = new HashMap<String, ArrayList<Integer>>();
+            this.eventMap = new HashMap<String, ArrayList<Integer>>();
             this.lemmaMap = new HashMap<String, ArrayList<Integer>>();
             this.posMap = new HashMap<String, ArrayList<Integer>>();
             this.mainPosMap = new HashMap<String, ArrayList<Integer>>();
@@ -88,6 +92,14 @@ public class KafStatistics {
 
         public void setnLemmasArrayList(ArrayList<Integer> nLemmasArrayList) {
             this.nLemmasArrayList = nLemmasArrayList;
+        }
+
+        public void addnEntitiesArrayList(Integer nEntityArrayList, int n) {
+            this.nEntitiesArrayList.add(n,nEntityArrayList);
+        }
+
+        public void addnEventsArrayList(Integer nEventsArrayList, int n) {
+            this.nEventsArrayList.add(n,nEventsArrayList);
         }
 
         public void addnLemmasArrayList(Integer nLemmasArrayList, int n) {
@@ -222,9 +234,6 @@ public class KafStatistics {
             this.nEntitiesArrayList = nEntitiesArrayList;
         }
 
-        public void addnEntitiesArrayList(Integer nEntitiesArrayList, int n) {
-            this.nEntitiesArrayList.add(n, nEntitiesArrayList);
-        }
 
         public HashMap<String, ArrayList<Integer>> getLemmaMap() {
             return lemmaMap;
@@ -253,6 +262,51 @@ public class KafStatistics {
                 values.add(n, cnt);
                 this.lemmaMap.put(str, values);
             }
+        }
+
+
+        public void setEntityMap(HashMap<String, ArrayList<Integer>> entityMap) {
+            this.entityMap = entityMap;
+        }
+
+
+        public void addEntityMap(String str, Integer cnt, int n) {
+            if (this.entityMap.containsKey(str)) {
+                ArrayList<Integer> values = this.entityMap.get(str);
+                values.add(n, cnt);
+                this.entityMap.put(str, values);
+            }
+            else {
+                ArrayList<Integer> values = initArrayList(nFile);
+                values.add(n, cnt);
+                this.entityMap.put(str, values);
+            }
+        }
+
+        public HashMap<String, ArrayList<Integer>> getEntityMap() {
+            return entityMap;
+        }
+
+        public void setEventMap(HashMap<String, ArrayList<Integer>> eventMap) {
+            this.eventMap = eventMap;
+        }
+
+
+        public void addEventMap(String str, Integer cnt, int n) {
+            if (this.eventMap.containsKey(str)) {
+                ArrayList<Integer> values = this.eventMap.get(str);
+                values.add(n, cnt);
+                this.eventMap.put(str, values);
+            }
+            else {
+                ArrayList<Integer> values = initArrayList(nFile);
+                values.add(n, cnt);
+                this.eventMap.put(str, values);
+            }
+        }
+
+        public HashMap<String, ArrayList<Integer>> getEventMap() {
+            return eventMap;
         }
 
         public HashMap<String, ArrayList<Integer>> getPosMap() {
@@ -317,6 +371,7 @@ public class KafStatistics {
                 this.phraseMap.put(str, values);
             }
         }
+
         public void getOutputString (FileOutputStream fos, String folderPath) throws IOException {
             String str = "KAF Statistics\n";
             str += "File\t"+folderPath+"\n";
@@ -506,7 +561,7 @@ public class KafStatistics {
             fos.write(str.getBytes());
 
             str = "\n";
-            str += "POS table"+fileHeaderString+"\n";
+            str += "Specific POS table"+fileHeaderString+"\n";
             keySet = posMap.keySet();
             keys = keySet.iterator();
             sorter = new TreeSet();
@@ -561,12 +616,28 @@ public class KafStatistics {
             }
             fos.write(str.getBytes());
 
-            str = "\n";
-            str += "Lemma table"+fileHeaderString+"\n";
+        }
+
+        public void getLemmaString (FileOutputStream fos, String folderPath) throws IOException {
+            String str = "KAF Statistics\n";
+            str += "File\t"+folderPath+"\n";
+            str += "\n";
+            String fileHeaderString = "\tTotal";
+            for (int i = 0; i < sourceNames.size(); i++) {
+                String s = sourceNames.get(i);
+                fileHeaderString += "\t"+s;
+            }
+
+            str += fileHeaderString+"\n";
+
+
+            int total = 0;
+            str += "Nr. of Lemmas\t"+lemmaMap.size()+"\n";
+
             fos.write(str.getBytes());
-            keySet = lemmaMap.keySet();
-            keys = keySet.iterator();
-            sorter = new TreeSet();
+            Set keySet = lemmaMap.keySet();
+            Iterator keys = keySet.iterator();
+            TreeSet sorter = new TreeSet();
             while (keys.hasNext()) {
                 String key = (String) keys.next();
                 sorter.add(key);
@@ -577,6 +648,124 @@ public class KafStatistics {
                 str = key;
                 total = 0;
                 ArrayList<Integer> cnt = lemmaMap.get(key);
+                for (int i = 0; i < cnt.size(); i++) {
+                    Integer integer = cnt.get(i);
+                    total += integer;
+                }
+                str += "\t"+total;
+                for (int i = 0; i < cnt.size(); i++) {
+                    Integer integer = cnt.get(i);
+                    str += "\t"+integer.toString();
+                }
+                str += "\n";
+                fos.write(str.getBytes());
+            }
+            fos.write(str.getBytes());
+        }
+
+       public void getEntityString (FileOutputStream fos, String folderPath) throws IOException {
+            String str = "KAF Statistics\n";
+            str += "File\t"+folderPath+"\n";
+            str += "\n";
+            String fileHeaderString = "\tTotal";
+            for (int i = 0; i < sourceNames.size(); i++) {
+                String s = sourceNames.get(i);
+                fileHeaderString += "\t"+s;
+            }
+
+            str += fileHeaderString+"\n";
+
+
+            int total = 0;
+            str += "Nr. of Entities";
+            for (int i = 0; i < this.nEntitiesArrayList.size(); i++) {
+                Integer integer = this.nEntitiesArrayList.get(i);
+                total += integer;
+            }
+            str += "\t"+total;
+            for (int i = 0; i < this.nEntitiesArrayList.size(); i++) {
+                Integer integer = this.nEntitiesArrayList.get(i);
+                str += "\t"+integer;
+            }
+            str += "\n";
+
+
+
+            str = "\n";
+            str += "Entity table"+fileHeaderString+"\n";
+            fos.write(str.getBytes());
+            Set keySet = entityMap.keySet();
+            Iterator keys = keySet.iterator();
+            TreeSet sorter = new TreeSet();
+            while (keys.hasNext()) {
+                String key = (String) keys.next();
+                sorter.add(key);
+            }
+            keys = sorter.iterator();
+            while (keys.hasNext()) {
+                String key = (String) keys.next();
+                str = key;
+                total = 0;
+                ArrayList<Integer> cnt = entityMap.get(key);
+                for (int i = 0; i < cnt.size(); i++) {
+                    Integer integer = cnt.get(i);
+                    total += integer;
+                }
+                str += "\t"+total;
+                for (int i = 0; i < cnt.size(); i++) {
+                    Integer integer = cnt.get(i);
+                    str += "\t"+integer.toString();
+                }
+                str += "\n";
+                fos.write(str.getBytes());
+            }
+            fos.write(str.getBytes());
+        }
+
+        public void getEventString (FileOutputStream fos, String folderPath) throws IOException {
+            String str = "KAF Statistics\n";
+            str += "File\t"+folderPath+"\n";
+            str += "\n";
+            String fileHeaderString = "\tTotal";
+            for (int i = 0; i < sourceNames.size(); i++) {
+                String s = sourceNames.get(i);
+                fileHeaderString += "\t"+s;
+            }
+
+            str += fileHeaderString+"\n";
+
+
+            int total = 0;
+            str += "Nr. of Events";
+            for (int i = 0; i < this.nEventsArrayList.size(); i++) {
+                Integer integer = this.nEventsArrayList.get(i);
+                total += integer;
+            }
+            str += "\t"+total;
+            for (int i = 0; i < this.nEventsArrayList.size(); i++) {
+                Integer integer = this.nEventsArrayList.get(i);
+                str += "\t"+integer;
+            }
+            str += "\n";
+
+
+
+            str = "\n";
+            str += "Entity table"+fileHeaderString+"\n";
+            fos.write(str.getBytes());
+            Set keySet = eventMap.keySet();
+            Iterator keys = keySet.iterator();
+            TreeSet sorter = new TreeSet();
+            while (keys.hasNext()) {
+                String key = (String) keys.next();
+                sorter.add(key);
+            }
+            keys = sorter.iterator();
+            while (keys.hasNext()) {
+                String key = (String) keys.next();
+                str = key;
+                total = 0;
+                ArrayList<Integer> cnt = eventMap.get(key);
                 for (int i = 0; i < cnt.size(); i++) {
                     Integer integer = cnt.get(i);
                     total += integer;
@@ -652,6 +841,42 @@ public class KafStatistics {
         return lemmaMap;
     }
 
+    static public HashMap<String, Integer> getEntityMap (KafSaxParser parser) {
+        HashMap<String, Integer> entityMap = new HashMap<String, Integer>();
+        for (int i = 0; i < parser.kafEntityArrayList.size(); i++) {
+            KafEntity kafEntity = parser.kafEntityArrayList.get(i);
+            kafEntity.setTokenStrings(parser);
+            String phrase = kafEntity.getTokenStringArray().get(0);
+            if (entityMap.containsKey(phrase)) {
+                Integer cnt = entityMap.get(phrase);
+                cnt++;
+                entityMap.put(phrase, cnt);
+            }
+            else {
+                entityMap.put(phrase, 1);
+            }
+        }
+        return entityMap;
+    }
+
+
+    static public HashMap<String, Integer> getEventMap (KafSaxParser parser) {
+        HashMap<String, Integer> eventMap = new HashMap<String, Integer>();
+        for (int i = 0; i < parser.kafEventArrayList.size(); i++) {
+            KafEvent kafEvent = parser.kafEventArrayList.get(i);
+            String phrase = AddTokensAsCommentsToSpans.getTokenStringFromTermIds(parser, kafEvent.getSpanIds());
+            if (eventMap.containsKey(phrase)) {
+                Integer cnt = eventMap.get(phrase);
+                cnt++;
+                eventMap.put(phrase, cnt);
+            }
+            else {
+                eventMap.put(phrase, 1);
+            }
+        }
+        return eventMap;
+    }
+
     static public HashMap<String, Integer> getPosMap (KafSaxParser parser) {
         HashMap<String, Integer> posMap = new HashMap<String, Integer>();
         for (int i = 0; i < parser.kafTermList.size(); i++) {
@@ -701,17 +926,16 @@ public class KafStatistics {
         return phraseMap;
     }
 
-    static void updateStatistics (Statistics stats, String kafFilePath, int n) {
+    static void updateStatistics (Statistics stats, String kafFilePath, KafSaxParser parser, int n) {
         String sourceName = new File (kafFilePath).getName();
         stats.addSourceNames(sourceName, n);
-        KafSaxParser parser = new KafSaxParser();
-        parser.parseFile(kafFilePath);
-        stats.addnPagesArrayList(getNumberOfPages(parser),n);
-        stats.addnParagraphsArrayList(getNumberOfParagraphs(parser),n);
-        stats.addnSentencesArrayList(getNumberOfSentences(parser),n);
+        stats.addnPagesArrayList(getNumberOfPages(parser), n);
+        stats.addnParagraphsArrayList(getNumberOfParagraphs(parser), n);
+        stats.addnSentencesArrayList(getNumberOfSentences(parser), n);
         stats.addnChunksArrayList(parser.kafChunkList.size(), n);
-        stats.addnDependenciesArrayList(parser.kafDepList.size(),n);
-        stats.addnEntitiesArrayList(parser.kafEntityArrayList.size(),n);
+        stats.addnDependenciesArrayList(parser.kafDepList.size(), n);
+        stats.addnEntitiesArrayList(parser.kafEntityArrayList.size(), n);
+        stats.addnEventsArrayList(parser.kafEventArrayList.size(), n);
         stats.addnWordFormsArrayList(parser.kafWordFormList.size(),n);
         stats.addnWordTermsArrayList(parser.kafTermList.size(),n);
         stats.addnDatesArrayList(parser.kafDateArrayList.size(),n);
@@ -743,6 +967,29 @@ public class KafStatistics {
             Integer cnt = phraseMap.get(key);
             stats.addPhraseMap(key, cnt, n);
         }
+
+        HashMap<String, Integer> entityMap = getEntityMap(parser);
+        keySet = entityMap.keySet();
+        keys = keySet.iterator();
+        while (keys.hasNext()) {
+            String key = (String) keys.next();
+            Integer cnt = entityMap.get(key);
+            stats.addEntityMap(key, cnt, n);
+        }
+
+        stats.addnEntitiesArrayList(entityMap.size(), n);
+
+        HashMap<String, Integer> eventMap = getEventMap(parser);
+        keySet = eventMap.keySet();
+        keys = keySet.iterator();
+        while (keys.hasNext()) {
+            String key = (String) keys.next();
+            Integer cnt = eventMap.get(key);
+            stats.addEventMap(key, cnt, n);
+        }
+
+        stats.addnEventsArrayList(eventMap.size(), n);
+
         HashMap<String, Integer> lemmaMap = getLemmaMap(parser);
         keySet = lemmaMap.keySet();
         keys = keySet.iterator();
@@ -823,6 +1070,43 @@ public class KafStatistics {
             str += "\t"+key+"\t"+cnt.toString()+"\n";
         }
 
+        str += "Entity table\n";
+        HashMap<String, Integer> entityMap = getEntityMap(parser);
+        str += "\tNr. type\t"+entityMap.size()+"\n";
+        keySet = entityMap.keySet();
+        keys = keySet.iterator();
+        sorter = new TreeSet();
+        while (keys.hasNext()) {
+            String key = (String) keys.next();
+            sorter.add(key);
+        }
+        keys = sorter.iterator();
+        while (keys.hasNext()) {
+            String key = (String) keys.next();
+            Integer cnt = entityMap.get(key);
+            str += "\t"+key+"\t"+cnt.toString()+"\n";
+
+        }
+
+        str += "Event table\n";
+        HashMap<String, Integer> eventMap = getEventMap(parser);
+        str += "\tNr. type\t"+eventMap.size()+"\n";
+        keySet = eventMap.keySet();
+        keys = keySet.iterator();
+        sorter = new TreeSet();
+        while (keys.hasNext()) {
+            String key = (String) keys.next();
+            sorter.add(key);
+        }
+        keys = sorter.iterator();
+        while (keys.hasNext()) {
+            String key = (String) keys.next();
+            Integer cnt = eventMap.get(key);
+            str += "\t"+key+"\t"+cnt.toString()+"\n";
+
+        }
+
+
         str += "Lemma table\n";
         HashMap<String, Integer> lemmaMap = getLemmaMap(parser);
         str += "\tNr. type\t"+lemmaMap.size()+"\n";
@@ -848,24 +1132,47 @@ public class KafStatistics {
         return str;
     }
 
+
+
+
     static public void main (String [] args) {
         try {
             //String kafFilePath = args[0];
             //String extension = args[1];
-            String kafFilePath = "/Users/piek/Desktop/Thomese/Thomese_chapters_pages";
-            String extension = "kaf";
+            String kafFilePath = "/Users/piek/Desktop/NWR-DATA/techcrunch/1_3000";
+           // String kafFilePath = "/Users/piek/Desktop/Thomese/Thomese_book_opener_nwr_srl";
+           // String extension = "kaf.coref.coref";
+            String extension = ".naf";
             File file = new File(kafFilePath);
             if (file.isDirectory()) {
                 String [] files= FileProcessor.makeRecursiveFileList(kafFilePath, extension);
+                System.out.println("files.length = " + files.length);
                 Statistics stats = new Statistics(files.length);
+
+                KafSaxParser parser = new KafSaxParser();
                 for (int i = 0; i < files.length; i++) {
                     String filePath = files[i];
-                    System.out.println("filePath = " + filePath);
-                    updateStatistics(stats, filePath, i);
+                   // System.out.println("filePath = " + filePath);
+                    String fileName = new File (filePath).getName();
+                    parser.parseFile(filePath);
+                    updateStatistics(stats, filePath, parser, i);
                 }
-                String kafStatFilePath = kafFilePath+".stats.xls";
+                /// printout overview data for all files
+                String kafStatFilePath = kafFilePath+"/stats.xls";
                 FileOutputStream fos = new FileOutputStream(kafStatFilePath);
                 stats.getOutputString(fos, kafFilePath);
+                fos.close();
+                String lemmaMapFile = kafFilePath+"/lemma.stats.xls";
+                fos = new FileOutputStream(lemmaMapFile);
+                stats.getLemmaString(fos, lemmaMapFile);
+                fos.close();
+                String entityMapFile = kafFilePath+"/entity.stats.xls";
+                fos = new FileOutputStream(entityMapFile);
+                stats.getEntityString(fos, entityMapFile);
+                fos.close();
+                String eventMapFile = kafFilePath+"/event.stats.xls";
+                fos = new FileOutputStream(eventMapFile);
+                stats.getEventString(fos, eventMapFile);
                 fos.close();
             }
             else {

@@ -3481,6 +3481,7 @@ public class KafSaxParser extends DefaultHandler {
 		}
     }
 
+
     public void writeKafToStream(OutputStream stream)
     {
     	try
@@ -3586,24 +3587,27 @@ public class KafSaxParser extends DefaultHandler {
                 root.appendChild(coreferences);
             }
 
+            if (kafCountryArrayList.size()>0) {
+                Element locations = xmldoc.createElement("locations");
+                for (int i = 0; i < kafCountryArrayList.size(); i++) {
+                    GeoCountryObject geoCountryObject = kafCountryArrayList.get(i);
+                    locations.appendChild(geoCountryObject.toXML(xmldoc));
+                }
+                for (int i = 0; i < kafPlaceArrayList.size(); i++) {
+                    GeoPlaceObject geoPlaceObject = kafPlaceArrayList.get(i);
+                    locations.appendChild(geoPlaceObject.toXML(xmldoc));
+                }
+                root.appendChild(locations);
+            }
 
-            Element locations = xmldoc.createElement("locations");
-            for (int i = 0; i < kafCountryArrayList.size(); i++) {
-                GeoCountryObject geoCountryObject = kafCountryArrayList.get(i);
-                locations.appendChild(geoCountryObject.toXML(xmldoc));
+            if (kafDateArrayList.size()>0) {
+                Element dates = xmldoc.createElement("dates");
+                for (int i = 0; i < kafDateArrayList.size(); i++) {
+                    ISODate isoDate = kafDateArrayList.get(i);
+                    dates.appendChild(isoDate.toXML(xmldoc));
+                }
+                root.appendChild(dates);
             }
-            for (int i = 0; i < kafPlaceArrayList.size(); i++) {
-                GeoPlaceObject geoPlaceObject = kafPlaceArrayList.get(i);
-                locations.appendChild(geoPlaceObject.toXML(xmldoc));
-            }
-            root.appendChild(locations);
-
-            Element dates = xmldoc.createElement("dates");
-            for (int i = 0; i < kafDateArrayList.size(); i++) {
-                ISODate isoDate = kafDateArrayList.get(i);
-                dates.appendChild(isoDate.toXML(xmldoc));
-            }
-            root.appendChild(dates);
 
             if (kafEventISIList.size()>0) {
                 Element isiEvents  = xmldoc.createElement("isi-events");

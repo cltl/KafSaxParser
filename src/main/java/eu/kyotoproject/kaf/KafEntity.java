@@ -186,6 +186,14 @@ public class KafEntity {
                 '}';
     }
 
+    public String toTableStringValues () {
+        String str = id+"\t"+type+"\t";
+        if (externalReferences.size()>0) {
+            str += externalReferences.get(0).getSensecode();
+        }
+        return str;
+    }
+
     public Element toXML(Document xmldoc)
     {
         Element root = xmldoc.createElement("entity");
