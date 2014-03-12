@@ -2010,6 +2010,15 @@ public class KafSaxParser extends DefaultHandler {
 		return "-1";
     }
 
+    public String getSentenceIdForToken(String token)
+    {   if (wordFormMap.containsKey(token))
+		{
+			KafWordForm word = wordFormMap.get(token);
+			return word.getSent();
+		}
+		return "-1";
+    }
+
     public KafMetaData getKafMetaData() {
         return kafMetaData;
     }

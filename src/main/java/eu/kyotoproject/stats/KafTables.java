@@ -22,6 +22,7 @@ public class KafTables {
             ArrayList<String> setOfSPans = geoPlaceObject.getSpans();
             String sentenceId = "";
             String termIds = "";
+            /// timex spans are tokens
             for (int j = 0; j < setOfSPans.size(); j++) {
                 String kafReference = setOfSPans.get(j);
                 if (sentenceId.isEmpty()) {
@@ -33,6 +34,31 @@ public class KafTables {
                 termIds+=kafReference;
             }
             str = fileName+"\t"+ sentenceId+"\t"+termIds+"\t"+geoPlaceObject.getPlaceInfo().getName()+"\n";
+            fileOutputStream.write(str.getBytes());
+        }
+    }
+
+
+    static void writeTimex (String fileName, KafSaxParser kafSaxParser, FileOutputStream fileOutputStream) throws IOException {
+        String str = "";
+        for (int i = 0; i < kafSaxParser.kafTimexLayer.size(); i++) {
+            KafTimex timex = kafSaxParser.kafTimexLayer.get(i);
+            timex.setTokenString(AddTokensAsCommentsToSpans.getTokenString(kafSaxParser, timex.getSpans()));
+
+            ArrayList<String> setOfSPans = timex.getSpans();
+            String sentenceId = "";
+            String tokenIds = "";
+            for (int j = 0; j < setOfSPans.size(); j++) {
+                String kafReference = setOfSPans.get(j);
+                if (sentenceId.isEmpty()) {
+                    sentenceId= kafSaxParser.getSentenceIdForToken(kafReference);
+                }
+                if (!tokenIds.isEmpty()) {
+                    tokenIds+=",";
+                }
+                tokenIds+=kafReference;
+            }
+            str = fileName+"\t"+ sentenceId+"\t"+tokenIds+"\t"+timex.getTokenString()+"\n";
             fileOutputStream.write(str.getBytes());
         }
     }
@@ -55,7 +81,7 @@ public class KafTables {
                 }
                 termIds+=kafReference;
             }
-            str = fileName+"\t"+ sentenceId+"\t"+termIds+"\t"+isoDate.getDateInfo()+"\n";
+            str = fileName+"\t"+ sentenceId+"\t"+termIds+"\t"+isoDate.getDateInfo().getDateISO()+"\n";
             fileOutputStream.write(str.getBytes());
         }
     }
@@ -142,6 +168,14 @@ public class KafTables {
             event.setTokenString(AddTokensAsCommentsToSpans.getTokenStringFromTermIds(kafSaxParser, event.getSpanIds()));
             String sentenceIdEvent= "";
             String eventTermIds = "";
+            String eventType = "";
+            for (int j = 0; j < event.getExternalReferences().size(); j++) {
+                KafSense kafSense = event.getExternalReferences().get(j);
+                if (!eventType.isEmpty()) {
+                    eventType += ",";
+                }
+                eventType += kafSense.getSensecode();
+            }
             for (int j = 0; j < event.getSpanIds().size(); j++) {
                 String span = event.getSpanIds().get(j);
                 if (sentenceIdEvent.isEmpty()) {
@@ -167,7 +201,7 @@ public class KafTables {
                     }
                     participantTermIds+=span;
                 }
-                str = fileName+"\t"+ sentenceIdEvent+"\t"+eventTermIds+"\t"+participantTermIds+"\t"+event.getId()+"\t"+event.getTokenString()+"\t"+kafParticipant.getId()+"\t"+kafParticipant.getRole()+"\t"+kafParticipant.getTokenString()+"\n";
+                str = fileName+"\t"+ sentenceIdEvent+"\t"+eventTermIds+"\t"+participantTermIds+"\t"+event.getId()+"\t"+eventType+"\t"+event.getTokenString()+"\t"+kafParticipant.getRole()+"\t"+kafParticipant.getId()+"\t"+kafParticipant.getTokenString()+"\n";
                 fileOutputStream.write(str.getBytes());
             }
         }
@@ -207,18 +241,21 @@ public class KafTables {
                 FileOutputStream entities = new FileOutputStream(kafFilePath+"/"+"entity-list.xls");
                 FileOutputStream opinions = new FileOutputStream(kafFilePath+"/"+"opinion-list.xls");
                 FileOutputStream events = new FileOutputStream(kafFilePath+"/"+"event-list.xls");
-                FileOutputStream dates = new FileOutputStream(kafFilePath+"/"+"date-list.xls");
-                FileOutputStream locations = new FileOutputStream(kafFilePath+"/"+"location-list.xls");
+                //FileOutputStream dates = new FileOutputStream(kafFilePath+"/"+"date-list.xls");
+                FileOutputStream timex = new FileOutputStream(kafFilePath+"/"+"time-list.xls");
+                //FileOutputStream locations = new FileOutputStream(kafFilePath+"/"+"location-list.xls");
                 String header = "File\tsentence\tterms\tentity-id\ttype\turi\texpression\n";
                 entities.write(header.getBytes());
                 header = "File\tsentence\tterms opinion\tterms holder\tterms target\t"+ KafOpinion.toTableHeaderString()+"\n";
                 opinions.write(header.getBytes());
-                header = "File\tsentence\tterms event\tterms participant\tevent id\tevent expression\trole\tparticipant id\tparticipant expression\n";
+                header = "File\tsentence\tterms event\tterms participant\tevent id\tevent type\tevent expression\trole\tparticipant id\tparticipant expression\n";
                 events.write(header.getBytes());
-                header =  "File\tsentence\tterms\tdate\n";
-                dates.write(header.getBytes());
-                header =  "File\tsentence\tterms\tplace\n";
-                locations.write(header.getBytes());
+                header =  "File\tsentence\ttokens\ttime expression\n";
+                timex.write(header.getBytes());
+               // header =  "File\tsentence\tterms\tdate\n";
+               // dates.write(header.getBytes());
+               // header =  "File\tsentence\tterms\tplace\n";
+               // locations.write(header.getBytes());
                 KafSaxParser parser = new KafSaxParser();
                 for (int i = 0; i < files.length; i++) {
                     String filePath = files[i];
@@ -228,14 +265,16 @@ public class KafTables {
                     writeEntities(fileName, parser, entities);
                     writeOpinions(fileName, parser, opinions);
                     writeSrl(fileName, parser, events);
-                    writeDates(fileName, parser, dates);
-                    writePlaces(fileName, parser, locations);
+                    writeTimex(fileName, parser, timex);
+                   // writeDates(fileName, parser, dates);
+                   // writePlaces(fileName, parser, locations);
                 }
                 entities.close();
                 opinions.close();
                 events.close();
-                dates.close();
-                locations.close();
+                timex.close();
+               // dates.close();
+               // locations.close();
             }
         } catch (IOException e) {
             e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
