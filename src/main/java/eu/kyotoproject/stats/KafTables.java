@@ -212,11 +212,11 @@ public class KafTables {
             //String kafFilePath = args[0];
             //String extension = args[1];
             //String kafFilePath = "/Users/piek/Desktop/NWR-DATA/techcrunch/1_3000";
-             //String kafFilePath = "/Users/piek/Desktop/Thomese/Thomese_book_opener_nwr_srl";
+             String kafFilePath = "/Users/piek/Desktop/Thomese/thomese_plus_dbpedia";
              //String extension = "kaf.coref.coref";
-             String kafFilePath = "";
-             String extension = "";
-            //String extension = ".naf";
+             //String kafFilePath = "";
+             //String extension = "";
+            String extension = ".naf";
             for (int i = 0; i < args.length; i++) {
                 String arg = args[i];
                 if (arg.equalsIgnoreCase("--input") && args.length>(i+1)) {

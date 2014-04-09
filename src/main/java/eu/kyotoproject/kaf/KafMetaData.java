@@ -312,7 +312,7 @@ public class KafMetaData {
 	  {
 		  Element lingEl = xmldoc.createElement("linguisticProcessors");
 		  lingEl.setAttribute("layer", layer);
-		  for (LP lp : linguisticProcessors.get(layer))
+		  for (eu.kyotoproject.kaf.LP lp : linguisticProcessors.get(layer))
 			  lingEl.appendChild(lp.toXML(xmldoc));
 		  root.appendChild(lingEl);
 	  }
@@ -415,9 +415,9 @@ public class KafMetaData {
           return str;
   }
     
-    public void addLayer(String layer, String name, String version, String timestamp)
+    public void addLayer(String layer, String name, String version, String timestamp, String beginTimestamp, String endTimeStamp)
     {
-    	LP lp = new LP(name,version, timestamp);
+    	LP lp = new LP(name,version, timestamp, beginTimestamp, endTimeStamp);
     	if (linguisticProcessors.containsKey(layer))
     		linguisticProcessors.get(layer).add(lp);
     	else
@@ -428,17 +428,39 @@ public class KafMetaData {
     	}
     }
 
+    public void addLayer(String layer, LP lp)
+    {
+    	if (linguisticProcessors.containsKey(layer))
+    		linguisticProcessors.get(layer).add(lp);
+    	else
+    	{
+    		List<LP> list = new ArrayList<LP>();
+    		list.add(lp);
+    		linguisticProcessors.put(layer, list);
+    	}
+    }
+  /*
     private class LP
     {
-    	String name, version, timestamp;
-    	
-    	public LP(String name, String version, String timestamp)
+   	String name, version, timestamp, beginTimestamp, endTimestamp;
+
+    	public LP(String name, String version, String timestamp, String beginTimestamp, String endTimestamp)
     	{
     		this.name = name;
     		this.version = version;
     		this.timestamp = timestamp;
+            this.beginTimestamp = beginTimestamp;
+            this.endTimestamp = endTimestamp;
     	}
-    	
+
+        public void setEndTimeStamp (String endTimestamp) {
+            this.endTimestamp = endTimestamp;
+        }
+
+        public void setBeginTimeStamp (String beginTimestamp) {
+            this.beginTimestamp = beginTimestamp;
+        }
+
     	public Element toXML(Document xmldoc)
     	{
     		Element lp = xmldoc.createElement("lp");
@@ -448,7 +470,11 @@ public class KafMetaData {
     			lp.setAttribute("version", version);
     		if (timestamp != null)
     			lp.setAttribute("timestamp", timestamp);
+    		if (beginTimestamp != null)
+    			lp.setAttribute("beginTimestamp", beginTimestamp);
+    		if (endTimestamp != null)
+    			lp.setAttribute("endTimestamp", endTimestamp);
     		return lp;
     	}
-    }
+    }   */
 }

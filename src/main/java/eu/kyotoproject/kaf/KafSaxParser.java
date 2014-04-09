@@ -543,7 +543,7 @@ public class KafSaxParser extends DefaultHandler {
         }
         else if (qName.equalsIgnoreCase("lp"))
         {
-           	kafMetaData.addLayer(layer, attributes.getValue("name"), attributes.getValue("version"), attributes.getValue("timestamp"));
+           	kafMetaData.addLayer(layer, attributes.getValue("name"), attributes.getValue("version"), attributes.getValue("timestamp"), attributes.getValue("beginTimestamp"), attributes.getValue("endTimestamp"));
         	//kafMetaData.addLP(attributes.getValue("name"), attributes.getValue("version"), attributes.getValue("timestamp"));
         }
 
@@ -3045,7 +3045,7 @@ public class KafSaxParser extends DefaultHandler {
     	Calendar cal = Calendar.getInstance();
     	String date = new SimpleDateFormat("yyyy-MM-dd").format(cal.getTime());
         String time = new SimpleDateFormat("HH:mm:ss").format(cal.getTime());
-    	kafMetaData.addLayer(layer, name, version, date + "T" + time + "Z");
+    	kafMetaData.addLayer(layer, name, version, date + "T" + time + "Z", null, null);
     }
 
     public String getXML()

@@ -1139,10 +1139,12 @@ public class KafStatistics {
         try {
            // String kafFilePath = "/Users/piek/Desktop/NWR-DATA/techcrunch/1_3000";
            // String kafFilePath = "/Users/piek/Desktop/Thomese/Thomese_book_opener_nwr_srl";
-           // String extension = "kaf.coref.coref";
-           // String extension = ".naf";
-            String kafFilePath = "";
-            String extension = "";
+            String kafFilePath = "/Users/piek/Desktop/Thomese/thomese_plus_dbpedia";
+
+            // String extension = "kaf.coref.coref";
+            String extension = ".naf";
+           // String kafFilePath = "";
+            //String extension = "";
             for (int i = 0; i < args.length; i++) {
                  String arg = args[i];
                  if (arg.equalsIgnoreCase("--input") && args.length>(i+1)) {
