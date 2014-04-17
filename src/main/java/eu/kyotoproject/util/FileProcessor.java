@@ -575,6 +575,35 @@ public class FileProcessor {
         return null;
     }
 
+    static public ArrayList<File> makeRecursiveFileArrayList(String inputPath, String theFilter) {
+        ArrayList<File> acceptedFileList = new ArrayList<File>();
+        File[] theFileList = null;
+        File lF = new File(inputPath);
+        if ((lF.canRead()) && lF.isDirectory()) {
+            theFileList = lF.listFiles();
+            for (int i = 0; i < theFileList.length; i++) {
+                String newFilePath = theFileList[i].getAbsolutePath();
+                if (theFileList[i].isDirectory()) {
+                    ArrayList<File> nextFileList = makeRecursiveFileArrayList(newFilePath, theFilter);
+                    for (int j = 0; j < nextFileList.size(); j++) {
+                        File file = nextFileList.get(j);
+                        acceptedFileList.add(file);
+                    }
+                } else {
+                    if (acceptFile(newFilePath, theFilter)) {
+                        acceptedFileList.add(theFileList[i]);
+                    }
+                }
+            }
+        } else {
+            System.out.println("Cannot access file:" + inputPath + "#");
+            if (!lF.exists()) {
+                System.out.println("File does not exist!");
+            }
+        }
+        return acceptedFileList;
+    }
+
     static public String[] makeRecursiveFileList(String inputPath, String theFilter) {
         long nSelectedFolders = 1;
         String[] acceptedFileList = new String[0];
