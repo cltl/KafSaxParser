@@ -3402,24 +3402,27 @@ public class KafSaxParser extends DefaultHandler {
                 }
                 root.appendChild(constituency);
             }
+            if (kafCountryArrayList.size()>0) {
+                Element locations = xmldoc.createElement("locations");
+                for (int i = 0; i < kafCountryArrayList.size(); i++) {
+                    GeoCountryObject geoCountryObject = kafCountryArrayList.get(i);
+                    locations.appendChild(geoCountryObject.toNafXML(xmldoc));
+                }
+                for (int i = 0; i < kafPlaceArrayList.size(); i++) {
+                    GeoPlaceObject geoPlaceObject = kafPlaceArrayList.get(i);
+                    locations.appendChild(geoPlaceObject.toNafXML(xmldoc));
+                }
+                root.appendChild(locations);
+            }
 
-            Element locations = xmldoc.createElement("locations");
-            for (int i = 0; i < kafCountryArrayList.size(); i++) {
-                GeoCountryObject geoCountryObject = kafCountryArrayList.get(i);
-                locations.appendChild(geoCountryObject.toNafXML(xmldoc));
+            if (kafDateArrayList.size()>0) {
+                Element dates = xmldoc.createElement("dates");
+                for (int i = 0; i < kafDateArrayList.size(); i++) {
+                    ISODate isoDate = kafDateArrayList.get(i);
+                    dates.appendChild(isoDate.toNafXML(xmldoc));
+                }
+                root.appendChild(dates);
             }
-            for (int i = 0; i < kafPlaceArrayList.size(); i++) {
-                GeoPlaceObject geoPlaceObject = kafPlaceArrayList.get(i);
-                locations.appendChild(geoPlaceObject.toNafXML(xmldoc));
-            }
-            root.appendChild(locations);
-
-            Element dates = xmldoc.createElement("dates");
-            for (int i = 0; i < kafDateArrayList.size(); i++) {
-                ISODate isoDate = kafDateArrayList.get(i);
-                dates.appendChild(isoDate.toNafXML(xmldoc));
-            }
-            root.appendChild(dates);
 
 
             if (kafEventArrayList.size()>0) {

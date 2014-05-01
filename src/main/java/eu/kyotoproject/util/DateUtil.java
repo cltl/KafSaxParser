@@ -68,4 +68,13 @@ public class DateUtil {
         return calendarObj;
     }
 
+    /** Returns current timestamp as xs:Date format. */
+    static public String createTimestamp() {
+        Date date = new Date();
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssZ");
+        String formattedDate = sdf.format(date);
+        return formattedDate;
+    }
+
+
 }
