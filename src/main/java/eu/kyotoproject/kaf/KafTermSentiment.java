@@ -3,6 +3,8 @@ package eu.kyotoproject.kaf;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
+import java.io.Serializable;
+
 /**
  * Created with IntelliJ IDEA.
  * User: kyoto
@@ -10,7 +12,7 @@ import org.w3c.dom.Element;
  * Time: 11:27 AM
  * To change this template use File | Settings | File Templates.
  */
-public class KafTermSentiment {
+public class KafTermSentiment  implements Serializable {
 
 
     /*

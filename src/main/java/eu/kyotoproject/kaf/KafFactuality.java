@@ -3,10 +3,12 @@ package eu.kyotoproject.kaf;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
+import java.io.Serializable;
+
 /**
  * Created by kyoto on 12/4/13.
  */
-public class KafFactuality {
+public class KafFactuality  implements Serializable {
 
     /**
      * <factualitylayer>

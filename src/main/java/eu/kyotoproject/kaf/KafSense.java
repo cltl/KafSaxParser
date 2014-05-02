@@ -3,6 +3,7 @@ package eu.kyotoproject.kaf;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
@@ -26,7 +27,7 @@ import java.util.ArrayList;
     You should have received a copy of the GNU General Public License
     along with KafSaxParser.  If not, see <http://www.gnu.org/licenses/>.
  */
-public class KafSense {
+public class KafSense  implements Serializable {
     /*
     <sense sensecode="ENG-30-04751652-n" confidence="1.0"/>
     <externalRef resource="WN-1.3" reference="" "ENG-30-04751652-n" confidence="1.0"/>
