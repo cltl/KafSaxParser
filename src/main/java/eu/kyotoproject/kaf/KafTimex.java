@@ -30,14 +30,24 @@ public class KafTimex {
 
     private String id;
     private String type;
+    private String value;
     private String tokenString;
     private ArrayList<String> spans;
 
     public KafTimex() {
         this.id = "";
         this.type = "";
+        this.value = "";
         this.tokenString = "";
         this.spans = new ArrayList<String>();
+    }
+
+    public String getValue() {
+        return value;
+    }
+
+    public void setValue(String value) {
+        this.value = value;
     }
 
     public String getId() {
@@ -85,6 +95,9 @@ public class KafTimex {
 
         if (!this.getType().isEmpty())
             root.setAttribute("type", this.getType());
+
+        if (!this.getValue().isEmpty())
+            root.setAttribute("value", this.getValue());
 
         if (this.getTokenString().length()>0) {
             Comment comment = xmldoc.createComment(this.getTokenString());

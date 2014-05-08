@@ -573,6 +573,9 @@ public class KafSaxParser extends DefaultHandler {
                else if (name.equalsIgnoreCase("type")) {
                    kafTimex.setType(attributes.getValue(i).trim());
                }
+               else if (name.equalsIgnoreCase("value")) {
+                   kafTimex.setValue(attributes.getValue(i).trim());
+               }
                else {
                    //   System.out.println("314 ********* FOUND UNKNOWN Attribute " + name + " *****************");
                }

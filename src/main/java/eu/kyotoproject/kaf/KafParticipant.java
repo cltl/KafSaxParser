@@ -28,6 +28,15 @@ public class KafParticipant extends KafEventComponent{
         this.role = role;
     }
 
+    public String getHeadId () {
+        for (int i = 0; i < this.getSpans().size(); i++) {
+            CorefTarget corefTarget = this.getSpans().get(i);
+            if (!corefTarget.getHead().isEmpty()) {
+                return corefTarget.getId();
+            }
+        }
+        return "";
+    }
 
     public Element toXML(Document xmldoc)
     {

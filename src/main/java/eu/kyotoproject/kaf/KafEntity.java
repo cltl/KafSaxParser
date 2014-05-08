@@ -70,6 +70,24 @@ public class KafEntity {
         this.dateISO = "";
     }
 
+    public String getFirstUriReference (){
+        String uri = "";
+        for (int i = 0; i < getExternalReferences().size(); i++) {
+            KafSense kafSense = getExternalReferences().get(i);
+            uri = kafSense.getSensecode();
+            break;
+        }
+        return uri;
+    }
+
+    public String getTokenString () {
+        String tokenString = "";
+        for (int i = 0; i < tokenStringArray.size(); i++) {
+            String s = tokenStringArray.get(i);
+            tokenString += " "+s;
+        }
+        return tokenString.trim();
+    }
     public ArrayList<String> getTokenStringArray() {
         return tokenStringArray;
     }
