@@ -3802,6 +3802,21 @@ public class KafSaxParser extends DefaultHandler {
         return null;
     }
 
+    public ArrayList<String> covertTokensSpanToTermSPan (ArrayList<String> tokenSpans) {
+        ArrayList<String> termSpans = new ArrayList<String>();
+        for (int i = 0; i < tokenSpans.size(); i++) {
+            String tokenSpan =  tokenSpans.get(i);
+            KafTerm kafTerm = getTermForWordId(tokenSpan);
+            if (kafTerm!=null) {
+                if (!termSpans.contains(kafTerm.getTid())) {
+                    termSpans.add(kafTerm.getTid());
+                }
+            }
+
+        }
+        return termSpans;
+    }
+
     static public void main (String[] args) {
         String file = "/Code/vu/kyotoproject/KafSaxParser/test/eventcoref_in.xml";
         //String file = "/Tools/TextPro/TextPro2.0-forNewsReader/test/gold/Time.NAF.xml";

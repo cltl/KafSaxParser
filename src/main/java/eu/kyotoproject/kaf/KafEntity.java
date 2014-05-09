@@ -88,6 +88,7 @@ public class KafEntity {
         }
         return tokenString.trim();
     }
+
     public ArrayList<String> getTokenStringArray() {
         return tokenStringArray;
     }

@@ -1,6 +1,8 @@
 package eu.kyotoproject.util;
 
 import eu.kyotoproject.kaf.CorefTarget;
+import eu.kyotoproject.kaf.KafSaxParser;
+import eu.kyotoproject.kaf.KafTerm;
 
 import java.util.ArrayList;
 
@@ -27,4 +29,6 @@ public class SetsOfSpans {
         }
         return false;
     }
+
+
 }

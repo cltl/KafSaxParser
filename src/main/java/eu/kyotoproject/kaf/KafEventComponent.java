@@ -1,5 +1,7 @@
 package eu.kyotoproject.kaf;
 
+import eu.kyotoproject.util.AddTokensAsCommentsToSpans;
+
 import java.util.ArrayList;
 
 /**
@@ -35,6 +37,12 @@ public class KafEventComponent {
         this.sentenceId = "";
         this.spans = new ArrayList<CorefTarget>();
         this.externalReferences = new ArrayList<KafSense>();
+    }
+
+
+    public void setTokenStrings (KafSaxParser parser) {
+        ArrayList<String> corefTokens = AddTokensAsCommentsToSpans.convertCorefTargetsToTokenSpan(parser, spans);
+        tokenString = AddTokensAsCommentsToSpans.getTokenString(parser, corefTokens);
     }
 
     public String getElementName() {
