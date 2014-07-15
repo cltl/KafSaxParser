@@ -44,6 +44,7 @@ public class KafSaxParser extends DefaultHandler {
     final byte[] utf8_bom = { (byte) 0xEF, (byte) 0xBB,
         (byte) 0xBF }; /// For Chinese KAF
     final String utf8_bomString = new String(utf8_bom);
+    static String encoding = "UTF-8";
     private String value = "";
     private String previousvalue = "";
     private KafMetaData kafMetaData;
@@ -317,7 +318,7 @@ public class KafSaxParser extends DefaultHandler {
     }
 
     public boolean parseFile(String filePath, String encoding) {
-        return parseFile(new File(filePath, encoding));
+        return parseFile(new File(filePath), encoding);
     }//--c
 
     public boolean parseStringContent(String content)
@@ -3272,7 +3273,7 @@ public class KafSaxParser extends DefaultHandler {
             serializer.setOutputProperty(OutputKeys.INDENT, "yes");
             serializer.setOutputProperty("{http://xml.apache.org/xslt}indent-amount", "2");
 
-            StreamResult streamResult = new StreamResult(new OutputStreamWriter(stream,"UTF-8"));
+            StreamResult streamResult = new StreamResult(new OutputStreamWriter(stream,encoding));
 			serializer.transform(domSource, streamResult); 
 		}
 		catch(Exception e)
@@ -3281,6 +3282,9 @@ public class KafSaxParser extends DefaultHandler {
 		}
     }
 
+    public void writeNafToStream(OutputStream stream, String encoding) {
+           this.encoding = encoding;
+    }
     public void writeNafToStream(OutputStream stream)
     {
     	try
@@ -3487,7 +3491,7 @@ public class KafSaxParser extends DefaultHandler {
             serializer.setOutputProperty(OutputKeys.INDENT, "yes");
             serializer.setOutputProperty("{http://xml.apache.org/xslt}indent-amount", "2");
 
-            StreamResult streamResult = new StreamResult(new OutputStreamWriter(stream,"UTF-8"));
+            StreamResult streamResult = new StreamResult(new OutputStreamWriter(stream, encoding));
 			serializer.transform(domSource, streamResult);
 		}
 		catch(Exception e)
@@ -3497,6 +3501,10 @@ public class KafSaxParser extends DefaultHandler {
     }
 
 
+    public void writeKafToStream(OutputStream stream, String encoding) {
+        this.encoding = encoding;
+
+    }
     public void writeKafToStream(OutputStream stream)
     {
     	try
@@ -3690,7 +3698,7 @@ public class KafSaxParser extends DefaultHandler {
             serializer.setOutputProperty(OutputKeys.INDENT, "yes");
             serializer.setOutputProperty("{http://xml.apache.org/xslt}indent-amount", "2");
 
-            StreamResult streamResult = new StreamResult(new OutputStreamWriter(stream,"UTF-8"));
+            StreamResult streamResult = new StreamResult(new OutputStreamWriter(stream,encoding));
 			serializer.transform(domSource, streamResult);
 
 		}
@@ -3818,7 +3826,8 @@ public class KafSaxParser extends DefaultHandler {
     }
 
     static public void main (String[] args) {
-        String file = "/Code/vu/kyotoproject/KafSaxParser/test/eventcoref_in.xml";
+        String file = "/Tools/kafkybot.v.1.1/example/razni11-01.naf";
+        //String file = "/Code/vu/kyotoproject/KafSaxParser/test/eventcoref_in.xml";
         //String file = "/Tools/TextPro/TextPro2.0-forNewsReader/test/gold/Time.NAF.xml";
        // String file = "/Code/vu/newsreader/pos.xml";
        // String file = "test/car.naf";
