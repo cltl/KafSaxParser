@@ -3030,7 +3030,7 @@ public class KafSaxParser extends DefaultHandler {
 			tf.setAttribute("indent-number", 4);  
 			Transformer serializer = tf.newTransformer();
 			serializer.setOutputProperty(OutputKeys.INDENT,"yes");
-			serializer.setOutputProperty(OutputKeys.ENCODING,"UTF-8");
+			//serializer.setOutputProperty(OutputKeys.ENCODING,"UTF-8");
             //serializer.setParameter("format-pretty-print", Boolean.TRUE);
             serializer.setOutputProperty(OutputKeys.INDENT, "yes");
             serializer.setOutputProperty("{http://xml.apache.org/xslt}indent-amount", "2");
@@ -3267,7 +3267,7 @@ public class KafSaxParser extends DefaultHandler {
 			//tf.setAttribute("indent-number", 4);  
 			Transformer serializer = tf.newTransformer();
 			serializer.setOutputProperty(OutputKeys.INDENT,"yes");
-			serializer.setOutputProperty(OutputKeys.ENCODING,"UTF-8");
+			//serializer.setOutputProperty(OutputKeys.ENCODING,"UTF-8");
 			serializer.setOutputProperty(OutputKeys.STANDALONE, "yes");
             //serializer.setParameter("format-pretty-print", Boolean.TRUE);
             serializer.setOutputProperty(OutputKeys.INDENT, "yes");
@@ -3285,6 +3285,7 @@ public class KafSaxParser extends DefaultHandler {
     public void writeNafToStream(OutputStream stream, String encoding) {
            this.encoding = encoding;
     }
+
     public void writeNafToStream(OutputStream stream)
     {
     	try
@@ -3309,6 +3310,7 @@ public class KafSaxParser extends DefaultHandler {
                 Element text = xmldoc.createElement("text");
                 for (int i = 0; i < this.kafWordFormList.size(); i++) {
                     KafWordForm kaf  = kafWordFormList.get(i);
+                    //System.out.println("kaf.getWf() = " + kaf.getWf());
                     text.appendChild(kaf.toNafXML(xmldoc));
                 }
                 root.appendChild(text);
@@ -3485,13 +3487,13 @@ public class KafSaxParser extends DefaultHandler {
 			//tf.setAttribute("indent-number", 4);
 			Transformer serializer = tf.newTransformer();
 			serializer.setOutputProperty(OutputKeys.INDENT,"yes");
-			serializer.setOutputProperty(OutputKeys.ENCODING,"UTF-8");
+			//serializer.setOutputProperty(OutputKeys.ENCODING,"UTF-8");
 			serializer.setOutputProperty(OutputKeys.STANDALONE, "yes");
             //serializer.setParameter("format-pretty-print", Boolean.TRUE);
-            serializer.setOutputProperty(OutputKeys.INDENT, "yes");
             serializer.setOutputProperty("{http://xml.apache.org/xslt}indent-amount", "2");
 
-            StreamResult streamResult = new StreamResult(new OutputStreamWriter(stream, encoding));
+            //StreamResult streamResult = new StreamResult(new OutputStreamWriter(stream, encoding));
+            StreamResult streamResult = new StreamResult(new OutputStreamWriter(stream));
 			serializer.transform(domSource, streamResult);
 		}
 		catch(Exception e)
@@ -3692,13 +3694,14 @@ public class KafSaxParser extends DefaultHandler {
 			//tf.setAttribute("indent-number", 4);
 			Transformer serializer = tf.newTransformer();
 			serializer.setOutputProperty(OutputKeys.INDENT,"yes");
-			serializer.setOutputProperty(OutputKeys.ENCODING,"UTF-8");
+			//serializer.setOutputProperty(OutputKeys.ENCODING,"UTF-8");
 			serializer.setOutputProperty(OutputKeys.STANDALONE, "yes");
            // serializer.setParameter("format-pretty-print", Boolean.TRUE);
             serializer.setOutputProperty(OutputKeys.INDENT, "yes");
             serializer.setOutputProperty("{http://xml.apache.org/xslt}indent-amount", "2");
 
-            StreamResult streamResult = new StreamResult(new OutputStreamWriter(stream,encoding));
+            //StreamResult streamResult = new StreamResult(new OutputStreamWriter(stream,encoding));
+            StreamResult streamResult = new StreamResult(new OutputStreamWriter(stream));
 			serializer.transform(domSource, streamResult);
 
 		}
@@ -3826,13 +3829,17 @@ public class KafSaxParser extends DefaultHandler {
     }
 
     static public void main (String[] args) {
-        String file = "/Tools/kafkybot.v.1.1/example/razni11-01.naf";
+        String file = "/Projects/NewsReader/collaboration/razni11-01.naf";
         //String file = "/Code/vu/kyotoproject/KafSaxParser/test/eventcoref_in.xml";
         //String file = "/Tools/TextPro/TextPro2.0-forNewsReader/test/gold/Time.NAF.xml";
        // String file = "/Code/vu/newsreader/pos.xml";
        // String file = "test/car.naf";
         KafSaxParser parser = new KafSaxParser();
         parser.parseFile(file);
+/*        for (int i = 0; i < parser.kafWordFormList.size(); i++) {
+            KafWordForm kafWordForm = parser.kafWordFormList.get(i);
+            System.out.println("kafWordForm.getWf() = " + kafWordForm.getWf());
+        }*/
         String outfile = file+".out.xml";
         try {
             FileOutputStream fos = new FileOutputStream(outfile);
