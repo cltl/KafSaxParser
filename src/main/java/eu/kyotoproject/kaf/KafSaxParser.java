@@ -44,7 +44,7 @@ public class KafSaxParser extends DefaultHandler {
     final byte[] utf8_bom = { (byte) 0xEF, (byte) 0xBB,
         (byte) 0xBF }; /// For Chinese KAF
     final String utf8_bomString = new String(utf8_bom);
-    static String encoding = "UTF-8";
+    //static String encoding = "UTF-8";
     private String value = "";
     private String previousvalue = "";
     private KafMetaData kafMetaData;
@@ -228,6 +228,7 @@ public class KafSaxParser extends DefaultHandler {
         init();
     }
     
+/*
     public boolean parseFile(InputSource source, String encoding)
     {
     	try 
@@ -261,12 +262,58 @@ public class KafSaxParser extends DefaultHandler {
         }
     	return false;
     }
+*/
+
+    public boolean parseFile(InputSource source)
+    {
+    	try
+    	{
+            init();
+            SAXParserFactory factory = SAXParserFactory.newInstance();
+            factory.setValidating(false);
+            SAXParser parser = factory.newSAXParser();
+            parser.parse(source, this);
+            buildSentenceTermIndex();
+            return true;
+        }
+    	catch (FactoryConfigurationError factoryConfigurationError)
+    	{
+            factoryConfigurationError.printStackTrace();
+        }
+    	catch (ParserConfigurationException e)
+    	{
+            e.printStackTrace();
+        }
+    	catch (SAXException e)
+        {
+            //System.out.println("last value = " + previousvalue);
+            e.printStackTrace();
+        }
+    	catch (IOException e)
+    	{
+           // e.printStackTrace();
+        }
+    	return false;
+    }
     
     public boolean parseFile(File file)
     {
-    	return parseFile(file, null);
-    }
+        try
+        {
+            // System.out.println("file.getAbsolutePath() = " + file.getAbsolutePath());
+            FileReader reader = new FileReader(file);
+            InputSource inp = new InputSource(reader);
+            boolean result = parseFile(inp);
+            reader.close();
+            return result;
+        }
+        catch (IOException e)
+        {
+            e.printStackTrace();
+            return false;
+        }    }
     
+/*
     public boolean parseFile(File file, String encoding)
     {
     	try
@@ -284,11 +331,12 @@ public class KafSaxParser extends DefaultHandler {
     		return false;
     	}
     }
-    
+*/
+
     public boolean parseFile(InputStream stream)
     {
     	InputSource source = new InputSource(stream);
-    	boolean result = parseFile(source, null);
+    	boolean result = parseFile(source);
     	try 
     	{
 			stream.close();
@@ -298,13 +346,19 @@ public class KafSaxParser extends DefaultHandler {
     	return result;
     }
 
+/*
     public boolean parseFile(InputStream stream, String encoding)
     {
     	InputSource source = new InputSource(stream);
         source.setEncoding(encoding);
     	return parseFile(source, encoding);
     }
-    
+
+    public boolean parseFile(String filePath, String encoding) {
+        return parseFile(new File(filePath), encoding);
+    }//--c
+*/
+
     public boolean parseFile(String filePath) {
     	return parseFile(new File(filePath));
     }//--c
@@ -317,20 +371,16 @@ public class KafSaxParser extends DefaultHandler {
     	return parseFile(new File(filePath));
     }
 
-    public boolean parseFile(String filePath, String encoding) {
-        return parseFile(new File(filePath), encoding);
-    }//--c
-
     public boolean parseStringContent(String content)
     {
        	InputSource source = new InputSource(new ByteArrayInputStream(content.getBytes()));
-       	return parseFile(source, null);
+       	return parseFile(source);
     }//--c
 
     public boolean parseByteContent(byte [] content) 
     {
     	InputSource source = new InputSource(new ByteArrayInputStream(content));
-    	return parseFile(source, null);
+    	return parseFile(source);
     }//--c
 
     public void init() {
@@ -3270,11 +3320,11 @@ public class KafSaxParser extends DefaultHandler {
 			//serializer.setOutputProperty(OutputKeys.ENCODING,"UTF-8");
 			serializer.setOutputProperty(OutputKeys.STANDALONE, "yes");
             //serializer.setParameter("format-pretty-print", Boolean.TRUE);
-            serializer.setOutputProperty(OutputKeys.INDENT, "yes");
             serializer.setOutputProperty("{http://xml.apache.org/xslt}indent-amount", "2");
 
-            StreamResult streamResult = new StreamResult(new OutputStreamWriter(stream,encoding));
-			serializer.transform(domSource, streamResult); 
+          //  StreamResult streamResult = new StreamResult(new OutputStreamWriter(stream,encoding));
+            StreamResult streamResult = new StreamResult(new OutputStreamWriter(stream));
+			serializer.transform(domSource, streamResult);
 		}
 		catch(Exception e)
 		{
@@ -3282,9 +3332,6 @@ public class KafSaxParser extends DefaultHandler {
 		}
     }
 
-    public void writeNafToStream(OutputStream stream, String encoding) {
-           this.encoding = encoding;
-    }
 
     public void writeNafToStream(OutputStream stream)
     {
@@ -3503,10 +3550,6 @@ public class KafSaxParser extends DefaultHandler {
     }
 
 
-    public void writeKafToStream(OutputStream stream, String encoding) {
-        this.encoding = encoding;
-
-    }
     public void writeKafToStream(OutputStream stream)
     {
     	try
@@ -3829,7 +3872,7 @@ public class KafSaxParser extends DefaultHandler {
     }
 
     static public void main (String[] args) {
-        String file = "/Projects/NewsReader/collaboration/razni11-01.naf";
+        String file = "/Projects/NewsReader/collaboration/bulgarian/razni11-01.naf";
         //String file = "/Code/vu/kyotoproject/KafSaxParser/test/eventcoref_in.xml";
         //String file = "/Tools/TextPro/TextPro2.0-forNewsReader/test/gold/Time.NAF.xml";
        // String file = "/Code/vu/newsreader/pos.xml";
