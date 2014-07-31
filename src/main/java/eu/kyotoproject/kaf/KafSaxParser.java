@@ -1250,7 +1250,8 @@ public class KafSaxParser extends DefaultHandler {
                else {
                    predicateSenseTags.add(sense);
                }
-           } if (ROLE) {
+           }
+           else if (ROLE) {
                if (roleSenseTags.size()>0) {
                    if (externalRefLevel>0) {
                         KafSense k = roleSenseTags.get(roleSenseTags.size()-1);
@@ -1760,11 +1761,14 @@ public class KafSaxParser extends DefaultHandler {
             }
             else if (qName.equalsIgnoreCase("term")) {
                 kafTerm.setSpans(spans);
-                if (senseTags.size()>0) {
-                    kafTerm.setSenseTags(senseTags);
-                    //// set to empty since they can also apply to components...
-                    senseTags = new ArrayList<KafSense>();
-                }
+                //if (!COMPONENT && !PREDICATE && !ROLE) {
+                    /// to be sure that these senses are not for other sublayers
+                    if (senseTags.size() > 0) {
+                        kafTerm.setSenseTags(senseTags);
+                        //// set to empty since they can also apply to components...
+                        senseTags = new ArrayList<KafSense>();
+                    }
+                //}
                 for (int i = 0; i < spans.size(); i++) {
                      String span = (String) spans.get(i);
                      WordFormToTerm.put(span, kafTerm.getTid());
@@ -1804,6 +1808,7 @@ public class KafSaxParser extends DefaultHandler {
                     TermToWord.put(component.getId(), spans);
                 }
                 spans = new ArrayList<String>();
+                senseTags = new ArrayList<KafSense>();
             }
             else if (qName.equalsIgnoreCase("component")) {
                 COMPONENT = false;
@@ -3872,7 +3877,9 @@ public class KafSaxParser extends DefaultHandler {
     }
 
     static public void main (String[] args) {
-        String file = "/Projects/NewsReader/collaboration/bulgarian/razni11-01.naf";
+        //String file = "/Projects/NewsReader/collaboration/bulgarian/razni11-01.naf";
+        String file = "/Users/piek/Desktop/NWR/NWR-SRL/wikinews-nl/files/14369_Airbus_offers_funding_to_search_for_black_boxes_from_Air_France_disaster.ukb.kaf";
+
         //String file = "/Code/vu/kyotoproject/KafSaxParser/test/eventcoref_in.xml";
         //String file = "/Tools/TextPro/TextPro2.0-forNewsReader/test/gold/Time.NAF.xml";
        // String file = "/Code/vu/newsreader/pos.xml";
