@@ -154,4 +154,20 @@ public class KafSense  implements Serializable {
     public void setKafTermSentiment(KafTermSentiment kafTermSentiment) {
         this.kafTermSentiment = kafTermSentiment;
     }
+
+    static void addSenseToSenseTags (ArrayList<KafSense> senseTags, int level, KafSense sense) {
+        if (level == 0 || senseTags.size()==0) {
+            senseTags.add(sense);
+        }
+        else {
+            KafSense k = senseTags.get(senseTags.size() - 1);
+            if (level==1) {
+                // System.out.println("k.toString() = " + k.toString());
+                k.getChildren().add(sense);
+            }
+            else {
+                addSenseToSenseTags(k.children, level-1, sense);
+            }
+        }
+    }
 }

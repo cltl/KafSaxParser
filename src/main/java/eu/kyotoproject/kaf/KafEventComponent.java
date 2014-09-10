@@ -147,6 +147,14 @@ public class KafEventComponent {
     }
 
     public void addExternalReferences(KafSense externalReference) {
-        this.externalReferences.add(externalReference);
+        boolean has = false;
+        for (int i = 0; i < this.externalReferences.size(); i++) {
+            KafSense kafSense = this.externalReferences.get(i);
+            if (kafSense.getSensecode().equals(externalReference.getSensecode())) {
+                has = true;
+                break;
+            }
+        }
+        if (!has) this.externalReferences.add(externalReference);
     }
 }

@@ -1193,12 +1193,13 @@ public class KafSaxParser extends DefaultHandler {
                     <externalRef confidence="1.0" reference="ActionVerbalBase" reftype="sc_subClassOf" resource="ontology"/>
                 </externalRef>
              */
+         //  System.out.println("externalRefLevel = " + externalRefLevel);
            sense = new KafSense();
            for (int i = 0; i < attributes.getLength(); i++) {
                String name = attributes.getQName(i);
                if (name.equalsIgnoreCase("reference")) {
                    sense.setSensecode(attributes.getValue(i).trim());
-                  // System.out.println("sense.getSenseCode() = " + sense.getSenseCode());
+               //    System.out.println("sense.getSenseCode() = " + sense.getSensecode());
                }
                else if (name.equalsIgnoreCase("confidence")) {
                    double conf = 0;
@@ -1212,6 +1213,7 @@ public class KafSaxParser extends DefaultHandler {
                else if (name.equalsIgnoreCase("resource"))
                {
             	   sense.setResource(attributes.getValue(i).trim());
+                   //System.out.println("sense.getR = " + sense.getResource());
                }
                else if (name.equalsIgnoreCase("reftype"))  {
                     sense.setRefType(attributes.getValue(i).trim());
@@ -1223,66 +1225,38 @@ public class KafSaxParser extends DefaultHandler {
             	 //  System.out.println("449 ********* FOUND UNKNOWN Attribute " + name + " *****************");
                }
            }
+           //System.out.println("sense.toString() = " + sense.toString());
            if (COMPONENT) {
-               if (senseTagsComponents.size()>0) {
-                   if (externalRefLevel>0) {
-                        KafSense k = senseTagsComponents.get(senseTagsComponents.size()-1);
-                        k.getChildren().add(sense);
-                   }
-                   else {
-                       senseTagsComponents.add(sense);
-                   }
-               }
-               else {
-                   senseTagsComponents.add(sense);
-               }
+               KafSense.addSenseToSenseTags(senseTagsComponents, externalRefLevel, sense);
            }
            else if (PREDICATE && !ROLE) {
-               if (predicateSenseTags.size()>0) {
-                   if (externalRefLevel>0) {
-                        KafSense k = predicateSenseTags.get(predicateSenseTags.size()-1);
-                        k.getChildren().add(sense);
-                   }
-                   else {
-                       predicateSenseTags.add(sense);
-                   }
-               }
-               else {
-                   predicateSenseTags.add(sense);
-               }
+               KafSense.addSenseToSenseTags(predicateSenseTags, externalRefLevel, sense);
            }
            else if (ROLE) {
-               if (roleSenseTags.size()>0) {
-                   if (externalRefLevel>0) {
-                        KafSense k = roleSenseTags.get(roleSenseTags.size()-1);
-                        k.getChildren().add(sense);
-                   }
-                   else {
-                       roleSenseTags.add(sense);
-                   }
-               }
-               else {
-                   roleSenseTags.add(sense);
-               }
+               KafSense.addSenseToSenseTags(roleSenseTags, externalRefLevel, sense);
            }
            else {
+               //// in all other cases we are dealing with external reference sense linked to terms
+               KafSense.addSenseToSenseTags(senseTags, externalRefLevel, sense);
+
+/* DOES NOT DEAL WITH NESTING
                if (senseTags.size()>0) {
                    if (externalRefLevel>0) {
                        KafSense k = senseTags.get(senseTags.size()-1);
-                     //  System.out.println("k.toString() = " + k.toString());
                         k.getChildren().add(sense);
                    }
                    else {
                        senseTags.add(sense);
-                    //   System.out.println("next sense.toString() = " + sense.toString());
                    }
                }
                else {
                    senseTags.add(sense);
-                //   System.out.println("first sense.toString() = " + sense.toString());
                }
+*/
+
            }
            externalRefLevel++;
+          // System.out.println("ex = " + externalRefLevel);
        }
        else if (qName.equalsIgnoreCase("component")) {
     /*
@@ -3878,7 +3852,9 @@ public class KafSaxParser extends DefaultHandler {
 
     static public void main (String[] args) {
         //String file = "/Projects/NewsReader/collaboration/bulgarian/razni11-01.naf";
-        String file = "/Users/piek/Desktop/NWR/NWR-SRL/wikinews-nl/files/14369_Airbus_offers_funding_to_search_for_black_boxes_from_Air_France_disaster.ukb.kaf";
+        //String file = "/Users/piek/Desktop/NWR/NWR-SRL/wikinews-nl/files/14369_Airbus_offers_funding_to_search_for_black_boxes_from_Air_France_disaster.ukb.kaf";
+       // String file = "/Users/piek/Desktop/NWR/NWR-SRL/wikinews-nl/files/14369_Airbus_offers_funding_to_search_for_black_boxes_from_Air_France_disaster.ukb.kaf";
+        String file = "/Tools/ontotagger-v1.0/naf-example/spinoza-voorbeeld-ukb.ont.xml";
 
         //String file = "/Code/vu/kyotoproject/KafSaxParser/test/eventcoref_in.xml";
         //String file = "/Tools/TextPro/TextPro2.0-forNewsReader/test/gold/Time.NAF.xml";
