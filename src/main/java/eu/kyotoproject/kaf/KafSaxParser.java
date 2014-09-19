@@ -3138,7 +3138,7 @@ public class KafSaxParser extends DefaultHandler {
 			DOMImplementation impl = builder.getDOMImplementation();
 
 			Document xmldoc = impl.createDocument(null, "KAF", null);
-			xmldoc.setXmlStandalone(true);
+			xmldoc.setXmlStandalone(false);
 			Element root = xmldoc.getDocumentElement();
 			root.setAttribute("xml:lang", kafMetaData.getLanguage());
 			root.appendChild(kafMetaData.toHeaderXML(xmldoc));
@@ -3321,7 +3321,7 @@ public class KafSaxParser extends DefaultHandler {
 			DOMImplementation impl = builder.getDOMImplementation();
 
 			Document xmldoc = impl.createDocument(null, "NAF", null);
-			xmldoc.setXmlStandalone(true);
+			xmldoc.setXmlStandalone(false);
 			Element root = xmldoc.getDocumentElement();
             root.setAttribute("version", NAFVERSION);
 			root.setAttribute("xml:lang", kafMetaData.getLanguage());
@@ -3538,7 +3538,7 @@ public class KafSaxParser extends DefaultHandler {
 			DOMImplementation impl = builder.getDOMImplementation();
 
 			Document xmldoc = impl.createDocument(null, "KAF", null);
-			xmldoc.setXmlStandalone(true);
+			xmldoc.setXmlStandalone(false);
 			Element root = xmldoc.getDocumentElement();
 			root.setAttribute("xml:lang", kafMetaData.getLanguage());
 			root.appendChild(kafMetaData.toHeaderXML(xmldoc));
