@@ -2101,6 +2101,7 @@ public class KafSaxParser extends DefaultHandler {
         return kafOpinionArrayList;
     }
 
+
     /**
      * Gives the sentence identifier for a term identifiewr
      * @param termId
@@ -2118,6 +2119,48 @@ public class KafSaxParser extends DefaultHandler {
             }
         }
         return sentenceId;
+    }
+
+
+    /**
+     *
+     * @param span
+     * @return
+     */
+     public boolean contentWord (String span) {
+        KafTerm kafTerm = getTerm(span);
+        if (kafTerm!=null) {
+            String pos = kafTerm.getPos();
+            if (pos.toLowerCase().startsWith("n")) {
+                return true;
+            }
+            if (pos.toLowerCase().startsWith("v")) {
+                return true;
+            }
+            if (pos.toLowerCase().startsWith("a")) {
+                return true;
+            }
+            if (pos.toLowerCase().startsWith("g")) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
+     * Counts how many of the span elements are content words
+     * @param spans
+     * @return
+     */
+     public int getNumberContentWords (ArrayList<String> spans) {
+        int nContentWords = 0;
+        for (int i = 0; i < spans.size(); i++) {
+            String span = spans.get(i);
+            if (contentWord(span)) {
+                nContentWords++;
+            }
+        }
+        return nContentWords;
     }
 
     /**
