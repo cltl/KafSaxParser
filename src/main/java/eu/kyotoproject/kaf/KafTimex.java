@@ -103,16 +103,15 @@ public class KafTimex {
             Comment comment = xmldoc.createComment(this.getTokenString());
             root.appendChild(comment);
         }
-
-        Element spanElement = xmldoc.createElement("span");
-        for (int i = 0; i < this.getSpans().size(); i++)
-        {
-            Element target = xmldoc.createElement("target");
-            target.setAttribute("id", this.getSpans().get(i));
-            spanElement.appendChild(target);
+        if (this.getSpans().size()>0) {
+            Element spanElement = xmldoc.createElement("span");
+            for (int i = 0; i < this.getSpans().size(); i++) {
+                Element target = xmldoc.createElement("target");
+                target.setAttribute("id", this.getSpans().get(i));
+                spanElement.appendChild(target);
+            }
+            root.appendChild(spanElement);
         }
-        root.appendChild(spanElement);
-
         return root;
     }
 

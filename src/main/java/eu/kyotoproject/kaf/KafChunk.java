@@ -100,18 +100,19 @@ public class KafChunk {
   	  if (!head.isEmpty()) root.setAttribute("head", head);
   	  if (!phrase.isEmpty()) root.setAttribute("phrase", phrase);
 
-  	  Element span = xmldoc.createElement("span");
-      if (tokenString.trim().length()>0) {
-            Comment comment = xmldoc.createComment(tokenString.trim());
-            span.appendChild(comment);
+      if (this.getSpans().size()>0) {
+          Element span = xmldoc.createElement("span");
+          if (tokenString.trim().length() > 0) {
+              Comment comment = xmldoc.createComment(tokenString.trim());
+              span.appendChild(comment);
+          }
+          for (int i = 0; i < this.spans.size(); i++) {
+              Element target = xmldoc.createElement("target");
+              target.setAttribute("id", spans.get(i));
+              span.appendChild(target);
+          }
+          root.appendChild(span);
       }
-      for (int i = 0; i < this.spans.size(); i++)
-  	  {
-  		  Element target = xmldoc.createElement("target");
-  		  target.setAttribute("id", spans.get(i));
-  		  span.appendChild(target);
-  	  }
-  	  root.appendChild(span);
   	  return root;
     }
 
