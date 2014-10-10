@@ -359,6 +359,7 @@ public class KafStatistics {
         public void setPhraseMap(HashMap<String, ArrayList<Integer>> phraseMap) {
             this.phraseMap = phraseMap;
         }
+
         public void addPhraseMap(String str, Integer cnt, int n) {
             if (this.phraseMap.containsKey(str)) {
                 ArrayList<Integer> values = this.phraseMap.get(str);
@@ -533,7 +534,7 @@ public class KafStatistics {
             str += "\n";
             fos.write(str.getBytes());
 
-            str = "Main  POS table"+fileHeaderString+"\n";
+            str = "POS table"+fileHeaderString+"\n";
             Set keySet = this.mainPosMap.keySet();
             Iterator keys = keySet.iterator();
             TreeSet sorter = new TreeSet();
@@ -561,7 +562,7 @@ public class KafStatistics {
             fos.write(str.getBytes());
 
             str = "\n";
-            str += "Specific POS table"+fileHeaderString+"\n";
+            str += "Morphofeatures table"+fileHeaderString+"\n";
             keySet = posMap.keySet();
             keys = keySet.iterator();
             sorter = new TreeSet();
@@ -881,13 +882,13 @@ public class KafStatistics {
         HashMap<String, Integer> posMap = new HashMap<String, Integer>();
         for (int i = 0; i < parser.kafTermList.size(); i++) {
             KafTerm kafTerm = parser.kafTermList.get(i);
-            if (posMap.containsKey(kafTerm.getPos())) {
-                Integer cnt = posMap.get(kafTerm.getPos());
+            if (posMap.containsKey(kafTerm.getMorphofeat())) {
+                Integer cnt = posMap.get(kafTerm.getMorphofeat());
                 cnt++;
-                posMap.put(kafTerm.getPos(), cnt);
+                posMap.put(kafTerm.getMorphofeat(), cnt);
             }
             else {
-                posMap.put(kafTerm.getPos(), 1);
+                posMap.put(kafTerm.getMorphofeat(), 1);
             }
         }
         return posMap;
@@ -1022,7 +1023,7 @@ public class KafStatistics {
         str += "Nr. of Places\t"+parser.kafPlaceArrayList.size()+"\n";
         str += "Nr. of Discourse units\t"+parser.kafDiscourseList.size()+"\n";
         str += "\n";
-        str += "Main  POS table\n";
+        str += "POS table\n";
         HashMap<String, Integer> posMap = getMainPosMap(parser);
         Set keySet = posMap.keySet();
         Iterator keys = keySet.iterator();
@@ -1038,7 +1039,7 @@ public class KafStatistics {
             str += "\t"+key+"\t"+cnt.toString()+"\n";
         }
 
-        str += "POS table\n";
+        str += "Morphofeature table\n";
         posMap = getPosMap(parser);
         keySet = posMap.keySet();
         keys = keySet.iterator();
@@ -1112,8 +1113,8 @@ public class KafStatistics {
         str += "\tNr. type\t"+lemmaMap.size()+"\n";
         str += "\tNr. term tokens\t"+parser.kafTermList.size()+"\n";
         str += "\tNr. word form tokens\t"+parser.kafWordFormList.size()+"\n";
-        str += "\tType/term token ration\t"+parser.kafTermList.size()/lemmaMap.size()+"\n";
-        str += "\tType/word token ration\t"+parser.kafWordFormList.size()/lemmaMap.size()+"\n";
+        str += "\tType/term token ratio\t"+parser.kafTermList.size()/lemmaMap.size()+"\n";
+        str += "\tType/word token ratio\t"+parser.kafWordFormList.size()/lemmaMap.size()+"\n";
         keySet = lemmaMap.keySet();
         keys = keySet.iterator();
         sorter = new TreeSet();
@@ -1165,7 +1166,7 @@ public class KafStatistics {
                 for (int i = 0; i < files.length; i++) {
                     String filePath = files[i];
                    // System.out.println("filePath = " + filePath);
-                    String fileName = new File (filePath).getName();
+                    //String fileName = new File (filePath).getName();
                     parser.parseFile(filePath);
                     updateStatistics(stats, filePath, parser, i);
                 }

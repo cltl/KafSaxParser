@@ -35,6 +35,12 @@ public class KafEvent extends KafEventComponent{
         this.participants.add(participant);
     }
 
+    public void addTermDataToSpans (KafSaxParser kafSaxParser) {
+        for (int i = 0; i < this.getSpans().size(); i++) {
+            CorefTarget corefTarget = this.getSpans().get(i);
+            corefTarget.setLemmaAndPos(kafSaxParser);
+        }
+    }
 
     public Element toXML(Document xmldoc)
     {
@@ -94,9 +100,6 @@ public class KafEvent extends KafEventComponent{
 
         return root;
     }
-
-
-
 
     /*
       <srl>

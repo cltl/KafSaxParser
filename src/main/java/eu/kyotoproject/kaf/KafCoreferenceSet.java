@@ -41,6 +41,8 @@ public class KafCoreferenceSet {
 
     private String coid;
     private String type;
+    private double score;
+    private String lowestCommonSubsumer;
     private ArrayList<ArrayList<CorefTarget>> setsOfSpans;
     private ArrayList<String> tokenStringArray;
 
@@ -48,9 +50,28 @@ public class KafCoreferenceSet {
     public KafCoreferenceSet() {
         this.coid = "";
         this.type = "";
+        this.score = 0;
+        this.lowestCommonSubsumer = "";
         this.setsOfSpans = new ArrayList<ArrayList<CorefTarget>>();
         this.tokenStringArray = new ArrayList<String>();
     }
+
+    public double getScore() {
+        return score;
+    }
+
+    public void setScore(double score) {
+        this.score = score;
+    }
+
+    public String getLowestCommonSubsumer() {
+        return lowestCommonSubsumer;
+    }
+
+    public void setLowestCommonSubsumer(String lowestCommonSubsumer) {
+        this.lowestCommonSubsumer = lowestCommonSubsumer;
+    }
+
     public ArrayList<String> getTokenStringArray() {
         return tokenStringArray;
     }
