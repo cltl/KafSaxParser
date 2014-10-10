@@ -12,39 +12,21 @@ import org.w3c.dom.Element;
  */
 public class CorefTarget {
         private String id;
-        private double score;
         private String head;
         private String lemma;
-        private String subsumer; //lowestcommonsubsumer
         private String pos;
         private String tokenString;
 
         public CorefTarget() {
             this.head = "";
             this.id = "";
-            this.score = 0;
             this.lemma = "";
-            this.subsumer = "";
             this.pos = "";
             this.tokenString = "";
         }
 
 
-    public String getSubsumer() {
-        return subsumer;
-    }
 
-    public void setSubsumer(String subsumer) {
-        this.subsumer = subsumer;
-    }
-
-    public double getScore() {
-        return score;
-    }
-
-    public void setScore(double score) {
-        this.score = score;
-    }
 
     public void setLemmaAndPos (KafSaxParser kafSaxParser) {
         KafTerm kafTerm = kafSaxParser.getTerm(this.id);
@@ -94,7 +76,7 @@ public class CorefTarget {
                     ", id='" + id + '\'' +
                     ", phrase='" + tokenString + '\'' +
                     ", lemma='" + lemma + '\'' +
-                    ", score='" + score + '\'' +
+                    ", pos='" + pos + '\'' +
                     '}';
         }
 
@@ -103,8 +85,6 @@ public class CorefTarget {
             Element root = xmldoc.createElement("target");
             if (id != null)
                 root.setAttribute("id", id);
-           /* if (score > 0)
-                root.setAttribute("score", new Double(score).toString());*/
             if (head != null)
                 if (!head.isEmpty()) root.setAttribute("head", head);
             return root;
