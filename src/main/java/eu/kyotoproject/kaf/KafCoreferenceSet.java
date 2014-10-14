@@ -112,6 +112,32 @@ public class KafCoreferenceSet {
         this.setsOfSpans.add(setOfSpans);
     }
 
+
+    public boolean hasSpan (ArrayList<CorefTarget> spans) {
+        for (int i = 0; i < setsOfSpans.size(); i++) {
+            ArrayList<CorefTarget> corefTargets = setsOfSpans.get(i);
+            int overlap = CorefTarget.overlapSetOfSpans(corefTargets, spans);
+            if (overlap==corefTargets.size() && (overlap==spans.size())) {
+                /// exact match
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public boolean hasIntersection (ArrayList<CorefTarget> spans) {
+        for (int i = 0; i < setsOfSpans.size(); i++) {
+            ArrayList<CorefTarget> corefTargets = setsOfSpans.get(i);
+            int overlap = CorefTarget.overlapSetOfSpans(corefTargets, spans);
+            if (overlap>0) {
+                /// exact match
+                return true;
+            }
+        }
+        return false;
+    }
+
+
     public void setTokenStrings (KafSaxParser parser) {
         for (int i = 0; i < setsOfSpans.size(); i++) {
             ArrayList<CorefTarget> corefTargets = setsOfSpans.get(i);
@@ -176,4 +202,8 @@ public class KafCoreferenceSet {
         }
         return root;
     }
+
+
+
+
 }

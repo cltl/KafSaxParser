@@ -66,7 +66,7 @@ public class KafDep {
   	  root.setAttribute("to", to);
   	  root.setAttribute("rfunc", rfunc);
       Comment comment = xmldoc.createComment(tokenString.trim());
-      comment.appendChild(comment);
+      root.appendChild(comment);
       return root;
     }
     
@@ -76,6 +76,10 @@ public class KafDep {
  	  if (!from.isEmpty()) root.setAttribute("from", from);
   	  if (!to.isEmpty()) root.setAttribute("to", to);
   	  if (!rfunc.isEmpty()) root.setAttribute("rfunc", rfunc);
+      if (!tokenString.isEmpty()) {
+        Comment comment = xmldoc.createComment(tokenString.trim());
+        root.appendChild(comment);
+      }
   	  return root;
     }
 

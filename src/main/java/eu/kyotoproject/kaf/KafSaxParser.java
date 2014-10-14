@@ -105,6 +105,16 @@ public class KafSaxParser extends DefaultHandler {
     public ArrayList<KafDep> kafDepList;
 
     /**
+     * ArrayList with KafEventRelations expressing Clinks
+     */
+    public ArrayList<KafEventRelation> kafClinks;
+
+    /**
+     * ArrayList with KafEventRelations expressing TLinks
+     */
+    public ArrayList<KafEventRelation> kafTlinks;
+
+    /**
      * ArrayList with the KafTextUnit elements in the order as presented in the KAF file
      */
     public ArrayList<KafTextUnit> kafDiscourseList;
@@ -201,6 +211,7 @@ public class KafSaxParser extends DefaultHandler {
     private KafWordForm kafWordForm;
     private TermComponent termComponent;
     private KafDep kafDep;
+    private KafEventRelation kafEventRelation;
     private KafOpinion kafOpinion;
     private KafTermSentiment kafTermSentiment;
     private KafEvent kafEvent;
@@ -395,6 +406,8 @@ public class KafSaxParser extends DefaultHandler {
          kafTermList = new ArrayList<KafTerm>();
          kafChunkList = new ArrayList<KafChunk>();
          kafDepList = new ArrayList<KafDep>();
+         kafClinks = new ArrayList<KafEventRelation>();
+         kafTlinks = new ArrayList<KafEventRelation>();
          senseTags = new ArrayList<KafSense>();
          predicateSenseTags = new ArrayList<KafSense>();
          roleSenseTags = new ArrayList<KafSense>();
@@ -420,6 +433,7 @@ public class KafSaxParser extends DefaultHandler {
          property = false;
          kafParticipant = new KafParticipant();
          kafReference = new KafReference();
+         kafEventRelation = new KafEventRelation();
          date = new ISODate();
          country = new GeoCountryObject();
          place = new GeoPlaceObject();
@@ -656,6 +670,64 @@ public class KafSaxParser extends DefaultHandler {
             	//   System.out.println("314 ********* FOUND UNKNOWN Attribute " + name + " *****************");
                }
            }
+       }
+       else if (qName.equalsIgnoreCase("tlink")) {
+           kafEventRelation = new KafEventRelation();
+           for (int i = 0; i < attributes.getLength(); i++) {
+               String name = attributes.getQName(i);
+               if (name.equalsIgnoreCase("from")) {
+                   kafEventRelation.setFrom(attributes.getValue(i).trim());
+               }
+               else if (name.equalsIgnoreCase("to")) {
+                   kafEventRelation.setTo(attributes.getValue(i).trim());
+               }
+               else if (name.equalsIgnoreCase("relType")) {
+                   kafEventRelation.setRelType(attributes.getValue(i).trim());
+               }
+               else if (name.equalsIgnoreCase("fromType")) {
+                   kafEventRelation.setFromType(attributes.getValue(i).trim());
+               }
+               else if (name.equalsIgnoreCase("toType")) {
+                   kafEventRelation.setToType(attributes.getValue(i).trim());
+               }
+               else if (name.equalsIgnoreCase("id")) {
+                   kafEventRelation.setId(attributes.getValue(i).trim());
+               }
+               else {
+            	//   System.out.println("329 ********* FOUND UNKNOWN Attribute " + name + " *****************");
+               }
+           }
+           /// dep only has attributes so we can store it now....
+           kafTlinks.add(kafEventRelation);
+       }
+       else if (qName.equalsIgnoreCase("clink")) {
+           kafEventRelation = new KafEventRelation();
+           for (int i = 0; i < attributes.getLength(); i++) {
+               String name = attributes.getQName(i);
+               if (name.equalsIgnoreCase("from")) {
+                   kafEventRelation.setFrom(attributes.getValue(i).trim());
+               }
+               else if (name.equalsIgnoreCase("to")) {
+                   kafEventRelation.setTo(attributes.getValue(i).trim());
+               }
+               else if (name.equalsIgnoreCase("relType")) {
+                   kafEventRelation.setRelType(attributes.getValue(i).trim());
+               }
+               else if (name.equalsIgnoreCase("fromType")) {
+                   kafEventRelation.setFromType(attributes.getValue(i).trim());
+               }
+               else if (name.equalsIgnoreCase("toType")) {
+                   kafEventRelation.setToType(attributes.getValue(i).trim());
+               }
+               else if (name.equalsIgnoreCase("id")) {
+                   kafEventRelation.setId(attributes.getValue(i).trim());
+               }
+               else {
+            	//   System.out.println("329 ********* FOUND UNKNOWN Attribute " + name + " *****************");
+               }
+           }
+           /// dep only has attributes so we can store it now....
+           kafClinks.add(kafEventRelation);
        }
        else if (qName.equalsIgnoreCase("dep")) {
            kafDep = new KafDep();
@@ -2374,200 +2446,7 @@ public class KafSaxParser extends DefaultHandler {
         return isoDates;
     }
 
-    /**	@deprecated Use getXML() instead.
-     * 
-     */
-    public String serialization () {
-        String str = "<?xml version=\"1.0\"?>\n" +kafMetaData.toKafStartElementString();
-        str += kafMetaData.toKafHeaderString();
-        str += "<text>\n";
-        for (int i = 0; i < this.kafWordFormList.size(); i++) {
-            KafWordForm kaf  = (KafWordForm) kafWordFormList.get(i);
-            str += kaf.toString();
-        }
-        str += "</text>\n";
-        str += "<terms>\n";
-        for (int i = 0; i < this.kafTermList.size(); i++) {
-            KafTerm kaf  = (KafTerm) kafTermList.get(i);
-            str += kaf.toString();
-        }
-        str += "</terms>\n";
-        str += "<chunks>\n";
-        for (int i = 0; i < this.kafChunkList.size(); i++) {
-            KafChunk kaf  = (KafChunk) kafChunkList.get(i);
-            str += kaf.toString();
-        }
-        str += "</chunks>\n";
-        str += "<deps>\n";
-        for (int i = 0; i < this.kafDepList.size(); i++) {
-            KafDep kaf  = (KafDep) kafDepList.get(i);
-            str += kaf.toString();
-        }
-        str += "</deps>\n";
 
-        if (kafEventISIList.size()>0) {
-            str += "<isi-events>\n";
-            for (int i = 0; i < kafEventISIList.size(); i++) {
-                KafEventISI eventISI = kafEventISIList.get(i);
-                str += eventISI.toString();
-            }
-            str += "</isi-events>\n";
-        }
-
-        if (kafEventArrayList.size()>0) {
-            str += "<events>\n";
-            for (int i = 0; i < kafEventArrayList.size(); i++) {
-                KafEvent event = kafEventArrayList.get(i);
-                str += event.toString();
-            }
-            str += "</events>\n";
-        }
-
-        str += "<opinions>\n";
-        for (int i = 0; i < this.kafOpinionArrayList.size(); i++) {
-            KafOpinion kaf  = (KafOpinion) kafOpinionArrayList.get(i);
-            str += kaf.toString();
-        }
-        str += "</opinions>\n";
-
-        str += "<entities>\n";
-        for (int i = 0; i < this.kafEntityArrayList.size(); i++) {
-            KafEntity kaf  = kafEntityArrayList.get(i);
-            str += kaf.toString();
-        }
-        str += "</entities>\n";
-
-        str += "<tunits>\n";
-        for (int i = 0; i < this.kafDiscourseList.size(); i++) {
-            KafTextUnit kaf  = (KafTextUnit) kafDiscourseList.get(i);
-            str += kaf.toString();
-        }
-        str += "</tunits>\n";
-        str += "</KAF>\n";
-        return str;
-    }
-
-    /**	@deprecated Use writeKafToFile(FileOutputStream) instead.
-     * 
-     */
-    public void serialization (FileOutputStream fos) {
-        try {
-        	OutputStreamWriter writer = new OutputStreamWriter(fos);
-            writer.write("<?xml version=\"1.0\"?>\n" +kafMetaData.toKafStartElementString());
-            writer.write(kafMetaData.toKafHeaderString());
-            writer.write("<text>\n");
-            for (int i = 0; i < this.kafWordFormList.size(); i++) {
-                KafWordForm kaf  = (KafWordForm) kafWordFormList.get(i);
-                writer.write(kaf.toString());
-            }
-            writer.write("</text>\n");
-            
-            writer.write("<terms>\n");
-            for (int i = 0; i < this.kafTermList.size(); i++) {
-                KafTerm kaf  = (KafTerm) kafTermList.get(i);
-                writer.write(kaf.toString());
-            }
-            writer.write("</terms>\n");
-
-            writer.write("<deps>\n");
-            for (int i = 0; i < this.kafDepList.size(); i++) {
-                KafDep kaf  = (KafDep) kafDepList.get(i);
-                writer.write(kaf.toString());
-            }
-            writer.write("</deps>\n");
-
-            writer.write("<chunks>\n");
-            for (int i = 0; i < this.kafChunkList.size(); i++) {
-                KafChunk kaf  = (KafChunk) kafChunkList.get(i);
-                writer.write(kaf.toString());
-            }
-            writer.write("</chunks>\n");
-
-            if (kafOpinionArrayList.size()>0){
-                writer.write("<opinions>\n");
-                for (int i = 0; i < this.kafOpinionArrayList.size(); i++) {
-                    KafOpinion kaf  = (KafOpinion) kafOpinionArrayList.get(i);
-                    writer.write(kaf.toString());
-                }
-                writer.write("</opinions>\n");
-            }
-
-            if (kafEventISIList.size()>0) {
-                writer.write("<isi-events>\n");
-                for (int i = 0; i < kafEventISIList.size(); i++) {
-                    KafEventISI eventISI = kafEventISIList.get(i);
-                    writer.write(eventISI.toString());
-                }
-                writer.write("</isi-events>\n");
-            }
-            writer.write("<tunits>\n");
-            for (int i = 0; i < this.kafDiscourseList.size(); i++) {
-                KafTextUnit kaf  = (KafTextUnit) kafDiscourseList.get(i);
-                writer.write(kaf.toString());
-            }
-            writer.write("</tunits>\n");
-            writer.write("<locations>\n");
-            writer.write("</locations>\n");
-            writer.write("<dates>\n");
-            writer.write("</dates>\n");
-            writer.write("</KAF>\n");
-            writer.flush();
-            writer.close();
-        } catch (IOException e) {
-            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
-        }
-    }
-    
-    /**	@deprecated Use writeKafToFile(FileOutputStream, true) instead.
-     * 
-     */
-    public void NEserialization (FileOutputStream fos) {
-        try {
-        	OutputStreamWriter writer = new OutputStreamWriter(fos);
-            writer.write("<?xml version=\"1.0\"?>\n" +kafMetaData.toKafStartElementString());
-            writer.write(kafMetaData.toKafHeaderString());
-            writer.write("</KAF>\n");
-            writer.flush();
-            writer.close();
-        } catch (IOException e) {
-            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
-        }
-    }
-
-	/**	@deprecated Use writeDiscourseUnitsToFile(FileOutputStream) instead.
-	 * 
-	 */
-    public void serializationDiscourceUnits (FileOutputStream fos) {
-        try {
-        	OutputStreamWriter writer = new OutputStreamWriter(fos);
-        	writer.write("<?xml version=\"1.0\"?>\n" +kafMetaData.toKafStartElementString());
-            writer.write(kafMetaData.toKafHeaderString());
-        //    fos.write(str.getBytes());
-/*
-            str = "<text>\n";
-            fos.write(str.getBytes());
-            for (int i = 0; i < this.kafWordFormList.size(); i++) {
-                KafWordForm kaf  = (KafWordForm) kafWordFormList.get(i);
-                str = kaf.toString();
-                fos.write(str.getBytes());
-            }
-            str = "</text>\n";
-            fos.write(str.getBytes());
-*/
-            writer.write("<tunits>\n");
-            for (int i = 0; i < this.kafDiscourseList.size(); i++) {
-                KafTextUnit kaf  = (KafTextUnit) kafDiscourseList.get(i);
-                writer.write(kaf.toString());
-            //    fos.write(str.getBytes());
-            }
-            writer.write("</tunits>\n");
-            writer.write("</KAF>\n");
-       //     fos.write(str.getBytes());
-        //    fos.flush();
-        } catch (IOException e) {
-            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
-        }
-    }
     
     /**	Writes an xml-representation of the kaf-header and discourse units to
      * file.
@@ -2612,241 +2491,7 @@ public class KafSaxParser extends DefaultHandler {
 		}
     }
 
-	/** @deprecated Use writePageToKaf(KafTextUnit, FileOutputStream) instead.
-	 * 
-	 */
-    public void pageSerialization (KafTextUnit ktu, FileOutputStream fos) {
-        ////ktu.spans contains a list of all the wf ids that are part of the ktu
-        String str = null;
-        try {
-/*
-            System.out.println("ktu.spans.size() = " + ktu.spans.size());
-            System.out.println("ktu.spans.get(0) = " + ktu.spans.get(0));
-            System.out.println("ktu.spans.get(ktu.spans.size()-1) = " + ktu.spans.get(ktu.spans.size()-1));
-*/
-            ArrayList<String> termIdScope = new ArrayList<String>();
-            boolean scope = true;
-            str = "<?xml version=\"1.0\"?>\n" + kafMetaData.toKafStartElementString();
-            str += kafMetaData.toKafHeaderString();
-            str += "<text>\n";
-            fos.write(str.getBytes());
-            for (int i = 0; i < this.kafWordFormList.size(); i++) {
-                KafWordForm kaf  = (KafWordForm) kafWordFormList.get(i);
-                if (ktu.getSpans().contains(kaf.getWid())) {
-                    str = kaf.toString();
-                    //System.out.println("str = " + str);
-                    fos.write(str.getBytes());
-                }
-            }
-            str = "</text>\n";
-            fos.write(str.getBytes());
-            str = "<terms>\n";
-            fos.write(str.getBytes());
-            for (int i = 0; i < this.kafTermList.size(); i++) {
-                KafTerm kaf  = (KafTerm) kafTermList.get(i);
-                scope = true;
-                for (int j = 0; j < kaf.spans.size(); j++) {
-                   String span = (String) kaf.spans.get(j);
-                    if (!ktu.getSpans().contains(span)) {
-                        scope = false;
-                        //System.out.println("out of scope span = " + span);
-                        break;
-                    }
-                }
-                if (scope) {
-                    termIdScope.add(kaf.getTid());
-                    str = kaf.toString();
-                    fos.write(str.getBytes());
-                }
-            }
-            str = "</terms>\n";
-            fos.write(str.getBytes());
-            str = "<chunks>\n";
-            fos.write(str.getBytes());
-            for (int i = 0; i < this.kafChunkList.size(); i++) {
-                KafChunk kaf  = (KafChunk) kafChunkList.get(i);
-                scope = true;
-                for (int j = 0; j < kaf.spans.size(); j++) {
-                   String span = (String) kaf.spans.get(j);
-                    if (!termIdScope.contains(span)) {
-                        scope = false;
-                        break;
-                    }
-                }
-                if (scope) {
-                    str = kaf.toString();
-                    fos.write(str.getBytes());
-                }
-            }
-            str = "</chunks>\n";
-            fos.write(str.getBytes());
-            str = "<deps>\n";
-            fos.write(str.getBytes());
-            for (int i = 0; i < this.kafDepList.size(); i++) {
-                KafDep kaf  = (KafDep) kafDepList.get(i);
-                if ((termIdScope.contains(kaf.from)) &&
-                    (termIdScope.contains(kaf.to))) {
-                    str = kaf.toString();
-                    fos.write(str.getBytes());
-                }
-            }
-            str = "</deps>\n";
-            fos.write(str.getBytes());
 
-            if (kafEventISIList.size()>0) {
-                str = "<isi-events>\n";
-                for (int i = 0; i < kafEventISIList.size(); i++) {
-                    KafEventISI eventISI = kafEventISIList.get(i);
-                    str += eventISI.toString();
-                }
-                str += "</isi-events>\n";
-                fos.write(str.getBytes());
-            }
-
-            str = "<tunits>\n";
-            fos.write(str.getBytes());
-            for (int i = 0; i < this.kafDiscourseList.size(); i++) {
-                KafTextUnit kaf  = (KafTextUnit) kafDiscourseList.get(i);
-                if (!kaf.getType().equalsIgnoreCase(KafDiscourseUnits.sPAGE)) {
-                    scope = true;
-                    for (int j = 0; j < kaf.getSpans().size(); j++) {
-                       String span = kaf.getSpans().get(j);
-                        if (!ktu.getSpans().contains(span)) {
-                            scope = false;
-                            break;
-                        }
-                    }
-                    if (scope) {
-                        str = kaf.toString();
-                        fos.write(str.getBytes());
-                    }
-                }
-            }
-            str = "</tunits>\n";
-            str += "</KAF>\n";
-            fos.write(str.getBytes());
-        } catch (IOException e) {
-            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
-        }
-    }
-    
-    /**	@deprecated Use writePageToXML(KafTextUnit, Writer) instead.
-     * 
-     */
-    public void pageSerialization (KafTextUnit ktu, Writer fos) {
-        ////ktu.spans contains a list of all the wf ids that are part of the ktu
-        String str = null;
-        try {
-/*
-            System.out.println("ktu.spans.size() = " + ktu.spans.size());
-            System.out.println("ktu.spans.get(0) = " + ktu.spans.get(0));
-            System.out.println("ktu.spans.get(ktu.spans.size()-1) = " + ktu.spans.get(ktu.spans.size()-1));
-*/
-            ArrayList<String> termIdScope = new ArrayList<String>();
-            boolean scope = true;
-            str = "<?xml version=\"1.0\"?>\n" + kafMetaData.toKafStartElementString();
-            str =
-            str += "<text>\n";
-            str += kafMetaData.toKafHeaderString();
-            fos.write(str);
-            for (int i = 0; i < this.kafWordFormList.size(); i++) {
-                KafWordForm kaf  = (KafWordForm) kafWordFormList.get(i);
-                if (ktu.getSpans().contains(kaf.getWid())) {
-                    str = kaf.toString();
-                    fos.write(str);
-                }
-            }
-            str = "</text>\n";
-            fos.write(str);
-            str = "<terms>\n";
-            fos.write(str);
-            for (int i = 0; i < this.kafTermList.size(); i++) {
-                KafTerm kaf  = (KafTerm) kafTermList.get(i);
-                scope = true;
-                for (int j = 0; j < kaf.spans.size(); j++) {
-                   String span = (String) kaf.spans.get(j);
-                    if (!ktu.getSpans().contains(span)) {
-                        scope = false;
-                        //System.out.println("out of scope span = " + span);
-                        break;
-                    }
-                }
-                if (scope) {
-                    termIdScope.add(kaf.getTid());
-                    str = kaf.toString();
-                    fos.write(str);
-                }
-            }
-            str = "</terms>\n";
-            fos.write(str);
-            str = "<chunks>\n";
-            fos.write(str);
-            for (int i = 0; i < this.kafChunkList.size(); i++) {
-                KafChunk kaf  = (KafChunk) kafChunkList.get(i);
-                scope = true;
-                for (int j = 0; j < kaf.spans.size(); j++) {
-                   String span = (String) kaf.spans.get(j);
-                    if (!termIdScope.contains(span)) {
-                        scope = false;
-                        break;
-                    }
-                }
-                if (scope) {
-                    str = kaf.toString();
-                    fos.write(str);
-                }
-            }
-            str = "</chunks>\n";
-            fos.write(str);
-            str = "<deps>\n";
-            fos.write(str);
-            for (int i = 0; i < this.kafDepList.size(); i++) {
-                KafDep kaf  = (KafDep) kafDepList.get(i);
-                if ((termIdScope.contains(kaf.from)) &&
-                    (termIdScope.contains(kaf.to))) {
-                    str = kaf.toString();
-                    fos.write(str);
-                }
-            }
-            str = "</deps>\n";
-            fos.write(str);
-
-
-            if (kafEventISIList.size()>0) {
-                str = "<isi-events>\n";
-                for (int i = 0; i < kafEventISIList.size(); i++) {
-                    KafEventISI eventISI = kafEventISIList.get(i);
-                    str += eventISI.toString();
-                }
-                str += "</isi-events>\n";
-                fos.write(str);
-            }
-            str = "<tunits>\n";
-            fos.write(str);
-            for (int i = 0; i < this.kafDiscourseList.size(); i++) {
-                KafTextUnit kaf  = (KafTextUnit) kafDiscourseList.get(i);
-                if (!kaf.getType().equalsIgnoreCase(KafDiscourseUnits.sPAGE)) {
-                    scope = true;
-                    for (int j = 0; j < kaf.getSpans().size(); j++) {
-                       String span = (String) kaf.getSpans().get(j);
-                        if (!ktu.getSpans().contains(span)) {
-                            scope = false;
-                            break;
-                        }
-                    }
-                    if (scope) {
-                        str = kaf.toString();
-                        fos.write(str);
-                    }
-                }
-            }
-            str = "</tunits>\n";
-            str += "</KAF>\n";
-            fos.write(str);
-        } catch (IOException e) {
-            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
-        }
-    }
     
     /**	Writes all kaf-info about the wordforms in the given KafTextUnit
      * to the given outputstream.
@@ -3531,6 +3176,28 @@ public class KafSaxParser extends DefaultHandler {
                 root.appendChild(timexLayer);
             }
 
+            if (kafClinks.size()>0) {
+                Element tlinksLayer = xmldoc.createElement("temporalRelations");
+
+                for (int i = 0; i < kafTlinks.size(); i++) {
+                    KafEventRelation eventRelation = kafTlinks.get(i);
+                    tlinksLayer.appendChild(eventRelation.toNafXML(xmldoc, "tlink"));
+                }
+
+                root.appendChild(tlinksLayer);
+            }
+
+            if (kafTlinks.size()>0) {
+                Element clinksLayer = xmldoc.createElement("causalRelations");
+
+                for (int i = 0; i < kafClinks.size(); i++) {
+                    KafEventRelation eventRelation = kafClinks.get(i);
+                    clinksLayer.appendChild(eventRelation.toNafXML(xmldoc, "clink"));
+                }
+
+                root.appendChild(clinksLayer);
+            }
+
             if (kafFactualityLayer.size()>0) {
                 Element factualities = xmldoc.createElement("factualitylayer");
 
@@ -3898,7 +3565,8 @@ public class KafSaxParser extends DefaultHandler {
         //String file = "/Users/piek/Desktop/NWR/NWR-SRL/wikinews-nl/files/14369_Airbus_offers_funding_to_search_for_black_boxes_from_Air_France_disaster.ukb.kaf";
        // String file = "/Users/piek/Desktop/NWR/NWR-SRL/wikinews-nl/files/14369_Airbus_offers_funding_to_search_for_black_boxes_from_Air_France_disaster.ukb.kaf";
        // String file = "/Tools/ontotagger-v1.0/naf-example/spinoza-voorbeeld-ukb.ont.xml";
-        String file = "/Users/piek/Desktop/test/eventcorref_in.xml";
+        //String file = "/Users/piek/Desktop/test/eventcorref_in.xml";
+        String file = "/Users/piek/Desktop/NWR/en_pipeline2.0/v21_out.naf";
 
         //String file = "/Code/vu/kyotoproject/KafSaxParser/test/eventcoref_in.xml";
         //String file = "/Tools/TextPro/TextPro2.0-forNewsReader/test/gold/Time.NAF.xml";
