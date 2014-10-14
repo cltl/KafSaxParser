@@ -45,6 +45,8 @@ public class KafCoreferenceSet {
     private String lowestCommonSubsumer;
     private ArrayList<ArrayList<CorefTarget>> setsOfSpans;
     private ArrayList<String> tokenStringArray;
+    private ArrayList<KafSense> externalReferences;
+
 
 
     public KafCoreferenceSet() {
@@ -54,6 +56,8 @@ public class KafCoreferenceSet {
         this.lowestCommonSubsumer = "";
         this.setsOfSpans = new ArrayList<ArrayList<CorefTarget>>();
         this.tokenStringArray = new ArrayList<String>();
+        this.externalReferences = new ArrayList<KafSense>();
+
     }
 
     public double getScore() {
@@ -112,6 +116,17 @@ public class KafCoreferenceSet {
         this.setsOfSpans.add(setOfSpans);
     }
 
+    public ArrayList<KafSense> getExternalReferences() {
+        return externalReferences;
+    }
+
+    public void setExternalReferences(ArrayList<KafSense> externalReferences) {
+        this.externalReferences = externalReferences;
+    }
+
+    public void addExternalReferences(KafSense externalReference) {
+        this.externalReferences.add(externalReference);
+    }
 
     public boolean hasSpan (ArrayList<CorefTarget> spans) {
         for (int i = 0; i < setsOfSpans.size(); i++) {
@@ -174,6 +189,15 @@ public class KafCoreferenceSet {
                 root.appendChild(setOfTargets);
             }
         }
+
+        if (externalReferences.size()>0) {
+            Element externalRefs = xmldoc.createElement("externalReferences");
+            for (int i = 0; i < externalReferences.size(); i++) {
+                KafSense kafSense = externalReferences.get(i);
+                externalRefs.appendChild(kafSense.toXML(xmldoc));
+            }
+            root.appendChild(externalRefs);
+        }
         return root;
     }
     public Element toNafXML(Document xmldoc)
@@ -199,6 +223,15 @@ public class KafCoreferenceSet {
                 }
                 root.appendChild(setOfTargets);
             }
+        }
+
+        if (externalReferences.size()>0) {
+            Element externalRefs = xmldoc.createElement("externalReferences");
+            for (int i = 0; i < externalReferences.size(); i++) {
+                KafSense kafSense = externalReferences.get(i);
+                externalRefs.appendChild(kafSense.toXML(xmldoc));
+            }
+            root.appendChild(externalRefs);
         }
         return root;
     }

@@ -1955,6 +1955,10 @@ public class KafSaxParser extends DefaultHandler {
             }
             else if (qName.equalsIgnoreCase("coref"))       /// version 2
             {
+                    if (senseTags.size()>0) {
+                        kafCoreferenceSet.setExternalReferences(senseTags);
+                        senseTags = new ArrayList<KafSense>();
+                    }
                     this.kafCorefenceArrayList.add(kafCoreferenceSet);
                     kafCoreferenceSet = new KafCoreferenceSet();
                     coreference = false;
