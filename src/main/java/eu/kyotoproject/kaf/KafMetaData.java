@@ -415,9 +415,9 @@ public class KafMetaData {
           return str;
   }
     
-    public void addLayer(String layer, String name, String version, String timestamp, String beginTimestamp, String endTimeStamp)
+    public void addLayer(String layer, String name, String version, String timestamp, String beginTimestamp, String endTimeStamp, String hostname)
     {
-    	LP lp = new LP(name,version, timestamp, beginTimestamp, endTimeStamp);
+    	LP lp = new LP(name,version, timestamp, beginTimestamp, endTimeStamp, hostname);
     	if (linguisticProcessors.containsKey(layer))
     		linguisticProcessors.get(layer).add(lp);
     	else

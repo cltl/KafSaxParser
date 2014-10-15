@@ -2,7 +2,10 @@ package eu.kyotoproject.kaf;
 
 
 import eu.kyotoproject.util.AddTokensAsCommentsToSpans;
-import org.w3c.dom.*;
+import org.w3c.dom.Comment;
+import org.w3c.dom.DOMImplementation;
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
 import org.xml.sax.Attributes;
 import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
@@ -15,6 +18,8 @@ import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
 import java.io.*;
+import java.net.InetAddress;
+import java.net.UnknownHostException;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
@@ -608,7 +613,12 @@ public class KafSaxParser extends DefaultHandler {
         }
         else if (qName.equalsIgnoreCase("lp"))
         {
-           	kafMetaData.addLayer(layer, attributes.getValue("name"), attributes.getValue("version"), attributes.getValue("timestamp"), attributes.getValue("beginTimestamp"), attributes.getValue("endTimestamp"));
+           	kafMetaData.addLayer(layer, attributes.getValue("name"),
+                    attributes.getValue("version"),
+                    attributes.getValue("timestamp"),
+                    attributes.getValue("beginTimestamp"),
+                    attributes.getValue("endTimestamp"),
+                    attributes.getValue("hostname"));
         	//kafMetaData.addLP(attributes.getValue("name"), attributes.getValue("version"), attributes.getValue("timestamp"));
         }
 
@@ -2770,7 +2780,14 @@ public class KafSaxParser extends DefaultHandler {
     	Calendar cal = Calendar.getInstance();
     	String date = new SimpleDateFormat("yyyy-MM-dd").format(cal.getTime());
         String time = new SimpleDateFormat("HH:mm:ss").format(cal.getTime());
-    	kafMetaData.addLayer(layer, name, version, date + "T" + time + "Z", null, null);
+        String host = "";
+        try {
+            host = InetAddress.getLocalHost().getHostName();
+        } catch (UnknownHostException e) {
+            e.printStackTrace();
+        }
+
+        kafMetaData.addLayer(layer, name, version, date + "T" + time + "Z", null, null, host);
     }
 
     public String getXML()

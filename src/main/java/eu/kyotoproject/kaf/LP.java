@@ -7,14 +7,63 @@ import org.w3c.dom.Element;
  * Created by piek on 4/4/14.
  */
 public class LP {
-    private String name, version, timestamp, beginTimestamp, endTimestamp;
+    private String hostname, name, version, timestamp, beginTimestamp, endTimestamp;
 
-    public LP(String name, String version, String timestamp, String beginTimestamp, String endTimestamp)
+    public LP(String name, String version, String timestamp, String beginTimestamp, String endTimestamp, String hostname)
     {
         this.name = name;
         this.version = version;
         this.timestamp = timestamp;
         this.beginTimestamp = beginTimestamp;
+        this.endTimestamp = endTimestamp;
+        this.hostname = hostname;
+    }
+
+    public String getHostname() {
+        return hostname;
+    }
+
+    public void setHostname(String hostname) {
+        this.hostname = hostname;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getVersion() {
+        return version;
+    }
+
+    public void setVersion(String version) {
+        this.version = version;
+    }
+
+    public String getTimestamp() {
+        return timestamp;
+    }
+
+    public void setTimestamp(String timestamp) {
+        this.timestamp = timestamp;
+    }
+
+    public String getBeginTimestamp() {
+        return beginTimestamp;
+    }
+
+    public void setBeginTimestamp(String beginTimestamp) {
+        this.beginTimestamp = beginTimestamp;
+    }
+
+    public String getEndTimestamp() {
+        return endTimestamp;
+    }
+
+    public void setEndTimestamp(String endTimestamp) {
         this.endTimestamp = endTimestamp;
     }
 
@@ -39,6 +88,8 @@ public class LP {
             lp.setAttribute("beginTimestamp", beginTimestamp);
         if (endTimestamp != null)
             lp.setAttribute("endTimestamp", endTimestamp);
+        if (hostname != null)
+            lp.setAttribute("hostname", hostname);
         return lp;
     }
 }
