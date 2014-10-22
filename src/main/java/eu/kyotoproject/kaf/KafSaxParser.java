@@ -2217,6 +2217,9 @@ public class KafSaxParser extends DefaultHandler {
         KafTerm kafTerm = getTerm(span);
         if (kafTerm!=null) {
             String pos = kafTerm.getPos();
+            if (pos.toLowerCase().startsWith("r")) { /// appears to be used for NEs
+                return true;
+            }
             if (pos.toLowerCase().startsWith("n")) {
                 return true;
             }
