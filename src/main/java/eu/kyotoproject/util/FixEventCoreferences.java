@@ -39,7 +39,7 @@ public class FixEventCoreferences {
         for (int i = 0; i < kafSaxParser.kafCorefenceArrayList.size(); i++) {
             KafCoreferenceSet kafCoreferenceSet = kafSaxParser.kafCorefenceArrayList.get(i);
             if (kafCoreferenceSet.getType().toLowerCase().startsWith("event")) {
-                if (kafCoreferenceSet.getExternalReferences().size()>3) {
+                if (kafCoreferenceSet.getExternalReferences().size()>4) {
                     HashMap<String, KafCoreferenceSet> corefMap = new HashMap<String, KafCoreferenceSet>();
                     int nSubSets = 0;
                     for (int j = 0; j < kafCoreferenceSet.getSetsOfSpans().size(); j++) {

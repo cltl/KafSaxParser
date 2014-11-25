@@ -623,7 +623,7 @@ public class KafStatistics {
             String str = "KAF Statistics\n";
             str += "File\t"+folderPath+"\n";
             str += "\n";
-            String fileHeaderString = "\tTotal";
+            String fileHeaderString = "\tTotal freq\tNr. doc";
             for (int i = 0; i < sourceNames.size(); i++) {
                 String s = sourceNames.get(i);
                 fileHeaderString += "\t"+s;
@@ -633,6 +633,7 @@ public class KafStatistics {
 
 
             int total = 0;
+            int nDoc = 0;
             str += "Nr. of Lemmas\t"+lemmaMap.size()+"\n";
 
             fos.write(str.getBytes());
@@ -652,8 +653,11 @@ public class KafStatistics {
                 for (int i = 0; i < cnt.size(); i++) {
                     Integer integer = cnt.get(i);
                     total += integer;
+                    if (integer>0) {
+                        nDoc++;
+                    }
                 }
-                str += "\t"+total;
+                str += "\t"+total+"\t"+nDoc;
                 for (int i = 0; i < cnt.size(); i++) {
                     Integer integer = cnt.get(i);
                     str += "\t"+integer.toString();
@@ -1140,9 +1144,10 @@ public class KafStatistics {
         try {
            // String kafFilePath = "/Users/piek/Desktop/NWR-DATA/techcrunch/1_3000";
            // String kafFilePath = "/Users/piek/Desktop/Thomese/Thomese_book_opener_nwr_srl";
-            String kafFilePath = "/Users/piek/Desktop/Thomese/grillroom";
+           // String kafFilePath = "/Users/piek/Desktop/Thomese/grillroom";
+            String kafFilePath = "/Users/piek/Desktop/CLTL-onderwijs/TMC/week-5-new/slides/data";
 
-             String extension = "kaf.coref.coref";
+             String extension = ".kaf";
            // String extension = ".naf";
            // String kafFilePath = "";
             //String extension = "";
