@@ -633,7 +633,6 @@ public class KafStatistics {
 
 
             int total = 0;
-            int nDoc = 0;
             str += "Nr. of Lemmas\t"+lemmaMap.size()+"\n";
 
             fos.write(str.getBytes());
@@ -649,6 +648,7 @@ public class KafStatistics {
                 String key = (String) keys.next();
                 str = key;
                 total = 0;
+                int nDoc = 0;
                 ArrayList<Integer> cnt = lemmaMap.get(key);
                 for (int i = 0; i < cnt.size(); i++) {
                     Integer integer = cnt.get(i);
