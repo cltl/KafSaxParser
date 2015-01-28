@@ -22,8 +22,8 @@ public class CromerToNaf {
 
 
     static public void main (String[] args) {
-        String input = "";
-        String extension = "";
+        String input = "/Users/piek/Desktop/NWR/ECB+_LREC2014/ECB+";
+        String extension = ".xml";
         String lang = "en";
         for (int i = 0; i < args.length; i++) {
             String arg = args[i];
