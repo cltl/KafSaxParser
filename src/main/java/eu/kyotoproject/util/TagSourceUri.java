@@ -15,20 +15,34 @@ public class TagSourceUri {
 
 
     static public void main (String [] args) {
-        String pathToFolder = args[0];
-        String tag = args[1];
-        String filter = args[2];
-        String fileTag = args[3];
-        /*pathToFolder = "/Users/piek/Desktop/NWR/Cross-lingual/corpus_NAF_output_141214-lemma-en-coref";
-        tag = ".en";
+        String pathToFolder = "";
+        String tag = "";
+        String filter = "";
+        String fileTag = "";
+        /*pathToFolder = args[0];
+        tag = args[1];
+        filter = args[2];
+        fileTag = args[3];*/
+        pathToFolder = "/Users/piek/Desktop/NWR/Cross-lingual/dutch-wikinews/gm";
+        tag = ".nl";
         filter = ".naf";
-        fileTag = ".en.coref";*/
+        fileTag = ".nl.coref";
         KafSaxParser kafSaxParser = new KafSaxParser();
         ArrayList<File> files = FileProcessor.makeRecursiveFileArrayList(pathToFolder, filter);
         for (int i = 0; i < files.size(); i++) {
             File file = files.get(i);
             kafSaxParser.parseFile(file);
-            String url = kafSaxParser.getKafMetaData().getUrl()+tag;
+            String url = kafSaxParser.getKafMetaData().getUrl();
+            if (url.isEmpty()) {
+                int idx = file.getName().indexOf(".");
+                if (idx>-1) {
+                    url = file.getName().substring(0, idx);
+                }
+                else {
+                    url = file.getName();
+                }
+            }
+            url += tag;
             kafSaxParser.getKafMetaData().setUrl(url);
             try {
                 String filePath = file.getAbsolutePath()+fileTag;
