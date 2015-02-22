@@ -1288,7 +1288,7 @@ public class KafSaxParser extends DefaultHandler {
                    try {
                        conf = Double.parseDouble(attributes.getValue(i).trim());
                    } catch (NumberFormatException e) {
-                       e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+                     //  e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
                    }
                    sense.setConfidence(conf);
                }
