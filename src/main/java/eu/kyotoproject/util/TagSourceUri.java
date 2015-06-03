@@ -23,9 +23,9 @@ public class TagSourceUri {
         tag = args[1];
         filter = args[2];
         fileTag = args[3];*/
-        pathToFolder = "/Users/piek/Desktop/NWR/Cross-lingual/dutch-wikinews/gm";
+        pathToFolder = "/Users/piek/Desktop/NWR/Cross-lingual/dutch-wikinews/corpus_stockmarket";
         tag = ".nl";
-        filter = ".naf";
+        filter = ".out.naf";
         fileTag = ".nl.coref";
         KafSaxParser kafSaxParser = new KafSaxParser();
         ArrayList<File> files = FileProcessor.makeRecursiveFileArrayList(pathToFolder, filter);
