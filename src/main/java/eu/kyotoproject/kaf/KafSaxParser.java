@@ -49,7 +49,7 @@ public class KafSaxParser extends DefaultHandler {
     final byte[] utf8_bom = { (byte) 0xEF, (byte) 0xBB,
         (byte) 0xBF }; /// For Chinese KAF
     final String utf8_bomString = new String(utf8_bom);
-    //static String encoding = "UTF-8";
+    public static String encoding = "";
     private String value = "";
     private String previousvalue = "";
     private KafMetaData kafMetaData;
@@ -247,7 +247,7 @@ public class KafSaxParser extends DefaultHandler {
 /*
     public boolean parseFile(InputSource source, String encoding)
     {
-    	try 
+    	try
     	{
             init();
             SAXParserFactory factory = SAXParserFactory.newInstance();
@@ -258,21 +258,21 @@ public class KafSaxParser extends DefaultHandler {
             parser.parse(source, this);
             buildSentenceTermIndex();
             return true;
-        } 
-    	catch (FactoryConfigurationError factoryConfigurationError) 
+        }
+    	catch (FactoryConfigurationError factoryConfigurationError)
     	{
             factoryConfigurationError.printStackTrace();
-        } 
-    	catch (ParserConfigurationException e) 
+        }
+    	catch (ParserConfigurationException e)
     	{
             e.printStackTrace();
-        } 
+        }
     	catch (SAXException e)
         {
             //System.out.println("last value = " + previousvalue);
             e.printStackTrace();
-        } 
-    	catch (IOException e) 
+        }
+    	catch (IOException e)
     	{
            // e.printStackTrace();
         }
@@ -288,6 +288,7 @@ public class KafSaxParser extends DefaultHandler {
             SAXParserFactory factory = SAXParserFactory.newInstance();
             factory.setValidating(false);
             SAXParser parser = factory.newSAXParser();
+            if (!encoding.isEmpty()) source.setEncoding(encoding);
             parser.parse(source, this);
             buildSentenceTermIndex();
             return true;
@@ -3252,8 +3253,8 @@ public class KafSaxParser extends DefaultHandler {
             //serializer.setParameter("format-pretty-print", Boolean.TRUE);
             serializer.setOutputProperty("{http://xml.apache.org/xslt}indent-amount", "2");
 
-            //StreamResult streamResult = new StreamResult(new OutputStreamWriter(stream, encoding));
-            StreamResult streamResult = new StreamResult(new OutputStreamWriter(stream));
+            StreamResult streamResult = new StreamResult(new OutputStreamWriter(stream, "UTF-8"));
+            //StreamResult streamResult = new StreamResult(new OutputStreamWriter(stream));
 			serializer.transform(domSource, streamResult);
 		}
 		catch(Exception e)
@@ -3569,7 +3570,7 @@ public class KafSaxParser extends DefaultHandler {
         return null;
     }
 
-    public ArrayList<String> covertTokensSpanToTermSPan (ArrayList<String> tokenSpans) {
+    public ArrayList<String> convertTokensSpanToTermSpan (ArrayList<String> tokenSpans) {
         ArrayList<String> termSpans = new ArrayList<String>();
         for (int i = 0; i < tokenSpans.size(); i++) {
             String tokenSpan =  tokenSpans.get(i);
@@ -3584,13 +3585,24 @@ public class KafSaxParser extends DefaultHandler {
         return termSpans;
     }
 
+    public ArrayList<String> convertTermSpanToTokenSpan (ArrayList<String> termSpans) {
+        for (int i = 0; i < termSpans.size(); i++) {
+            String termSpan =  termSpans.get(i);
+            KafTerm kafTerm = getTerm(termSpan);
+            if (kafTerm!=null) {
+                return kafTerm.getSpans();
+            }
+        }
+        return new ArrayList<String>();
+    }
+
     static public void main (String[] args) {
         //String file = "/Projects/NewsReader/collaboration/bulgarian/razni11-01.naf";
         //String file = "/Users/piek/Desktop/NWR/NWR-SRL/wikinews-nl/files/14369_Airbus_offers_funding_to_search_for_black_boxes_from_Air_France_disaster.ukb.kaf";
        // String file = "/Users/piek/Desktop/NWR/NWR-SRL/wikinews-nl/files/14369_Airbus_offers_funding_to_search_for_black_boxes_from_Air_France_disaster.ukb.kaf";
        // String file = "/Tools/ontotagger-v1.0/naf-example/spinoza-voorbeeld-ukb.ont.xml";
         //String file = "/Users/piek/Desktop/test/eventcorref_in.xml";
-        String file = "/Users/piek/Desktop/NWR/en_pipeline2.0/v21_out.naf";
+        String file = "/Users/piek/Desktop/tweede-kamer/NAF-Analysis/test/7236196.xml.19k351u4o.xml";
 
         //String file = "/Code/vu/kyotoproject/KafSaxParser/test/eventcoref_in.xml";
         //String file = "/Tools/TextPro/TextPro2.0-forNewsReader/test/gold/Time.NAF.xml";
@@ -3606,7 +3618,7 @@ public class KafSaxParser extends DefaultHandler {
         try {
             FileOutputStream fos = new FileOutputStream(outfile);
             //parser.writeKafToFile(fos);
-            parser.writeNafToStream(fos);
+            parser.writeNafToStream(System.out);
             fos.close();
         } catch (IOException e) {
             e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
