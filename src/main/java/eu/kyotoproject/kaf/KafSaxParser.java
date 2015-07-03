@@ -84,6 +84,23 @@ public class KafSaxParser extends DefaultHandler {
     private boolean externalreference;
     private int externalRefLevel = 0;
     public String rawText;
+
+
+    /**
+     * ArrayList with KafTopics assigned to the whole document
+     */
+    public ArrayList<KafTopic> kafTopicsArrayList;
+
+    /**
+     * Arraylist with KafMarkables that assign concepts to any span of text elements
+     */
+    public ArrayList<KafMarkable> kafMarkablesArrayList;
+
+    /**
+     * ArrayList with KafAttribution elements
+     */
+    public ArrayList<KafStatement> kafAttributionArrayList;
+
     /**
      * ArrayList with KafEventISI: special events represented in the ISI corpus
      */
@@ -224,6 +241,12 @@ public class KafSaxParser extends DefaultHandler {
     private KafEventISI kafEventISI;
     private KafTextUnit kaftextUnit;
     private KafTimex kafTimex;
+    private KafStatement kafAttribution;
+    private KafTopic kafTopic;
+    private KafMarkable kafMarkable;
+    private KafStatement kafStatement;
+    private KafFactuality kafFactuality;
+
     private ArrayList<KafSense> senseTags;
     private ArrayList<KafSense> predicateSenseTags;
     private ArrayList<KafSense> roleSenseTags;
@@ -327,6 +350,7 @@ public class KafSaxParser extends DefaultHandler {
         catch (IOException e)
         {
             e.printStackTrace();
+            System.out.println("file.getName() = " + file.getName());
             return false;
         }    }
     
@@ -431,7 +455,12 @@ public class KafSaxParser extends DefaultHandler {
          kafConstituencyTree = new KafConstituencyTree();
          kafConstituencyTerminal = new KafConstituencyTerminal();
          kafFactualityLayer = new ArrayList<KafFactuality>();
+
+         kafAttributionArrayList = new ArrayList<KafStatement>();
+         kafTopicsArrayList = new ArrayList<KafTopic>();
+         kafMarkablesArrayList = new ArrayList<KafMarkable>();
          kafTimexLayer = new ArrayList<KafTimex>();
+
          AUGMENTID = false;
          kafreference = false;
          coreference = false;
@@ -463,6 +492,11 @@ public class KafSaxParser extends DefaultHandler {
          kafEvent = new KafEvent();
          kafEventISI = new KafEventISI();
          kaftextUnit = new KafTextUnit();
+         kafFactuality = new KafFactuality();
+         kafStatement = new KafStatement();
+         kafTopic = new KafTopic();
+         kafMarkable = new KafMarkable();
+
          WordFormToTerm = new HashMap<String,String>();
          SentenceToWord = new HashMap<String,ArrayList<String>>();
          SentenceToTerm = new HashMap<String,ArrayList<String>>();
@@ -841,26 +875,67 @@ public class KafSaxParser extends DefaultHandler {
            kafConstituencyTree.addEdges(kafConstituencyEdge);
        }
 
-
+       /// OLD VERSION @DEPRECATED
        /**
         * <factualitylayer>
         *     <factvalue id="w4" prediction="CT+" confidence="0.5904876913248487"/>
         * <factvalue id="w681" prediction="Uu" confidence="0.5324089742552198"/>
         */
+       /**
+        <factuality id="f1">
+        <span>
+        <target id="t3"/>
+        <target id="t4"/>
+        <target id="t5"/>
+        <target id="t6"/>
+        <target id="t7"/>
+        </span>
+        <factVal value="CT+" resource="FactBank"
+        confidence="0.83"/>
+        <factVal value="CERTAIN" resource="nwr:AttributionCertainty"
+        confidence="0.79"/>
+        <factVal value="PROBABLE" resource="nwr:AttributionCertainty"
+        confidence="0.11"/>
+        <factVal value="NONFUTURE" resource="nwr:AttributionTime"
+        confidence="0.91"/>
+        <factVal value="POS" resource="nwr:AttributionPolarity"
+        confidence="0.67"/>
+        </factuality>
 
-       else if (qName.equalsIgnoreCase("factvalue")) {
-           KafFactuality kafFactuality = new KafFactuality();
+        */
+
+       else if (qName.equalsIgnoreCase("factuality")) {
+           kafFactuality = new KafFactuality();
+           spans = new ArrayList<String>();
            for (int i = 0; i < attributes.getLength(); i++) {
                String name = attributes.getQName(i);
                if (name.equalsIgnoreCase("id")) {
                    kafFactuality.setId(attributes.getValue(i).trim());
                }
-               else if (name.equalsIgnoreCase("prediction")) {
-                   kafFactuality.setPrediction(attributes.getValue(i).trim());
+               else  {
+                //   System.out.println("352 ********* FOUND UNKNOWN Attribute " + name + " *****************");
+               }
+           }
+       //    kafFactualityLayer.add(kafFactuality);
+       }
+       else if (qName.equalsIgnoreCase("factval")) {
+           /*
+                 <factVal value="CT+" resource="FactBank"
+               confidence="0.83"/>
+
+            */
+           KafFactValue kafFactValue = new KafFactValue();
+           for (int i = 0; i < attributes.getLength(); i++) {
+               String name = attributes.getQName(i);
+               if (name.equalsIgnoreCase("value")) {
+                   kafFactValue.setValue(attributes.getValue(i).trim());
+               }
+               else if (name.equalsIgnoreCase("resource")) {
+                   kafFactValue.setResource(attributes.getValue(i).trim());
                }
                else if (name.equalsIgnoreCase("confidence")) {
                    try {
-                       kafFactuality.setConfidence(Double.parseDouble(attributes.getValue(i).trim()));
+                       kafFactValue.setConfidence(Double.parseDouble(attributes.getValue(i).trim()));
                    } catch (NumberFormatException e) {
                        e.printStackTrace();
                    }
@@ -869,7 +944,38 @@ public class KafSaxParser extends DefaultHandler {
                 //   System.out.println("352 ********* FOUND UNKNOWN Attribute " + name + " *****************");
                }
            }
-           kafFactualityLayer.add(kafFactuality);
+           kafFactuality.addFactValue(kafFactValue);
+       }
+
+
+       /*    <attribution>
+    <!-- They said Hilton Hotel Paris was a nightmare. -->
+    <statement id="a1">
+    <statement_target>
+    <span>
+    <target id="t3">
+    <target id="t4">
+    <target id="t5">
+    <target id="t6">
+    <target id="t7">
+    </span>
+    </statement_target>
+    <statement_source>
+    <span>
+    <target id="t1">
+    </span>
+    </statement_source>
+    <statement_cue>
+    <span>
+    <target id="t2">
+    </span>
+    </statement_cue>
+    </statement>
+    </attribution>
+*/
+       else if (qName.equalsIgnoreCase("statement")) {
+           kafStatement = new KafStatement();
+           kafStatement.setId(attributes.getValue("id"));
        }
 
        else if (qName.equalsIgnoreCase("opinion")) {
@@ -878,8 +984,7 @@ public class KafSaxParser extends DefaultHandler {
                String name = attributes.getQName(i);
                if (name.equalsIgnoreCase("oid")) {
                    kafOpinion.setOpinionId(attributes.getValue(i).trim());
-               }
-               else if (name.equalsIgnoreCase("id")) {
+               } else if (name.equalsIgnoreCase("id")) {
                    kafOpinion.setOpinionId(attributes.getValue(i).trim());
                }
                else if (name.equalsIgnoreCase("overlap_ents")) {
@@ -1369,8 +1474,7 @@ public class KafSaxParser extends DefaultHandler {
                }
                else if (name.equalsIgnoreCase("lemma")) {
                    termComponent.setLemma(attributes.getValue(i).trim());
-               }
-               else if (name.equalsIgnoreCase("pos")) {
+               } else if (name.equalsIgnoreCase("pos")) {
             	   termComponent.setPos(attributes.getValue(i).trim());
                }
                else {
@@ -1416,8 +1520,7 @@ public class KafSaxParser extends DefaultHandler {
                String name = attributes.getQName(i);
                if (name.equalsIgnoreCase("did")) {
                    date.setDid(attributes.getValue(i).trim());
-               }
-               else if (name.equalsIgnoreCase("id")) {
+               } else if (name.equalsIgnoreCase("id")) {
                    date.setDid(attributes.getValue(i).trim());
                }
            }
@@ -1428,8 +1531,7 @@ public class KafSaxParser extends DefaultHandler {
                String name = attributes.getQName(i);
                if (name.equalsIgnoreCase("dateIso")) {
                    dateInfo.setDateISO(attributes.getValue(i).trim());
-               }
-               else if (name.equalsIgnoreCase("lemma")) {
+               } else if (name.equalsIgnoreCase("lemma")) {
                    dateInfo.setLemma(attributes.getValue(i).trim());
                }
            }
@@ -1644,20 +1746,63 @@ public class KafSaxParser extends DefaultHandler {
                }
            }
        }
-       else if (qName.equalsIgnoreCase("timex3")) {
-           spans = new ArrayList<String>();
+       else if (qName.equalsIgnoreCase("topic")) {
+           /*
+           <topic confidence="0.6"
+	 source="newsreader"
+	 method="textclassification-svm"
+	 uri="http://en.wikipedia.org/wiki/Category:War">War</topic>
+            */
+           kafTopic = new KafTopic();
            for (int i = 0; i < attributes.getLength(); i++) {
                String name = attributes.getQName(i);
-               if (name.equalsIgnoreCase("coid")) {
-                   kafCoreferenceSet.setCoid(attributes.getValue(i).trim());
+               if (name.equalsIgnoreCase("source")) {
+                   kafTopic.setSource(attributes.getValue(i).trim());
                }
-               else if (name.equalsIgnoreCase("type")) {
-                   kafCoreferenceSet.setType(attributes.getValue(i).trim());
+               else if (name.equalsIgnoreCase("method")) {
+                   kafTopic.setMethod(attributes.getValue(i).trim());
                }
-               else if (name.equalsIgnoreCase("id")) {
-                   kafCoreferenceSet.setCoid(attributes.getValue(i).trim());
+               else if (name.equalsIgnoreCase("confidence")) {
+                   try {
+                       kafTopic.setConfidence(Double.parseDouble(attributes.getValue(i).trim()));
+                   } catch (NumberFormatException e) {
+                    //   e.printStackTrace();
+                   }
+               }
+               else if (name.equalsIgnoreCase("uri")) {
+                   kafTopic.setUri(attributes.getValue(i).trim());
                }
            }
+           /// kafTopic is added to kafTopicArrayList when value is stored
+       }
+       else if (qName.equalsIgnoreCase("mark")) {
+           /*<mark id="m42" lemma="Football Championship Subdivision" source="DBpedia">
+     <span>
+     <target id="w20"/>
+     <target id="w21"/>
+     <target id="w22"/>
+     </span>
+     <externalReferences>
+     <externalRef resource="spotlight"
+     reference="http://dbpedia.org/resource/Division_I_(NCAA)"
+     confidence="1.0"/>
+     </externalReferences>
+     </mark>
+            */
+           kafMarkable = new KafMarkable();
+           for (int i = 0; i < attributes.getLength(); i++) {
+               String name = attributes.getQName(i);
+               if (name.equalsIgnoreCase("id")) {
+                   kafMarkable.setId(attributes.getValue(i).trim());
+               }
+               else if (name.equalsIgnoreCase("lemma")) {
+                   kafMarkable.setLemma(attributes.getValue(i).trim());
+               }
+               else if (name.equalsIgnoreCase("source")) {
+                   kafMarkable.setSource(attributes.getValue(i).trim());
+               }
+           }
+           /// kafTopic is added to kafTopicArrayList when value is stored
        }
        else {
           ///
@@ -1974,6 +2119,46 @@ public class KafSaxParser extends DefaultHandler {
                     kafCoreferenceSet = new KafCoreferenceSet();
                     coreference = false;
             }
+
+            else if (qName.equalsIgnoreCase("factuality"))       /// version 3
+            {
+                    kafFactuality.setSpans(spans);
+                    this.kafFactualityLayer.add(kafFactuality);
+                    spans = new ArrayList<String>();
+            }
+
+            else if (qName.equalsIgnoreCase("statement"))       /// version 3
+            {
+                    kafAttributionArrayList.add(kafStatement);
+                    this.kafFactualityLayer.add(kafFactuality);
+                    spans = new ArrayList<String>();
+            }
+            else if (qName.equalsIgnoreCase("statement_target"))       /// version 3
+            {       kafStatement.setStatementTargetSpans(spans);
+                    spans = new ArrayList<String>();
+            }
+            else if (qName.equalsIgnoreCase("statement_cue"))       /// version 3
+            {       kafStatement.setStatementCueSpans(spans);
+                    spans = new ArrayList<String>();
+            }
+            else if (qName.equalsIgnoreCase("statement_source"))       /// version 3
+            {       kafStatement.setStatementSourceSpans(spans);
+                    spans = new ArrayList<String>();
+            }
+
+            else if (qName.equalsIgnoreCase("topic"))       /// version 3
+            {       kafTopic.setTopic(value);
+                    kafTopicsArrayList.add(kafTopic);
+            }
+
+            else if (qName.equalsIgnoreCase("mark"))       /// version 3
+            {       kafMarkable.setSpans(spans);
+                    kafMarkable.setExternalReferences(senseTags);
+                    spans = new ArrayList<String>();
+                    senseTags = new ArrayList<KafSense>();
+                    kafMarkablesArrayList.add(kafMarkable);
+            }
+
             else if (qName.equalsIgnoreCase("span")) {
                 if (coreference) {
                     kafCoreferenceSet.addSetsOfSpans(corefSpans);
@@ -3202,22 +3387,22 @@ public class KafSaxParser extends DefaultHandler {
             }
 
             if (kafClinks.size()>0) {
-                Element tlinksLayer = xmldoc.createElement("temporalRelations");
+                Element tlinksLayer = xmldoc.createElement("causalRelations");
 
-                for (int i = 0; i < kafTlinks.size(); i++) {
-                    KafEventRelation eventRelation = kafTlinks.get(i);
-                    tlinksLayer.appendChild(eventRelation.toNafXML(xmldoc, "tlink"));
+                for (int i = 0; i < kafClinks.size(); i++) {
+                    KafEventRelation eventRelation = kafClinks.get(i);
+                    tlinksLayer.appendChild(eventRelation.toNafXML(xmldoc, "clink"));
                 }
 
                 root.appendChild(tlinksLayer);
             }
 
             if (kafTlinks.size()>0) {
-                Element clinksLayer = xmldoc.createElement("causalRelations");
+                Element clinksLayer = xmldoc.createElement("temporalRelations");
 
-                for (int i = 0; i < kafClinks.size(); i++) {
-                    KafEventRelation eventRelation = kafClinks.get(i);
-                    clinksLayer.appendChild(eventRelation.toNafXML(xmldoc, "clink"));
+                for (int i = 0; i < kafTlinks.size(); i++) {
+                    KafEventRelation eventRelation = kafTlinks.get(i);
+                    clinksLayer.appendChild(eventRelation.toNafXML(xmldoc, "tlink"));
                 }
 
                 root.appendChild(clinksLayer);
@@ -3228,9 +3413,42 @@ public class KafSaxParser extends DefaultHandler {
 
                 for (int i = 0; i < kafFactualityLayer.size(); i++) {
                     KafFactuality kafFactuality = kafFactualityLayer.get(i);
+                    kafFactuality.setTokenString(this);
                     factualities.appendChild((kafFactuality.toNafXML(xmldoc)));
                 }
                 root.appendChild(factualities);
+            }
+
+            if (kafAttributionArrayList.size()>0) {
+                Element factualities = xmldoc.createElement("attribution");
+
+                for (int i = 0; i < kafAttributionArrayList.size(); i++) {
+                    KafStatement kafStatement = kafAttributionArrayList.get(i);
+                    kafStatement.setTokenString(this);
+                    factualities.appendChild((kafStatement.toNafXML(xmldoc)));
+                }
+                root.appendChild(factualities);
+            }
+
+            if (kafTopicsArrayList.size()>0) {
+                Element topics = xmldoc.createElement("topics");
+
+                for (int i = 0; i < kafTopicsArrayList.size(); i++) {
+                    KafTopic kafTopic = kafTopicsArrayList.get(i);
+                    topics.appendChild((kafTopic.toNafXML(xmldoc)));
+                }
+                root.appendChild(topics);
+            }
+
+            if (kafMarkablesArrayList.size()>0) {
+                Element markables = xmldoc.createElement("markables");
+
+                for (int i = 0; i < kafMarkablesArrayList.size(); i++) {
+                    KafMarkable kafMarkable = kafMarkablesArrayList.get(i);
+                    kafMarkable.setTokenString(this);
+                    markables.appendChild((kafMarkable.toNafXML(xmldoc)));
+                }
+                root.appendChild(markables);
             }
 
 /*       @deprecated
@@ -3253,8 +3471,13 @@ public class KafSaxParser extends DefaultHandler {
             //serializer.setParameter("format-pretty-print", Boolean.TRUE);
             serializer.setOutputProperty("{http://xml.apache.org/xslt}indent-amount", "2");
 
-            StreamResult streamResult = new StreamResult(new OutputStreamWriter(stream, "UTF-8"));
-            //StreamResult streamResult = new StreamResult(new OutputStreamWriter(stream));
+            StreamResult streamResult = null;
+            if (encoding.isEmpty()) {
+               streamResult = new StreamResult(new OutputStreamWriter(stream));
+            }
+            else {
+                streamResult = new StreamResult(new OutputStreamWriter(stream, encoding));
+            }
 			serializer.transform(domSource, streamResult);
 		}
 		catch(Exception e)
@@ -3457,8 +3680,14 @@ public class KafSaxParser extends DefaultHandler {
             serializer.setOutputProperty(OutputKeys.INDENT, "yes");
             serializer.setOutputProperty("{http://xml.apache.org/xslt}indent-amount", "2");
 
-            //StreamResult streamResult = new StreamResult(new OutputStreamWriter(stream,encoding));
-            StreamResult streamResult = new StreamResult(new OutputStreamWriter(stream));
+            StreamResult streamResult = null;
+
+            if (encoding.isEmpty()) {
+                streamResult = new StreamResult(new OutputStreamWriter(stream));
+            }
+            else {
+                streamResult = new StreamResult(new OutputStreamWriter(stream, encoding));
+            }
 			serializer.transform(domSource, streamResult);
 
 		}
@@ -3597,12 +3826,14 @@ public class KafSaxParser extends DefaultHandler {
     }
 
     static public void main (String[] args) {
+        String file = "";
         //String file = "/Projects/NewsReader/collaboration/bulgarian/razni11-01.naf";
         //String file = "/Users/piek/Desktop/NWR/NWR-SRL/wikinews-nl/files/14369_Airbus_offers_funding_to_search_for_black_boxes_from_Air_France_disaster.ukb.kaf";
        // String file = "/Users/piek/Desktop/NWR/NWR-SRL/wikinews-nl/files/14369_Airbus_offers_funding_to_search_for_black_boxes_from_Air_France_disaster.ukb.kaf";
        // String file = "/Tools/ontotagger-v1.0/naf-example/spinoza-voorbeeld-ukb.ont.xml";
         //String file = "/Users/piek/Desktop/test/eventcorref_in.xml";
-        String file = "/Users/piek/Desktop/tweede-kamer/NAF-Analysis/test/7236196.xml.19k351u4o.xml";
+        //file = "/Users/piek/Desktop/tweede-kamer/NAF-Analysis/test/7236196.xml.19k351u4o.xml";
+        file =  "/Users/piek/Desktop/NAF3.0/obama.xml";
 
         //String file = "/Code/vu/kyotoproject/KafSaxParser/test/eventcoref_in.xml";
         //String file = "/Tools/TextPro/TextPro2.0-forNewsReader/test/gold/Time.NAF.xml";
@@ -3617,7 +3848,7 @@ public class KafSaxParser extends DefaultHandler {
         String outfile = file+".out.xml";
         try {
             FileOutputStream fos = new FileOutputStream(outfile);
-            //parser.writeKafToFile(fos);
+            parser.writeNafToStream(fos);
             parser.writeNafToStream(System.out);
             fos.close();
         } catch (IOException e) {

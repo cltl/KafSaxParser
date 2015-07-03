@@ -295,7 +295,7 @@ public class KafMetaData {
 	//  if ((docId != null) && (docId.length() > 0))
 	//	  p.setAttribute("docid", docId);
 	  if ((publicId != null) && (publicId.length() > 0))
-		  p.setAttribute("dmsid", publicId);
+		  p.setAttribute("publicId", publicId);
 	  if ((url != null) && (url.length() > 0))
 		  p.setAttribute("uri", url);
 		//  p.setAttribute("uri", url.replaceAll("&", "&amp;"));

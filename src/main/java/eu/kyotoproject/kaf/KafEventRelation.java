@@ -25,6 +25,20 @@ public class KafEventRelation {
      <!--(coevent3, coevent6)-->
      <clink from="coevent3" to="coevent6" relType="" id="clink1"/>
 
+
+     <temporalRelations>
+     <!--BEFORE(pr4, tmx0)-->
+     <tlink id="tlink0" from="pr4" to="tmx0" fromType="event" toType="timex" relType="BEFORE"/>
+     <!--BEFORE(pr13, tmx0)-->
+     <tlink id="tlink1" from="pr13" to="tmx0" fromType="event" toType="timex" relType="BEFORE"/>
+     <!--BEFORE(pr16, tmx0)-->
+     <tlink id="tlink2" from="pr16" to="tmx0" fromType="event" toType="timex" relType="BEFORE"/>
+     <!--IS_INCLUDED(pr1, tmx0)-->
+     <tlink id="tlink3" from="pr1" to="tmx0" fromType="event" toType="timex" relType="IS_INCLUDED"/>
+     <!--BEFORE(pr9, tmx0)-->
+     <tlink id="tlink4" from="pr9" to="tmx0" fromType="event" toType="timex" relType="BEFORE"/>
+     </temporalRelations>
+
      */
 
 
