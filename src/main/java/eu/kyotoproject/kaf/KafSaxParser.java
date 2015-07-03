@@ -65,6 +65,7 @@ public class KafSaxParser extends DefaultHandler {
     public ArrayList<KafConstituencyTree> kafConstituencyTrees;
     public ArrayList<KafFactuality> kafFactualityLayer;
     public ArrayList<KafTimex> kafTimexLayer;
+    public ArrayList<KafPredicateAnchor> kafPredicateAnchorArrayList;
     public boolean AUGMENTID;
     private KafReference kafReference;
     private boolean kafreference;
@@ -246,6 +247,7 @@ public class KafSaxParser extends DefaultHandler {
     private KafMarkable kafMarkable;
     private KafStatement kafStatement;
     private KafFactuality kafFactuality;
+    private KafPredicateAnchor kafPredicateAnchor;
 
     private ArrayList<KafSense> senseTags;
     private ArrayList<KafSense> predicateSenseTags;
@@ -456,6 +458,7 @@ public class KafSaxParser extends DefaultHandler {
          kafConstituencyTerminal = new KafConstituencyTerminal();
          kafFactualityLayer = new ArrayList<KafFactuality>();
 
+         kafPredicateAnchorArrayList = new ArrayList<KafPredicateAnchor>();
          kafAttributionArrayList = new ArrayList<KafStatement>();
          kafTopicsArrayList = new ArrayList<KafTopic>();
          kafMarkablesArrayList = new ArrayList<KafMarkable>();
@@ -496,6 +499,7 @@ public class KafSaxParser extends DefaultHandler {
          kafStatement = new KafStatement();
          kafTopic = new KafTopic();
          kafMarkable = new KafMarkable();
+         kafPredicateAnchor = new KafPredicateAnchor();
 
          WordFormToTerm = new HashMap<String,String>();
          SentenceToWord = new HashMap<String,ArrayList<String>>();
@@ -978,6 +982,35 @@ public class KafSaxParser extends DefaultHandler {
            kafStatement.setId(attributes.getValue("id"));
        }
 
+
+       else if (qName.equalsIgnoreCase("predicateAnchor")) {
+           /**
+            *  < predicateAnchor id="an1"
+                     anchorTime="" beginPoint="tmx5" endPoint="tmx0">
+                <span><target id="pr11"></span>
+            */
+           spans = new ArrayList<String>();
+           kafPredicateAnchor = new KafPredicateAnchor();
+           for (int i = 0; i < attributes.getLength(); i++) {
+               String name = attributes.getQName(i);
+               if (name.equalsIgnoreCase("id")) {
+                   kafPredicateAnchor.setId(attributes.getValue(i).trim());
+               }
+               else if (name.equalsIgnoreCase("beginPoint")) {
+                   kafPredicateAnchor.setBeginPoint(attributes.getValue(i).trim());
+               }
+               else if (name.equalsIgnoreCase("anchorTime")) {
+                   kafPredicateAnchor.setAnchorTime(attributes.getValue(i).trim());
+               }
+               else if (name.equalsIgnoreCase("endPoint")) {
+                   kafPredicateAnchor.setEndPoint(attributes.getValue(i).trim());
+               }
+               else  {
+                   //   System.out.println("352 ********* FOUND UNKNOWN Attribute " + name + " *****************");
+               }
+           }
+       }
+
        else if (qName.equalsIgnoreCase("opinion")) {
            kafOpinion = new KafOpinion();
            for (int i = 0; i < attributes.getLength(); i++) {
@@ -986,11 +1019,9 @@ public class KafSaxParser extends DefaultHandler {
                    kafOpinion.setOpinionId(attributes.getValue(i).trim());
                } else if (name.equalsIgnoreCase("id")) {
                    kafOpinion.setOpinionId(attributes.getValue(i).trim());
-               }
-               else if (name.equalsIgnoreCase("overlap_ents")) {
+               } else if (name.equalsIgnoreCase("overlap_ents")) {
                    kafOpinion.setOverlap_ents(attributes.getValue(i).trim());
-               }
-               else if (name.equalsIgnoreCase("overlap_props")) {
+               } else if (name.equalsIgnoreCase("overlap_props")) {
                    kafOpinion.setOverlap_props(attributes.getValue(i).trim());
                }
                else  {
@@ -2157,6 +2188,12 @@ public class KafSaxParser extends DefaultHandler {
                     spans = new ArrayList<String>();
                     senseTags = new ArrayList<KafSense>();
                     kafMarkablesArrayList.add(kafMarkable);
+            }
+
+            else if (qName.equalsIgnoreCase("predicateAnchor"))       /// version 3
+            {       kafPredicateAnchor.setSpans(spans);
+                    kafPredicateAnchorArrayList.add(kafPredicateAnchor);
+                    spans = new ArrayList<String>();
             }
 
             else if (qName.equalsIgnoreCase("span")) {
@@ -3387,25 +3424,29 @@ public class KafSaxParser extends DefaultHandler {
             }
 
             if (kafClinks.size()>0) {
-                Element tlinksLayer = xmldoc.createElement("causalRelations");
+                Element clinksLayer = xmldoc.createElement("causalRelations");
 
                 for (int i = 0; i < kafClinks.size(); i++) {
                     KafEventRelation eventRelation = kafClinks.get(i);
-                    tlinksLayer.appendChild(eventRelation.toNafXML(xmldoc, "clink"));
-                }
-
-                root.appendChild(tlinksLayer);
-            }
-
-            if (kafTlinks.size()>0) {
-                Element clinksLayer = xmldoc.createElement("temporalRelations");
-
-                for (int i = 0; i < kafTlinks.size(); i++) {
-                    KafEventRelation eventRelation = kafTlinks.get(i);
-                    clinksLayer.appendChild(eventRelation.toNafXML(xmldoc, "tlink"));
+                    clinksLayer.appendChild(eventRelation.toNafXML(xmldoc, "clink"));
                 }
 
                 root.appendChild(clinksLayer);
+            }
+
+            if (kafTlinks.size()>0 || kafPredicateAnchorArrayList.size()>0) {
+                Element tlinksLayer = xmldoc.createElement("temporalRelations");
+
+                for (int i = 0; i < kafTlinks.size(); i++) {
+                    KafEventRelation eventRelation = kafTlinks.get(i);
+                    tlinksLayer.appendChild(eventRelation.toNafXML(xmldoc, "tlink"));
+                }
+
+                for (int i = 0; i < kafPredicateAnchorArrayList.size(); i++) {
+                    KafPredicateAnchor predicateAnchor = kafPredicateAnchorArrayList.get(i);
+                    tlinksLayer.appendChild(predicateAnchor.toNafXML(xmldoc));
+                }
+                root.appendChild(tlinksLayer);
             }
 
             if (kafFactualityLayer.size()>0) {
