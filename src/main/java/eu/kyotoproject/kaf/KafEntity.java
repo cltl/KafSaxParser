@@ -49,6 +49,7 @@ public class KafEntity {
 
     private String id;
     private String type;
+    private String source;
     private String subtype;
     private String moneyISO;
     private String dateISO;
@@ -66,6 +67,7 @@ public class KafEntity {
         this.type = "";
         this.id = "";
         this.subtype = "";
+        this.source = "";
         this.moneyISO = "";
         this.dateISO = "";
     }
@@ -87,6 +89,14 @@ public class KafEntity {
             tokenString += " "+s;
         }
         return tokenString.trim();
+    }
+
+    public String getSource() {
+        return source;
+    }
+
+    public void setSource(String source) {
+        this.source = source;
     }
 
     public ArrayList<String> getTokenStringArray() {
@@ -275,6 +285,8 @@ public class KafEntity {
             root.setAttribute("id", id);
         if ((subtype != null) && (!subtype.isEmpty()))
             root.setAttribute("subtype", subtype);
+        if ((source != null) && (!source.isEmpty()))
+            root.setAttribute("source", source);
         if ((moneyISO != null)  && (!moneyISO.isEmpty()))
             root.setAttribute("moneyISO", moneyISO);
         if ((dateISO != null)  && (!dateISO.isEmpty()))

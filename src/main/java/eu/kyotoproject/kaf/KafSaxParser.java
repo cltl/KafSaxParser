@@ -1732,6 +1732,9 @@ public class KafSaxParser extends DefaultHandler {
                else if (name.equalsIgnoreCase("type")) {
                    kafEntity.setType(attributes.getValue(i).trim());
                }
+               else if (name.equalsIgnoreCase("source")) {
+                   kafEntity.setSource(attributes.getValue(i).trim());
+               }
                else if (name.equalsIgnoreCase("subtype")) {
                    kafEntity.setSubtype(attributes.getValue(i).trim());
                }
@@ -3874,7 +3877,7 @@ public class KafSaxParser extends DefaultHandler {
        // String file = "/Tools/ontotagger-v1.0/naf-example/spinoza-voorbeeld-ukb.ont.xml";
         //String file = "/Users/piek/Desktop/test/eventcorref_in.xml";
         //file = "/Users/piek/Desktop/tweede-kamer/NAF-Analysis/test/7236196.xml.19k351u4o.xml";
-        file =  "/Users/piek/Desktop/NAF3.0/obama.xml";
+        file =  "/Users/piek/Desktop/English Pipeline/naf3.0/obama_v3.xml";
 
         //String file = "/Code/vu/kyotoproject/KafSaxParser/test/eventcoref_in.xml";
         //String file = "/Tools/TextPro/TextPro2.0-forNewsReader/test/gold/Time.NAF.xml";
