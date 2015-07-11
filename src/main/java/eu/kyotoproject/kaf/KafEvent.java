@@ -39,6 +39,7 @@ public class KafEvent extends KafEventComponent{
         for (int i = 0; i < this.getSpans().size(); i++) {
             CorefTarget corefTarget = this.getSpans().get(i);
             corefTarget.setLemmaAndPos(kafSaxParser);
+            corefTarget.setSentenceId(kafSaxParser);
         }
     }
 
