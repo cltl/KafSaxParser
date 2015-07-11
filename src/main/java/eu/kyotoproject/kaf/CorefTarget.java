@@ -18,6 +18,7 @@ public class CorefTarget {
         private String lemma;
         private String pos;
         private String tokenString;
+        private String sentenceId;
 
         public CorefTarget() {
             this.head = "";
@@ -25,10 +26,25 @@ public class CorefTarget {
             this.lemma = "";
             this.pos = "";
             this.tokenString = "";
+            this.sentenceId = "";
         }
 
 
+    public void setLemma(String lemma) {
+        this.lemma = lemma;
+    }
 
+    public void setPos(String pos) {
+        this.pos = pos;
+    }
+
+    public String getSentenceId() {
+        return sentenceId;
+    }
+
+    public void setSentenceId(String sentenceId) {
+        this.sentenceId = sentenceId;
+    }
 
     public void setLemmaAndPos (KafSaxParser kafSaxParser) {
         KafTerm kafTerm = kafSaxParser.getTerm(this.id);
@@ -79,6 +95,7 @@ public class CorefTarget {
                     ", phrase='" + tokenString + '\'' +
                     ", lemma='" + lemma + '\'' +
                     ", pos='" + pos + '\'' +
+                    ", sentence='" + sentenceId + '\'' +
                     '}';
         }
 
