@@ -53,6 +53,12 @@ public class CorefTarget {
             this.pos = kafTerm.getPos();
         }
     }
+    public void setSentenceId (KafSaxParser kafSaxParser) {
+            KafTerm kafTerm = kafSaxParser.getTerm(this.id);
+            if (kafTerm!=null) {
+                this.sentenceId = kafSaxParser.getSentenceId(kafTerm);
+            }
+        }
 
     public String getLemma() {
         return lemma;
