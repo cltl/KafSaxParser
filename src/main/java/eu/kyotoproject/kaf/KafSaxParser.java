@@ -1434,6 +1434,11 @@ public class KafSaxParser extends DefaultHandler {
             	   sense.setResource(attributes.getValue(i).trim());
                    //System.out.println("sense.getR = " + sense.getResource());
                }
+               else if (name.equalsIgnoreCase("source"))
+               {
+            	   sense.setSource(attributes.getValue(i).trim());
+                   //System.out.println("sense.getR = " + sense.getResource());
+               }
                else if (name.equalsIgnoreCase("reftype"))  {
                     sense.setRefType(attributes.getValue(i).trim());
                }

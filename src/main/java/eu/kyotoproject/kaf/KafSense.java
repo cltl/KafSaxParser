@@ -33,6 +33,7 @@ public class KafSense  implements Serializable {
     <externalRef resource="WN-1.3" reference="" "ENG-30-04751652-n" confidence="1.0"/>
      */
     private String resource;
+    private String source;
     private String sensecode;
     private double confidence;
     private String refType = "", status = "";
@@ -42,15 +43,18 @@ public class KafSense  implements Serializable {
     public KafSense() {
         this.kafTermSentiment = new KafTermSentiment();
         this.sensecode = "";
+        this.source = "";
         this.resource = "";
         this.confidence = 0;
         this.children = new ArrayList<KafSense>();
     }
     
-    public KafSense(String resource, String reference, String refType, String status)
+    public KafSense(String resource, String souce, String reference, String refType, String status)
     {
     	this();
-    	if (resource != null)
+    	if (source!=null)
+            this.source = source;
+        if (resource != null)
     		this.resource = resource;
     	if (reference != null)
     		this.sensecode = reference;
@@ -80,6 +84,7 @@ public class KafSense  implements Serializable {
   	  Element root = xmldoc.createElement("externalRef");
       root.setAttribute("resource", resource);
       if (!sensecode.isEmpty()) root.setAttribute("reference", sensecode);
+      if (!source.isEmpty()) root.setAttribute("source", source);
       if (!refType.isEmpty()) root.setAttribute("reftype", refType);
       if (!status.isEmpty()) root.setAttribute("status", status);
       if (confidence>0) root.setAttribute("confidence", Double.toString(confidence));
@@ -93,6 +98,14 @@ public class KafSense  implements Serializable {
           }
       }
   	  return root;
+    }
+
+    public String getSource() {
+        return source;
+    }
+
+    public void setSource(String source) {
+        this.source = source;
     }
 
     public ArrayList<KafSense> getChildren() {
