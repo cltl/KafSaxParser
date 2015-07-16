@@ -129,5 +129,19 @@ topic.
 
         return root;
     }
+    public String toString()
+    {
+        String str = "<topic";
+        if (!uri.isEmpty()) str += " uri\"" +uri+"\"";
+        if (!source.isEmpty()) str += " source\"" +source+"\"";
+        if (!method.isEmpty())
+            str += " method\"" +method+"\"";
+        if (confidence>0) {
+            str += " confidence\"" +confidence+"\"";
+        }
+        str += "/>";
+
+        return str;
+    }
 
 }
