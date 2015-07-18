@@ -96,8 +96,10 @@ public class KafFactuality  implements Serializable {
         this.confidence = confidence;
     }
 */
+
     public String getPrediction () {
         String prediction = "";
+      //  System.out.println("factValueArrayList.size() = " + factValueArrayList.size());
         for (int i = 0; i < factValueArrayList.size(); i++) {
             KafFactValue kafFactValue = factValueArrayList.get(i);
             if (!prediction.isEmpty()) {
@@ -105,6 +107,8 @@ public class KafFactuality  implements Serializable {
             }
             prediction += kafFactValue.getValue();
         }
+     //   System.out.println("prediction = " + prediction);
+
         return prediction;
     }
 

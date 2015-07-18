@@ -922,7 +922,7 @@ public class KafSaxParser extends DefaultHandler {
            }
        //    kafFactualityLayer.add(kafFactuality);
        }
-       else if (qName.equalsIgnoreCase("factval")) {
+       else if (qName.equalsIgnoreCase("factvalue")) {
            /*
                  <factVal value="CT+" resource="FactBank"
                confidence="0.83"/>
