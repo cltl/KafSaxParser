@@ -45,7 +45,7 @@ public class KafFactuality  implements Serializable {
 	</factuality>
   </factualities>
      */
-
+    static public final String defaultAttribution = "CERTAIN,NONFUTURE,POS";
     private String id;
     //private String prediction;
     //private Double confidence;
@@ -79,38 +79,55 @@ public class KafFactuality  implements Serializable {
         this.id = id;
     }
 
-/*
-    public String getPrediction() {
-        return prediction;
-    }
 
-    public void setPrediction(String prediction) {
-        this.prediction = prediction;
-    }
+    /**
+     * Values are converted to a fixed string with fields for each of the following 4 sources
+     *       <factValue confidence="0.83" resource="FactBank" value="CT+"/>
+     <factValue confidence="0.11" resource="nwr:AttributionCertainty" value="PROBABLE"/>
+     <factValue confidence="0.91" resource="nwr:AttributionTime" value="FUTURE"/>
+     <factValue confidence="0.67" resource="nwr:AttributionPolarity" value="POS"/>
 
-    public Double getConfidence() {
-        return confidence;
-    }
+     WE ignore FactBank values
+     http://www.newsreader-project.eu/ontologies/value#attr=CERTAIN,FUTURE,POS
 
-    public void setConfidence(Double confidence) {
-        this.confidence = confidence;
-    }
-*/
 
+     @TODO NORMALIZE AND FIX THE ORDER
+     * @return
+     */
     public String getPrediction () {
         String prediction = "";
+        String certainty = "u";
+        String time = "u";
+        String polarity = "u";
       //  System.out.println("factValueArrayList.size() = " + factValueArrayList.size());
         for (int i = 0; i < factValueArrayList.size(); i++) {
             KafFactValue kafFactValue = factValueArrayList.get(i);
-            if (!prediction.isEmpty()) {
-                prediction +=";";
+            if (kafFactValue.getResource().toLowerCase().endsWith("attributioncertainty")) {
+                certainty = kafFactValue.getValue();
+                break; // assume there is one value only
             }
-            prediction += kafFactValue.getValue();
         }
-     //   System.out.println("prediction = " + prediction);
+        for (int i = 0; i < factValueArrayList.size(); i++) {
+            KafFactValue kafFactValue = factValueArrayList.get(i);
+            if (kafFactValue.getResource().toLowerCase().endsWith("attributiontime")) {
+                time = kafFactValue.getValue();
+                break; // assume there is one value only
+            }
+        }
+        for (int i = 0; i < factValueArrayList.size(); i++) {
+            KafFactValue kafFactValue = factValueArrayList.get(i);
+            if (kafFactValue.getResource().toLowerCase().endsWith("attributionpolarity")) {
+                polarity = kafFactValue.getValue();
+                break; // assume there is one value only
+            }
+        }
+        prediction = certainty+","+time+","+polarity;
+
+        //   System.out.println("prediction = " + prediction);
 
         return prediction;
     }
+
 
     public ArrayList<KafFactValue> getFactValueArrayList() {
         return factValueArrayList;

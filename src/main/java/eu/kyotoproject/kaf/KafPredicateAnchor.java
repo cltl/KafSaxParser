@@ -15,13 +15,14 @@ public class KafPredicateAnchor {
      * <temporalRelations>
       <!-- anchor pr11 predicate -->
       < predicateAnchor id="an1"
-              anchorTime="" beginPoint="tmx5" endPoint="tmx0">
+              anchorTime="" beginPoint="tmx5" endPoint="tmx0" functionInDocument="dct">
          <span><target id="pr11"></span>
       </predicateAnchor>
      </temporalRelations>
      */
 
     private String id;
+    private String functionInDocument;
     private String anchorTime;
     private String beginPoint;
     private String endPoint;
@@ -29,12 +30,21 @@ public class KafPredicateAnchor {
     private String tokenString;
 
     public KafPredicateAnchor() {
+        this.functionInDocument = "";
         this.anchorTime = "";
         this.beginPoint = "";
         this.endPoint = "";
         this.id = "";
         this.tokenString = "";
         this.spans = new ArrayList<String>();
+    }
+
+    public String getFunctionInDocument() {
+        return functionInDocument;
+    }
+
+    public void setFunctionInDocument(String functionInDocument) {
+        this.functionInDocument = functionInDocument;
     }
 
     public String getAnchorTime() {
@@ -91,6 +101,7 @@ public class KafPredicateAnchor {
         if (!id.isEmpty()) root.setAttribute("is", id);
         if (!beginPoint.isEmpty()) root.setAttribute("beginPoint", beginPoint);
         if (!endPoint.isEmpty()) root.setAttribute("endPoint", endPoint);
+        if (!functionInDocument.isEmpty()) root.setAttribute("functionInDocument", functionInDocument);
         if (!anchorTime.isEmpty()) root.setAttribute("anchorTime", anchorTime);
         if (this.getSpans().size()>0) {
             Element span = xmldoc.createElement("span");
