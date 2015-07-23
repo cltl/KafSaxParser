@@ -677,6 +677,11 @@ public class KafSaxParser extends DefaultHandler {
             </span>
             </timex3>
             </timeExpressions>
+
+            private String functionInDocument;
+            private String anchorTimeID;
+            private String beginPoint;
+            private String endPoint;
             */
             kafTimex = new KafTimex();
             for (int i = 0; i < attributes.getLength(); i++) {
@@ -689,6 +694,18 @@ public class KafSaxParser extends DefaultHandler {
                }
                else if (name.equalsIgnoreCase("value")) {
                    kafTimex.setValue(attributes.getValue(i).trim());
+               }
+               else if (name.equalsIgnoreCase("functionInDocument")) {
+                   kafTimex.setFunctionInDocument(attributes.getValue(i).trim());
+               }
+               else if (name.equalsIgnoreCase("anchorTimeID")) {
+                   kafTimex.setAnchorTimeID(attributes.getValue(i).trim());
+               }
+               else if (name.equalsIgnoreCase("beginPoint")) {
+                   kafTimex.setBeginPoint(attributes.getValue(i).trim());
+               }
+               else if (name.equalsIgnoreCase("endPoint")) {
+                   kafTimex.setEndPoint(attributes.getValue(i).trim());
                }
                else {
                    //   System.out.println("314 ********* FOUND UNKNOWN Attribute " + name + " *****************");
