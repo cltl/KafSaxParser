@@ -90,8 +90,6 @@ public class KafFactuality  implements Serializable {
      WE ignore FactBank values
      http://www.newsreader-project.eu/ontologies/value#attr=CERTAIN,FUTURE,POS
 
-
-     @TODO NORMALIZE AND FIX THE ORDER
      * @return
      */
     public String getPrediction () {

@@ -12,6 +12,22 @@ import java.util.ArrayList;
 public class KafTimex {
 
     /**
+     * <!ATTLIST timex3
+     id ID #REQUIRED
+     type CDATA #REQUIRED
+     beginPoint IDREF #IMPLIED
+     endPoint IDREF #IMPLIED
+     quant CDATA #IMPLIED
+     freq  CDATA #IMPLIED
+     functionInDocument CDATA #IMPLIED
+     temporalFunction CDATA #IMPLIED
+     value CDATA #IMPLIED
+     valueFromFunction CDATA #IMPLIED
+     mod CDATA #IMPLIED
+     anchorTimeID IDREF #IMPLIED>
+     */
+
+    /**
      * <timeExpressions>
      <timex3 id="tmx1" type="DURATION">
      <span>
@@ -32,12 +48,21 @@ public class KafTimex {
     private String type;
     private String value;
     private String tokenString;
+    private String functionInDocument;
+    private String anchorTimeID;
+    private String beginPoint;
+    private String endPoint;
+
     private ArrayList<String> spans;
 
     public KafTimex() {
         this.id = "";
         this.type = "";
         this.value = "";
+        this.functionInDocument = "";
+        this.anchorTimeID = "";
+        this.beginPoint = "";
+        this.endPoint = "";
         this.tokenString = "";
         this.spans = new ArrayList<String>();
     }
@@ -86,18 +111,51 @@ public class KafTimex {
         this.tokenString = tokenString;
     }
 
+    public String getAnchorTimeID() {
+        return anchorTimeID;
+    }
+
+    public void setAnchorTimeID(String anchorTimeID) {
+        this.anchorTimeID = anchorTimeID;
+    }
+
+    public String getBeginPoint() {
+        return beginPoint;
+    }
+
+    public void setBeginPoint(String beginPoint) {
+        this.beginPoint = beginPoint;
+    }
+
+    public String getEndPoint() {
+        return endPoint;
+    }
+
+    public void setEndPoint(String endPoint) {
+        this.endPoint = endPoint;
+    }
+
+    public String getFunctionInDocument() {
+        return functionInDocument;
+    }
+
+    public void setFunctionInDocument(String functionInDocument) {
+        this.functionInDocument = functionInDocument;
+    }
+
     public Element toNafXML(Document xmldoc)
     {
         Element root = xmldoc.createElement("timex3");
 
-        if (!this.getId().isEmpty())
-            root.setAttribute("id", this.getId());
+        if (!this.getId().isEmpty())  root.setAttribute("id", this.getId());
 
-        if (!this.getType().isEmpty())
-            root.setAttribute("type", this.getType());
+        if (!this.getType().isEmpty()) root.setAttribute("type", this.getType());
 
-        if (!this.getValue().isEmpty())
-            root.setAttribute("value", this.getValue());
+        if (!this.getValue().isEmpty()) root.setAttribute("value", this.getValue());
+        if (!this.getFunctionInDocument().isEmpty()) root.setAttribute("functionInDocument", this.getFunctionInDocument());
+        if (!this.getAnchorTimeID().isEmpty()) root.setAttribute("anchorTimeID", this.getAnchorTimeID());
+        if (!this.getBeginPoint().isEmpty()) root.setAttribute("beginPoint", this.getBeginPoint());
+        if (!this.getEndPoint().isEmpty()) root.setAttribute("endPoint", this.getEndPoint());
 
         if (this.getTokenString().length()>0) {
             Comment comment = xmldoc.createComment(this.getTokenString());
