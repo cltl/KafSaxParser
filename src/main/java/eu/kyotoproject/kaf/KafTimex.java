@@ -44,6 +44,11 @@ public class KafTimex {
      </timeExpressions>
      */
 
+    static public final String typeDURATION = "DURATION";
+    static public final String typeDATE = "DATE";
+    static public final String typeTIME = "TIME";
+    static public final String functionInDocumentCreationTime = "CREATION_TIME";
+
     private String id;
     private String type;
     private String value;
