@@ -3,10 +3,12 @@ package eu.kyotoproject.kaf;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
+import java.io.Serializable;
+
 /**
  * Created by piek on 03/07/15.
  */
-public class KafFactValue {
+public class KafFactValue implements Serializable {
     /*
           <factVal value="CT+" resource="FactBank"
                confidence="0.83"/>
@@ -53,5 +55,14 @@ public class KafFactValue {
         if (!resource.isEmpty()) root.setAttribute("resource", resource);
         if (confidence > -1) root.setAttribute("confidence", Double.toString(confidence));
         return root;
+    }
+
+    @Override
+    public String toString() {
+        return "KafFactValue{" +
+                "value=" + value +
+                ", resource='" + resource + '\'' +
+                ", confidence='" + confidence + '\'' +
+                '}';
     }
 }
