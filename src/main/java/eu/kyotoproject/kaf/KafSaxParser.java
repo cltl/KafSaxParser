@@ -937,13 +937,13 @@ public class KafSaxParser extends DefaultHandler {
                 //   System.out.println("352 ********* FOUND UNKNOWN Attribute " + name + " *****************");
                }
            }
-       //    kafFactualityLayer.add(kafFactuality);
        }
-       else if (qName.equalsIgnoreCase("factvalue")) {
+       else if (qName.equalsIgnoreCase("factvalue") ||
+                qName.equalsIgnoreCase("factval")) {
            /*
                  <factVal value="CT+" resource="FactBank"
                confidence="0.83"/>
-
+               /// OLD version factValue !!!!!!
             */
            KafFactValue kafFactValue = new KafFactValue();
            for (int i = 0; i < attributes.getLength(); i++) {

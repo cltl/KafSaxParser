@@ -44,6 +44,27 @@ public class KafFactuality  implements Serializable {
                confidence="0.67"/>
 	</factuality>
   </factualities>
+
+  NEW FORMAT July 2015
+
+      <factuality id="f40">
+      <span>
+        <target id="t248"/>
+      </span>
+      <factVal resource="nwr:attributionTense" value="NON_FUTURE"/>
+      <factVal resource="factbank" value="CT+"/>
+      <factVal resource="nwr:attributionCertainty" value="CERTAIN"/>
+      <factVal resource="nwr:attributionPolarity" value="POS"/>
+    </factuality>
+    <factuality id="f41">
+      <span>
+        <target id="t183"/>
+      </span>
+      <factVal resource="nwr:attributionTense" value="UNDERSPECIFIED"/>
+      <factVal resource="factbank" value="NONE"/>
+      <factVal resource="nwr:attributionCertainty" value="CERTAIN"/>
+      <factVal resource="nwr:attributionPolarity" value="POS"/>
+    </factuality>
      */
     static public final String defaultAttribution = "CERTAIN,NONFUTURE,POS";
     private String id;
@@ -82,10 +103,31 @@ public class KafFactuality  implements Serializable {
 
     /**
      * Values are converted to a fixed string with fields for each of the following 4 sources
-     *       <factValue confidence="0.83" resource="FactBank" value="CT+"/>
+     *** example output
+     <factValue confidence="0.83" resource="FactBank" value="CT+"/>
      <factValue confidence="0.11" resource="nwr:AttributionCertainty" value="PROBABLE"/>
      <factValue confidence="0.91" resource="nwr:AttributionTime" value="FUTURE"/>
      <factValue confidence="0.67" resource="nwr:AttributionPolarity" value="POS"/>
+
+     *** actual output
+     <factuality id="f40">
+     <span>
+     <target id="t248"/>
+     </span>
+     <factVal resource="nwr:attributionTense" value="NON_FUTURE"/>
+     <factVal resource="factbank" value="CT+"/>
+     <factVal resource="nwr:attributionCertainty" value="CERTAIN"/>
+     <factVal resource="nwr:attributionPolarity" value="POS"/>
+     </factuality>
+     <factuality id="f41">
+     <span>
+     <target id="t183"/>
+     </span>
+     <factVal resource="nwr:attributionTense" value="UNDERSPECIFIED"/>
+     <factVal resource="factbank" value="NONE"/>
+     <factVal resource="nwr:attributionCertainty" value="CERTAIN"/>
+     <factVal resource="nwr:attributionPolarity" value="POS"/>
+     </factuality>
 
      WE ignore FactBank values
      http://www.newsreader-project.eu/ontologies/value#attr=CERTAIN,FUTURE,POS
@@ -107,7 +149,7 @@ public class KafFactuality  implements Serializable {
         }
         for (int i = 0; i < factValueArrayList.size(); i++) {
             KafFactValue kafFactValue = factValueArrayList.get(i);
-            if (kafFactValue.getResource().toLowerCase().endsWith("attributiontime")) {
+            if (kafFactValue.getResource().toLowerCase().endsWith("attributiontense")) {
                 time = kafFactValue.getValue();
                 break; // assume there is one value only
             }
@@ -120,6 +162,7 @@ public class KafFactuality  implements Serializable {
             }
         }
         prediction = certainty+","+time+","+polarity;
+        prediction = prediction.replaceAll("UNDERSPECIFIED","u");
 
         //   System.out.println("prediction = " + prediction);
 

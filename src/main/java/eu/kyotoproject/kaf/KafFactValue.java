@@ -13,7 +13,25 @@ public class KafFactValue implements Serializable {
           <factVal value="CT+" resource="FactBank"
                confidence="0.83"/>
 
+                    <factVal resource="nwr:attributionTense" value="NON_FUTURE"/>
+     <factVal resource="factbank" value="CT+"/>
+     <factVal resource="nwr:attributionCertainty" value="CERTAIN"/>
+     <factVal resource="nwr:attributionPolarity" value="POS"/>
+
+      //// OLD VERSION factValue instead of factVal
      */
+    static public final String FUTURE = "FUTURE";
+    static public final String NON_FUTURE = "NON_FUTURE";
+    static public final String CERTAIN = "CERTAIN";
+    static public final String UNCERTAIN = "UNCERTAIN";
+    static public final String POS = "POS";
+    static public final String NEG = "NEG";
+    static public final String PROBABLE = "PROBABLE";
+    static public final String UNPROBABLE = "UNPROBABLE";
+    static public final String resourceFactbank = "factbank";
+    static public final String resourceAttributionTense = "nwr:attributionTense";
+    static public final String resourceAttributionCertainty = "nwr:attributionCertainty";
+    static public final String resourceAttributionPolarity = "nwr:attributionPolarity";
 
     private String value;
     private String resource;
@@ -50,7 +68,7 @@ public class KafFactValue implements Serializable {
     }
 
     public Element toNafXML(Document xmldoc) {
-        Element root = xmldoc.createElement("factValue");
+        Element root = xmldoc.createElement("factVal");
         if (!value.isEmpty()) root.setAttribute("value", value);
         if (!resource.isEmpty()) root.setAttribute("resource", resource);
         if (confidence > -1) root.setAttribute("confidence", Double.toString(confidence));
