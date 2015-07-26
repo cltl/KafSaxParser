@@ -131,6 +131,17 @@ public class KafCoreferenceSet {
         return lcsReferences;
     }
 
+    public ArrayList<KafSense> getExternalReferencesWithoutLCS() {
+        ArrayList<KafSense> lcsReferences = new ArrayList<KafSense>();
+        for (int i = 0; i < externalReferences.size(); i++) {
+            KafSense kafSense = externalReferences.get(i);
+            if (!kafSense.getSource().equalsIgnoreCase("lowest-common-subsumer")) {
+                lcsReferences.add(kafSense);
+            }
+        }
+        return lcsReferences;
+    }
+
     public void setExternalReferences(ArrayList<KafSense> externalReferences) {
         this.externalReferences = externalReferences;
     }
