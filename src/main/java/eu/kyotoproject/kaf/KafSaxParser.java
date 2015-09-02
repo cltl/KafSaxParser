@@ -575,6 +575,18 @@ public class KafSaxParser extends DefaultHandler {
                 else if (name.equalsIgnoreCase("author")) {
                     kafMetaData.setAuthor(attributes.getValue(i).trim());
                 }
+                else if (name.equalsIgnoreCase("section")) {
+                    kafMetaData.setSection(attributes.getValue(i).trim());
+                }
+                else if (name.equalsIgnoreCase("magazine")) {
+                    kafMetaData.setMagazine(attributes.getValue(i).trim());
+                }
+                else if (name.equalsIgnoreCase("publisher")) {
+                    kafMetaData.setPublisher(attributes.getValue(i).trim());
+                }
+                else if (name.equalsIgnoreCase("location")) {
+                    kafMetaData.setLocation(attributes.getValue(i).trim());
+                }
                 else if (name.equalsIgnoreCase("creationtime")) {
                     kafMetaData.setCreationtime(attributes.getValue(i).trim());
                 }
@@ -3899,7 +3911,7 @@ public class KafSaxParser extends DefaultHandler {
        // String file = "/Tools/ontotagger-v1.0/naf-example/spinoza-voorbeeld-ukb.ont.xml";
         //String file = "/Users/piek/Desktop/test/eventcorref_in.xml";
         //file = "/Users/piek/Desktop/tweede-kamer/NAF-Analysis/test/7236196.xml.19k351u4o.xml";
-        file =  "/Users/piek/Desktop/English Pipeline/naf3.0/obama_v3.xml";
+        file =  "/Users/piek/Desktop/NWR/output-rich-header.naf";
 
         //String file = "/Code/vu/kyotoproject/KafSaxParser/test/eventcoref_in.xml";
         //String file = "/Tools/TextPro/TextPro2.0-forNewsReader/test/gold/Time.NAF.xml";

@@ -31,9 +31,24 @@ import java.util.Map;
  */
 public class KafMetaData {
 
+    /*
+    1. uri
+    2. publicId
+    3. creationtime
+    4. section
+    5. magazine
+    6. author
+    7. location
+    8. title
+    9. publisher
+     */
     private String version;
     private String title;
     private String author;
+    private String section;
+    private String magazine;
+    private String location;
+    private String publisher;
     private String filename;
     private String filetype;
     private String docId;
@@ -63,6 +78,10 @@ public class KafMetaData {
       this.version = "";
       this.title = "";
       this.author = "";
+      this.section = "";
+      this.magazine = "";
+      this.publisher = "";
+      this.location = "";
       this.filename = "";
       this.filetype = "";
       this.docId = "";
@@ -78,6 +97,38 @@ public class KafMetaData {
       dateString = "";
       pagefolderpath = "";
   }
+
+    public String getSection() {
+        return section;
+    }
+
+    public void setSection(String section) {
+        this.section = section;
+    }
+
+    public String getPublisher() {
+        return publisher;
+    }
+
+    public void setPublisher(String publisher) {
+        this.publisher = publisher;
+    }
+
+    public String getMagazine() {
+        return magazine;
+    }
+
+    public void setMagazine(String magazine) {
+        this.magazine = magazine;
+    }
+
+    public String getLocation() {
+        return location;
+    }
+
+    public void setLocation(String location) {
+        this.location = location;
+    }
 
     public String getVersion() {
         return version;
@@ -357,6 +408,14 @@ public class KafMetaData {
             fileDesc.setAttribute("title", title);
         if ((author != null) && (author.length() > 0))
             fileDesc.setAttribute("author", author);
+        if ((section != null) && (section.length() > 0))
+            fileDesc.setAttribute("section", section);
+        if ((magazine != null) && (magazine.length() > 0))
+            fileDesc.setAttribute("magazine", magazine);
+        if ((publisher != null) && (publisher.length() > 0))
+            fileDesc.setAttribute("publisher", publisher);
+        if ((location != null) && (location.length() > 0))
+            fileDesc.setAttribute("location", location);
         if ((filename != null) && (filename.length() > 0))
             fileDesc.setAttribute("filename", filename);
         if (filesize > 0)
