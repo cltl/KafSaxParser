@@ -139,6 +139,19 @@ public class KafEntity {
     }
 */
 
+    public ArrayList<String> geTermIds() {
+        ArrayList<String> ids = new ArrayList<String>();
+        for (int i = 0; i < setsOfSpans.size(); i++) {
+            ArrayList<CorefTarget> corefTargets = setsOfSpans.get(i);
+            for (int j = 0; j < corefTargets.size(); j++) {
+                CorefTarget corefTarget = corefTargets.get(j);
+                if (!ids.contains(corefTarget.getId())) {
+                    ids.add(corefTarget.getId());
+                }
+            }
+        }
+        return ids;
+    }
     public ArrayList<ArrayList<CorefTarget>> getSetsOfSpans() {
         return setsOfSpans;
     }
