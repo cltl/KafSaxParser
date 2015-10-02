@@ -66,7 +66,8 @@ public class KafFactuality  implements Serializable {
       <factVal resource="nwr:attributionPolarity" value="POS"/>
     </factuality>
      */
-    static public final String defaultAttribution = "CERTAIN,NONFUTURE,POS";
+   // static public final String defaultAttribution = "CERTAIN,NON_FUTURE,POS";
+    static public final String defaultAttribution = "CERTAIN_NON_FUTURE_POS";
     private String id;
     //private String prediction;
     //private Double confidence;
@@ -161,7 +162,8 @@ public class KafFactuality  implements Serializable {
                 break; // assume there is one value only
             }
         }
-        prediction = certainty+","+time+","+polarity;
+        prediction = certainty+"_"+time+"_"+polarity;
+      //  prediction = certainty+","+time+","+polarity;
         prediction = prediction.replaceAll("UNDERSPECIFIED","u");
 
         //   System.out.println("prediction = " + prediction);
