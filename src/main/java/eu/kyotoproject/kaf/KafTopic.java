@@ -4,10 +4,12 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 
+import java.io.Serializable;
+
 /**
  * Created by piek on 26/06/15.
  */
-public class KafTopic {
+public class KafTopic implements Serializable {
 
     /*
 

@@ -354,7 +354,8 @@ public class KafSaxParser extends DefaultHandler {
             e.printStackTrace();
             System.out.println("file.getName() = " + file.getName());
             return false;
-        }    }
+        }
+    }
     
 /*
     public boolean parseFile(File file, String encoding)
@@ -3911,7 +3912,8 @@ public class KafSaxParser extends DefaultHandler {
        // String file = "/Tools/ontotagger-v1.0/naf-example/spinoza-voorbeeld-ukb.ont.xml";
         //String file = "/Users/piek/Desktop/test/eventcorref_in.xml";
         //file = "/Users/piek/Desktop/tweede-kamer/NAF-Analysis/test/7236196.xml.19k351u4o.xml";
-        file =  "/Users/piek/Desktop/NWR/output-rich-header.naf";
+        //file =  "/Users/piek/Desktop/NWR/output-rich-header.naf";
+        file =  "/Code/vu/newsreader/EventCoreference/newsreader-vm/vua-naf2sem_v4_2015/test/4KJ5-2R90-TX51-F3C4.xml.1a0sdakjs.xml";
 
         //String file = "/Code/vu/kyotoproject/KafSaxParser/test/eventcoref_in.xml";
         //String file = "/Tools/TextPro/TextPro2.0-forNewsReader/test/gold/Time.NAF.xml";
@@ -3923,6 +3925,15 @@ public class KafSaxParser extends DefaultHandler {
             KafWordForm kafWordForm = parser.kafWordFormList.get(i);
             System.out.println("kafWordForm.getWf() = " + kafWordForm.getWf());
         }*/
+
+        for (int i = 0; i < parser.kafEntityArrayList.size(); i++) {
+            KafEntity kafEntity = parser.kafEntityArrayList.get(i);
+            kafEntity.setTokenStrings(parser);
+            if (kafEntity.getTokenString().indexOf("Schreyer")>-1) {
+                System.out.println("kafEntity. = " + kafEntity.getTokenString());
+            }
+        }
+/*
         String outfile = file+".out.xml";
         try {
             FileOutputStream fos = new FileOutputStream(outfile);
@@ -3932,5 +3943,6 @@ public class KafSaxParser extends DefaultHandler {
         } catch (IOException e) {
             e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
         }
+*/
     }
 }
