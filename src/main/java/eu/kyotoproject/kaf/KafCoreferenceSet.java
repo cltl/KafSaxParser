@@ -176,6 +176,7 @@ public class KafCoreferenceSet {
 
 
     public void setTokenStrings (KafSaxParser parser) {
+        tokenStringArray = new ArrayList<String>();
         for (int i = 0; i < setsOfSpans.size(); i++) {
             ArrayList<CorefTarget> corefTargets = setsOfSpans.get(i);
             ArrayList<String> corefTokens = AddTokensAsCommentsToSpans.convertCorefTargetsToTokenSpan(parser, corefTargets);
