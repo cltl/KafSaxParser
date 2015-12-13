@@ -19,14 +19,27 @@ public class TagSourceUri {
         String tag = "";
         String filter = "";
         String fileTag = "";
-        /*pathToFolder = args[0];
-        tag = args[1];
-        filter = args[2];
-        fileTag = args[3];*/
         pathToFolder = "/Users/piek/Desktop/NWR/Cross-lingual/dutch-wikinews/corpus_stockmarket";
         tag = ".nl";
         filter = ".out.naf";
         fileTag = ".nl.coref";
+
+        for (int i = 0; i < args.length; i++) {
+            String arg = args[i];
+            if (arg.equals("--extension") && args.length>(i+1)) {
+                filter = args[i+1];
+            }
+            else if (arg.equals("--tag") && args.length>(i+1)) {
+                tag = args[i+1];
+            }
+            else if (arg.equals("--folder") && args.length>(i+1)) {
+                pathToFolder = args[i+1];
+            }
+        }
+        /*pathToFolder = args[0];
+        tag = args[1];
+        filter = args[2];
+        fileTag = args[3];*/
         KafSaxParser kafSaxParser = new KafSaxParser();
         ArrayList<File> files = FileProcessor.makeRecursiveFileArrayList(pathToFolder, filter);
         for (int i = 0; i < files.size(); i++) {
@@ -45,12 +58,13 @@ public class TagSourceUri {
             url += tag;
             kafSaxParser.getKafMetaData().setUrl(url);
             try {
+/*               // String filePath = file.getAbsolutePath()+fileTag;
                 String filePath = file.getAbsolutePath()+fileTag;
-               /* int idx = filePath.lastIndexOf(".naf.");
+               *//* int idx = filePath.lastIndexOf(".naf.");
                 if (idx>-1) {
                     filePath = filePath.substring(0, idx+4)+fileTag;
                 }*/
-                OutputStream fos = new FileOutputStream(filePath);
+                OutputStream fos = new FileOutputStream(file);
                 kafSaxParser.writeNafToStream(fos);
                 fos.close();
             } catch (IOException e) {

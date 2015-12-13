@@ -3914,7 +3914,7 @@ public class KafSaxParser extends DefaultHandler {
         //file = "/Users/piek/Desktop/tweede-kamer/NAF-Analysis/test/7236196.xml.19k351u4o.xml";
         //file =  "/Users/piek/Desktop/NWR/output-rich-header.naf";
         file =  "/Code/vu/newsreader/EventCoreference/newsreader-vm/vua-naf2sem_v4_2015/test/4KJ5-2R90-TX51-F3C4.xml.1a0sdakjs.xml";
-
+        file = "/Users/piek/Desktop/NWR/timeline/vua-naf2jsontimeline_2015/test/corpus_airbus/51682_Singapore_Airlines_to_be_compensated_for_A380_delays.naf";
         //String file = "/Code/vu/kyotoproject/KafSaxParser/test/eventcoref_in.xml";
         //String file = "/Tools/TextPro/TextPro2.0-forNewsReader/test/gold/Time.NAF.xml";
        // String file = "/Code/vu/newsreader/pos.xml";
@@ -3926,6 +3926,7 @@ public class KafSaxParser extends DefaultHandler {
             System.out.println("kafWordForm.getWf() = " + kafWordForm.getWf());
         }*/
 
+/*
         for (int i = 0; i < parser.kafEntityArrayList.size(); i++) {
             KafEntity kafEntity = parser.kafEntityArrayList.get(i);
             kafEntity.setTokenStrings(parser);
@@ -3933,7 +3934,8 @@ public class KafSaxParser extends DefaultHandler {
                 System.out.println("kafEntity. = " + kafEntity.getTokenString());
             }
         }
-/*
+*/
+
         String outfile = file+".out.xml";
         try {
             FileOutputStream fos = new FileOutputStream(outfile);
@@ -3943,6 +3945,6 @@ public class KafSaxParser extends DefaultHandler {
         } catch (IOException e) {
             e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
         }
-*/
+
     }
 }
