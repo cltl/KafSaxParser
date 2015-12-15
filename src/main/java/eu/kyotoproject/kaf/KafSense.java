@@ -32,6 +32,11 @@ public class KafSense  implements Serializable {
     <sense sensecode="ENG-30-04751652-n" confidence="1.0"/>
     <externalRef resource="WN-1.3" reference="" "ENG-30-04751652-n" confidence="1.0"/>
      */
+
+    static public final String LOWEST_COMMON_SUBSUMER = "lowest_common_subsumer";
+    static public final String HYPERNYM = "hypernym";
+    static public final String DOMINANT_SENSE = "dominant_sense";
+
     private String resource;
     private String source;
     private String sensecode;

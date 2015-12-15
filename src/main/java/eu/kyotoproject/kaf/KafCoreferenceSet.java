@@ -133,12 +133,12 @@ public class KafCoreferenceSet {
     }
 
     public ArrayList<KafSense> getLcsFromExternalReferences() {
-        ArrayList<KafSense> lcsReferences = getExternalReferencesForSource("lowest-common-subsumer");
+        ArrayList<KafSense> lcsReferences = getExternalReferencesForSource(KafSense.LOWEST_COMMON_SUBSUMER);
         return lcsReferences;
     }
 
     public ArrayList<KafSense> getHypernymFromExternalReferences() {
-        ArrayList<KafSense> lcsReferences = getExternalReferencesForSource("hypernym");
+        ArrayList<KafSense> lcsReferences = getExternalReferencesForSource(KafSense.HYPERNYM);
         return lcsReferences;
     }
 
@@ -146,8 +146,8 @@ public class KafCoreferenceSet {
         ArrayList<KafSense> lcsReferences = new ArrayList<KafSense>();
         for (int i = 0; i < externalReferences.size(); i++) {
             KafSense kafSense = externalReferences.get(i);
-            if (!kafSense.getSource().equalsIgnoreCase("lowest-common-subsumer") &&
-                    !kafSense.getSource().equalsIgnoreCase("hypernym")
+            if (!kafSense.getSource().equalsIgnoreCase(KafSense.LOWEST_COMMON_SUBSUMER) &&
+                    !kafSense.getSource().equalsIgnoreCase(KafSense.HYPERNYM)
                     ) {
                 lcsReferences.add(kafSense);
             }
