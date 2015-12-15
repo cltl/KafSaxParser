@@ -49,6 +49,12 @@ public class KafEvent extends KafEventComponent{
         if (!this.getId().isEmpty())
             root.setAttribute("id", this.getId());
 
+        if (!this.getSource().isEmpty())
+            root.setAttribute("source", this.getSource());
+
+        if (!this.getStatus().isEmpty())
+            root.setAttribute("status", this.getStatus());
+
         if (!this.getSynsetId().isEmpty()) {
             root.setAttribute("synsetId", this.getSynsetId());
             root.setAttribute("synsetConfidence", new Double(this.getSynsetConfidence()).toString());
@@ -122,17 +128,12 @@ public class KafEvent extends KafEventComponent{
         Element predicate = xmldoc.createElement("predicate");
         if (!this.getId().isEmpty())
             predicate.setAttribute("id", this.getId());
-/*
-        if (!this.getSynsetId().isEmpty()) {
-            predicate.setAttribute("uri", this.getSynsetId());
-            predicate.setAttribute("confidence", new Double(this.getSynsetConfidence()).toString());
-        }
-*/
-/*
-        if (!this.getSentenceId().isEmpty()) {
-            predicate.setAttribute("sentence", this.getSentenceId());
-        }
-*/
+
+        if (!this.getSource().isEmpty())
+            predicate.setAttribute("source", this.getSource());
+
+        if (!this.getStatus().isEmpty())
+            predicate.setAttribute("status", this.getStatus());
 
         if (this.getTokenString().length()>0) {
             Comment comment = xmldoc.createComment(this.getTokenString());

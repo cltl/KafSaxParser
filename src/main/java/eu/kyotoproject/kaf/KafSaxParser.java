@@ -1144,6 +1144,12 @@ public class KafSaxParser extends DefaultHandler {
                if (name.equalsIgnoreCase("id")) {
                    kafEvent.setId(attributes.getValue(i).trim());
                }
+               else if (name.equalsIgnoreCase("status")) {
+                   kafEvent.setStatus(attributes.getValue(i).trim());
+               }
+               if (name.equalsIgnoreCase("source")) {
+                   kafEvent.setSource(attributes.getValue(i).trim());
+               }
            }
        }
        else if (qName.equalsIgnoreCase("role")) {

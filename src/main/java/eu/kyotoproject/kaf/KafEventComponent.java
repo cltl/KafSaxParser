@@ -15,6 +15,8 @@ public class KafEventComponent {
 
     private String componentType;
     private String id;
+    private String source;
+    private String status;
     private String synsetId;
     private double synsetConfidence;
     private String sentenceId;
@@ -32,6 +34,8 @@ public class KafEventComponent {
         this.pos = "";
         this.componentType = "";
         this.id = "";
+        this.source = "";
+        this.status = "";
         this.synsetConfidence = 0;
         this.synsetId = "";
         this.sentenceId = "";
@@ -91,6 +95,22 @@ public class KafEventComponent {
 
     public void setId(String id) {
         this.id = id;
+    }
+
+    public String getSource() {
+        return source;
+    }
+
+    public void setSource(String source) {
+        this.source = source;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 
     public double getSynsetConfidence() {
