@@ -120,25 +120,25 @@ public class KafCoreferenceSet {
         return externalReferences;
     }
 
-    public ArrayList<KafSense> getLcsFromExternalReferences() {
-        ArrayList<KafSense> lcsReferences = new ArrayList<KafSense>();
-        for (int i = 0; i < externalReferences.size(); i++) {
-            KafSense kafSense = externalReferences.get(i);
-            if (kafSense.getSource().equalsIgnoreCase("lowest-common-subsumer")) {
-                lcsReferences.add(kafSense);
+
+    public ArrayList<KafSense> getExternalReferencesForSource(String source) {
+            ArrayList<KafSense> refs = new ArrayList<KafSense>();
+            for (int i = 0; i < externalReferences.size(); i++) {
+                KafSense kafSense = externalReferences.get(i);
+                if (kafSense.getSource().equalsIgnoreCase(source)) {
+                    refs.add(kafSense);
+                }
             }
-        }
+            return refs;
+    }
+
+    public ArrayList<KafSense> getLcsFromExternalReferences() {
+        ArrayList<KafSense> lcsReferences = getExternalReferencesForSource("lowest-common-subsumer");
         return lcsReferences;
     }
 
     public ArrayList<KafSense> getHypernymFromExternalReferences() {
-        ArrayList<KafSense> lcsReferences = new ArrayList<KafSense>();
-        for (int i = 0; i < externalReferences.size(); i++) {
-            KafSense kafSense = externalReferences.get(i);
-            if (kafSense.getSource().equalsIgnoreCase("hypernym")) {
-                lcsReferences.add(kafSense);
-            }
-        }
+        ArrayList<KafSense> lcsReferences = getExternalReferencesForSource("hypernym");
         return lcsReferences;
     }
 
