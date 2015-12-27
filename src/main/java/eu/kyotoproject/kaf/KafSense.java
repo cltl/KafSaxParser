@@ -32,6 +32,13 @@ public class KafSense  implements Serializable {
     <sense sensecode="ENG-30-04751652-n" confidence="1.0"/>
     <externalRef resource="WN-1.3" reference="" "ENG-30-04751652-n" confidence="1.0"/>
      */
+    /*
+    @TODO remove serialVersionUID
+    java.io.InvalidClassException: eu.kyotoproject.kaf.KafSense;
+    local class incompatible: stream classdesc serialVersionUID = 8053939673306041625,
+    local class serialVersionUID = -8445028541396433418
+     */
+    private static final long serialVersionUID = 8053939673306041625L;
 
     static public final String LOWEST_COMMON_SUBSUMER = "lowest_common_subsumer";
     static public final String HYPERNYM = "hypernym";

@@ -112,12 +112,17 @@ public class AddTokensAsCommentsToSpans {
         ArrayList<String> tokenSpan = new ArrayList<String>();
         for (int i = 0; i < span.size(); i++) {
             CorefTarget corefTarget = span.get(i);
-            ArrayList<String> tokens = kafSaxParser.TermToWord.get(corefTarget.getId());
-            for (int j = 0; j < tokens.size(); j++) {
-                String t = tokens.get(j);
-                tokenSpan.add(t);
+            if (!kafSaxParser.TermToWord.containsKey(corefTarget.getId())) {
+                System.out.println("kafSaxParser = " + kafSaxParser.getKafMetaData().getUrl());
+                System.out.println("Cannot find word for corefTarget.getId() = " + corefTarget.getId());
             }
-
+            else {
+                ArrayList<String> tokens = kafSaxParser.TermToWord.get(corefTarget.getId());
+                for (int j = 0; j < tokens.size(); j++) {
+                    String t = tokens.get(j);
+                    tokenSpan.add(t);
+                }
+            }
         }
         return tokenSpan;
     }
