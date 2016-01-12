@@ -2485,11 +2485,22 @@ public class KafSaxParser extends DefaultHandler {
         KafTerm kafTerm = getTerm(span);
         if (kafTerm!=null) {
             String pos = kafTerm.getPos();
+            if (kafTerm.getType().equalsIgnoreCase("open")) {
+                return true;
+            }
+            if (kafTerm.getType().equalsIgnoreCase("close")) {
+                return false;
+            }
             if (pos.isEmpty()) {
                 // we have no POS
                 return true;
             }
             if (pos.toLowerCase().startsWith("r")) { /// appears to be used for NEs
+                return true;
+            }
+            if (pos.toLowerCase().startsWith("s")) { /// appears to be used for NEs and some nouns by FBK
+                //    <term id="t6" type="" lemma="itunes" pos="SPN">
+                // <term id="t117" type="" lemma="musica" pos="SS" morphofeat="musica+n+f+sing">
                 return true;
             }
             if (pos.toLowerCase().startsWith("n")) {
