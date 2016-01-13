@@ -2488,9 +2488,10 @@ public class KafSaxParser extends DefaultHandler {
             if (kafTerm.getType().equalsIgnoreCase("open")) {
                 return true;
             }
-            if (kafTerm.getType().equalsIgnoreCase("close")) {
+            /// Had to take this out because the Spanish NAF labels entities wqith pos="R" and type="close"
+            /*if (kafTerm.getType().equalsIgnoreCase("close")) {
                 return false;
-            }
+            }*/
             if (pos.isEmpty()) {
                 // we have no POS
                 return true;
