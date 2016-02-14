@@ -3936,9 +3936,9 @@ public class KafSaxParser extends DefaultHandler {
         //String file = "/Users/piek/Desktop/test/eventcorref_in.xml";
         //file = "/Users/piek/Desktop/tweede-kamer/NAF-Analysis/test/7236196.xml.19k351u4o.xml";
         //file =  "/Users/piek/Desktop/NWR/output-rich-header.naf";
-        file =  "/Code/vu/newsreader/EventCoreference/newsreader-vm/vua-naf2sem_v4_2015/test/4KJ5-2R90-TX51-F3C4.xml.1a0sdakjs.xml";
-        file = "/Users/piek/Desktop/NWR/timeline/vua-naf2jsontimeline_2015/test/corpus_airbus/51682_Singapore_Airlines_to_be_compensated_for_A380_delays.naf";
-        file = "/Users/piek/Desktop/NWR/wikinews/en_wikinews/output/enwikinews-47846_ab4772cd07e05b65a54d987676e005c8.xml.bz2_76c6ad5b1dcb6463dbdf48e11016d3eb.naf.bz2";
+        //file =  "/Code/vu/newsreader/EventCoreference/newsreader-vm/vua-naf2sem_v4_2015/test/4KJ5-2R90-TX51-F3C4.xml.1a0sdakjs.xml";
+        //file = "/Users/piek/Desktop/NWR/timeline/vua-naf2jsontimeline_2015/test/corpus_airbus/51682_Singapore_Airlines_to_be_compensated_for_A380_delays.naf";
+        //file = "/Users/piek/Desktop/NWR/wikinews/en_wikinews/output/enwikinews-47846_ab4772cd07e05b65a54d987676e005c8.xml.bz2_76c6ad5b1dcb6463dbdf48e11016d3eb.naf.bz2";
         //String file = "/Code/vu/kyotoproject/KafSaxParser/test/eventcoref_in.xml";
         //String file = "/Tools/TextPro/TextPro2.0-forNewsReader/test/gold/Time.NAF.xml";
        // String file = "/Code/vu/newsreader/pos.xml";
@@ -3952,7 +3952,9 @@ public class KafSaxParser extends DefaultHandler {
                 parser.parseFile(gzipStream);
             } catch (FileNotFoundException e) {
                 e.printStackTrace();
-            }
+            } catch (IOException e) {
+                e.printStackTrace();
+	    }
         }
         else {
 
