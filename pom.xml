@@ -6,7 +6,7 @@
 
     <groupId>com.github.cltl</groupId>
     <artifactId>KafSaxParser</artifactId>
-    <version>3.0</version>
+    <version>v3.0</version>
 
     <packaging>jar</packaging>
     <name>KafSaxParser</name>
