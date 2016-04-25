@@ -15,6 +15,7 @@ https://github.com/cltl/KafSaxParser
 
 The binaries can be built using maven and the pom.xml
 
+> mvn clean
 > mvn install
 
 REQUIREMENTS
