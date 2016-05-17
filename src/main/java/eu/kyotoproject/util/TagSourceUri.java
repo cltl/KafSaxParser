@@ -19,10 +19,9 @@ public class TagSourceUri {
         String tag = "";
         String filter = "";
         String fileTag = "";
-        pathToFolder = "/Users/piek/Desktop/NWR/Cross-lingual/dutch-wikinews/corpus_stockmarket";
-        tag = ".nl";
-        filter = ".out.naf";
-        fileTag = ".nl.coref";
+        pathToFolder = "/Users/piek/Desktop/NWR/Wikinews/Cross-lingual-pip3/cross-stock/corpus_stock_en";
+        tag = ".en";
+        filter = ".naf";
 
         for (int i = 0; i < args.length; i++) {
             String arg = args[i];

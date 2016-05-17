@@ -123,21 +123,7 @@ public class KafEntity {
         this.externalReferences.add(externalReference);
     }
 
-/*
-    public ArrayList<String> getSpans() {
-        return spans;
-    }
 
-    public void setSpans(ArrayList<String> spans) {
-        this.spans = spans;
-    }
-
-    public void addSpan(String span) {
-        if (!this.spans.contains(span)) {
-            this.spans.add(span);
-        }
-    }
-*/
 
     public ArrayList<String> getTermIds() {
         ArrayList<String> ids = new ArrayList<String>();
