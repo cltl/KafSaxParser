@@ -10,10 +10,10 @@ import java.util.ArrayList;
 public class FixDutchSrl {
     static public void main (String[] args) {
         KafSaxParser kafSaxParser = new KafSaxParser();
-        String pathToFile = "/Users/piek/Desktop/NWR-INC/dasym/test1/test2.naf";
-        kafSaxParser.parseFile(pathToFile);
+        //String pathToFile = "/Users/piek/Desktop/NWR-INC/dasym/test1/test2.naf";
+        ///kafSaxParser.parseFile(pathToFile);
+        kafSaxParser.parseFile(System.in);
         dutchSrlFix(kafSaxParser);
-      //  kafSaxParser.parseFile(System.in);
         kafSaxParser.writeNafToStream(System.out);
     }
 
