@@ -15,11 +15,12 @@ public class FixEventCoreferences {
 
     static public void main (String[] args) {
        // String pathToFile = args[0];
-        String pathToPredicateFile = "";
-        String pathToFile = "";
+        String pathToPredicateFile = "/Users/piek/Desktop/NWR-INC/dasym/test1/noncoref.txt";
+        String pathToFile = "/Users/piek/Desktop/NWR-INC/dasym/test1/test.ent.xml";
         Vector<String> predicates = readFileToVector(pathToPredicateFile);
         KafSaxParser kafSaxParser = new KafSaxParser();
-        kafSaxParser.parseFile(System.in);
+        kafSaxParser.parseFile(pathToFile);
+        //kafSaxParser.parseFile(System.in);
         fixEventCoreferenceSets(kafSaxParser, predicates);
         kafSaxParser.writeNafToStream(System.out);
 
@@ -48,51 +49,29 @@ public class FixEventCoreferences {
             }
             lemma = lemma.trim();
             if (predicates.contains(lemma)) {
+               // System.out.println("lemma = " + lemma);
                 return true;
             }
         }
         return false;
     }
 
-    static void fixEventCoreferenceSets (KafSaxParser kafSaxParser, Vector<String> predicates) {
+    static public void fixEventCoreferenceSets (KafSaxParser kafSaxParser, Vector<String> predicates) {
         ArrayList<KafCoreferenceSet> fixedSets = new ArrayList<KafCoreferenceSet>();
         for (int i = 0; i < kafSaxParser.kafCorefenceArrayList.size(); i++) {
             KafCoreferenceSet kafCoreferenceSet = kafSaxParser.kafCorefenceArrayList.get(i);
             if (kafCoreferenceSet.getType().toLowerCase().startsWith("event")) {
                 if (breakNeeded(kafCoreferenceSet, kafSaxParser, predicates)) {
-                    HashMap<String, KafCoreferenceSet> corefMap = new HashMap<String, KafCoreferenceSet>();
+                    ArrayList<KafCoreferenceSet> newSets = new ArrayList<KafCoreferenceSet>();
                     int nSubSets = 0;
                     for (int j = 0; j < kafCoreferenceSet.getSetsOfSpans().size(); j++) {
                         ArrayList<CorefTarget> corefTargets = kafCoreferenceSet.getSetsOfSpans().get(j);
-                        String lemma = "";
-                        for (int k = 0; k < corefTargets.size(); k++) {
-                            CorefTarget corefTarget = corefTargets.get(k);
-                            KafTerm kafTerm = kafSaxParser.getTerm(corefTarget.getId());
-                            if (kafTerm!=null) {
-                                lemma += kafTerm.getLemma()+" ";
-                            }
-                        }
-                        lemma = lemma.trim();
-                        if (corefMap.containsKey(lemma)) {
-                            KafCoreferenceSet kafCoreferenceSetNew = corefMap.get(lemma);
-                            kafCoreferenceSetNew.addSetsOfSpans(corefTargets);
-                            corefMap.put(lemma, kafCoreferenceSetNew);
-                        }
-                        else {
-                            nSubSets++;
-                            KafCoreferenceSet kafCoreferenceSetNew = new KafCoreferenceSet();
-                            String corefId = kafCoreferenceSet.getCoid()+"_"+nSubSets;
-                            kafCoreferenceSetNew.setCoid(corefId);
-                            kafCoreferenceSetNew.setType(kafCoreferenceSet.getType());
-                            kafCoreferenceSetNew.addSetsOfSpans(corefTargets);
-                            corefMap.put(lemma, kafCoreferenceSetNew);
-                        }
-                    }
-                    Set keySet = corefMap.keySet();
-                    Iterator<String> keys = keySet.iterator();
-                    while (keys.hasNext()) {
-                        String key = keys.next();
-                        KafCoreferenceSet kafCoreferenceSetNew = corefMap.get(key);
+                        nSubSets++;
+                        KafCoreferenceSet kafCoreferenceSetNew = new KafCoreferenceSet();
+                        String corefId = kafCoreferenceSet.getCoid()+"_"+nSubSets;
+                        kafCoreferenceSetNew.setCoid(corefId);
+                        kafCoreferenceSetNew.setType(kafCoreferenceSet.getType());
+                        kafCoreferenceSetNew.addSetsOfSpans(corefTargets);
                         fixedSets.add(kafCoreferenceSetNew);
                     }
                 }
@@ -108,7 +87,7 @@ public class FixEventCoreferences {
     }
 
 
-    static Vector<String> readFileToVector(String fileName) {
+    static public Vector<String> readFileToVector(String fileName) {
         Vector<String> lineList = new Vector<String>();
         if (new File(fileName).exists() ) {
             try {

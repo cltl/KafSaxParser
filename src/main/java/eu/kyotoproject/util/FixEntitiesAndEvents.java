@@ -1,25 +1,27 @@
 package eu.kyotoproject.util;
 
-import eu.kyotoproject.kaf.KafEntity;
 import eu.kyotoproject.kaf.KafSaxParser;
-import eu.kyotoproject.kaf.KafTerm;
 
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.util.ArrayList;
+import java.util.Vector;
 
 /**
- * Created by piek on 16/05/16.
+ * Created by piek on 20/05/16.
  */
-public class FixEntities {
+public class FixEntitiesAndEvents {
 
     static public void main (String[] args) {
         KafSaxParser kafSaxParser = new KafSaxParser();
         String pathToFile = "";
         String extension = "";
-         pathToFile = "/Users/piek/Desktop/NWR-INC/dasym/test1/test.naf";
+        String eventPath = "";
+        Vector<String> predicates = null;
+
+        pathToFile = "/Users/piek/Desktop/NWR-INC/dasym/test1/test.naf";
         for (int i = 0; i < args.length; i++) {
             String arg = args[i];
             if (arg.equalsIgnoreCase("--input") && args.length>(i+1)) {
@@ -28,10 +30,14 @@ public class FixEntities {
             else if (arg.equalsIgnoreCase("--extension") && args.length>(i+1)) {
                 extension = args[i+1];
             }
+            else if (arg.equalsIgnoreCase("--events") && args.length>(i+1)) {
+                eventPath = args[i+1];
+                predicates = FixEventCoreferences.readFileToVector(eventPath);
+            }
         }
         if (pathToFile.equalsIgnoreCase("stream")) {
             kafSaxParser.parseFile(System.in);
-            fix(kafSaxParser);
+            fix(kafSaxParser,predicates);
             kafSaxParser.writeNafToStream(System.out);
         }
         else {
@@ -41,7 +47,7 @@ public class FixEntities {
                 for (int i = 0; i < files.size(); i++) {
                     File nextFile = files.get(i);
                     kafSaxParser.parseFile(nextFile);
-                    fix(kafSaxParser);
+                    fix(kafSaxParser, predicates);
                     try {
                         OutputStream fos = new FileOutputStream(nextFile);
                         kafSaxParser.writeNafToStream(fos);
@@ -53,7 +59,7 @@ public class FixEntities {
             }
             else {
                 kafSaxParser.parseFile(file);
-                fix(kafSaxParser);
+                fix(kafSaxParser, predicates);
                 try {
                     OutputStream fos = new FileOutputStream(file);
                     kafSaxParser.writeNafToStream(fos);
@@ -65,46 +71,10 @@ public class FixEntities {
         }
     }
 
-    static public void fix (KafSaxParser kafSaxParser) {
-        ArrayList<KafEntity> fixedEntities = new ArrayList<KafEntity>();
-        for (int i = 0; i < kafSaxParser.kafEntityArrayList.size(); i++) {
-            KafEntity kafEntity = kafSaxParser.kafEntityArrayList.get(i);
-            if (validEntityType(kafEntity.getType())) {
-                fixedEntities.add(kafEntity);
-            }
-            else {
-                ArrayList<String> spanIds = kafEntity.getTermIds();
-                String lastSpanId = spanIds.get(spanIds.size()-1);
-                KafTerm kafTerm = kafSaxParser.getTerm(lastSpanId);
-                if (kafTerm!=null) {
-                    if (kafTerm.getPos().equalsIgnoreCase("name")) {
-                      fixedEntities.add(kafEntity);
-                    }
-                }
-            }
+    static void fix (KafSaxParser kafSaxParser, Vector events) {
+        FixEntities.fix(kafSaxParser);
+        if (events!=null) {
+            FixEventCoreferences.fixEventCoreferenceSets(kafSaxParser, events);
         }
-        kafSaxParser.kafEntityArrayList = fixedEntities;
     }
-
-    static boolean validEntityType (String type) {
-        if (type.equalsIgnoreCase("PER")) {
-            return true;
-        }
-        else if (type.equalsIgnoreCase("PRO")) {
-            return true;
-        }
-        else if (type.equalsIgnoreCase("MISC")) {
-            return true;
-        }
-        else if (type.equalsIgnoreCase("ORG")) {
-            return true;
-        }
-        else if (type.equalsIgnoreCase("LOC")) {
-            return true;
-        }
-        return false;
-    }
-
-
-
 }
