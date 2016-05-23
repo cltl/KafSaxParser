@@ -21,7 +21,8 @@ public class FixEntitiesAndEvents {
         String eventPath = "";
         Vector<String> predicates = null;
 
-        pathToFile = "/Users/piek/Desktop/NWR-INC/dasym/test1/test.naf";
+        pathToFile = "/Users/piek/Desktop/NWR-INC/dasym/dumpje/12.naf.topic";
+        eventPath = "/Users/piek/Desktop/NWR-INC/dasym/naf2sem/scripts/noncoref.txt";
         for (int i = 0; i < args.length; i++) {
             String arg = args[i];
             if (arg.equalsIgnoreCase("--input") && args.length>(i+1)) {
@@ -32,9 +33,10 @@ public class FixEntitiesAndEvents {
             }
             else if (arg.equalsIgnoreCase("--events") && args.length>(i+1)) {
                 eventPath = args[i+1];
-                predicates = FixEventCoreferences.readFileToVector(eventPath);
             }
         }
+        predicates = FixEventCoreferences.readFileToVector(eventPath);
+
         if (pathToFile.equalsIgnoreCase("stream")) {
             kafSaxParser.parseFile(System.in);
             fix(kafSaxParser,predicates);

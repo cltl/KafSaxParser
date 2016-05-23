@@ -105,6 +105,9 @@ public class FixEventCoreferences {
                 e.printStackTrace();
             }
         }
+        else {
+            System.out.println("Cannot load the file = " + fileName);
+        }
         return lineList;
     }
 

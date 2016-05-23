@@ -2406,6 +2406,17 @@ public class KafSaxParser extends DefaultHandler {
 		return "-1";
     }
 
+    public String getLemma (ArrayList<String> termIds) {
+        String lemma = "";
+        for (int i = 0; i < termIds.size(); i++) {
+            String termId = termIds.get(i);
+            KafTerm  kafTerm = this.getTerm(termId);
+            if (kafTerm!=null) {
+                lemma += kafTerm.getLemma()+" ";
+            }
+        }
+        return lemma.trim();
+    }
     public KafMetaData getKafMetaData() {
         return kafMetaData;
     }
