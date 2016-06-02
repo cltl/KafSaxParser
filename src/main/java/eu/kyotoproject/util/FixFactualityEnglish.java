@@ -95,17 +95,7 @@ public class FixFactualityEnglish {
      */
     static public void fix (KafSaxParser kafSaxParser) {
         for (int i = 0; i < kafSaxParser.kafFactualityLayer.size(); i++) {
-            KafFactuality kafFactuality = kafSaxParser.kafFactualityLayer.get(i);
-            boolean NEEDCHECKING = false;
-            for (int j = 0; j < kafFactuality.getFactValueArrayList().size(); j++) {
-                KafFactValue kafFactValue = kafFactuality.getFactValueArrayList().get(j);
-                if (kafFactValue.getValue().equalsIgnoreCase("UNDERSPECIFIED") &&
-                        kafFactValue.getResource().equalsIgnoreCase("nwr:attributionPolarity") || kafFactValue.getResource().equalsIgnoreCase("nwr:attributionTense")) {
-                    NEEDCHECKING = true;
-                    break;
-                }
-            }
-            if (NEEDCHECKING) {
+                KafFactuality kafFactuality = kafSaxParser.kafFactualityLayer.get(i);
                 KafTerm kafTerm = null;
                 KafTerm kafTermp1 = null;
                 KafTerm kafTermp2 = null;
@@ -178,7 +168,7 @@ public class FixFactualityEnglish {
                              //   System.out.println(kafTerm.getLemma() + " kafFactValue = " + kafFactValue.toString());
                             }
                         }
-                        if (!kafFactValue.getValue().equalsIgnoreCase("FUTURE") &&
+                        else if (!kafFactValue.getValue().equalsIgnoreCase("FUTURE") &&
                                 kafFactValue.getResource().equalsIgnoreCase("nwr:attributionTense")) {
                             if (kafTermp1 != null && kafTermp1.getMorphofeat().equalsIgnoreCase("MD")) {
                                 kafFactValue.setValue("FUTURE");
@@ -213,9 +203,78 @@ public class FixFactualityEnglish {
                                 }
                             }
                         }
+                        else if (!kafFactValue.getValue().equalsIgnoreCase("CERTAIN") &&
+                                kafFactValue.getResource().equalsIgnoreCase("nwr:attributionCertainty")) {
+
+                            if (kafTermp1!=null && kafTermp1.getLemma().equalsIgnoreCase("might") ||
+                                    kafTermp1.getLemma().equalsIgnoreCase("may") ||
+                                    kafTermp1.getLemma().equalsIgnoreCase("can") ||
+                                    kafTermp1.getLemma().equalsIgnoreCase("could") ||
+                                    kafTermp1.getLemma().equalsIgnoreCase("perhaps") ||
+                                    kafTermp1.getLemma().equalsIgnoreCase("possibly") ||
+                                    kafTermp1.getLemma().equalsIgnoreCase("could") ||
+                                    kafTermp1.getLemma().equalsIgnoreCase("uncertain") ||
+                                    kafTermp1.getLemma().equalsIgnoreCase("uncertainly") ||
+                                    kafTermp1.getLemma().equalsIgnoreCase("unsure") ||
+                                    kafTermp1.getLemma().equalsIgnoreCase("unlikely") ||
+                                    kafTermp1.getLemma().equalsIgnoreCase("maybe")
+                                    ) {
+                                    kafFactValue.setValue("UNCERTAIN");
+                                    //    System.out.println(kafTerm.getLemma() + " kafFactValue = " + kafFactValue.toString());
+                            }
+                            else if (kafTermp2!=null && kafTermp2.getLemma().equalsIgnoreCase("might") ||
+                                    kafTermp1.getLemma().equalsIgnoreCase("may") ||
+                                    kafTermp1.getLemma().equalsIgnoreCase("can") ||
+                                    kafTermp1.getLemma().equalsIgnoreCase("could") ||
+                                    kafTermp1.getLemma().equalsIgnoreCase("perhaps") ||
+                                    kafTermp1.getLemma().equalsIgnoreCase("possibly") ||
+                                    kafTermp1.getLemma().equalsIgnoreCase("could") ||
+                                    kafTermp1.getLemma().equalsIgnoreCase("uncertain") ||
+                                    kafTermp1.getLemma().equalsIgnoreCase("uncertainly") ||
+                                    kafTermp1.getLemma().equalsIgnoreCase("possibly") ||
+                                    kafTermp1.getLemma().equalsIgnoreCase("potentially") ||
+                                    kafTermp1.getLemma().equalsIgnoreCase("unsure") ||
+                                    kafTermp1.getLemma().equalsIgnoreCase("unlikely") ||
+                                    kafTermp1.getLemma().equalsIgnoreCase("maybe")
+                                    ) {
+                                    kafFactValue.setValue("UNCERTAIN");
+                                    //    System.out.println(kafTerm.getLemma() + " kafFactValue = " + kafFactValue.toString());
+                            }
+                        }
                     }
+                    /*boolean NEGATION = false;
+                    for (int j = 0; j < kafFactuality.getFactValueArrayList().size(); j++) {
+                        KafFactValue kafFactValue = kafFactuality.getFactValueArrayList().get(j);
+                        if (kafFactValue.getValue().equalsIgnoreCase("NEG") &&
+                                kafFactValue.getResource().equalsIgnoreCase("nwr:attributionPolarity")) {
+                            NEGATION = true;
+                            break;
+                        }
+                    }
+                    for (int j = 0; j < kafFactuality.getFactValueArrayList().size(); j++) {
+                        KafFactValue kafFactValue = kafFactuality.getFactValueArrayList().get(j);
+                        if (!kafFactValue.getValue().equalsIgnoreCase("CERTAIN") &&
+                                kafFactValue.getResource().equalsIgnoreCase("nwr:attributionCertainty")) {
+
+                            if (kafTermp1.getLemma().equalsIgnoreCase("might") ||
+                                    kafTermp1.getLemma().equalsIgnoreCase("may") ||
+                                    kafTermp1.getLemma().equalsIgnoreCase("can") ||
+                                    kafTermp1.getLemma().equalsIgnoreCase("could") ||
+                                    kafTermp1.getLemma().equalsIgnoreCase("perhaps") ||
+                                    kafTermp1.getLemma().equalsIgnoreCase("possibly") ||
+                                    kafTermp1.getLemma().equalsIgnoreCase("could") ||
+                                    kafTermp1.getLemma().equalsIgnoreCase("unsure") ||
+                                    kafTermp1.getLemma().equalsIgnoreCase("unlikely") ||
+                                    kafTermp1.getLemma().equalsIgnoreCase("maybe")
+                                    ) {
+                                if (!NEGATION) {
+                                    kafFactValue.setValue("UNCERTAIN");
+                                    //    System.out.println(kafTerm.getLemma() + " kafFactValue = " + kafFactValue.toString());
+                                }
+                            }
+                        }
+                    }*/
                 }
-            }
         }
     }
 
