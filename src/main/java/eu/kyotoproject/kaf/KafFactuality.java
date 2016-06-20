@@ -147,6 +147,18 @@ public class KafFactuality  implements Serializable {
                 certainty = kafFactValue.getValue();
                 break; // assume there is one value only
             }
+            else if (kafFactValue.getResource().equalsIgnoreCase("factbank")) {
+                if (kafFactValue.getValue().startsWith("CT")) {
+                    certainty = "CERTAIN";
+                    break; // assume there is one value only
+                } else if (kafFactValue.getValue().startsWith("PR")) {
+                    certainty = "PROBABLE";
+                    break; // assume there is one value only
+                } else if (kafFactValue.getValue().startsWith("PS")) {
+                    certainty = "POSSIBLE";
+                    break; // assume there is one value only
+                }
+            }
         }
         for (int i = 0; i < factValueArrayList.size(); i++) {
             KafFactValue kafFactValue = factValueArrayList.get(i);
@@ -161,6 +173,16 @@ public class KafFactuality  implements Serializable {
                 polarity = kafFactValue.getValue();
                 break; // assume there is one value only
             }
+            else if (kafFactValue.getResource().equalsIgnoreCase("factbank")) {
+                if (kafFactValue.getValue().endsWith("-")) {
+                    polarity = "NEG";
+                    break; // assume there is one value only
+                }
+                else if (kafFactValue.getValue().endsWith("+")) {
+                    polarity = "POS";
+                    break; // assume there is one value only
+                }
+            }
         }
         prediction = certainty+"_"+time+"_"+polarity;
       //  prediction = certainty+","+time+","+polarity;
@@ -171,7 +193,26 @@ public class KafFactuality  implements Serializable {
         return prediction;
     }
 
-
+    /**
+     * 118189       <factVal resource="factbank" value="CT+"/>
+     4354       <factVal resource="factbank" value="CT-"/>
+     1791       <factVal resource="factbank" value="PR+"/>
+     51       <factVal resource="factbank" value="PR-"/>
+     1932       <factVal resource="factbank" value="PS+"/>
+     37       <factVal resource="factbank" value="PS-"/>
+     23409       <factVal resource="factbank" value="Uu"/>
+     122543       <factVal resource="nwr:attributionCertainty" value="CERTAIN"/>
+     941       <factVal resource="nwr:attributionCertainty" value="POSSIBLE"/>
+     1838       <factVal resource="nwr:attributionCertainty" value="PROBABLE"/>
+     1551       <factVal resource="nwr:attributionCertainty" value="UNCERTAIN"/>
+     22890       <factVal resource="nwr:attributionCertainty" value="UNDERSPECIFIED"/>
+     5831       <factVal resource="nwr:attributionPolarity" value="NEG"/>
+     120977       <factVal resource="nwr:attributionPolarity" value="POS"/>
+     22955       <factVal resource="nwr:attributionPolarity" value="UNDERSPECIFIED"/>
+     11947       <factVal resource="nwr:attributionTense" value="FUTURE"/>
+     62878       <factVal resource="nwr:attributionTense" value="NON_FUTURE"/>
+     74938       <factVal resource="nwr:attributionTense" value="UNDERSPECIFIED"/>
+     */
     public ArrayList<KafFactValue> getFactValueArrayList() {
         return factValueArrayList;
     }

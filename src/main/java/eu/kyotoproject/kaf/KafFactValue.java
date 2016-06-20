@@ -22,6 +22,8 @@ public class KafFactValue implements Serializable {
      */
     static public final String FUTURE = "FUTURE";
     static public final String NON_FUTURE = "NON_FUTURE";
+    static public final String RECENT = "RECENT";
+    static public final String PAST = "PAST";
     static public final String CERTAIN = "CERTAIN";
     static public final String UNCERTAIN = "UNCERTAIN";
     static public final String POS = "POS";

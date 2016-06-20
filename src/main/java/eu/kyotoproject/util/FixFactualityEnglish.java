@@ -20,8 +20,8 @@ public class FixFactualityEnglish {
         KafSaxParser kafSaxParser = new KafSaxParser();
         String pathToFile = "";
         String extension = ".naf";
-        pathToFile = "/Users/piek/Desktop/01082e4c-a2f8-11e4-ac1c-00144feab7de.relink.dominantentities.naf";
-        pathToFile = "/Users/piek/Desktop/NWR-INC/financialtimes/brexit4-SAMPLE";
+        pathToFile = "/Users/piek/Desktop/NWR-INC/financialtimes/data/brexit6.naf/01082e4c-a2f8-11e4-ac1c-00144feab7de.naf";
+       // pathToFile = "/Users/piek/Desktop/NWR-INC/financialtimes/data/brexit6.naf";
         for (int i = 0; i < args.length; i++) {
             String arg = args[i];
             if (arg.equalsIgnoreCase("--input") && args.length>(i+1)) {
@@ -169,7 +169,7 @@ public class FixFactualityEnglish {
                             }
                         }
                         else if (!kafFactValue.getValue().equalsIgnoreCase("FUTURE") &&
-                                kafFactValue.getResource().equalsIgnoreCase("nwr:attributionTense")) {
+                                kafFactValue.getResource().toLowerCase().endsWith("attributiontense")) {
                             if (kafTermp1 != null && kafTermp1.getMorphofeat().equalsIgnoreCase("MD")) {
                                 kafFactValue.setValue("FUTURE");
                               //    System.out.println(kafTerm.getLemma() + " kafFactValue = " + kafFactValue.toString());
@@ -204,7 +204,7 @@ public class FixFactualityEnglish {
                             }
                         }
                         else if (!kafFactValue.getValue().equalsIgnoreCase("CERTAIN") &&
-                                kafFactValue.getResource().equalsIgnoreCase("nwr:attributionCertainty")) {
+                                kafFactValue.getResource().toLowerCase().endsWith("attributioncertainty")) {
 
                             if (kafTermp1!=null && kafTermp1.getLemma().equalsIgnoreCase("might") ||
                                     kafTermp1.getLemma().equalsIgnoreCase("may") ||
