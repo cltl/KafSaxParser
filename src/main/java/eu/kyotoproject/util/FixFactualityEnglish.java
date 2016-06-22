@@ -1,14 +1,13 @@
 package eu.kyotoproject.util;
 
-import eu.kyotoproject.kaf.KafFactValue;
-import eu.kyotoproject.kaf.KafFactuality;
-import eu.kyotoproject.kaf.KafSaxParser;
-import eu.kyotoproject.kaf.KafTerm;
+import eu.kyotoproject.kaf.*;
 
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
+import java.net.InetAddress;
+import java.net.UnknownHostException;
 import java.util.ArrayList;
 
 /**
@@ -16,11 +15,14 @@ import java.util.ArrayList;
  */
 public class FixFactualityEnglish {
 
+    static final String layer = "factualities";
+    static final String name = "vua-english-factuality-fix";
+    static final String version = "3.1";
     static public void main (String[] args) {
         KafSaxParser kafSaxParser = new KafSaxParser();
         String pathToFile = "";
         String extension = ".naf";
-        pathToFile = "/Users/piek/Desktop/NWR-INC/financialtimes/data/brexit6.naf/01082e4c-a2f8-11e4-ac1c-00144feab7de.naf";
+        pathToFile = "/Users/piek/Desktop/NWR-INC/financialtimes/data/brexit6.naf";
        // pathToFile = "/Users/piek/Desktop/NWR-INC/financialtimes/data/brexit6.naf";
         for (int i = 0; i < args.length; i++) {
             String arg = args[i];
@@ -94,6 +96,8 @@ public class FixFactualityEnglish {
     </factuality>
      */
     static public void fix (KafSaxParser kafSaxParser) {
+        String strBeginDate = eu.kyotoproject.util.DateUtil.createTimestamp();
+        String strEndDate = null;
         for (int i = 0; i < kafSaxParser.kafFactualityLayer.size(); i++) {
                 KafFactuality kafFactuality = kafSaxParser.kafFactualityLayer.get(i);
                 KafTerm kafTerm = null;
@@ -276,6 +280,15 @@ public class FixFactualityEnglish {
                     }*/
                 }
         }
+        strEndDate = eu.kyotoproject.util.DateUtil.createTimestamp();
+        String host = "";
+        try {
+            host = InetAddress.getLocalHost().getHostName();
+        } catch (UnknownHostException e) {
+            e.printStackTrace();
+        }
+        LP lp = new LP(name,version, strBeginDate, strBeginDate, strEndDate, host);
+        kafSaxParser.getKafMetaData().addLayer(layer, lp);
     }
 
     /*
