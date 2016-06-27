@@ -186,7 +186,7 @@ public class KafFactuality  implements Serializable {
         }
         prediction = certainty+"_"+time+"_"+polarity;
       //  prediction = certainty+","+time+","+polarity;
-        prediction = prediction.replaceAll("UNDERSPECIFIED","u");
+        //prediction = prediction.replaceAll("UNDERSPECIFIED","u");
 
         //   System.out.println("prediction = " + prediction);
 
