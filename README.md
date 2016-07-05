@@ -1,6 +1,6 @@
 KafSaxParser
 ============
-version 3.0
+version 3.1.1
 Copyright: VU University Amsterdam
 email: piek.vossen@vu.nl
 
