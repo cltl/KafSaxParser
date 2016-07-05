@@ -1,34 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" readonly="true" id="0c1cb0bf-7907-41fe-ad2f-1e2c1a78032c" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/eu/kyotoproject/util/AddTokensAsCommentsToSpans.java" afterPath="$PROJECT_DIR$/src/main/java/eu/kyotoproject/util/AddTokensAsCommentsToSpans.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/eu/kyotoproject/kaf/CorefTarget.java" afterPath="$PROJECT_DIR$/src/main/java/eu/kyotoproject/kaf/CorefTarget.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/eu/kyotoproject/util/DateUtil.java" afterPath="$PROJECT_DIR$/src/main/java/eu/kyotoproject/util/DateUtil.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/eu/kyotoproject/stats/ExternalRefStats.java" afterPath="$PROJECT_DIR$/src/main/java/eu/kyotoproject/stats/ExternalRefStats.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/eu/kyotoproject/util/FileProcessor.java" afterPath="$PROJECT_DIR$/src/main/java/eu/kyotoproject/util/FileProcessor.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/eu/kyotoproject/kaf/GeoCountryObject.java" afterPath="$PROJECT_DIR$/src/main/java/eu/kyotoproject/kaf/GeoCountryObject.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/eu/kyotoproject/kaf/GeoPlaceObject.java" afterPath="$PROJECT_DIR$/src/main/java/eu/kyotoproject/kaf/GeoPlaceObject.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/eu/kyotoproject/kaf/ISODate.java" afterPath="$PROJECT_DIR$/src/main/java/eu/kyotoproject/kaf/ISODate.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/eu/kyotoproject/kaf/KafChunk.java" afterPath="$PROJECT_DIR$/src/main/java/eu/kyotoproject/kaf/KafChunk.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/eu/kyotoproject/kaf/KafCoreferenceSet.java" afterPath="$PROJECT_DIR$/src/main/java/eu/kyotoproject/kaf/KafCoreferenceSet.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/eu/kyotoproject/kaf/KafDep.java" afterPath="$PROJECT_DIR$/src/main/java/eu/kyotoproject/kaf/KafDep.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/eu/kyotoproject/kaf/KafEntity.java" afterPath="$PROJECT_DIR$/src/main/java/eu/kyotoproject/kaf/KafEntity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/eu/kyotoproject/kaf/KafEventISI.java" afterPath="$PROJECT_DIR$/src/main/java/eu/kyotoproject/kaf/KafEventISI.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/eu/kyotoproject/kaf/KafMetaData.java" afterPath="$PROJECT_DIR$/src/main/java/eu/kyotoproject/kaf/KafMetaData.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/eu/kyotoproject/kaf/KafOpinion.java" afterPath="$PROJECT_DIR$/src/main/java/eu/kyotoproject/kaf/KafOpinion.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/eu/kyotoproject/kaf/KafProperty.java" afterPath="$PROJECT_DIR$/src/main/java/eu/kyotoproject/kaf/KafProperty.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/eu/kyotoproject/kaf/KafReference.java" afterPath="$PROJECT_DIR$/src/main/java/eu/kyotoproject/kaf/KafReference.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/eu/kyotoproject/kaf/KafSaxParser.java" afterPath="$PROJECT_DIR$/src/main/java/eu/kyotoproject/kaf/KafSaxParser.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/eu/kyotoproject/kaf/KafSense.java" afterPath="$PROJECT_DIR$/src/main/java/eu/kyotoproject/kaf/KafSense.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/eu/kyotoproject/stats/KafStatistics.java" afterPath="$PROJECT_DIR$/src/main/java/eu/kyotoproject/stats/KafStatistics.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/eu/kyotoproject/kaf/KafTerm.java" afterPath="$PROJECT_DIR$/src/main/java/eu/kyotoproject/kaf/KafTerm.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/eu/kyotoproject/kaf/KafTermSentiment.java" afterPath="$PROJECT_DIR$/src/main/java/eu/kyotoproject/kaf/KafTermSentiment.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/eu/kyotoproject/kaf/KafTextUnit.java" afterPath="$PROJECT_DIR$/src/main/java/eu/kyotoproject/kaf/KafTextUnit.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/eu/kyotoproject/kaf/KafWordForm.java" afterPath="$PROJECT_DIR$/src/main/java/eu/kyotoproject/kaf/KafWordForm.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/eu/kyotoproject/kaf/TermComponent.java" afterPath="$PROJECT_DIR$/src/main/java/eu/kyotoproject/kaf/TermComponent.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/eu/kyotoproject/util/XmlCharacterConversion.java" afterPath="$PROJECT_DIR$/src/main/java/eu/kyotoproject/util/XmlCharacterConversion.java" />
-    </list>
+    <list default="true" id="0c1cb0bf-7907-41fe-ad2f-1e2c1a78032c" name="Default" comment="-- stat" />
     <ignored path="KyotoKafSaxParser.iws" />
     <ignored path=".idea/workspace.xml" />
     <ignored path="$PROJECT_DIR$/target/" />
@@ -76,316 +49,15 @@
         <option name="LOG_MESSAGE" value="" />
       </breakpoint>
     </breakpoint_any>
-    <ui_properties converted="true" />
     <breakpoint_rules converted="true" />
+    <ui_properties converted="true" />
   </component>
   <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
   <component name="FavoritesManager">
     <favorites_list name="KyotoKafSaxParser" />
   </component>
   <component name="FileEditorManager">
-    <leaf>
-      <file leaf-file-name="KafSaxParser.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/eu/kyotoproject/kaf/KafSaxParser.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="18" column="47" selection-start-line="18" selection-start-column="47" selection-end-line="18" selection-end-column="47" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="pom.xml" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/pom.xml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.625">
-              <caret line="25" column="32" selection-start-line="0" selection-start-column="0" selection-end-line="58" selection-end-column="10" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="DependenciesToTermAttribute.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/eu/kyotoproject/util/DependenciesToTermAttribute.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="47" column="51" selection-start-line="47" selection-start-column="51" selection-end-line="47" selection-end-column="51" />
-              <folding>
-                <element signature="imports" expanded="false" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="ISODate.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/eu/kyotoproject/kaf/ISODate.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="133" column="36" selection-start-line="133" selection-start-column="36" selection-end-line="133" selection-end-column="36" />
-              <folding>
-                <element signature="imports" expanded="false" />
-                <element signature="e#1365#1379#0" expanded="false" />
-                <element signature="e#1523#1524#0" expanded="false" />
-                <element signature="e#1548#1549#0" expanded="false" />
-                <element signature="e#1582#1583#0" expanded="false" />
-                <element signature="e#1608#1609#0" expanded="false" />
-                <element signature="e#1666#1667#0" expanded="false" />
-                <element signature="e#1702#1703#0" expanded="false" />
-                <element signature="e#1794#1802#0" expanded="false" />
-                <element signature="e#2083#2084#0" expanded="false" />
-                <element signature="e#2133#2134#0" expanded="false" />
-                <element signature="e#2195#2196#0" expanded="false" />
-                <element signature="e#2247#2248#0" expanded="false" />
-                <element signature="e#2516#2517#0" expanded="false" />
-                <element signature="e#2547#2548#0" expanded="false" />
-                <element signature="e#2597#2598#0" expanded="false" />
-                <element signature="e#2637#2638#0" expanded="false" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="KafReference.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/eu/kyotoproject/kaf/KafReference.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="130" column="0" selection-start-line="130" selection-start-column="0" selection-end-line="130" selection-end-column="0" />
-              <folding>
-                <element signature="imports" expanded="false" />
-                <element signature="e#1500#1501#0" expanded="false" />
-                <element signature="e#1528#1529#0" expanded="false" />
-                <element signature="e#1570#1571#0" expanded="false" />
-                <element signature="e#1604#1605#0" expanded="false" />
-                <element signature="e#1637#1638#0" expanded="false" />
-                <element signature="e#1666#1667#0" expanded="false" />
-                <element signature="e#1710#1711#0" expanded="false" />
-                <element signature="e#1746#1747#0" expanded="false" />
-                <element signature="e#1843#1844#0" expanded="false" />
-                <element signature="e#1866#1867#0" expanded="false" />
-                <element signature="e#1994#1995#0" expanded="false" />
-                <element signature="e#2020#2021#0" expanded="false" />
-                <element signature="e#2058#2059#0" expanded="false" />
-                <element signature="e#2088#2089#0" expanded="false" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="GeoCountryObject.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/eu/kyotoproject/kaf/GeoCountryObject.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="70" column="69" selection-start-line="70" selection-start-column="69" selection-end-line="70" selection-end-column="69" />
-              <folding>
-                <element signature="imports" expanded="false" />
-                <element signature="e#1051#1065#0" expanded="false" />
-                <element signature="e#1416#1417#0" expanded="false" />
-                <element signature="e#1442#1443#0" expanded="false" />
-                <element signature="e#1480#1481#0" expanded="false" />
-                <element signature="e#1510#1511#0" expanded="false" />
-                <element signature="e#1568#1569#0" expanded="false" />
-                <element signature="e#1609#1610#0" expanded="false" />
-                <element signature="e#1807#1808#0" expanded="false" />
-                <element signature="e#1843#1844#0" expanded="false" />
-                <element signature="e#1935#1943#0" expanded="false" />
-                <element signature="e#2224#2225#0" expanded="false" />
-                <element signature="e#2274#2275#0" expanded="false" />
-                <element signature="e#2320#2321#0" expanded="false" />
-                <element signature="e#2354#2355#0" expanded="false" />
-                <element signature="e#2416#2417#0" expanded="false" />
-                <element signature="e#2462#2463#0" expanded="false" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="GeoPlaceObject.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/eu/kyotoproject/kaf/GeoPlaceObject.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="103" column="12" selection-start-line="103" selection-start-column="12" selection-end-line="103" selection-end-column="12" />
-              <folding>
-                <element signature="imports" expanded="false" />
-                <element signature="e#1047#1061#0" expanded="false" />
-                <element signature="e#1401#1402#0" expanded="false" />
-                <element signature="e#1427#1428#0" expanded="false" />
-                <element signature="e#1465#1466#0" expanded="false" />
-                <element signature="e#1495#1496#0" expanded="false" />
-                <element signature="e#1552#1553#0" expanded="false" />
-                <element signature="e#1588#1589#0" expanded="false" />
-                <element signature="e#1663#1664#0" expanded="false" />
-                <element signature="e#1713#1714#0" expanded="false" />
-                <element signature="e#1771#1772#0" expanded="false" />
-                <element signature="e#1812#1813#0" expanded="false" />
-                <element signature="e#2045#2053#0" expanded="false" />
-                <element signature="e#2301#2302#0" expanded="false" />
-                <element signature="e#2333#2334#0" expanded="false" />
-                <element signature="e#2389#2390#0" expanded="false" />
-                <element signature="e#2431#2432#0" expanded="false" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="GeoInfoPlace.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/eu/kyotoproject/kaf/GeoInfoPlace.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="155" column="24" selection-start-line="155" selection-start-column="24" selection-end-line="155" selection-end-column="24" />
-              <folding>
-                <element signature="imports" expanded="false" />
-                <element signature="e#1313#1314#0" expanded="false" />
-                <element signature="e#1340#1341#0" expanded="false" />
-                <element signature="e#1380#1381#0" expanded="false" />
-                <element signature="e#1412#1413#0" expanded="false" />
-                <element signature="e#1447#1448#0" expanded="false" />
-                <element signature="e#1478#1479#0" expanded="false" />
-                <element signature="e#1526#1527#0" expanded="false" />
-                <element signature="e#1566#1567#0" expanded="false" />
-                <element signature="e#1602#1603#0" expanded="false" />
-                <element signature="e#1634#1635#0" expanded="false" />
-                <element signature="e#1684#1685#0" expanded="false" />
-                <element signature="e#1726#1727#0" expanded="false" />
-                <element signature="e#1761#1762#0" expanded="false" />
-                <element signature="e#1792#1793#0" expanded="false" />
-                <element signature="e#1840#1841#0" expanded="false" />
-                <element signature="e#1880#1881#0" expanded="false" />
-                <element signature="e#1912#1913#0" expanded="false" />
-                <element signature="e#1940#1941#0" expanded="false" />
-                <element signature="e#1982#1983#0" expanded="false" />
-                <element signature="e#2016#2017#0" expanded="false" />
-                <element signature="e#2054#2055#0" expanded="false" />
-                <element signature="e#2088#2089#0" expanded="false" />
-                <element signature="e#2142#2143#0" expanded="false" />
-                <element signature="e#2188#2189#0" expanded="false" />
-                <element signature="e#2226#2227#0" expanded="false" />
-                <element signature="e#2260#2261#0" expanded="false" />
-                <element signature="e#2314#2315#0" expanded="false" />
-                <element signature="e#2360#2361#0" expanded="false" />
-                <element signature="e#2397#2398#0" expanded="false" />
-                <element signature="e#2430#2431#0" expanded="false" />
-                <element signature="e#2482#2483#0" expanded="false" />
-                <element signature="e#2526#2527#0" expanded="false" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="DateInfo.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/eu/kyotoproject/kaf/DateInfo.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="50" column="0" selection-start-line="50" selection-start-column="0" selection-end-line="50" selection-end-column="0" />
-              <folding>
-                <element signature="imports" expanded="false" />
-                <element signature="e#1159#1160#0" expanded="false" />
-                <element signature="e#1189#1190#0" expanded="false" />
-                <element signature="e#1235#1236#0" expanded="false" />
-                <element signature="e#1273#1274#0" expanded="false" />
-                <element signature="e#1305#1306#0" expanded="false" />
-                <element signature="e#1333#1334#0" expanded="false" />
-                <element signature="e#1375#1376#0" expanded="false" />
-                <element signature="e#1409#1410#0" expanded="false" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="KafTerm.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/eu/kyotoproject/kaf/KafTerm.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="74" column="21" selection-start-line="74" selection-start-column="21" selection-end-line="74" selection-end-column="21" />
-              <folding>
-                <element signature="imports" expanded="false" />
-                <element signature="e#12164#12165#0" expanded="false" />
-                <element signature="e#12198#12199#0" expanded="false" />
-                <element signature="e#12252#12253#0" expanded="false" />
-                <element signature="e#12298#12299#0" expanded="false" />
-                <element signature="e#12335#12336#0" expanded="false" />
-                <element signature="e#12368#12369#0" expanded="false" />
-                <element signature="e#12420#12421#0" expanded="false" />
-                <element signature="e#12464#12465#0" expanded="false" />
-                <element signature="e#12494#12495#0" expanded="false" />
-                <element signature="e#12520#12521#0" expanded="false" />
-                <element signature="e#12558#12559#0" expanded="false" />
-                <element signature="e#12588#12589#0" expanded="false" />
-                <element signature="e#12619#12620#0" expanded="false" />
-                <element signature="e#12646#12647#0" expanded="false" />
-                <element signature="e#12686#12687#0" expanded="false" />
-                <element signature="e#12718#12719#0" expanded="false" />
-                <element signature="e#12751#12752#0" expanded="false" />
-                <element signature="e#12780#12781#0" expanded="false" />
-                <element signature="e#12824#12825#0" expanded="false" />
-                <element signature="e#12860#12861#0" expanded="false" />
-                <element signature="e#12895#12896#0" expanded="false" />
-                <element signature="e#12926#12927#0" expanded="false" />
-                <element signature="e#12974#12975#0" expanded="false" />
-                <element signature="e#13014#13015#0" expanded="false" />
-                <element signature="e#13062#13063#0" expanded="false" />
-                <element signature="e#13107#13108#0" expanded="false" />
-                <element signature="e#13136#13137#0" expanded="false" />
-                <element signature="e#13164#13165#0" expanded="false" />
-                <element signature="e#13203#13204#0" expanded="false" />
-                <element signature="e#13237#13238#0" expanded="false" />
-                <element signature="e#13270#13271#0" expanded="false" />
-                <element signature="e#13299#13300#0" expanded="false" />
-                <element signature="e#13343#13344#0" expanded="false" />
-                <element signature="e#13379#13380#0" expanded="false" />
-                <element signature="e#13409#13410#0" expanded="false" />
-                <element signature="e#13435#13436#0" expanded="false" />
-                <element signature="e#13473#13474#0" expanded="false" />
-                <element signature="e#13503#13504#0" expanded="false" />
-                <element signature="e#13535#13536#0" expanded="false" />
-                <element signature="e#13563#13564#0" expanded="false" />
-                <element signature="e#13605#13606#0" expanded="false" />
-                <element signature="e#13639#13640#0" expanded="false" />
-                <element signature="e#13669#13670#0" expanded="false" />
-                <element signature="e#13695#13696#0" expanded="false" />
-                <element signature="e#13728#13729#0" expanded="false" />
-                <element signature="e#13769#13770#0" expanded="false" />
-                <element signature="e#13807#13808#0" expanded="false" />
-                <element signature="e#13837#13838#0" expanded="false" />
-                <element signature="e#13868#13869#0" expanded="false" />
-                <element signature="e#13895#13896#0" expanded="false" />
-                <element signature="e#13935#13936#0" expanded="false" />
-                <element signature="e#13967#13968#0" expanded="false" />
-                <element signature="e#14010#14011#0" expanded="false" />
-                <element signature="e#14038#14039#0" expanded="false" />
-                <element signature="e#14233#14234#0" expanded="false" />
-                <element signature="e#14267#14268#0" expanded="false" />
-                <element signature="e#14308#14309#0" expanded="false" />
-                <element signature="e#14344#14345#0" expanded="false" />
-                <element signature="e#14393#14394#0" expanded="false" />
-                <element signature="e#14425#14426#0" expanded="false" />
-                <element signature="e#14476#14477#0" expanded="false" />
-                <element signature="e#14509#14510#0" expanded="false" />
-                <element signature="e#14576#14577#0" expanded="false" />
-                <element signature="e#14618#14619#0" expanded="false" />
-                <element signature="e#14843#14844#0" expanded="false" />
-                <element signature="e#14876#14877#0" expanded="false" />
-                <element signature="e#14946#14947#0" expanded="false" />
-                <element signature="e#14990#14991#0" expanded="false" />
-                <element signature="e#15048#15049#0" expanded="false" />
-                <element signature="e#15094#15095#0" expanded="false" />
-                <element signature="e#15123#15124#0" expanded="false" />
-                <element signature="e#15151#15152#0" expanded="false" />
-                <element signature="e#15190#15191#0" expanded="false" />
-                <element signature="e#15224#15225#0" expanded="false" />
-                <element signature="e#15259#15260#0" expanded="false" />
-                <element signature="e#15290#15291#0" expanded="false" />
-                <element signature="e#15338#15339#0" expanded="false" />
-                <element signature="e#15378#15379#0" expanded="false" />
-                <element signature="e#15431#15432#0" expanded="false" />
-                <element signature="e#15470#15471#0" expanded="false" />
-                <element signature="e#15544#15545#0" expanded="false" />
-                <element signature="e#15600#15601#0" expanded="false" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-    </leaf>
+    <leaf />
   </component>
   <component name="FindManager">
     <FindUsagesManager>
@@ -400,14 +72,18 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/main/java/eu/kyotoproject/kaf/KafSaxParser.java" />
+        <option value="$PROJECT_DIR$/pom.xml" />
+        <option value="$PROJECT_DIR$/README.md" />
+        <option value="$PROJECT_DIR$/readme.txt" />
+        <option value="$PROJECT_DIR$/.gitignore" />
       </list>
     </option>
   </component>
   <component name="MavenImportPreferences">
     <option name="generalSettings">
       <MavenGeneralSettings>
-        <option name="mavenHome" value="Bundled (Maven 3)" />
+        <option name="mavenHome" value="$PROJECT_DIR$/../../../apache-maven-2.2.1" />
+        <option name="usePluginRegistry" value="true" />
       </MavenGeneralSettings>
     </option>
     <option name="importingSettings">
@@ -417,28 +93,18 @@
     </option>
   </component>
   <component name="MavenProjectNavigator">
-    <treeState>
-      <PATH>
-        <PATH_ELEMENT>
-          <option name="myItemId" value="" />
-          <option name="myItemType" value="org.jetbrains.idea.maven.navigator.MavenProjectsStructure$RootNode" />
-        </PATH_ELEMENT>
-      </PATH>
-    </treeState>
+    <treeState />
   </component>
   <component name="ModuleEditorState">
     <option name="LAST_EDITED_MODULE_NAME" />
     <option name="LAST_EDITED_TAB_NAME" />
   </component>
-  <component name="NamedScopeManager">
-    <order />
-  </component>
   <component name="ProjectFrameBounds">
-    <option name="y" value="22" />
+    <option name="y" value="23" />
     <option name="width" value="1280" />
-    <option name="height" value="723" />
+    <option name="height" value="773" />
   </component>
-  <component name="ProjectLevelVcsManager" settingsEditedManually="false">
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
     <OptionsSetting value="true" id="Add" />
     <OptionsSetting value="true" id="Remove" />
     <OptionsSetting value="true" id="Checkout" />
@@ -452,7 +118,7 @@
     <option name="STATE" value="0" />
   </component>
   <component name="ProjectView">
-    <navigator currentView="Scope" currentSubView="Project Files" proportions="" version="1">
+    <navigator currentView="ProjectPane" proportions="" version="1">
       <flattenPackages />
       <showMembers ProjectPane="true" />
       <showModules />
@@ -462,6 +128,8 @@
       <autoscrollToSource />
       <autoscrollFromSource />
       <sortByType />
+      <manualOrder />
+      <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
       <pane id="Scope">
@@ -471,12 +139,12 @@
               <option name="myItemId" value="" />
               <option name="myItemType" value="" />
             </PATH_ELEMENT>
-            <PATH_ELEMENT USER_OBJECT="KafSaxParser">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
           </PATH>
         </subPane>
+      </pane>
+      <pane id="Scratches" />
+      <pane id="ProjectPane">
+        <subPane />
       </pane>
       <pane id="PackagesPane">
         <subPane>
@@ -492,17 +160,6 @@
           </PATH>
         </subPane>
       </pane>
-      <pane id="ProjectPane">
-        <subPane>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="KyotoKafSaxParser" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-          </PATH>
-        </subPane>
-      </pane>
-      <pane id="Scratches" />
       <pane id="Favorites" />
     </panes>
   </component>
@@ -519,16 +176,10 @@
     <property name="MemberChooser.copyJavadoc" value="false" />
     <property name="options.splitter.details.proportions" value="0.2" />
     <property name="options.searchVisible" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="ignore_missing_gitignore" value="true" />
     <property name="settings.editor.selected.configurable" value="MavenSettings" />
     <property name="settings.editor.splitter.proportion" value="0.2" />
-    <property name="GenerateAntBuildDialog.generateSingleFile" value="false" />
-    <property name="GenerateAntBuildDialog.enableUiFormCompile" value="true" />
-    <property name="GenerateAntBuildDialog.forceTargetJdk" value="true" />
-    <property name="GenerateAntBuildDialog.backupFiles" value="true" />
-    <property name="GenerateAntBuildDialog.inclineRuntiemClasspath" value="false" />
-    <property name="GenerateAntBuildDialog.generateIdeaHomeProperty" value="false" />
-    <property name="GenerateAntBuildDialog.outputFileNameProperty" value="kyotokafsaxparser" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
   </component>
   <component name="RecentsManager">
     <key name="CopyClassDialog.RECENTS_KEY">
@@ -606,6 +257,15 @@
       <option name="CLEAR_LOGCAT" value="false" />
       <option name="SHOW_LOGCAT_AUTOMATICALLY" value="true" />
       <option name="FILTER_LOGCAT_AUTOMATICALLY" value="true" />
+      <option name="SELECTED_CLOUD_MATRIX_CONFIGURATION_ID" value="0" />
+      <option name="SELECTED_CLOUD_MATRIX_PROJECT_ID" value="" />
+      <option name="SELECTED_CLOUD_DEVICE_CONFIGURATION_ID" value="0" />
+      <option name="SELECTED_CLOUD_DEVICE_PROJECT_ID" value="" />
+      <option name="IS_VALID_CLOUD_MATRIX_SELECTION" value="false" />
+      <option name="INVALID_CLOUD_MATRIX_SELECTION_ERROR" value="" />
+      <option name="IS_VALID_CLOUD_DEVICE_SELECTION" value="false" />
+      <option name="INVALID_CLOUD_DEVICE_SELECTION_ERROR" value="" />
+      <option name="CLOUD_DEVICE_SERIAL_NUMBER" value="" />
       <method />
     </configuration>
     <configuration default="true" type="AndroidTestRunConfigurationType" factoryName="Android Tests">
@@ -627,6 +287,15 @@
       <option name="CLEAR_LOGCAT" value="false" />
       <option name="SHOW_LOGCAT_AUTOMATICALLY" value="true" />
       <option name="FILTER_LOGCAT_AUTOMATICALLY" value="true" />
+      <option name="SELECTED_CLOUD_MATRIX_CONFIGURATION_ID" value="0" />
+      <option name="SELECTED_CLOUD_MATRIX_PROJECT_ID" value="" />
+      <option name="SELECTED_CLOUD_DEVICE_CONFIGURATION_ID" value="0" />
+      <option name="SELECTED_CLOUD_DEVICE_PROJECT_ID" value="" />
+      <option name="IS_VALID_CLOUD_MATRIX_SELECTION" value="false" />
+      <option name="INVALID_CLOUD_MATRIX_SELECTION_ERROR" value="" />
+      <option name="IS_VALID_CLOUD_DEVICE_SELECTION" value="false" />
+      <option name="INVALID_CLOUD_DEVICE_SELECTION_ERROR" value="" />
+      <option name="CLOUD_DEVICE_SERIAL_NUMBER" value="" />
       <method />
     </configuration>
     <configuration default="true" type="Applet" factoryName="Applet">
@@ -690,8 +359,70 @@
       <patterns />
       <method />
     </configuration>
+    <configuration default="true" type="JUnitTestDiscovery" factoryName="JUnit Test Discovery" changeList="All">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
+      <module name="" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="PACKAGE_NAME" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="METHOD_NAME" />
+      <option name="TEST_OBJECT" value="class" />
+      <option name="VM_PARAMETERS" />
+      <option name="PARAMETERS" />
+      <option name="WORKING_DIRECTORY" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="singleModule" />
+      </option>
+      <envs />
+      <patterns />
+      <method />
+    </configuration>
     <configuration default="true" type="JarApplication" factoryName="JAR Application">
       <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="true" type="Java Scratch" factoryName="Java Scratch">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
+      <option name="SCRATCH_FILE_ID" value="0" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="VM_PARAMETERS" />
+      <option name="PROGRAM_PARAMETERS" />
+      <option name="WORKING_DIRECTORY" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="ENABLE_SWING_INSPECTOR" value="false" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <module name="" />
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="true" type="JetRunConfigurationType" factoryName="Kotlin">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="VM_PARAMETERS" />
+      <option name="PROGRAM_PARAMETERS" />
+      <option name="WORKING_DIRECTORY" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <module name="KyotoKafSaxParser" />
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="true" type="KotlinStandaloneScriptRunConfigurationType" factoryName="Kotlin script">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
+      <option name="filePath" />
+      <option name="vmParameters" />
+      <option name="alternativeJrePath" />
+      <option name="programParameters" />
+      <option name="passParentEnvs" value="true" />
+      <option name="workingDirectory" />
+      <option name="isAlternativeJrePathEnabled" value="false" />
       <envs />
       <method />
     </configuration>
@@ -703,7 +434,7 @@
             <option name="checksumPolicy" value="FAIL" />
             <option name="failureBehavior" value="FAST" />
             <option name="localRepository" value="" />
-            <option name="mavenHome" value="$PROJECT_DIR$/../../../../apache-maven-2.2.1" />
+            <option name="mavenHome" value="/apache-maven-2.2.1" />
             <option name="nonRecursive" value="false" />
             <option name="outputLevel" value="INFO" />
             <option name="pluginUpdatePolicy" value="DO_NOT_UPDATE" />
@@ -783,11 +514,39 @@
       <listeners />
       <method />
     </configuration>
+    <configuration default="true" type="TestNGTestDiscovery" factoryName="TestNG Test Discovery" changeList="All">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
+      <module name="" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="SUITE_NAME" />
+      <option name="PACKAGE_NAME" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="METHOD_NAME" />
+      <option name="GROUP_NAME" />
+      <option name="TEST_OBJECT" value="CLASS" />
+      <option name="VM_PARAMETERS" />
+      <option name="PARAMETERS" />
+      <option name="WORKING_DIRECTORY" />
+      <option name="OUTPUT_DIRECTORY" />
+      <option name="ANNOTATION_TYPE" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="singleModule" />
+      </option>
+      <option name="USE_DEFAULT_REPORTERS" value="false" />
+      <option name="PROPERTIES_FILE" />
+      <envs />
+      <properties />
+      <listeners />
+      <method />
+    </configuration>
     <configuration default="false" name="ReduceKafToSelectedSentences" type="Application" factoryName="Application">
       <extension name="coverage" enabled="false" merge="false" runner="idea" />
       <option name="MAIN_CLASS_NAME" value="eu.kyotoproject.util.ReduceKafToSelectedSentences" />
       <option name="VM_PARAMETERS" value="" />
-      <option name="PROGRAM_PARAMETERS" value="&quot;$USER_HOME$/KybotEvaluation/release/data/generic/11767.kaf&quot; &quot;$USER_HOME$/KybotEvaluation/release/data1/11767.mw.wsd.ne.3.kaf.tag&quot;" />
+      <option name="PROGRAM_PARAMETERS" value="&quot;$PROJECT_DIR$/../../../KybotEvaluation/release/data/generic/11767.kaf&quot; &quot;$PROJECT_DIR$/../../../KybotEvaluation/release/data1/11767.mw.wsd.ne.3.kaf.tag&quot;" />
       <option name="WORKING_DIRECTORY" value="file://$PROJECT_DIR$" />
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
       <option name="ALTERNATIVE_JRE_PATH" value="" />
@@ -802,7 +561,7 @@
       <extension name="coverage" enabled="false" merge="false" runner="idea" />
       <option name="MAIN_CLASS_NAME" value="eu.kyotoproject.util.AlignKafFiles" />
       <option name="VM_PARAMETERS" value="" />
-      <option name="PROGRAM_PARAMETERS" value="&quot;$USER_HOME$/benchmark11767/11767_23447.kaf&quot; &quot;$USER_HOME$/KybotEvaluation/release/data/11767.mw.wsd.ne.kaf&quot;" />
+      <option name="PROGRAM_PARAMETERS" value="&quot;$PROJECT_DIR$/../../../benchmark11767/11767_23447.kaf&quot; &quot;$PROJECT_DIR$/../../../KybotEvaluation/release/data/11767.mw.wsd.ne.kaf&quot;" />
       <option name="WORKING_DIRECTORY" value="file://$PROJECT_DIR$" />
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
       <option name="ALTERNATIVE_JRE_PATH" value="" />
@@ -817,7 +576,7 @@
       <extension name="coverage" enabled="false" merge="false" runner="idea" />
       <option name="MAIN_CLASS_NAME" value="eu.kyotoproject.util.CheckOntologyForTerms" />
       <option name="VM_PARAMETERS" value="-Xmx812m" />
-      <option name="PROGRAM_PARAMETERS" value="&quot;$USER_HOME$/benchmark/11767.mw.wsd.ne.onto.kaf&quot;" />
+      <option name="PROGRAM_PARAMETERS" value="&quot;$PROJECT_DIR$/../../../benchmark/11767.mw.wsd.ne.onto.kaf&quot;" />
       <option name="WORKING_DIRECTORY" value="file://$PROJECT_DIR$" />
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
       <option name="ALTERNATIVE_JRE_PATH" value="" />
@@ -883,7 +642,7 @@
       <extension name="coverage" enabled="false" merge="false" runner="idea" />
       <option name="MAIN_CLASS_NAME" value="eu.kyotoproject.util.CountLemmas" />
       <option name="VM_PARAMETERS" value="" />
-      <option name="PROGRAM_PARAMETERS" value="&quot;$PROJECT_DIR$/../../../../other/treetagger/input/&quot;" />
+      <option name="PROGRAM_PARAMETERS" value="&quot;/other/treetagger/input/&quot;" />
       <option name="WORKING_DIRECTORY" value="file://$PROJECT_DIR$" />
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
       <option name="ALTERNATIVE_JRE_PATH" value="" />
@@ -1090,8 +849,24 @@
     </list>
   </component>
   <component name="ShelveChangesManager" show_recycled="false" />
-  <component name="SvnConfiguration" myUseAcceleration="nothing" cleanupOnStartRun="true">
+  <component name="SvnConfiguration" maxAnnotateRevisions="500" myUseAcceleration="nothing" myAutoUpdateAfterCommit="false" cleanupOnStartRun="true">
+    <option name="USER" value="" />
+    <option name="PASSWORD" value="" />
+    <option name="mySSHConnectionTimeout" value="30000" />
+    <option name="mySSHReadTimeout" value="30000" />
+    <option name="LAST_MERGED_REVISION" />
+    <option name="MERGE_DRY_RUN" value="false" />
+    <option name="MERGE_DIFF_USE_ANCESTRY" value="true" />
+    <option name="UPDATE_LOCK_ON_DEMAND" value="false" />
+    <option name="IGNORE_SPACES_IN_MERGE" value="false" />
+    <option name="DETECT_NESTED_COPIES" value="false" />
+    <option name="CHECK_NESTED_FOR_QUICK_MERGE" value="false" />
+    <option name="IGNORE_SPACES_IN_ANNOTATE" value="true" />
+    <option name="SHOW_MERGE_SOURCES_IN_ANNOTATE" value="true" />
+    <option name="FORCE_UPDATE" value="false" />
+    <option name="IGNORE_EXTERNALS" value="false" />
     <configuration useDefault="false">$USER_HOME$/.subversion</configuration>
+    <myIsUseDefaultProxy>false</myIsUseDefaultProxy>
     <supportedVersion>125</supportedVersion>
   </component>
   <component name="SvnFileUrlMappingImpl">
@@ -1099,7 +874,7 @@
       <list>
         <SvnCopyRootSimple>
           <option name="myVcsRoot" value="$PROJECT_DIR$" />
-          <option name="myCopyRoot" value="$PROJECT_DIR$/src" />
+          <option name="myCopyRoot" value="$PROJECT_DIR$" />
         </SvnCopyRootSimple>
       </list>
     </option>
@@ -1107,7 +882,7 @@
       <list>
         <SvnCopyRootSimple>
           <option name="myVcsRoot" value="$PROJECT_DIR$" />
-          <option name="myCopyRoot" value="$PROJECT_DIR$/src" />
+          <option name="myCopyRoot" value="$PROJECT_DIR$" />
         </SvnCopyRootSimple>
       </list>
     </option>
@@ -1269,41 +1044,49 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="22" width="1280" height="723" extended-state="6" />
-    <editor active="true" />
+    <frame x="0" y="23" width="1280" height="773" extended-state="6" />
+    <editor active="false" />
     <layout>
-      <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="14" side_tool="true" content_ui="tabs" />
-      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="true" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3286432" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.23771791" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
-      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3392265" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="true" content_ui="tabs" />
-      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.159375" sideWeight="0.7080666" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.15078124" sideWeight="0.7080666" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.21091582" sideWeight="0.9993104" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
-      <window_info id="SVN Repositories" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.55664486" sideWeight="0.9825297" order="8" side_tool="false" content_ui="tabs" />
-      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="JetGradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Maven-2 Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.38238454" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Web" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="EJB" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="JSON Formatter" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
-      <window_info id="Dependency Viewer" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
-      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3392265" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.28917378" sideWeight="0.5" order="13" side_tool="false" content_ui="tabs" />
+      <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="16" side_tool="true" content_ui="tabs" />
+      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.1292407" sideWeight="0.71702945" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3286432" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.2979351" sideWeight="0.99647474" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.25605816" sideWeight="0.71702945" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="true" content_ui="tabs" />
+      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="true" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="SVN Repositories" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.55664486" sideWeight="0.9825297" order="12" side_tool="false" content_ui="tabs" />
+      <window_info id="JSON Formatter" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="14" side_tool="false" content_ui="tabs" />
+      <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
+      <window_info id="Dependency Viewer" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="15" side_tool="false" content_ui="tabs" />
+      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
+      <window_info id="Inspection" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3105413" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="JetGradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Web" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.10656753" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Maven-2 Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="EJB" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
     </layout>
+  </component>
+  <component name="Vcs.Log.UiProperties">
+    <option name="RECENTLY_FILTERED_USER_GROUPS">
+      <collection />
+    </option>
+    <option name="RECENTLY_FILTERED_BRANCH_GROUPS">
+      <collection />
+    </option>
   </component>
   <component name="VcsContentAnnotationSettings">
     <option name="myLimit" value="2678400000" />
@@ -1335,1172 +1118,367 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/main/java/eu/kyotoproject/kaf/KafSaxParser.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/eu/kyotoproject/kaf/KafEntityFeature.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
+          <caret line="9" column="13" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/eu/kyotoproject/kaf/KafWordForm.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/eu/kyotoproject/kaf/TermComponent.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="118" column="0" selection-start-line="118" selection-start-column="0" selection-end-line="118" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/eu/kyotoproject/util/DependenciesToTermAttribute.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="47" column="51" selection-start-line="47" selection-start-column="51" selection-end-line="47" selection-end-column="51" />
-          <folding>
-            <element signature="imports" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/eu/kyotoproject/kaf/ISODate.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="133" column="36" selection-start-line="133" selection-start-column="36" selection-end-line="133" selection-end-column="36" />
-          <folding>
-            <element signature="imports" expanded="false" />
-            <element signature="e#1365#1379#0" expanded="false" />
-            <element signature="e#1523#1524#0" expanded="false" />
-            <element signature="e#1548#1549#0" expanded="false" />
-            <element signature="e#1582#1583#0" expanded="false" />
-            <element signature="e#1608#1609#0" expanded="false" />
-            <element signature="e#1666#1667#0" expanded="false" />
-            <element signature="e#1702#1703#0" expanded="false" />
-            <element signature="e#1794#1802#0" expanded="false" />
-            <element signature="e#2083#2084#0" expanded="false" />
-            <element signature="e#2133#2134#0" expanded="false" />
-            <element signature="e#2195#2196#0" expanded="false" />
-            <element signature="e#2247#2248#0" expanded="false" />
-            <element signature="e#2516#2517#0" expanded="false" />
-            <element signature="e#2547#2548#0" expanded="false" />
-            <element signature="e#2597#2598#0" expanded="false" />
-            <element signature="e#2637#2638#0" expanded="false" />
-          </folding>
+        <state vertical-scroll-proportion="0.5336323">
+          <caret line="132" column="26" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/eu/kyotoproject/kaf/KafReference.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="130" column="0" selection-start-line="130" selection-start-column="0" selection-end-line="130" selection-end-column="0" />
-          <folding>
-            <element signature="imports" expanded="false" />
-            <element signature="e#1500#1501#0" expanded="false" />
-            <element signature="e#1528#1529#0" expanded="false" />
-            <element signature="e#1570#1571#0" expanded="false" />
-            <element signature="e#1604#1605#0" expanded="false" />
-            <element signature="e#1637#1638#0" expanded="false" />
-            <element signature="e#1666#1667#0" expanded="false" />
-            <element signature="e#1710#1711#0" expanded="false" />
-            <element signature="e#1746#1747#0" expanded="false" />
-            <element signature="e#1843#1844#0" expanded="false" />
-            <element signature="e#1866#1867#0" expanded="false" />
-            <element signature="e#1994#1995#0" expanded="false" />
-            <element signature="e#2020#2021#0" expanded="false" />
-            <element signature="e#2058#2059#0" expanded="false" />
-            <element signature="e#2088#2089#0" expanded="false" />
-          </folding>
+        <state vertical-scroll-proportion="0.44918698">
+          <caret line="117" column="27" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/eu/kyotoproject/kaf/GeoCountryObject.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/eu/kyotoproject/util/GeneralizeDependencies.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="70" column="69" selection-start-line="70" selection-start-column="69" selection-end-line="70" selection-end-column="69" />
-          <folding>
-            <element signature="imports" expanded="false" />
-            <element signature="e#1051#1065#0" expanded="false" />
-            <element signature="e#1416#1417#0" expanded="false" />
-            <element signature="e#1442#1443#0" expanded="false" />
-            <element signature="e#1480#1481#0" expanded="false" />
-            <element signature="e#1510#1511#0" expanded="false" />
-            <element signature="e#1568#1569#0" expanded="false" />
-            <element signature="e#1609#1610#0" expanded="false" />
-            <element signature="e#1807#1808#0" expanded="false" />
-            <element signature="e#1843#1844#0" expanded="false" />
-            <element signature="e#1935#1943#0" expanded="false" />
-            <element signature="e#2224#2225#0" expanded="false" />
-            <element signature="e#2274#2275#0" expanded="false" />
-            <element signature="e#2320#2321#0" expanded="false" />
-            <element signature="e#2354#2355#0" expanded="false" />
-            <element signature="e#2416#2417#0" expanded="false" />
-            <element signature="e#2462#2463#0" expanded="false" />
-          </folding>
+          <caret line="22" column="79" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/eu/kyotoproject/kaf/GeoPlaceObject.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/eu/kyotoproject/util/FileProcessor.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="103" column="12" selection-start-line="103" selection-start-column="12" selection-end-line="103" selection-end-column="12" />
-          <folding>
-            <element signature="imports" expanded="false" />
-            <element signature="e#1047#1061#0" expanded="false" />
-            <element signature="e#1401#1402#0" expanded="false" />
-            <element signature="e#1427#1428#0" expanded="false" />
-            <element signature="e#1465#1466#0" expanded="false" />
-            <element signature="e#1495#1496#0" expanded="false" />
-            <element signature="e#1552#1553#0" expanded="false" />
-            <element signature="e#1588#1589#0" expanded="false" />
-            <element signature="e#1663#1664#0" expanded="false" />
-            <element signature="e#1713#1714#0" expanded="false" />
-            <element signature="e#1771#1772#0" expanded="false" />
-            <element signature="e#1812#1813#0" expanded="false" />
-            <element signature="e#2045#2053#0" expanded="false" />
-            <element signature="e#2301#2302#0" expanded="false" />
-            <element signature="e#2333#2334#0" expanded="false" />
-            <element signature="e#2389#2390#0" expanded="false" />
-            <element signature="e#2431#2432#0" expanded="false" />
-          </folding>
+          <caret line="577" column="60" selection-start-line="577" selection-start-column="34" selection-end-line="577" selection-end-column="60" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/eu/kyotoproject/kaf/GeoInfoPlace.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/eu/kyotoproject/stats/KafTables.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="155" column="24" selection-start-line="155" selection-start-column="24" selection-end-line="155" selection-end-column="24" />
-          <folding>
-            <element signature="imports" expanded="false" />
-            <element signature="e#1313#1314#0" expanded="false" />
-            <element signature="e#1340#1341#0" expanded="false" />
-            <element signature="e#1380#1381#0" expanded="false" />
-            <element signature="e#1412#1413#0" expanded="false" />
-            <element signature="e#1447#1448#0" expanded="false" />
-            <element signature="e#1478#1479#0" expanded="false" />
-            <element signature="e#1526#1527#0" expanded="false" />
-            <element signature="e#1566#1567#0" expanded="false" />
-            <element signature="e#1602#1603#0" expanded="false" />
-            <element signature="e#1634#1635#0" expanded="false" />
-            <element signature="e#1684#1685#0" expanded="false" />
-            <element signature="e#1726#1727#0" expanded="false" />
-            <element signature="e#1761#1762#0" expanded="false" />
-            <element signature="e#1792#1793#0" expanded="false" />
-            <element signature="e#1840#1841#0" expanded="false" />
-            <element signature="e#1880#1881#0" expanded="false" />
-            <element signature="e#1912#1913#0" expanded="false" />
-            <element signature="e#1940#1941#0" expanded="false" />
-            <element signature="e#1982#1983#0" expanded="false" />
-            <element signature="e#2016#2017#0" expanded="false" />
-            <element signature="e#2054#2055#0" expanded="false" />
-            <element signature="e#2088#2089#0" expanded="false" />
-            <element signature="e#2142#2143#0" expanded="false" />
-            <element signature="e#2188#2189#0" expanded="false" />
-            <element signature="e#2226#2227#0" expanded="false" />
-            <element signature="e#2260#2261#0" expanded="false" />
-            <element signature="e#2314#2315#0" expanded="false" />
-            <element signature="e#2360#2361#0" expanded="false" />
-            <element signature="e#2397#2398#0" expanded="false" />
-            <element signature="e#2430#2431#0" expanded="false" />
-            <element signature="e#2482#2483#0" expanded="false" />
-            <element signature="e#2526#2527#0" expanded="false" />
-          </folding>
+          <caret line="210" column="47" selection-start-line="210" selection-start-column="13" selection-end-line="210" selection-end-column="13" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/eu/kyotoproject/kaf/DateInfo.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/eu/kyotoproject/util/DateUtil.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="50" column="0" selection-start-line="50" selection-start-column="0" selection-end-line="50" selection-end-column="0" />
-          <folding>
-            <element signature="imports" expanded="false" />
-            <element signature="e#1159#1160#0" expanded="false" />
-            <element signature="e#1189#1190#0" expanded="false" />
-            <element signature="e#1235#1236#0" expanded="false" />
-            <element signature="e#1273#1274#0" expanded="false" />
-            <element signature="e#1305#1306#0" expanded="false" />
-            <element signature="e#1333#1334#0" expanded="false" />
-            <element signature="e#1375#1376#0" expanded="false" />
-            <element signature="e#1409#1410#0" expanded="false" />
-          </folding>
+          <caret line="71" column="11" selection-start-line="71" selection-start-column="11" selection-end-line="71" selection-end-column="11" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar:///System/Library/Frameworks/JavaVM.framework/Versions/1.6.0/Classes/classes.jar!/org/w3c/dom/Document.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.5090909">
+          <caret line="47" column="9" selection-start-line="47" selection-start-column="9" selection-end-line="47" selection-end-column="9" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/eu/kyotoproject/kaf/KafTerm.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="74" column="21" selection-start-line="74" selection-start-column="21" selection-end-line="74" selection-end-column="21" />
-          <folding>
-            <element signature="imports" expanded="false" />
-            <element signature="e#12164#12165#0" expanded="false" />
-            <element signature="e#12198#12199#0" expanded="false" />
-            <element signature="e#12252#12253#0" expanded="false" />
-            <element signature="e#12298#12299#0" expanded="false" />
-            <element signature="e#12335#12336#0" expanded="false" />
-            <element signature="e#12368#12369#0" expanded="false" />
-            <element signature="e#12420#12421#0" expanded="false" />
-            <element signature="e#12464#12465#0" expanded="false" />
-            <element signature="e#12494#12495#0" expanded="false" />
-            <element signature="e#12520#12521#0" expanded="false" />
-            <element signature="e#12558#12559#0" expanded="false" />
-            <element signature="e#12588#12589#0" expanded="false" />
-            <element signature="e#12619#12620#0" expanded="false" />
-            <element signature="e#12646#12647#0" expanded="false" />
-            <element signature="e#12686#12687#0" expanded="false" />
-            <element signature="e#12718#12719#0" expanded="false" />
-            <element signature="e#12751#12752#0" expanded="false" />
-            <element signature="e#12780#12781#0" expanded="false" />
-            <element signature="e#12824#12825#0" expanded="false" />
-            <element signature="e#12860#12861#0" expanded="false" />
-            <element signature="e#12895#12896#0" expanded="false" />
-            <element signature="e#12926#12927#0" expanded="false" />
-            <element signature="e#12974#12975#0" expanded="false" />
-            <element signature="e#13014#13015#0" expanded="false" />
-            <element signature="e#13062#13063#0" expanded="false" />
-            <element signature="e#13107#13108#0" expanded="false" />
-            <element signature="e#13136#13137#0" expanded="false" />
-            <element signature="e#13164#13165#0" expanded="false" />
-            <element signature="e#13203#13204#0" expanded="false" />
-            <element signature="e#13237#13238#0" expanded="false" />
-            <element signature="e#13270#13271#0" expanded="false" />
-            <element signature="e#13299#13300#0" expanded="false" />
-            <element signature="e#13343#13344#0" expanded="false" />
-            <element signature="e#13379#13380#0" expanded="false" />
-            <element signature="e#13409#13410#0" expanded="false" />
-            <element signature="e#13435#13436#0" expanded="false" />
-            <element signature="e#13473#13474#0" expanded="false" />
-            <element signature="e#13503#13504#0" expanded="false" />
-            <element signature="e#13535#13536#0" expanded="false" />
-            <element signature="e#13563#13564#0" expanded="false" />
-            <element signature="e#13605#13606#0" expanded="false" />
-            <element signature="e#13639#13640#0" expanded="false" />
-            <element signature="e#13669#13670#0" expanded="false" />
-            <element signature="e#13695#13696#0" expanded="false" />
-            <element signature="e#13728#13729#0" expanded="false" />
-            <element signature="e#13769#13770#0" expanded="false" />
-            <element signature="e#13807#13808#0" expanded="false" />
-            <element signature="e#13837#13838#0" expanded="false" />
-            <element signature="e#13868#13869#0" expanded="false" />
-            <element signature="e#13895#13896#0" expanded="false" />
-            <element signature="e#13935#13936#0" expanded="false" />
-            <element signature="e#13967#13968#0" expanded="false" />
-            <element signature="e#14010#14011#0" expanded="false" />
-            <element signature="e#14038#14039#0" expanded="false" />
-            <element signature="e#14233#14234#0" expanded="false" />
-            <element signature="e#14267#14268#0" expanded="false" />
-            <element signature="e#14308#14309#0" expanded="false" />
-            <element signature="e#14344#14345#0" expanded="false" />
-            <element signature="e#14393#14394#0" expanded="false" />
-            <element signature="e#14425#14426#0" expanded="false" />
-            <element signature="e#14476#14477#0" expanded="false" />
-            <element signature="e#14509#14510#0" expanded="false" />
-            <element signature="e#14576#14577#0" expanded="false" />
-            <element signature="e#14618#14619#0" expanded="false" />
-            <element signature="e#14843#14844#0" expanded="false" />
-            <element signature="e#14876#14877#0" expanded="false" />
-            <element signature="e#14946#14947#0" expanded="false" />
-            <element signature="e#14990#14991#0" expanded="false" />
-            <element signature="e#15048#15049#0" expanded="false" />
-            <element signature="e#15094#15095#0" expanded="false" />
-            <element signature="e#15123#15124#0" expanded="false" />
-            <element signature="e#15151#15152#0" expanded="false" />
-            <element signature="e#15190#15191#0" expanded="false" />
-            <element signature="e#15224#15225#0" expanded="false" />
-            <element signature="e#15259#15260#0" expanded="false" />
-            <element signature="e#15290#15291#0" expanded="false" />
-            <element signature="e#15338#15339#0" expanded="false" />
-            <element signature="e#15378#15379#0" expanded="false" />
-            <element signature="e#15431#15432#0" expanded="false" />
-            <element signature="e#15470#15471#0" expanded="false" />
-            <element signature="e#15544#15545#0" expanded="false" />
-            <element signature="e#15600#15601#0" expanded="false" />
-          </folding>
+          <caret line="338" column="32" selection-start-line="338" selection-start-column="18" selection-end-line="338" selection-end-column="32" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/eu/kyotoproject/kaf/KafSaxParser.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/eu/kyotoproject/util/GetTermListFromKaf.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
+          <caret line="32" column="13" selection-start-line="32" selection-start-column="13" selection-end-line="32" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/eu/kyotoproject/util/SetsOfSpans.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="32" column="0" selection-start-line="32" selection-start-column="0" selection-end-line="32" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/eu/kyotoproject/kaf/KafParticipant.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="13" column="46" selection-start-line="13" selection-start-column="46" selection-end-line="13" selection-end-column="46" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar:///System/Library/Frameworks/JavaVM.framework/Versions/1.6.0/Classes/classes.jar!/java/util/ArrayList.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.3322884">
+          <caret line="21" column="15" selection-start-line="21" selection-start-column="15" selection-end-line="21" selection-end-column="15" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/eu/kyotoproject/kaf/LP.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="11" column="120" selection-start-line="11" selection-start-column="112" selection-end-line="11" selection-end-column="120" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/eu/kyotoproject/util/CromerToNaf.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="24" column="66" selection-start-line="24" selection-start-column="66" selection-end-line="24" selection-end-column="66" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar:///System/Library/Frameworks/JavaVM.framework/Versions/1.6.0/Classes/classes.jar!/java/lang/String.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.34178612">
+          <caret line="623" column="15" selection-start-line="623" selection-start-column="15" selection-end-line="623" selection-end-column="15" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar:///System/Library/Frameworks/JavaVM.framework/Versions/1.6.0/Classes/classes.jar!/java/io/File.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.3547486">
+          <caret line="135" column="18" selection-start-line="135" selection-start-column="18" selection-end-line="135" selection-end-column="18" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/eu/kyotoproject/stats/KafStatistics.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="633" column="0" selection-start-line="633" selection-start-column="0" selection-end-line="633" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/eu/kyotoproject/util/RemoveEventCoreferences.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.82515335">
+          <caret line="38" column="58" selection-start-line="31" selection-start-column="7" selection-end-line="38" selection-end-column="55" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/eu/kyotoproject/kaf/KafWordForm.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="118" column="0" selection-start-line="118" selection-start-column="0" selection-end-line="118" selection-end-column="0" />
-          <folding />
+        <state vertical-scroll-proportion="0.7469325">
+          <caret line="150" column="0" selection-start-line="148" selection-start-column="0" selection-end-line="150" selection-end-column="0" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/eu/kyotoproject/util/DependenciesToTermAttribute.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/eu/kyotoproject/kaf/KafChunk.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="47" column="51" selection-start-line="47" selection-start-column="51" selection-end-line="47" selection-end-column="51" />
-          <folding>
-            <element signature="imports" expanded="false" />
-          </folding>
+          <caret line="129" column="0" selection-start-line="95" selection-start-column="1" selection-end-line="129" selection-end-column="0" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/eu/kyotoproject/kaf/ISODate.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/eu/kyotoproject/kaf/KafDep.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="133" column="36" selection-start-line="133" selection-start-column="36" selection-end-line="133" selection-end-column="36" />
-          <folding>
-            <element signature="imports" expanded="false" />
-            <element signature="e#1365#1379#0" expanded="false" />
-            <element signature="e#1523#1524#0" expanded="false" />
-            <element signature="e#1548#1549#0" expanded="false" />
-            <element signature="e#1582#1583#0" expanded="false" />
-            <element signature="e#1608#1609#0" expanded="false" />
-            <element signature="e#1666#1667#0" expanded="false" />
-            <element signature="e#1702#1703#0" expanded="false" />
-            <element signature="e#1794#1802#0" expanded="false" />
-            <element signature="e#2083#2084#0" expanded="false" />
-            <element signature="e#2133#2134#0" expanded="false" />
-            <element signature="e#2195#2196#0" expanded="false" />
-            <element signature="e#2247#2248#0" expanded="false" />
-            <element signature="e#2516#2517#0" expanded="false" />
-            <element signature="e#2547#2548#0" expanded="false" />
-            <element signature="e#2597#2598#0" expanded="false" />
-            <element signature="e#2637#2638#0" expanded="false" />
-          </folding>
+          <caret line="67" column="5" selection-start-line="67" selection-start-column="0" selection-end-line="68" selection-end-column="0" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/eu/kyotoproject/kaf/KafReference.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/eu/kyotoproject/kaf/KafEventRelation.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="130" column="0" selection-start-line="130" selection-start-column="0" selection-end-line="130" selection-end-column="0" />
-          <folding>
-            <element signature="imports" expanded="false" />
-            <element signature="e#1500#1501#0" expanded="false" />
-            <element signature="e#1528#1529#0" expanded="false" />
-            <element signature="e#1570#1571#0" expanded="false" />
-            <element signature="e#1604#1605#0" expanded="false" />
-            <element signature="e#1637#1638#0" expanded="false" />
-            <element signature="e#1666#1667#0" expanded="false" />
-            <element signature="e#1710#1711#0" expanded="false" />
-            <element signature="e#1746#1747#0" expanded="false" />
-            <element signature="e#1843#1844#0" expanded="false" />
-            <element signature="e#1866#1867#0" expanded="false" />
-            <element signature="e#1994#1995#0" expanded="false" />
-            <element signature="e#2020#2021#0" expanded="false" />
-            <element signature="e#2058#2059#0" expanded="false" />
-            <element signature="e#2088#2089#0" expanded="false" />
-          </folding>
+          <caret line="131" column="0" selection-start-line="127" selection-start-column="0" selection-end-line="131" selection-end-column="0" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/eu/kyotoproject/kaf/GeoCountryObject.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/eu/kyotoproject/kaf/KafMarkable.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="70" column="69" selection-start-line="70" selection-start-column="69" selection-end-line="70" selection-end-column="69" />
-          <folding>
-            <element signature="imports" expanded="false" />
-            <element signature="e#1051#1065#0" expanded="false" />
-            <element signature="e#1416#1417#0" expanded="false" />
-            <element signature="e#1442#1443#0" expanded="false" />
-            <element signature="e#1480#1481#0" expanded="false" />
-            <element signature="e#1510#1511#0" expanded="false" />
-            <element signature="e#1568#1569#0" expanded="false" />
-            <element signature="e#1609#1610#0" expanded="false" />
-            <element signature="e#1807#1808#0" expanded="false" />
-            <element signature="e#1843#1844#0" expanded="false" />
-            <element signature="e#1935#1943#0" expanded="false" />
-            <element signature="e#2224#2225#0" expanded="false" />
-            <element signature="e#2274#2275#0" expanded="false" />
-            <element signature="e#2320#2321#0" expanded="false" />
-            <element signature="e#2354#2355#0" expanded="false" />
-            <element signature="e#2416#2417#0" expanded="false" />
-            <element signature="e#2462#2463#0" expanded="false" />
-          </folding>
+        <state vertical-scroll-proportion="0.75460124">
+          <caret line="183" column="0" selection-start-line="172" selection-start-column="0" selection-end-line="183" selection-end-column="0" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/eu/kyotoproject/kaf/GeoPlaceObject.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/eu/kyotoproject/util/FixEventCoreferences.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="103" column="12" selection-start-line="103" selection-start-column="12" selection-end-line="103" selection-end-column="12" />
-          <folding>
-            <element signature="imports" expanded="false" />
-            <element signature="e#1047#1061#0" expanded="false" />
-            <element signature="e#1401#1402#0" expanded="false" />
-            <element signature="e#1427#1428#0" expanded="false" />
-            <element signature="e#1465#1466#0" expanded="false" />
-            <element signature="e#1495#1496#0" expanded="false" />
-            <element signature="e#1552#1553#0" expanded="false" />
-            <element signature="e#1588#1589#0" expanded="false" />
-            <element signature="e#1663#1664#0" expanded="false" />
-            <element signature="e#1713#1714#0" expanded="false" />
-            <element signature="e#1771#1772#0" expanded="false" />
-            <element signature="e#1812#1813#0" expanded="false" />
-            <element signature="e#2045#2053#0" expanded="false" />
-            <element signature="e#2301#2302#0" expanded="false" />
-            <element signature="e#2333#2334#0" expanded="false" />
-            <element signature="e#2389#2390#0" expanded="false" />
-            <element signature="e#2431#2432#0" expanded="false" />
-          </folding>
+          <caret line="87" column="5" selection-start-line="21" selection-start-column="0" selection-end-line="87" selection-end-column="5" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/eu/kyotoproject/kaf/GeoInfoPlace.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/eu/kyotoproject/util/KafFixECB.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="155" column="24" selection-start-line="155" selection-start-column="24" selection-end-line="155" selection-end-column="24" />
-          <folding>
-            <element signature="imports" expanded="false" />
-            <element signature="e#1313#1314#0" expanded="false" />
-            <element signature="e#1340#1341#0" expanded="false" />
-            <element signature="e#1380#1381#0" expanded="false" />
-            <element signature="e#1412#1413#0" expanded="false" />
-            <element signature="e#1447#1448#0" expanded="false" />
-            <element signature="e#1478#1479#0" expanded="false" />
-            <element signature="e#1526#1527#0" expanded="false" />
-            <element signature="e#1566#1567#0" expanded="false" />
-            <element signature="e#1602#1603#0" expanded="false" />
-            <element signature="e#1634#1635#0" expanded="false" />
-            <element signature="e#1684#1685#0" expanded="false" />
-            <element signature="e#1726#1727#0" expanded="false" />
-            <element signature="e#1761#1762#0" expanded="false" />
-            <element signature="e#1792#1793#0" expanded="false" />
-            <element signature="e#1840#1841#0" expanded="false" />
-            <element signature="e#1880#1881#0" expanded="false" />
-            <element signature="e#1912#1913#0" expanded="false" />
-            <element signature="e#1940#1941#0" expanded="false" />
-            <element signature="e#1982#1983#0" expanded="false" />
-            <element signature="e#2016#2017#0" expanded="false" />
-            <element signature="e#2054#2055#0" expanded="false" />
-            <element signature="e#2088#2089#0" expanded="false" />
-            <element signature="e#2142#2143#0" expanded="false" />
-            <element signature="e#2188#2189#0" expanded="false" />
-            <element signature="e#2226#2227#0" expanded="false" />
-            <element signature="e#2260#2261#0" expanded="false" />
-            <element signature="e#2314#2315#0" expanded="false" />
-            <element signature="e#2360#2361#0" expanded="false" />
-            <element signature="e#2397#2398#0" expanded="false" />
-            <element signature="e#2430#2431#0" expanded="false" />
-            <element signature="e#2482#2483#0" expanded="false" />
-            <element signature="e#2526#2527#0" expanded="false" />
-          </folding>
+          <caret line="16" column="28" selection-start-line="16" selection-start-column="0" selection-end-line="16" selection-end-column="0" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/eu/kyotoproject/kaf/DateInfo.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/eu/kyotoproject/kaf/KafStatement.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="50" column="0" selection-start-line="50" selection-start-column="0" selection-end-line="50" selection-end-column="0" />
-          <folding>
-            <element signature="imports" expanded="false" />
-            <element signature="e#1159#1160#0" expanded="false" />
-            <element signature="e#1189#1190#0" expanded="false" />
-            <element signature="e#1235#1236#0" expanded="false" />
-            <element signature="e#1273#1274#0" expanded="false" />
-            <element signature="e#1305#1306#0" expanded="false" />
-            <element signature="e#1333#1334#0" expanded="false" />
-            <element signature="e#1375#1376#0" expanded="false" />
-            <element signature="e#1409#1410#0" expanded="false" />
-          </folding>
+          <caret line="183" column="0" selection-start-line="181" selection-start-column="0" selection-end-line="183" selection-end-column="0" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/eu/kyotoproject/kaf/KafTerm.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/eu/kyotoproject/kaf/KafPredicateAnchor.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="74" column="21" selection-start-line="74" selection-start-column="21" selection-end-line="74" selection-end-column="21" />
-          <folding>
-            <element signature="imports" expanded="false" />
-            <element signature="e#12164#12165#0" expanded="false" />
-            <element signature="e#12198#12199#0" expanded="false" />
-            <element signature="e#12252#12253#0" expanded="false" />
-            <element signature="e#12298#12299#0" expanded="false" />
-            <element signature="e#12335#12336#0" expanded="false" />
-            <element signature="e#12368#12369#0" expanded="false" />
-            <element signature="e#12420#12421#0" expanded="false" />
-            <element signature="e#12464#12465#0" expanded="false" />
-            <element signature="e#12494#12495#0" expanded="false" />
-            <element signature="e#12520#12521#0" expanded="false" />
-            <element signature="e#12558#12559#0" expanded="false" />
-            <element signature="e#12588#12589#0" expanded="false" />
-            <element signature="e#12619#12620#0" expanded="false" />
-            <element signature="e#12646#12647#0" expanded="false" />
-            <element signature="e#12686#12687#0" expanded="false" />
-            <element signature="e#12718#12719#0" expanded="false" />
-            <element signature="e#12751#12752#0" expanded="false" />
-            <element signature="e#12780#12781#0" expanded="false" />
-            <element signature="e#12824#12825#0" expanded="false" />
-            <element signature="e#12860#12861#0" expanded="false" />
-            <element signature="e#12895#12896#0" expanded="false" />
-            <element signature="e#12926#12927#0" expanded="false" />
-            <element signature="e#12974#12975#0" expanded="false" />
-            <element signature="e#13014#13015#0" expanded="false" />
-            <element signature="e#13062#13063#0" expanded="false" />
-            <element signature="e#13107#13108#0" expanded="false" />
-            <element signature="e#13136#13137#0" expanded="false" />
-            <element signature="e#13164#13165#0" expanded="false" />
-            <element signature="e#13203#13204#0" expanded="false" />
-            <element signature="e#13237#13238#0" expanded="false" />
-            <element signature="e#13270#13271#0" expanded="false" />
-            <element signature="e#13299#13300#0" expanded="false" />
-            <element signature="e#13343#13344#0" expanded="false" />
-            <element signature="e#13379#13380#0" expanded="false" />
-            <element signature="e#13409#13410#0" expanded="false" />
-            <element signature="e#13435#13436#0" expanded="false" />
-            <element signature="e#13473#13474#0" expanded="false" />
-            <element signature="e#13503#13504#0" expanded="false" />
-            <element signature="e#13535#13536#0" expanded="false" />
-            <element signature="e#13563#13564#0" expanded="false" />
-            <element signature="e#13605#13606#0" expanded="false" />
-            <element signature="e#13639#13640#0" expanded="false" />
-            <element signature="e#13669#13670#0" expanded="false" />
-            <element signature="e#13695#13696#0" expanded="false" />
-            <element signature="e#13728#13729#0" expanded="false" />
-            <element signature="e#13769#13770#0" expanded="false" />
-            <element signature="e#13807#13808#0" expanded="false" />
-            <element signature="e#13837#13838#0" expanded="false" />
-            <element signature="e#13868#13869#0" expanded="false" />
-            <element signature="e#13895#13896#0" expanded="false" />
-            <element signature="e#13935#13936#0" expanded="false" />
-            <element signature="e#13967#13968#0" expanded="false" />
-            <element signature="e#14010#14011#0" expanded="false" />
-            <element signature="e#14038#14039#0" expanded="false" />
-            <element signature="e#14233#14234#0" expanded="false" />
-            <element signature="e#14267#14268#0" expanded="false" />
-            <element signature="e#14308#14309#0" expanded="false" />
-            <element signature="e#14344#14345#0" expanded="false" />
-            <element signature="e#14393#14394#0" expanded="false" />
-            <element signature="e#14425#14426#0" expanded="false" />
-            <element signature="e#14476#14477#0" expanded="false" />
-            <element signature="e#14509#14510#0" expanded="false" />
-            <element signature="e#14576#14577#0" expanded="false" />
-            <element signature="e#14618#14619#0" expanded="false" />
-            <element signature="e#14843#14844#0" expanded="false" />
-            <element signature="e#14876#14877#0" expanded="false" />
-            <element signature="e#14946#14947#0" expanded="false" />
-            <element signature="e#14990#14991#0" expanded="false" />
-            <element signature="e#15048#15049#0" expanded="false" />
-            <element signature="e#15094#15095#0" expanded="false" />
-            <element signature="e#15123#15124#0" expanded="false" />
-            <element signature="e#15151#15152#0" expanded="false" />
-            <element signature="e#15190#15191#0" expanded="false" />
-            <element signature="e#15224#15225#0" expanded="false" />
-            <element signature="e#15259#15260#0" expanded="false" />
-            <element signature="e#15290#15291#0" expanded="false" />
-            <element signature="e#15338#15339#0" expanded="false" />
-            <element signature="e#15378#15379#0" expanded="false" />
-            <element signature="e#15431#15432#0" expanded="false" />
-            <element signature="e#15470#15471#0" expanded="false" />
-            <element signature="e#15544#15545#0" expanded="false" />
-            <element signature="e#15600#15601#0" expanded="false" />
-          </folding>
+          <caret line="93" column="0" selection-start-line="93" selection-start-column="0" selection-end-line="93" selection-end-column="0" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/eu/kyotoproject/kaf/KafSaxParser.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/eu/kyotoproject/kaf/KafFactValue.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
+          <caret line="23" column="0" selection-start-line="22" selection-start-column="0" selection-end-line="23" selection-end-column="0" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/eu/kyotoproject/kaf/KafWordForm.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/eu/kyotoproject/kaf/KafTimex.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="118" column="0" selection-start-line="118" selection-start-column="0" selection-end-line="118" selection-end-column="0" />
-          <folding />
+          <caret line="20" column="23" selection-start-line="20" selection-start-column="23" selection-end-line="20" selection-end-column="23" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/eu/kyotoproject/util/DependenciesToTermAttribute.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/eu/kyotoproject/util/SensePuzzle.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="47" column="51" selection-start-line="47" selection-start-column="51" selection-end-line="47" selection-end-column="51" />
-          <folding>
-            <element signature="imports" expanded="false" />
-          </folding>
+          <caret line="14" column="66" selection-start-line="14" selection-start-column="66" selection-end-line="14" selection-end-column="66" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/eu/kyotoproject/kaf/ISODate.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/eu/kyotoproject/kaf/KafFactuality.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="133" column="36" selection-start-line="133" selection-start-column="36" selection-end-line="133" selection-end-column="36" />
-          <folding>
-            <element signature="imports" expanded="false" />
-            <element signature="e#1365#1379#0" expanded="false" />
-            <element signature="e#1523#1524#0" expanded="false" />
-            <element signature="e#1548#1549#0" expanded="false" />
-            <element signature="e#1582#1583#0" expanded="false" />
-            <element signature="e#1608#1609#0" expanded="false" />
-            <element signature="e#1666#1667#0" expanded="false" />
-            <element signature="e#1702#1703#0" expanded="false" />
-            <element signature="e#1794#1802#0" expanded="false" />
-            <element signature="e#2083#2084#0" expanded="false" />
-            <element signature="e#2133#2134#0" expanded="false" />
-            <element signature="e#2195#2196#0" expanded="false" />
-            <element signature="e#2247#2248#0" expanded="false" />
-            <element signature="e#2516#2517#0" expanded="false" />
-            <element signature="e#2547#2548#0" expanded="false" />
-            <element signature="e#2597#2598#0" expanded="false" />
-            <element signature="e#2637#2638#0" expanded="false" />
-          </folding>
+          <caret line="88" column="5" selection-start-line="88" selection-start-column="5" selection-end-line="88" selection-end-column="5" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/eu/kyotoproject/kaf/KafReference.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/eu/kyotoproject/kaf/KafMetaData.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="130" column="0" selection-start-line="130" selection-start-column="0" selection-end-line="130" selection-end-column="0" />
-          <folding>
-            <element signature="imports" expanded="false" />
-            <element signature="e#1500#1501#0" expanded="false" />
-            <element signature="e#1528#1529#0" expanded="false" />
-            <element signature="e#1570#1571#0" expanded="false" />
-            <element signature="e#1604#1605#0" expanded="false" />
-            <element signature="e#1637#1638#0" expanded="false" />
-            <element signature="e#1666#1667#0" expanded="false" />
-            <element signature="e#1710#1711#0" expanded="false" />
-            <element signature="e#1746#1747#0" expanded="false" />
-            <element signature="e#1843#1844#0" expanded="false" />
-            <element signature="e#1866#1867#0" expanded="false" />
-            <element signature="e#1994#1995#0" expanded="false" />
-            <element signature="e#2020#2021#0" expanded="false" />
-            <element signature="e#2058#2059#0" expanded="false" />
-            <element signature="e#2088#2089#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/eu/kyotoproject/kaf/GeoCountryObject.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="70" column="69" selection-start-line="70" selection-start-column="69" selection-end-line="70" selection-end-column="69" />
-          <folding>
-            <element signature="imports" expanded="false" />
-            <element signature="e#1051#1065#0" expanded="false" />
-            <element signature="e#1416#1417#0" expanded="false" />
-            <element signature="e#1442#1443#0" expanded="false" />
-            <element signature="e#1480#1481#0" expanded="false" />
-            <element signature="e#1510#1511#0" expanded="false" />
-            <element signature="e#1568#1569#0" expanded="false" />
-            <element signature="e#1609#1610#0" expanded="false" />
-            <element signature="e#1807#1808#0" expanded="false" />
-            <element signature="e#1843#1844#0" expanded="false" />
-            <element signature="e#1935#1943#0" expanded="false" />
-            <element signature="e#2224#2225#0" expanded="false" />
-            <element signature="e#2274#2275#0" expanded="false" />
-            <element signature="e#2320#2321#0" expanded="false" />
-            <element signature="e#2354#2355#0" expanded="false" />
-            <element signature="e#2416#2417#0" expanded="false" />
-            <element signature="e#2462#2463#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/eu/kyotoproject/kaf/GeoPlaceObject.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="103" column="12" selection-start-line="103" selection-start-column="12" selection-end-line="103" selection-end-column="12" />
-          <folding>
-            <element signature="imports" expanded="false" />
-            <element signature="e#1047#1061#0" expanded="false" />
-            <element signature="e#1401#1402#0" expanded="false" />
-            <element signature="e#1427#1428#0" expanded="false" />
-            <element signature="e#1465#1466#0" expanded="false" />
-            <element signature="e#1495#1496#0" expanded="false" />
-            <element signature="e#1552#1553#0" expanded="false" />
-            <element signature="e#1588#1589#0" expanded="false" />
-            <element signature="e#1663#1664#0" expanded="false" />
-            <element signature="e#1713#1714#0" expanded="false" />
-            <element signature="e#1771#1772#0" expanded="false" />
-            <element signature="e#1812#1813#0" expanded="false" />
-            <element signature="e#2045#2053#0" expanded="false" />
-            <element signature="e#2301#2302#0" expanded="false" />
-            <element signature="e#2333#2334#0" expanded="false" />
-            <element signature="e#2389#2390#0" expanded="false" />
-            <element signature="e#2431#2432#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/eu/kyotoproject/kaf/GeoInfoPlace.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="155" column="24" selection-start-line="155" selection-start-column="24" selection-end-line="155" selection-end-column="24" />
-          <folding>
-            <element signature="imports" expanded="false" />
-            <element signature="e#1313#1314#0" expanded="false" />
-            <element signature="e#1340#1341#0" expanded="false" />
-            <element signature="e#1380#1381#0" expanded="false" />
-            <element signature="e#1412#1413#0" expanded="false" />
-            <element signature="e#1447#1448#0" expanded="false" />
-            <element signature="e#1478#1479#0" expanded="false" />
-            <element signature="e#1526#1527#0" expanded="false" />
-            <element signature="e#1566#1567#0" expanded="false" />
-            <element signature="e#1602#1603#0" expanded="false" />
-            <element signature="e#1634#1635#0" expanded="false" />
-            <element signature="e#1684#1685#0" expanded="false" />
-            <element signature="e#1726#1727#0" expanded="false" />
-            <element signature="e#1761#1762#0" expanded="false" />
-            <element signature="e#1792#1793#0" expanded="false" />
-            <element signature="e#1840#1841#0" expanded="false" />
-            <element signature="e#1880#1881#0" expanded="false" />
-            <element signature="e#1912#1913#0" expanded="false" />
-            <element signature="e#1940#1941#0" expanded="false" />
-            <element signature="e#1982#1983#0" expanded="false" />
-            <element signature="e#2016#2017#0" expanded="false" />
-            <element signature="e#2054#2055#0" expanded="false" />
-            <element signature="e#2088#2089#0" expanded="false" />
-            <element signature="e#2142#2143#0" expanded="false" />
-            <element signature="e#2188#2189#0" expanded="false" />
-            <element signature="e#2226#2227#0" expanded="false" />
-            <element signature="e#2260#2261#0" expanded="false" />
-            <element signature="e#2314#2315#0" expanded="false" />
-            <element signature="e#2360#2361#0" expanded="false" />
-            <element signature="e#2397#2398#0" expanded="false" />
-            <element signature="e#2430#2431#0" expanded="false" />
-            <element signature="e#2482#2483#0" expanded="false" />
-            <element signature="e#2526#2527#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/eu/kyotoproject/kaf/DateInfo.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="50" column="0" selection-start-line="50" selection-start-column="0" selection-end-line="50" selection-end-column="0" />
-          <folding>
-            <element signature="imports" expanded="false" />
-            <element signature="e#1159#1160#0" expanded="false" />
-            <element signature="e#1189#1190#0" expanded="false" />
-            <element signature="e#1235#1236#0" expanded="false" />
-            <element signature="e#1273#1274#0" expanded="false" />
-            <element signature="e#1305#1306#0" expanded="false" />
-            <element signature="e#1333#1334#0" expanded="false" />
-            <element signature="e#1375#1376#0" expanded="false" />
-            <element signature="e#1409#1410#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/eu/kyotoproject/kaf/KafTerm.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="74" column="21" selection-start-line="74" selection-start-column="21" selection-end-line="74" selection-end-column="21" />
-          <folding>
-            <element signature="imports" expanded="false" />
-            <element signature="e#12164#12165#0" expanded="false" />
-            <element signature="e#12198#12199#0" expanded="false" />
-            <element signature="e#12252#12253#0" expanded="false" />
-            <element signature="e#12298#12299#0" expanded="false" />
-            <element signature="e#12335#12336#0" expanded="false" />
-            <element signature="e#12368#12369#0" expanded="false" />
-            <element signature="e#12420#12421#0" expanded="false" />
-            <element signature="e#12464#12465#0" expanded="false" />
-            <element signature="e#12494#12495#0" expanded="false" />
-            <element signature="e#12520#12521#0" expanded="false" />
-            <element signature="e#12558#12559#0" expanded="false" />
-            <element signature="e#12588#12589#0" expanded="false" />
-            <element signature="e#12619#12620#0" expanded="false" />
-            <element signature="e#12646#12647#0" expanded="false" />
-            <element signature="e#12686#12687#0" expanded="false" />
-            <element signature="e#12718#12719#0" expanded="false" />
-            <element signature="e#12751#12752#0" expanded="false" />
-            <element signature="e#12780#12781#0" expanded="false" />
-            <element signature="e#12824#12825#0" expanded="false" />
-            <element signature="e#12860#12861#0" expanded="false" />
-            <element signature="e#12895#12896#0" expanded="false" />
-            <element signature="e#12926#12927#0" expanded="false" />
-            <element signature="e#12974#12975#0" expanded="false" />
-            <element signature="e#13014#13015#0" expanded="false" />
-            <element signature="e#13062#13063#0" expanded="false" />
-            <element signature="e#13107#13108#0" expanded="false" />
-            <element signature="e#13136#13137#0" expanded="false" />
-            <element signature="e#13164#13165#0" expanded="false" />
-            <element signature="e#13203#13204#0" expanded="false" />
-            <element signature="e#13237#13238#0" expanded="false" />
-            <element signature="e#13270#13271#0" expanded="false" />
-            <element signature="e#13299#13300#0" expanded="false" />
-            <element signature="e#13343#13344#0" expanded="false" />
-            <element signature="e#13379#13380#0" expanded="false" />
-            <element signature="e#13409#13410#0" expanded="false" />
-            <element signature="e#13435#13436#0" expanded="false" />
-            <element signature="e#13473#13474#0" expanded="false" />
-            <element signature="e#13503#13504#0" expanded="false" />
-            <element signature="e#13535#13536#0" expanded="false" />
-            <element signature="e#13563#13564#0" expanded="false" />
-            <element signature="e#13605#13606#0" expanded="false" />
-            <element signature="e#13639#13640#0" expanded="false" />
-            <element signature="e#13669#13670#0" expanded="false" />
-            <element signature="e#13695#13696#0" expanded="false" />
-            <element signature="e#13728#13729#0" expanded="false" />
-            <element signature="e#13769#13770#0" expanded="false" />
-            <element signature="e#13807#13808#0" expanded="false" />
-            <element signature="e#13837#13838#0" expanded="false" />
-            <element signature="e#13868#13869#0" expanded="false" />
-            <element signature="e#13895#13896#0" expanded="false" />
-            <element signature="e#13935#13936#0" expanded="false" />
-            <element signature="e#13967#13968#0" expanded="false" />
-            <element signature="e#14010#14011#0" expanded="false" />
-            <element signature="e#14038#14039#0" expanded="false" />
-            <element signature="e#14233#14234#0" expanded="false" />
-            <element signature="e#14267#14268#0" expanded="false" />
-            <element signature="e#14308#14309#0" expanded="false" />
-            <element signature="e#14344#14345#0" expanded="false" />
-            <element signature="e#14393#14394#0" expanded="false" />
-            <element signature="e#14425#14426#0" expanded="false" />
-            <element signature="e#14476#14477#0" expanded="false" />
-            <element signature="e#14509#14510#0" expanded="false" />
-            <element signature="e#14576#14577#0" expanded="false" />
-            <element signature="e#14618#14619#0" expanded="false" />
-            <element signature="e#14843#14844#0" expanded="false" />
-            <element signature="e#14876#14877#0" expanded="false" />
-            <element signature="e#14946#14947#0" expanded="false" />
-            <element signature="e#14990#14991#0" expanded="false" />
-            <element signature="e#15048#15049#0" expanded="false" />
-            <element signature="e#15094#15095#0" expanded="false" />
-            <element signature="e#15123#15124#0" expanded="false" />
-            <element signature="e#15151#15152#0" expanded="false" />
-            <element signature="e#15190#15191#0" expanded="false" />
-            <element signature="e#15224#15225#0" expanded="false" />
-            <element signature="e#15259#15260#0" expanded="false" />
-            <element signature="e#15290#15291#0" expanded="false" />
-            <element signature="e#15338#15339#0" expanded="false" />
-            <element signature="e#15378#15379#0" expanded="false" />
-            <element signature="e#15431#15432#0" expanded="false" />
-            <element signature="e#15470#15471#0" expanded="false" />
-            <element signature="e#15544#15545#0" expanded="false" />
-            <element signature="e#15600#15601#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/eu/kyotoproject/kaf/KafOpinion.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="267" column="11" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <caret line="413" column="43" selection-start-line="413" selection-start-column="35" selection-end-line="413" selection-end-column="43" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/eu/kyotoproject/kaf/KafTermSentiment.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="32" column="22" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <caret line="14" column="56" selection-start-line="14" selection-start-column="56" selection-end-line="14" selection-end-column="56" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/eu/kyotoproject/kaf/TermComponent.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/eu/kyotoproject/kaf/CorefTarget.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="140" column="38" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <caret line="58" column="70" selection-start-line="58" selection-start-column="70" selection-end-line="58" selection-end-column="70" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/eu/kyotoproject/kaf/KafProperty.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="60" column="16" selection-start-line="60" selection-start-column="16" selection-end-line="60" selection-end-column="16" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/eu/kyotoproject/kaf/KafOpinion.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="198" column="16" selection-start-line="198" selection-start-column="16" selection-end-line="198" selection-end-column="16" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/eu/kyotoproject/kaf/KafEntity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.02607362">
+          <caret line="207" column="16" selection-start-line="207" selection-start-column="16" selection-end-line="207" selection-end-column="16" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/eu/kyotoproject/util/TagSourceUri.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="16" column="28" selection-start-line="16" selection-start-column="28" selection-end-line="16" selection-end-column="28" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/eu/kyotoproject/kaf/KafEventComponent.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.9574468">
+          <caret line="99" column="31" selection-start-line="99" selection-start-column="31" selection-end-line="99" selection-end-column="31" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/eu/kyotoproject/kaf/KafEvent.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.9574468">
+          <caret line="131" column="0" selection-start-line="131" selection-start-column="0" selection-end-line="131" selection-end-column="0" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/eu/kyotoproject/kaf/KafSense.java">
       <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.69398206">
+          <caret line="62" column="4" selection-start-line="62" selection-start-column="4" selection-end-line="62" selection-end-column="4" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/eu/kyotoproject/util/AddTokensAsCommentsToSpans.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.021766966">
+          <caret line="124" column="13" selection-start-line="124" selection-start-column="13" selection-end-line="124" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/eu/kyotoproject/kaf/KafCoreferenceSet.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.021766966">
+          <caret line="194" column="84" selection-start-line="194" selection-start-column="84" selection-end-line="194" selection-end-column="84" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/eu/kyotoproject/kaf/KafTopic.java">
+      <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="38" column="23" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/eu/kyotoproject/kaf/GeoInfoCountry.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="2.4418604">
-          <caret line="155" column="27" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/eu/kyotoproject/kaf/KafMetaData.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="3.0736086">
-          <caret line="338" column="86" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/eu/kyotoproject/kaf/KafWordForm.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="118" column="0" selection-start-line="118" selection-start-column="0" selection-end-line="118" selection-end-column="0" />
+          <caret line="69" column="14" selection-start-line="69" selection-start-column="14" selection-end-line="69" selection-end-column="14" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/eu/kyotoproject/util/DependenciesToTermAttribute.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="47" column="51" selection-start-line="47" selection-start-column="51" selection-end-line="47" selection-end-column="51" />
-          <folding>
-            <element signature="imports" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/eu/kyotoproject/kaf/ISODate.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="133" column="36" selection-start-line="133" selection-start-column="36" selection-end-line="133" selection-end-column="36" />
-          <folding>
-            <element signature="imports" expanded="false" />
-            <element signature="e#1365#1379#0" expanded="false" />
-            <element signature="e#1523#1524#0" expanded="false" />
-            <element signature="e#1548#1549#0" expanded="false" />
-            <element signature="e#1582#1583#0" expanded="false" />
-            <element signature="e#1608#1609#0" expanded="false" />
-            <element signature="e#1666#1667#0" expanded="false" />
-            <element signature="e#1702#1703#0" expanded="false" />
-            <element signature="e#1794#1802#0" expanded="false" />
-            <element signature="e#2083#2084#0" expanded="false" />
-            <element signature="e#2133#2134#0" expanded="false" />
-            <element signature="e#2195#2196#0" expanded="false" />
-            <element signature="e#2247#2248#0" expanded="false" />
-            <element signature="e#2516#2517#0" expanded="false" />
-            <element signature="e#2547#2548#0" expanded="false" />
-            <element signature="e#2597#2598#0" expanded="false" />
-            <element signature="e#2637#2638#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/eu/kyotoproject/kaf/KafReference.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="130" column="0" selection-start-line="130" selection-start-column="0" selection-end-line="130" selection-end-column="0" />
-          <folding>
-            <element signature="imports" expanded="false" />
-            <element signature="e#1500#1501#0" expanded="false" />
-            <element signature="e#1528#1529#0" expanded="false" />
-            <element signature="e#1570#1571#0" expanded="false" />
-            <element signature="e#1604#1605#0" expanded="false" />
-            <element signature="e#1637#1638#0" expanded="false" />
-            <element signature="e#1666#1667#0" expanded="false" />
-            <element signature="e#1710#1711#0" expanded="false" />
-            <element signature="e#1746#1747#0" expanded="false" />
-            <element signature="e#1843#1844#0" expanded="false" />
-            <element signature="e#1866#1867#0" expanded="false" />
-            <element signature="e#1994#1995#0" expanded="false" />
-            <element signature="e#2020#2021#0" expanded="false" />
-            <element signature="e#2058#2059#0" expanded="false" />
-            <element signature="e#2088#2089#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/eu/kyotoproject/kaf/GeoCountryObject.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="70" column="69" selection-start-line="70" selection-start-column="69" selection-end-line="70" selection-end-column="69" />
-          <folding>
-            <element signature="imports" expanded="false" />
-            <element signature="e#1051#1065#0" expanded="false" />
-            <element signature="e#1416#1417#0" expanded="false" />
-            <element signature="e#1442#1443#0" expanded="false" />
-            <element signature="e#1480#1481#0" expanded="false" />
-            <element signature="e#1510#1511#0" expanded="false" />
-            <element signature="e#1568#1569#0" expanded="false" />
-            <element signature="e#1609#1610#0" expanded="false" />
-            <element signature="e#1807#1808#0" expanded="false" />
-            <element signature="e#1843#1844#0" expanded="false" />
-            <element signature="e#1935#1943#0" expanded="false" />
-            <element signature="e#2224#2225#0" expanded="false" />
-            <element signature="e#2274#2275#0" expanded="false" />
-            <element signature="e#2320#2321#0" expanded="false" />
-            <element signature="e#2354#2355#0" expanded="false" />
-            <element signature="e#2416#2417#0" expanded="false" />
-            <element signature="e#2462#2463#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/eu/kyotoproject/kaf/GeoPlaceObject.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="103" column="12" selection-start-line="103" selection-start-column="12" selection-end-line="103" selection-end-column="12" />
-          <folding>
-            <element signature="imports" expanded="false" />
-            <element signature="e#1047#1061#0" expanded="false" />
-            <element signature="e#1401#1402#0" expanded="false" />
-            <element signature="e#1427#1428#0" expanded="false" />
-            <element signature="e#1465#1466#0" expanded="false" />
-            <element signature="e#1495#1496#0" expanded="false" />
-            <element signature="e#1552#1553#0" expanded="false" />
-            <element signature="e#1588#1589#0" expanded="false" />
-            <element signature="e#1663#1664#0" expanded="false" />
-            <element signature="e#1713#1714#0" expanded="false" />
-            <element signature="e#1771#1772#0" expanded="false" />
-            <element signature="e#1812#1813#0" expanded="false" />
-            <element signature="e#2045#2053#0" expanded="false" />
-            <element signature="e#2301#2302#0" expanded="false" />
-            <element signature="e#2333#2334#0" expanded="false" />
-            <element signature="e#2389#2390#0" expanded="false" />
-            <element signature="e#2431#2432#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/eu/kyotoproject/kaf/GeoInfoPlace.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="155" column="24" selection-start-line="155" selection-start-column="24" selection-end-line="155" selection-end-column="24" />
-          <folding>
-            <element signature="imports" expanded="false" />
-            <element signature="e#1313#1314#0" expanded="false" />
-            <element signature="e#1340#1341#0" expanded="false" />
-            <element signature="e#1380#1381#0" expanded="false" />
-            <element signature="e#1412#1413#0" expanded="false" />
-            <element signature="e#1447#1448#0" expanded="false" />
-            <element signature="e#1478#1479#0" expanded="false" />
-            <element signature="e#1526#1527#0" expanded="false" />
-            <element signature="e#1566#1567#0" expanded="false" />
-            <element signature="e#1602#1603#0" expanded="false" />
-            <element signature="e#1634#1635#0" expanded="false" />
-            <element signature="e#1684#1685#0" expanded="false" />
-            <element signature="e#1726#1727#0" expanded="false" />
-            <element signature="e#1761#1762#0" expanded="false" />
-            <element signature="e#1792#1793#0" expanded="false" />
-            <element signature="e#1840#1841#0" expanded="false" />
-            <element signature="e#1880#1881#0" expanded="false" />
-            <element signature="e#1912#1913#0" expanded="false" />
-            <element signature="e#1940#1941#0" expanded="false" />
-            <element signature="e#1982#1983#0" expanded="false" />
-            <element signature="e#2016#2017#0" expanded="false" />
-            <element signature="e#2054#2055#0" expanded="false" />
-            <element signature="e#2088#2089#0" expanded="false" />
-            <element signature="e#2142#2143#0" expanded="false" />
-            <element signature="e#2188#2189#0" expanded="false" />
-            <element signature="e#2226#2227#0" expanded="false" />
-            <element signature="e#2260#2261#0" expanded="false" />
-            <element signature="e#2314#2315#0" expanded="false" />
-            <element signature="e#2360#2361#0" expanded="false" />
-            <element signature="e#2397#2398#0" expanded="false" />
-            <element signature="e#2430#2431#0" expanded="false" />
-            <element signature="e#2482#2483#0" expanded="false" />
-            <element signature="e#2526#2527#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/eu/kyotoproject/kaf/DateInfo.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="50" column="0" selection-start-line="50" selection-start-column="0" selection-end-line="50" selection-end-column="0" />
-          <folding>
-            <element signature="imports" expanded="false" />
-            <element signature="e#1159#1160#0" expanded="false" />
-            <element signature="e#1189#1190#0" expanded="false" />
-            <element signature="e#1235#1236#0" expanded="false" />
-            <element signature="e#1273#1274#0" expanded="false" />
-            <element signature="e#1305#1306#0" expanded="false" />
-            <element signature="e#1333#1334#0" expanded="false" />
-            <element signature="e#1375#1376#0" expanded="false" />
-            <element signature="e#1409#1410#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/eu/kyotoproject/kaf/KafTerm.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="74" column="21" selection-start-line="74" selection-start-column="21" selection-end-line="74" selection-end-column="21" />
-          <folding>
-            <element signature="imports" expanded="false" />
-            <element signature="e#12164#12165#0" expanded="false" />
-            <element signature="e#12198#12199#0" expanded="false" />
-            <element signature="e#12252#12253#0" expanded="false" />
-            <element signature="e#12298#12299#0" expanded="false" />
-            <element signature="e#12335#12336#0" expanded="false" />
-            <element signature="e#12368#12369#0" expanded="false" />
-            <element signature="e#12420#12421#0" expanded="false" />
-            <element signature="e#12464#12465#0" expanded="false" />
-            <element signature="e#12494#12495#0" expanded="false" />
-            <element signature="e#12520#12521#0" expanded="false" />
-            <element signature="e#12558#12559#0" expanded="false" />
-            <element signature="e#12588#12589#0" expanded="false" />
-            <element signature="e#12619#12620#0" expanded="false" />
-            <element signature="e#12646#12647#0" expanded="false" />
-            <element signature="e#12686#12687#0" expanded="false" />
-            <element signature="e#12718#12719#0" expanded="false" />
-            <element signature="e#12751#12752#0" expanded="false" />
-            <element signature="e#12780#12781#0" expanded="false" />
-            <element signature="e#12824#12825#0" expanded="false" />
-            <element signature="e#12860#12861#0" expanded="false" />
-            <element signature="e#12895#12896#0" expanded="false" />
-            <element signature="e#12926#12927#0" expanded="false" />
-            <element signature="e#12974#12975#0" expanded="false" />
-            <element signature="e#13014#13015#0" expanded="false" />
-            <element signature="e#13062#13063#0" expanded="false" />
-            <element signature="e#13107#13108#0" expanded="false" />
-            <element signature="e#13136#13137#0" expanded="false" />
-            <element signature="e#13164#13165#0" expanded="false" />
-            <element signature="e#13203#13204#0" expanded="false" />
-            <element signature="e#13237#13238#0" expanded="false" />
-            <element signature="e#13270#13271#0" expanded="false" />
-            <element signature="e#13299#13300#0" expanded="false" />
-            <element signature="e#13343#13344#0" expanded="false" />
-            <element signature="e#13379#13380#0" expanded="false" />
-            <element signature="e#13409#13410#0" expanded="false" />
-            <element signature="e#13435#13436#0" expanded="false" />
-            <element signature="e#13473#13474#0" expanded="false" />
-            <element signature="e#13503#13504#0" expanded="false" />
-            <element signature="e#13535#13536#0" expanded="false" />
-            <element signature="e#13563#13564#0" expanded="false" />
-            <element signature="e#13605#13606#0" expanded="false" />
-            <element signature="e#13639#13640#0" expanded="false" />
-            <element signature="e#13669#13670#0" expanded="false" />
-            <element signature="e#13695#13696#0" expanded="false" />
-            <element signature="e#13728#13729#0" expanded="false" />
-            <element signature="e#13769#13770#0" expanded="false" />
-            <element signature="e#13807#13808#0" expanded="false" />
-            <element signature="e#13837#13838#0" expanded="false" />
-            <element signature="e#13868#13869#0" expanded="false" />
-            <element signature="e#13895#13896#0" expanded="false" />
-            <element signature="e#13935#13936#0" expanded="false" />
-            <element signature="e#13967#13968#0" expanded="false" />
-            <element signature="e#14010#14011#0" expanded="false" />
-            <element signature="e#14038#14039#0" expanded="false" />
-            <element signature="e#14233#14234#0" expanded="false" />
-            <element signature="e#14267#14268#0" expanded="false" />
-            <element signature="e#14308#14309#0" expanded="false" />
-            <element signature="e#14344#14345#0" expanded="false" />
-            <element signature="e#14393#14394#0" expanded="false" />
-            <element signature="e#14425#14426#0" expanded="false" />
-            <element signature="e#14476#14477#0" expanded="false" />
-            <element signature="e#14509#14510#0" expanded="false" />
-            <element signature="e#14576#14577#0" expanded="false" />
-            <element signature="e#14618#14619#0" expanded="false" />
-            <element signature="e#14843#14844#0" expanded="false" />
-            <element signature="e#14876#14877#0" expanded="false" />
-            <element signature="e#14946#14947#0" expanded="false" />
-            <element signature="e#14990#14991#0" expanded="false" />
-            <element signature="e#15048#15049#0" expanded="false" />
-            <element signature="e#15094#15095#0" expanded="false" />
-            <element signature="e#15123#15124#0" expanded="false" />
-            <element signature="e#15151#15152#0" expanded="false" />
-            <element signature="e#15190#15191#0" expanded="false" />
-            <element signature="e#15224#15225#0" expanded="false" />
-            <element signature="e#15259#15260#0" expanded="false" />
-            <element signature="e#15290#15291#0" expanded="false" />
-            <element signature="e#15338#15339#0" expanded="false" />
-            <element signature="e#15378#15379#0" expanded="false" />
-            <element signature="e#15431#15432#0" expanded="false" />
-            <element signature="e#15470#15471#0" expanded="false" />
-            <element signature="e#15544#15545#0" expanded="false" />
-            <element signature="e#15600#15601#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/eu/kyotoproject/kaf/KafSaxParser.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="18" column="47" selection-start-line="18" selection-start-column="47" selection-end-line="18" selection-end-column="47" />
+          <caret line="1851" column="53" selection-start-line="1851" selection-start-column="36" selection-end-line="1851" selection-end-column="53" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/pom.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.625">
-          <caret line="25" column="32" selection-start-line="0" selection-start-column="0" selection-end-line="58" selection-end-column="10" />
+        <state vertical-scroll-proportion="-11.0">
+          <caret line="23" column="0" selection-start-line="21" selection-start-column="0" selection-end-line="23" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/README.md">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-2.3448277">
+          <caret line="4" column="17" selection-start-line="4" selection-start-column="0" selection-end-line="5" selection-end-column="0" />
+        </state>
+      </provider>
+      <provider editor-type-id="MarkdownPreviewEditor">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/readme.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="18" column="27" selection-start-line="18" selection-start-column="12" selection-end-line="18" selection-end-column="12" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.gitignore">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0984556">
+          <caret line="3" column="40" selection-start-line="3" selection-start-column="0" selection-end-line="3" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/eu/kyotoproject/kaf/ISODate.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.3325893">
+          <caret line="26" column="13" selection-start-line="26" selection-start-column="13" selection-end-line="26" selection-end-column="13" />
           <folding />
         </state>
       </provider>
