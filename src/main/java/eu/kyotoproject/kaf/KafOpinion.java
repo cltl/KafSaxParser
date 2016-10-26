@@ -5,6 +5,7 @@ import org.w3c.dom.Comment;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
@@ -14,7 +15,7 @@ import java.util.ArrayList;
  * Time: 11:35 AM
  * To change this template use File | Settings | File Templates.
  */
-public class KafOpinion {
+public class KafOpinion  implements Serializable {
 
     /*
 <opinions>
