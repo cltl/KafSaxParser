@@ -13,14 +13,14 @@ import java.util.ArrayList;
  */
 public class KafEmotion implements Serializable {
 
-    private String id;
+    private int count;
     private String emotion;
     private String strength;
     private ArrayList<String> spans;
     private String tokenString;
 
     public KafEmotion() {
-        this.id = "";
+        this.count = 0;
         this.emotion = "";
         this.strength = "";
         this.spans = new ArrayList<String>();
@@ -32,12 +32,12 @@ public class KafEmotion implements Serializable {
                 this.getSpans());
     }
 
-    public String getId() {
-        return id;
+    public int getCount() {
+        return count;
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public void setCount(int count) {
+        this.count = count;
     }
 
     public String getEmotion() {
@@ -80,7 +80,7 @@ public class KafEmotion implements Serializable {
     public Element toNafXML(Document xmldoc)
     {
         Element root = xmldoc.createElement("emotion");
-        if (!id.isEmpty()) root.setAttribute("id", id);
+        if (count>0) root.setAttribute("score", new Integer(count).toString());
         if (!emotion.isEmpty()) root.setAttribute("emotion", emotion);
         if (!strength.isEmpty()) root.setAttribute("strength", strength.toString());
 

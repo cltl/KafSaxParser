@@ -1074,8 +1074,8 @@ public class KafSaxParser extends DefaultHandler {
            spans = new ArrayList<String>();
            for (int i = 0; i < attributes.getLength(); i++) {
                String name = attributes.getQName(i);
-               if (name.equalsIgnoreCase("id")) {
-                   kafEmotion.setId(attributes.getValue(i).trim());
+               if (name.equalsIgnoreCase("score")) {
+                   kafEmotion.setCount(Integer.parseInt(attributes.getValue(i).trim()));
                }
                else if (name.equalsIgnoreCase("emotion")) {
                    kafEmotion.setEmotion(attributes.getValue(i).trim());
