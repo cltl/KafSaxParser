@@ -64,6 +64,7 @@ public class KafSaxParser extends DefaultHandler {
     public ArrayList<ISODate> kafDateArrayList;
     private ArrayList<KafReference> kafReferenceArrayList;
     public ArrayList<KafConstituencyTree> kafConstituencyTrees;
+    public ArrayList<KafEmotionSet> kafEmotionSetArrayList;
     public ArrayList<KafFactuality> kafFactualityLayer;
     public ArrayList<KafTimex> kafTimexLayer;
     public ArrayList<KafPredicateAnchor> kafPredicateAnchorArrayList;
@@ -248,6 +249,8 @@ public class KafSaxParser extends DefaultHandler {
     private KafMarkable kafMarkable;
     private KafStatement kafStatement;
     private KafFactuality kafFactuality;
+    private KafEmotion kafEmotion;
+    private KafEmotionSet kafEmotionSet;
     private KafPredicateAnchor kafPredicateAnchor;
 
     private ArrayList<KafSense> senseTags;
@@ -459,7 +462,7 @@ public class KafSaxParser extends DefaultHandler {
          kafConstituencyTree = new KafConstituencyTree();
          kafConstituencyTerminal = new KafConstituencyTerminal();
          kafFactualityLayer = new ArrayList<KafFactuality>();
-
+         kafEmotionSetArrayList = new ArrayList<KafEmotionSet>();
          kafPredicateAnchorArrayList = new ArrayList<KafPredicateAnchor>();
          kafAttributionArrayList = new ArrayList<KafStatement>();
          kafTopicsArrayList = new ArrayList<KafTopic>();
@@ -498,6 +501,8 @@ public class KafSaxParser extends DefaultHandler {
          kafEventISI = new KafEventISI();
          kaftextUnit = new KafTextUnit();
          kafFactuality = new KafFactuality();
+         kafEmotion = new KafEmotion();
+         kafEmotionSet = new KafEmotionSet();
          kafStatement = new KafStatement();
          kafTopic = new KafTopic();
          kafMarkable = new KafMarkable();
@@ -1040,6 +1045,49 @@ public class KafSaxParser extends DefaultHandler {
                    //   System.out.println("352 ********* FOUND UNKNOWN Attribute " + name + " *****************");
                }
            }
+       }
+       else if (qName.equalsIgnoreCase("emotionSet")) {
+           kafEmotionSet = new KafEmotionSet();
+           spans = new ArrayList<String>();
+           for (int i = 0; i < attributes.getLength(); i++) {
+               String name = attributes.getQName(i);
+               if (name.equalsIgnoreCase("id")) {
+                   kafEmotionSet.setId(attributes.getValue(i).trim());
+               }
+               else if (name.equalsIgnoreCase("emotion")) {
+                   kafEmotionSet.setEmotion(attributes.getValue(i).trim());
+               }
+               else if (name.equalsIgnoreCase("strength")) {
+                   kafEmotionSet.setStrength(attributes.getValue(i).trim());
+               }
+               else if (name.equalsIgnoreCase("sentence")) {
+                   kafEmotionSet.setSentenceId(attributes.getValue(i).trim());
+               }
+               else  {
+                   //   System.out.println("352 ********* FOUND UNKNOWN Attribute " + name + " *****************");
+               }
+           }
+       }
+
+       else if (qName.equalsIgnoreCase("emotion")) {
+           kafEmotion = new KafEmotion();
+           spans = new ArrayList<String>();
+           for (int i = 0; i < attributes.getLength(); i++) {
+               String name = attributes.getQName(i);
+               if (name.equalsIgnoreCase("id")) {
+                   kafEmotion.setId(attributes.getValue(i).trim());
+               }
+               else if (name.equalsIgnoreCase("emotion")) {
+                   kafEmotion.setEmotion(attributes.getValue(i).trim());
+               }
+               else if (name.equalsIgnoreCase("strength")) {
+                   kafEmotion.setStrength(attributes.getValue(i).trim());
+               }
+               else  {
+                   //   System.out.println("352 ********* FOUND UNKNOWN Attribute " + name + " *****************");
+               }
+           }
+           kafEmotionSet.addKafEmotionArrayList(kafEmotion);
        }
 
        else if (qName.equalsIgnoreCase("opinion")) {
@@ -2203,6 +2251,19 @@ public class KafSaxParser extends DefaultHandler {
                     spans = new ArrayList<String>();
             }
 
+            else if (qName.equalsIgnoreCase("emotion"))       /// version 3.1
+            {
+                    kafEmotion.setSpans(spans);
+                    this.kafEmotionSet.addKafEmotionArrayList(kafEmotion);
+                    spans = new ArrayList<String>();
+            }
+
+            else if (qName.equalsIgnoreCase("emotionSet"))       /// version 3.1
+            {
+                    this.kafEmotionSetArrayList.add(kafEmotionSet);
+                    kafEmotionSet = new KafEmotionSet();
+            }
+
             else if (qName.equalsIgnoreCase("statement"))       /// version 3
             {
                     kafAttributionArrayList.add(kafStatement);
@@ -3288,6 +3349,16 @@ public class KafSaxParser extends DefaultHandler {
                 }
 
 
+                if (kafEmotionSetArrayList.size()>0) {
+                    Element emotions = xmldoc.createElement("emotions");
+
+                    for (int i = 0; i < kafEmotionSetArrayList.size(); i++) {
+                        KafEmotionSet kafEmotionSet = kafEmotionSetArrayList.get(i);
+                        emotions.appendChild((kafEmotionSet.toNafXML(xmldoc)));
+                    }
+                    root.appendChild(emotions);
+                }
+
                 Element tunits = xmldoc.createElement("tunits");
 				for (int i = 0; i < this.kafDiscourseList.size(); i++) {
 					KafTextUnit kaf  = (KafTextUnit) kafDiscourseList.get(i);
@@ -3532,6 +3603,16 @@ public class KafSaxParser extends DefaultHandler {
                 root.appendChild(factualities);
             }
 
+            if (kafEmotionSetArrayList.size()>0) {
+                Element emotions = xmldoc.createElement("emotions");
+
+                for (int i = 0; i < kafEmotionSetArrayList.size(); i++) {
+                    KafEmotionSet kafEmotionSet = kafEmotionSetArrayList.get(i);
+                    emotions.appendChild((kafEmotionSet.toNafXML(xmldoc)));
+                }
+                root.appendChild(emotions);
+            }
+
             if (kafAttributionArrayList.size()>0) {
                 Element factualities = xmldoc.createElement("attribution");
 
@@ -3772,6 +3853,18 @@ public class KafSaxParser extends DefaultHandler {
                     factualities.appendChild((kafFactuality.toNafXML(xmldoc)));
                 }
                 root.appendChild(factualities);
+            }
+
+
+
+            if (kafEmotionSetArrayList.size()>0) {
+                Element emotions = xmldoc.createElement("emotions");
+
+                for (int i = 0; i < kafEmotionSetArrayList.size(); i++) {
+                    KafEmotionSet kafEmotionSet = kafEmotionSetArrayList.get(i);
+                    emotions.appendChild((kafEmotionSet.toNafXML(xmldoc)));
+                }
+                root.appendChild(emotions);
             }
 
             Element tunits = xmldoc.createElement("tunits");
