@@ -21,7 +21,7 @@ public class KafFactValue implements Serializable {
       //// OLD VERSION factValue instead of factVal
      */
     static public final String FUTURE = "FUTURE";
-    static public final String NON_FUTURE = "NON_FUTURE";
+    static public final String NON_FUTURE = "NONFUTURE";
     static public final String RECENT = "RECENT";
     static public final String PAST = "PAST";
     static public final String CERTAIN = "CERTAIN";

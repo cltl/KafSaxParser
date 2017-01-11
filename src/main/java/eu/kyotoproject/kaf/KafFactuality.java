@@ -66,9 +66,9 @@ public class KafFactuality  implements Serializable {
       <factVal resource="nwr:attributionPolarity" value="POS"/>
     </factuality>
      */
-   // static public final String defaultAttribution = "CERTAIN,NONFUTURE,POS";
+
+
     static public final String defaultAttribution = "CERTAIN_NONFUTURE_POS";
-    //static public  ArrayList<String> defaultAttribution = null;
     static public final String[] defaultAttributionArray = {"CERTAIN", "NONFUTURE", "POS"};
     static public ArrayList<String> castToDefault () {
         ArrayList<String> arrayList = new ArrayList<String>();
@@ -78,6 +78,7 @@ public class KafFactuality  implements Serializable {
         }
         return arrayList;
     }
+
     private String id;
     //private String prediction;
     //private Double confidence;
@@ -175,7 +176,7 @@ public class KafFactuality  implements Serializable {
             KafFactValue kafFactValue = factValueArrayList.get(i);
             if (kafFactValue.getResource().toLowerCase().endsWith("attributiontense")) {
                 time = kafFactValue.getValue();
-                time.replace("NON_FUTURE", "FUTURE");
+                if (time.equalsIgnoreCase("NON_FUTURE")) time = "NONFUTURE";
                 break; // assume there is one value only
             }
         }
@@ -197,11 +198,6 @@ public class KafFactuality  implements Serializable {
             }
         }
         prediction = certainty+"_"+time+"_"+polarity;
-      //  prediction = certainty+","+time+","+polarity;
-        //prediction = prediction.replaceAll("UNDERSPECIFIED","u");
-
-        //   System.out.println("prediction = " + prediction);
-
         return prediction;
     }
 
@@ -234,7 +230,7 @@ public class KafFactuality  implements Serializable {
             KafFactValue kafFactValue = factValueArrayList.get(i);
             if (kafFactValue.getResource().toLowerCase().endsWith("attributiontense")) {
                 time = kafFactValue.getValue();
-                time.replace("NON_FUTURE", "FUTURE");
+                if (time.equalsIgnoreCase("NON_FUTURE")) time = "NONFUTURE";
                 break; // assume there is one value only
             }
         }
