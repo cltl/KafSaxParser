@@ -66,8 +66,18 @@ public class KafFactuality  implements Serializable {
       <factVal resource="nwr:attributionPolarity" value="POS"/>
     </factuality>
      */
-   // static public final String defaultAttribution = "CERTAIN,NON_FUTURE,POS";
-    static public final String defaultAttribution = "CERTAIN_NON_FUTURE_POS";
+   // static public final String defaultAttribution = "CERTAIN,NONFUTURE,POS";
+    static public final String defaultAttribution = "CERTAIN_NONFUTURE_POS";
+    //static public  ArrayList<String> defaultAttribution = null;
+    static public final String[] defaultAttributionArray = {"CERTAIN", "NONFUTURE", "POS"};
+    static public ArrayList<String> castToDefault () {
+        ArrayList<String> arrayList = new ArrayList<String>();
+        for (int i = 0; i < defaultAttributionArray.length; i++) {
+            String s = defaultAttributionArray[i];
+            arrayList.add(s);
+        }
+        return arrayList;
+    }
     private String id;
     //private String prediction;
     //private Double confidence;
@@ -103,6 +113,7 @@ public class KafFactuality  implements Serializable {
 
 
     /**
+     * @Deprecated
      * Values are converted to a fixed string with fields for each of the following 4 sources
      *** example output
      <factValue confidence="0.83" resource="FactBank" value="CT+"/>
@@ -164,6 +175,7 @@ public class KafFactuality  implements Serializable {
             KafFactValue kafFactValue = factValueArrayList.get(i);
             if (kafFactValue.getResource().toLowerCase().endsWith("attributiontense")) {
                 time = kafFactValue.getValue();
+                time.replace("NON_FUTURE", "FUTURE");
                 break; // assume there is one value only
             }
         }
@@ -189,6 +201,63 @@ public class KafFactuality  implements Serializable {
         //prediction = prediction.replaceAll("UNDERSPECIFIED","u");
 
         //   System.out.println("prediction = " + prediction);
+
+        return prediction;
+    }
+
+    public ArrayList<String> getPredictionArrayList () {
+        ArrayList<String> prediction = new ArrayList<String>();
+        String certainty = "u";
+        String time = "u";
+        String polarity = "u";
+      //  System.out.println("factValueArrayList.size() = " + factValueArrayList.size());
+        for (int i = 0; i < factValueArrayList.size(); i++) {
+            KafFactValue kafFactValue = factValueArrayList.get(i);
+            if (kafFactValue.getResource().toLowerCase().endsWith("attributioncertainty")) {
+                certainty = kafFactValue.getValue();
+                break; // assume there is one value only
+            }
+            else if (kafFactValue.getResource().equalsIgnoreCase("factbank")) {
+                if (kafFactValue.getValue().startsWith("CT")) {
+                    certainty = "CERTAIN";
+                    break; // assume there is one value only
+                } else if (kafFactValue.getValue().startsWith("PR")) {
+                    certainty = "PROBABLE";
+                    break; // assume there is one value only
+                } else if (kafFactValue.getValue().startsWith("PS")) {
+                    certainty = "POSSIBLE";
+                    break; // assume there is one value only
+                }
+            }
+        }
+        for (int i = 0; i < factValueArrayList.size(); i++) {
+            KafFactValue kafFactValue = factValueArrayList.get(i);
+            if (kafFactValue.getResource().toLowerCase().endsWith("attributiontense")) {
+                time = kafFactValue.getValue();
+                time.replace("NON_FUTURE", "FUTURE");
+                break; // assume there is one value only
+            }
+        }
+        for (int i = 0; i < factValueArrayList.size(); i++) {
+            KafFactValue kafFactValue = factValueArrayList.get(i);
+            if (kafFactValue.getResource().toLowerCase().endsWith("attributionpolarity")) {
+                polarity = kafFactValue.getValue();
+                break; // assume there is one value only
+            }
+            else if (kafFactValue.getResource().equalsIgnoreCase("factbank")) {
+                if (kafFactValue.getValue().endsWith("-")) {
+                    polarity = "NEG";
+                    break; // assume there is one value only
+                }
+                else if (kafFactValue.getValue().endsWith("+")) {
+                    polarity = "POS";
+                    break; // assume there is one value only
+                }
+            }
+        }
+        if (!certainty.isEmpty()) prediction.add(certainty);
+        if (!time.isEmpty()) prediction.add(time);
+        if (!polarity.isEmpty()) prediction.add(polarity);
 
         return prediction;
     }
