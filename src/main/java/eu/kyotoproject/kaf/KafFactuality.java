@@ -149,9 +149,9 @@ public class KafFactuality  implements Serializable {
      */
     public String getPrediction () {
         String prediction = "";
-        String certainty = "u";
-        String time = "u";
-        String polarity = "u";
+        String certainty = "";
+        String time = "";
+        String polarity = "";
       //  System.out.println("factValueArrayList.size() = " + factValueArrayList.size());
         for (int i = 0; i < factValueArrayList.size(); i++) {
             KafFactValue kafFactValue = factValueArrayList.get(i);
@@ -197,15 +197,22 @@ public class KafFactuality  implements Serializable {
                 }
             }
         }
+        if (certainty.equalsIgnoreCase("uu") ||
+                certainty.equalsIgnoreCase("UNDERSPECIFIED")) certainty ="";
+        if (time.equalsIgnoreCase("uu") ||
+                time.equalsIgnoreCase("UNDERSPECIFIED")) time ="";
+        if (polarity.equalsIgnoreCase("uu") ||
+                polarity.equalsIgnoreCase("UNDERSPECIFIED")) polarity="";
+
         prediction = certainty+"_"+time+"_"+polarity;
         return prediction;
     }
 
     public ArrayList<String> getPredictionArrayList () {
         ArrayList<String> prediction = new ArrayList<String>();
-        String certainty = "u";
-        String time = "u";
-        String polarity = "u";
+        String certainty = "";
+        String time = "";
+        String polarity = "";
       //  System.out.println("factValueArrayList.size() = " + factValueArrayList.size());
         for (int i = 0; i < factValueArrayList.size(); i++) {
             KafFactValue kafFactValue = factValueArrayList.get(i);
@@ -251,9 +258,15 @@ public class KafFactuality  implements Serializable {
                 }
             }
         }
-        if (!certainty.isEmpty()) prediction.add(certainty);
-        if (!time.isEmpty()) prediction.add(time);
-        if (!polarity.isEmpty()) prediction.add(polarity);
+        if (!certainty.isEmpty() &&
+                !certainty.equalsIgnoreCase("uu") &&
+        !certainty.equalsIgnoreCase("UNDERSPECIFIED")) prediction.add(certainty);
+        if (!time.isEmpty()&&
+                !time.equalsIgnoreCase("uu") &&
+                !time.equalsIgnoreCase("UNDERSPECIFIED")) prediction.add(time);
+        if (!polarity.isEmpty()&&
+                !polarity.equalsIgnoreCase("uu") &&
+                !polarity.equalsIgnoreCase("UNDERSPECIFIED")) prediction.add(polarity);
 
         return prediction;
     }
