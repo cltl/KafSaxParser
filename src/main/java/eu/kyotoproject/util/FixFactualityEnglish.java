@@ -22,7 +22,7 @@ public class FixFactualityEnglish {
         KafSaxParser kafSaxParser = new KafSaxParser();
         String pathToFile = "";
         String extension = ".naf";
-        pathToFile = "/Users/piek/Desktop/NWR-INC/financialtimes/data/brexit6.naf";
+        pathToFile = "/Users/piek/Desktop/Vaccins/naf";
        // pathToFile = "/Users/piek/Desktop/NWR-INC/financialtimes/data/brexit6.naf";
         for (int i = 0; i < args.length; i++) {
             String arg = args[i];
