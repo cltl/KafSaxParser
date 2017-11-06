@@ -87,6 +87,7 @@ public class KafSaxParser extends DefaultHandler {
     private boolean externalreference;
     private int externalRefLevel = 0;
     public String rawText;
+    public String fileName;
 
 
     /**
@@ -261,6 +262,7 @@ public class KafSaxParser extends DefaultHandler {
     private boolean PREDICATE = false;
     private boolean ROLE = false;
 
+
     /*
      * This KafSaxParser can be used to check some internal KAF consistencies.
      * At this moment we check:
@@ -346,6 +348,7 @@ public class KafSaxParser extends DefaultHandler {
     {
         try
         {
+            this.fileName = file.getName();
             // System.out.println("file.getAbsolutePath() = " + file.getAbsolutePath());
             FileReader reader = new FileReader(file);
             InputSource inp = new InputSource(reader);
@@ -408,6 +411,7 @@ public class KafSaxParser extends DefaultHandler {
 */
 
     public boolean parseFile(String filePath) {
+    	this.fileName = new File (filePath).getName();
     	return parseFile(new File(filePath));
     }//--c
     
@@ -525,6 +529,7 @@ public class KafSaxParser extends DefaultHandler {
          COMPONENT = false;
          PREDICATE = false;
          ROLE = false;
+         fileName = "";
     }
 
     public void buildSentenceTermIndex (){
