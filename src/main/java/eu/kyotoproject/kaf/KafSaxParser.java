@@ -2,6 +2,7 @@ package eu.kyotoproject.kaf;
 
 
 import eu.kyotoproject.util.AddTokensAsCommentsToSpans;
+import eu.kyotoproject.util.xml_util;
 import org.apache.tools.bzip2.CBZip2InputStream;
 import org.w3c.dom.Comment;
 import org.w3c.dom.DOMImplementation;
@@ -3677,6 +3678,7 @@ public class KafSaxParser extends DefaultHandler {
             else {
                 streamResult = new StreamResult(new OutputStreamWriter(stream, encoding));
             }
+//            serializer.setOutputProperty(,"");
 			serializer.transform(domSource, streamResult);
 		}
 		catch(Exception e)
@@ -4036,6 +4038,14 @@ public class KafSaxParser extends DefaultHandler {
         return new ArrayList<String>();
     }
 
+    public void addCDATA () {
+        this.rawText = xml_util.addCDATAstring(this.rawText);
+        for (int i = 0; i < kafWordFormList.size(); i++) {
+            KafWordForm wordForm = kafWordFormList.get(i);
+            wordForm.setWf(xml_util.addCDATAstring(wordForm.getWf()));
+        }
+    }
+
     static public void main (String[] args) {
         String file = "";
         //String file = "/Projects/NewsReader/collaboration/bulgarian/razni11-01.naf";
@@ -4052,6 +4062,7 @@ public class KafSaxParser extends DefaultHandler {
         //String file = "/Tools/TextPro/TextPro2.0-forNewsReader/test/gold/Time.NAF.xml";
        // String file = "/Code/vu/newsreader/pos.xml";
        // String file = "test/car.naf";
+        file = "/Users/piek/Desktop/SemEval2018/scripts/ac8040697b880d1e050737fc843136f3.naf";
         KafSaxParser parser = new KafSaxParser();
         if (file.endsWith("bz2")) {
             InputStream fileStream = null;
@@ -4068,6 +4079,7 @@ public class KafSaxParser extends DefaultHandler {
         else {
 
             parser.parseFile(file);
+            parser.addCDATA();
         }
 /*        for (int i = 0; i < parser.kafWordFormList.size(); i++) {
             KafWordForm kafWordForm = parser.kafWordFormList.get(i);

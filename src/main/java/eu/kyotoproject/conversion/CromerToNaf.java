@@ -1,7 +1,8 @@
-package eu.kyotoproject.util;
+package eu.kyotoproject.conversion;
 
 import eu.kyotoproject.kaf.KafSaxParser;
 import eu.kyotoproject.kaf.KafWordForm;
+import eu.kyotoproject.util.FileProcessor;
 import org.w3c.dom.Document;
 import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
