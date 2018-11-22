@@ -17,14 +17,21 @@ public class NafFromText {
         // String textFolder = "/Users/piek/Desktop/DigHum-2018/4775434/OBO_XML_7-2/ordinarysAccounts/text";
         //  String nafFolderpath = "/Users/piek/Desktop/DigHum-2018/4775434/OBO_XML_7-2/ordinarysAccounts/naf";
 
-        String textFolder = "/Users/piek/Desktop/DigHum-2018/4775434/OBO_XML_7-2/sessionsPapers/text/18century";
-        String nafFolderpath = "/Users/piek/Desktop/DigHum-2018/4775434/OBO_XML_7-2/sessionsPapers/naf18/";
+        //String textFolder = "/Users/piek/Desktop/DigHum-2018/4775434/OBO_XML_7-2/sessionsPapers/text/18century";
+        //String nafFolderpath = "/Users/piek/Desktop/DigHum-2018/4775434/OBO_XML_7-2/sessionsPapers/naf18/";
+        String textFolder = "";
+        String nafFolderpath = "";
+        String extension = "";
         for (int i = 0; i < args.length; i++) {
             String arg = args[i];
             if (arg.equalsIgnoreCase("--text-folder") && args.length > (i + 1)) {
                 textFolder = args[i + 1];
-            } else if (arg.equalsIgnoreCase("--naf-folder") && args.length > (i + 1)) {
+            }
+            else if (arg.equalsIgnoreCase("--naf-folder") && args.length > (i + 1)) {
                 nafFolderpath = args[i + 1];
+            }
+            else if (arg.equalsIgnoreCase("--extension") && args.length > (i + 1)) {
+                extension = args[i + 1];
             }
         }
         File nafFolder = new File(nafFolderpath);
@@ -32,7 +39,7 @@ public class NafFromText {
             nafFolder.mkdir();
         }
         if (nafFolder.exists()) {
-            ArrayList<File> txtFiles = FileProcessor.makeFlatFileList(new File(textFolder), ".txt");
+            ArrayList<File> txtFiles = FileProcessor.makeFlatFileList(new File(textFolder), extension);
             for (int i = 0; i < txtFiles.size(); i++) {
                 File txtFile = txtFiles.get(i);
                 System.out.println("txtFile.getName() = " + txtFile.getName());
