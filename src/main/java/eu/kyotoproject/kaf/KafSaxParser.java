@@ -3651,7 +3651,6 @@ public class KafSaxParser extends DefaultHandler {
                 root.appendChild(markables);
             }
 
-/*       @deprecated
             Element tunits = xmldoc.createElement("tunits");
             for (int i = 0; i < this.kafDiscourseList.size(); i++) {
                 KafTextUnit kaf  =  kafDiscourseList.get(i);
@@ -3659,7 +3658,6 @@ public class KafSaxParser extends DefaultHandler {
             }
             root.appendChild(tunits);
 
-*/
 			// Serialisation through Tranform.
 			DOMSource domSource = new DOMSource(xmldoc);
 			TransformerFactory tf = TransformerFactory.newInstance();
