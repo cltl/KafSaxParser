@@ -35,6 +35,8 @@ public class KafTextUnit {
     private int unitid;
     private String firstWord;
     private String lastWord;
+    private String charOffset;
+    private String charLength;
 /*
     String firstWordSpan;
     String lastWordSpan;
@@ -48,6 +50,9 @@ public class KafTextUnit {
         unitid = -1;
         this.firstWord = "";
         this.lastWord = "";
+
+        this.charOffset = "";
+        this.charLength = "";
 /*
         this.firstWordSpan = "";
         this.lastWordSpan = "";
@@ -115,7 +120,23 @@ public class KafTextUnit {
         this.unitid = unitid;
     }
 
-/*
+    public String getCharOffset() {
+        return charOffset;
+    }
+
+    public void setCharOffset(String charOffset) {
+        this.charOffset = charOffset;
+    }
+
+    public String getCharLength() {
+        return charLength;
+    }
+
+    public void setCharLength(String charLength) {
+        this.charLength = charLength;
+    }
+
+    /*
     public String getFirstWordSpan() {
         return firstWordSpan;
     }
@@ -158,6 +179,12 @@ public class KafTextUnit {
   	  	Element root = xmldoc.createElement("tunit");
   	  	root.setAttribute("type", type);
   	  	root.setAttribute("unitid", Integer.toString(getUnitid()));
+        if (charOffset.length() > 0)
+            root.setAttribute("offset", charOffset);
+
+        if (charLength.length() > 0)
+            root.setAttribute("length", charLength);
+
   	  	root.appendChild(comment1);
   	  	root.appendChild(comment2);
   	  	
@@ -181,6 +208,11 @@ public class KafTextUnit {
   	  	Element root = xmldoc.createElement("tunit");
   	  	root.setAttribute("type", type);
   	  	root.setAttribute("id", Integer.toString(getUnitid()));
+        if (charOffset.length() > 0)
+            root.setAttribute("offset", charOffset);
+
+        if (charLength.length() > 0)
+            root.setAttribute("length", charLength);
   	  	root.appendChild(comment1);
   	  	root.appendChild(comment2);
 
